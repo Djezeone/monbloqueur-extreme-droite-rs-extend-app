@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "2026-10-27.4",
+  "version": "2026-10-27.5",
   "accounts": [
     {
       "id": "217749896",
@@ -609,6 +609,46 @@
     {
       "id": "87212906",
       "username": "ThierryMARIANI"
+    },
+    {
+      "id": "1817912895394701312",
+      "username": "NadineLechonRN"
+    },
+    {
+      "id": "1590736934640517122",
+      "username": "MatthiasRN"
+    },
+    {
+      "id": "2317407128",
+      "username": "C_Szczurek"
+    },
+    {
+      "id": "1364165334",
+      "username": "MonnierThibaut"
+    },
+    {
+      "id": "1122957390",
+      "username": "PR_Thionnet"
+    },
+    {
+      "id": "497172391",
+      "username": "jrechagneux"
+    },
+    {
+      "id": "446123161",
+      "username": "WEBERFrederic1"
+    },
+    {
+      "id": "92795265",
+      "username": "JPGarraud"
+    },
+    {
+      "id": "79458791",
+      "username": "jsanchez_rn"
+    },
+    {
+      "id": "53667012",
+      "username": "AntBoulogne54"
     }
   ]
 }
