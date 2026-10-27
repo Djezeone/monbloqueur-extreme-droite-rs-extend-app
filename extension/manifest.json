@@ -1,13 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Bloquer l’extrême-droite",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Un bouton pour bloquer sur X tous les profils de la liste actualisée automatiquement.",
   "minimum_chrome_version": "120",
-  "permissions": [
-    "storage",
-    "alarms"
-  ],
+  "permissions": ["storage", "alarms"],
   "host_permissions": [
     "https://x.com/*",
     "https://twitter.com/*",
@@ -36,14 +33,9 @@
   },
   "content_scripts": [
     {
-      "run_at": "document_idle",
-      "matches": [
-        "https://x.com/*",
-        "https://twitter.com/*"
-      ],
-      "js": [
-        "content.js"
-      ]
+      "run_at": "document_end",
+      "matches": ["https://x.com/*", "https://twitter.com/*"],
+      "js": ["content.js"]
     }
   ]
 }

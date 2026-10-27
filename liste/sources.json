@@ -3,12 +3,54 @@
   "method": "Profils publics X : identité affichée, biographie et identifiant concordant dans les liens de suggestions et la bannière de profil. Aucune action de blocage réalisée pendant la vérification.",
   "scope": "Liste éditoriale initiale demandée par l’éditeur, complétée par les comptes officiels des partis directement cités par ces responsables publics. Liste non exhaustive ; aucune inférence sur des personnes privées.",
   "accounts": [
-    {"id":"217749896","username":"MLP_officiel","name":"Marine Le Pen","basis":"Compte expressément demandé par l’éditeur","source":"https://x.com/MLP_officiel"},
-    {"id":"1499400284","username":"J_Bardella","name":"Jordan Bardella","basis":"Compte expressément demandé par l’éditeur","source":"https://x.com/J_Bardella"},
-    {"id":"520449734","username":"MarionMarechal","name":"Marion Maréchal","basis":"Compte expressément demandé par l’éditeur","source":"https://x.com/MarionMarechal"},
-    {"id":"1183418538285027329","username":"ZemmourEric","name":"Éric Zemmour","basis":"Compte expressément demandé par l’éditeur","source":"https://x.com/ZemmourEric"},
-    {"id":"78085410","username":"RNational_off","name":"Rassemblement National","basis":"Compte officiel du parti présidé par Jordan Bardella, indiqué dans sa biographie publique","source":"https://x.com/RNational_off"},
-    {"id":"1466151854425923585","username":"Reconquete_off","name":"Reconquête","basis":"Compte officiel du parti cité par Éric Zemmour dans sa biographie publique","source":"https://x.com/Reconquete_off"},
-    {"id":"1842533759695958016","username":"ID_Libertes","name":"Identité Libertés","basis":"Compte officiel du mouvement cité par Marion Maréchal dans sa biographie publique","source":"https://x.com/ID_Libertes"}
+    {
+      "id": "217749896",
+      "username": "MLP_officiel",
+      "name": "Marine Le Pen",
+      "basis": "Compte expressément demandé par l’éditeur",
+      "source": "https://x.com/MLP_officiel"
+    },
+    {
+      "id": "1499400284",
+      "username": "J_Bardella",
+      "name": "Jordan Bardella",
+      "basis": "Compte expressément demandé par l’éditeur",
+      "source": "https://x.com/J_Bardella"
+    },
+    {
+      "id": "520449734",
+      "username": "MarionMarechal",
+      "name": "Marion Maréchal",
+      "basis": "Compte expressément demandé par l’éditeur",
+      "source": "https://x.com/MarionMarechal"
+    },
+    {
+      "id": "1183418538285027329",
+      "username": "ZemmourEric",
+      "name": "Éric Zemmour",
+      "basis": "Compte expressément demandé par l’éditeur",
+      "source": "https://x.com/ZemmourEric"
+    },
+    {
+      "id": "78085410",
+      "username": "RNational_off",
+      "name": "Rassemblement National",
+      "basis": "Compte officiel du parti présidé par Jordan Bardella, indiqué dans sa biographie publique",
+      "source": "https://x.com/RNational_off"
+    },
+    {
+      "id": "1466151854425923585",
+      "username": "Reconquete_off",
+      "name": "Reconquête",
+      "basis": "Compte officiel du parti cité par Éric Zemmour dans sa biographie publique",
+      "source": "https://x.com/Reconquete_off"
+    },
+    {
+      "id": "1842533759695958016",
+      "username": "ID_Libertes",
+      "name": "Identité Libertés",
+      "basis": "Compte officiel du mouvement cité par Marion Maréchal dans sa biographie publique",
+      "source": "https://x.com/ID_Libertes"
+    }
   ]
 }

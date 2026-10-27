@@ -8,7 +8,7 @@ Description détaillée :
 
 Ouvrez l’extension et cliquez sur « Bloquer l’Extrême-droite ». Elle utilise votre compte X déjà connecté dans Chrome pour bloquer les profils de la liste éditoriale. Aucun mot de passe ni clé API à saisir.
 
-La liste est publique, consultable et mise à jour à distance. Les ajouts ne déclenchent aucune action automatique : vous gardez la main en lançant le bouton. Vous pouvez fermer le popup pendant le blocage, suivre sa progression et arrêter l’opération. Les comptes déjà bloqués restent bloqués. Le bilan distingue les comptes indisponibles.
+La liste est publique, consultable et mise à jour à distance. Les ajouts ne déclenchent aucune action automatique : vous gardez la main en lançant le bouton. Le traitement réutilise un seul onglet en arrière-plan, sans changer l’onglet actif et sans créer de fenêtre séparée. Vous pouvez fermer le popup pendant le blocage, suivre sa progression et arrêter l’opération. Les comptes déjà bloqués restent bloqués. Le bilan distingue les comptes indisponibles.
 
 L’extension ne collecte ni cookies, ni mots de passe, ni jetons d’accès. La progression reste dans votre navigateur. Aucun suivi d’audience.
 
