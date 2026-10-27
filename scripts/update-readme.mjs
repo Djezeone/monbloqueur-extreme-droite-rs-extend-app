@@ -10,17 +10,35 @@ const accounts = [...list.accounts].sort((a, b) =>
 );
 const start = "<!-- comptes:debut -->";
 const end = "<!-- comptes:fin -->";
+const columnCount = 5;
+const rowCount = Math.ceil(accounts.length / columnCount);
+const columns = Array.from({ length: columnCount }, (_, index) =>
+  accounts.slice(index * rowCount, (index + 1) * rowCount),
+);
+const range = (column) => {
+  if (!column.length) return "";
+  const first = column[0].username[0].toUpperCase();
+  const last = column.at(-1).username[0].toUpperCase();
+  return first === last ? first : `${first} – ${last}`;
+};
+const row = (cells) => `| ${cells.join(" | ")} |`;
 const table = [
   start,
   `**${accounts.length} comptes** · liste ${list.version}`,
   "",
   "Ce tableau suit la liste de l’extension. Les blocages de chaque utilisateur restent privés.",
   "",
-  "| N° | Compte X |",
-  "| ---: | :--- |",
-  ...accounts.map(
-    (account, index) =>
-      `| ${index + 1} | [@${account.username}](https://x.com/${account.username}) |`,
+  row(columns.map(range)),
+  row(columns.map(() => ":---")),
+  ...Array.from({ length: rowCount }, (_, index) =>
+    row(
+      columns.map((column) => {
+        const account = column[index];
+        return account
+          ? `[@${account.username}](https://x.com/${account.username})`
+          : "";
+      }),
+    ),
   ),
   end,
 ].join("\n");
