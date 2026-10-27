@@ -20,7 +20,13 @@ Les comptes sont dans [`liste/accounts.json`](liste/accounts.json). Le fichier e
 
 La liste de départ reprend les quatre comptes demandés pour le projet, puis les comptes officiels des partis directement associés. Elle n’est pas exhaustive. Les identifiants et les sources sont dans [`liste/sources.json`](liste/sources.json).
 
-Pour ajouter ou corriger un compte, voir [la courte procédure de contribution](CONTRIBUTING.md). Retirer un compte du fichier ne le débloque pas sur X.
+### Proposer un compte
+
+La liste est gérée uniquement par **[MEYTRED sur X](https://x.com/MEYTRED)**. Pour demander l’ajout d’un compte ou signaler une erreur, contacte **[@MEYTRED](https://x.com/MEYTRED)** avec le lien du profil et les éléments qui justifient la demande.
+
+Chaque demande est examinée avant un éventuel ajout. Seul le propriétaire du dépôt publie les modifications de la liste officielle ; les demandes ne sont jamais ajoutées automatiquement. Les comptes retenus seront pris en compte au prochain lancement du blocage, sans réinstaller l’extension.
+
+Retirer un compte du fichier ne le débloque pas sur X.
 
 ## Pendant le blocage
 
