@@ -10,9 +10,9 @@ Choisis le paquet de ton navigateur :
 
 | Navigateur | Télécharger                                              | Installation                                                      |
 | ---------- | -------------------------------------------------------- | ----------------------------------------------------------------- |
-| Chrome     | [Version Chrome](downloads/extension-chrome.zip?raw=1)   | Décompresser, puis charger le dossier dans `chrome://extensions`. |
-| Edge       | [Version Edge](downloads/extension-edge.zip?raw=1)       | Décompresser, puis charger le dossier dans `edge://extensions`.   |
-| Firefox    | [Version Firefox](downloads/extension-firefox.zip?raw=1) | Charger le ZIP dans `about:debugging#/runtime/this-firefox`.      |
+| Chrome     | [Version Chrome](https://raw.githubusercontent.com/LaRosette/bloquer-extreme-droite-x/main/downloads/extension-chrome.zip)   | Décompresser, puis charger le dossier dans `chrome://extensions`. |
+| Edge       | [Version Edge](https://raw.githubusercontent.com/LaRosette/bloquer-extreme-droite-x/main/downloads/extension-edge.zip)       | Décompresser, puis charger le dossier dans `edge://extensions`.   |
+| Firefox    | [Version Firefox](https://raw.githubusercontent.com/LaRosette/bloquer-extreme-droite-x/main/downloads/extension-firefox.zip) | Charger le ZIP dans `about:debugging#/runtime/this-firefox`.      |
 
 Les étapes détaillées sont dans le [guide d’installation](INSTALLATION.md). Les extensions ne sont pas encore publiées dans les boutiques. Sur Firefox, le chargement est temporaire jusqu’au redémarrage ; une installation permanente demandera la signature Mozilla.
 

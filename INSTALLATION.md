@@ -4,14 +4,14 @@ Il faut être connecté à X dans le navigateur où l’extension est installée
 
 ## Chrome
 
-1. Télécharger [le ZIP Chrome](downloads/extension-chrome.zip?raw=1) et le décompresser.
+1. Télécharger [le ZIP Chrome](https://raw.githubusercontent.com/LaRosette/bloquer-extreme-droite-x/main/downloads/extension-chrome.zip) et le décompresser.
 2. Ouvrir `chrome://extensions`.
 3. Activer **Mode développeur**, en haut à droite.
 4. Cliquer sur **Charger l’extension non empaquetée** et sélectionner le dossier décompressé contenant `manifest.json`.
 
 ## Microsoft Edge
 
-1. Télécharger [le ZIP Edge](downloads/extension-edge.zip?raw=1) et le décompresser.
+1. Télécharger [le ZIP Edge](https://raw.githubusercontent.com/LaRosette/bloquer-extreme-droite-x/main/downloads/extension-edge.zip) et le décompresser.
 2. Ouvrir `edge://extensions`.
 3. Activer **Mode développeur**.
 4. Cliquer sur **Charger l’extension décompressée** — ou **Charger l’extension non empaquetée**, selon la version d’Edge — puis sélectionner le dossier contenant `manifest.json`.
@@ -22,7 +22,7 @@ Chrome et Edge conservent cette installation après un redémarrage. Évite de d
 
 Firefox 142 ou plus récent est nécessaire.
 
-1. Télécharger [le ZIP Firefox](downloads/extension-firefox.zip?raw=1).
+1. Télécharger [le ZIP Firefox](https://raw.githubusercontent.com/LaRosette/bloquer-extreme-droite-x/main/downloads/extension-firefox.zip).
 2. Ouvrir `about:debugging#/runtime/this-firefox`.
 3. Cliquer sur **Charger un module complémentaire temporaire**.
 4. Sélectionner directement le fichier `extension-firefox.zip`. On peut aussi le décompresser et sélectionner son `manifest.json`.
