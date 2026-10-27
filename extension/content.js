@@ -44,7 +44,7 @@
     if(!/^(bloquer|block)\b/.test(text)||!text.includes('@'+account.username.toLowerCase()))throw Error('Commande de blocage non reconnue.');
     action.click();
     const confirm=await waitFor(()=>find('[data-testid="confirmationSheetConfirm"]'));
-    const dialog=confirm.closest('[role="dialog"],[aria-modal="true"]');
+    const dialog=confirm.closest('[role="alertdialog"],[role="dialog"],[aria-modal="true"]');
     if(!dialog||!dialog.textContent.toLowerCase().includes('@'+account.username.toLowerCase())||!/^(bloquer|block)$/.test(normalize(confirm.textContent)))throw Error('Confirmation de blocage inattendue.');
     // Dernière vérification juste avant l’action sur le compte.
     if(owner()?.toLowerCase()!==message.owner.toLowerCase()||location.pathname.toLowerCase()!==`/${account.username.toLowerCase()}`)throw Error('La session X ou le profil a changé.');

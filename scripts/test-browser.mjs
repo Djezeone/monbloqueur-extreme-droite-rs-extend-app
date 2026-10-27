@@ -35,7 +35,7 @@ function sitePage(url){
  <button id="state" data-testid="${account.id}-${already?'unblock':'follow'}">${already?'Bloqué':'Suivre'}</button>
  <button id="more" data-testid="userActions">Plus</button>
  <div id="menu" role="menu" hidden><button id="action" role="menuitem" data-testid="block">${already?'Débloquer':'Bloquer'} @${handle}</button></div>
- <div id="dialog" role="dialog" aria-modal="true" hidden>Bloquer @${handle} ?<button id="confirm" data-testid="confirmationSheetConfirm">Bloquer</button></div></main>
+ <div id="dialog" role="alertdialog" hidden>Bloquer @${handle} ?<button id="confirm" data-testid="confirmationSheetConfirm">Bloquer</button></div></main>
  <script>
  document.getElementById('more').onclick=()=>document.getElementById('menu').hidden=false;
  document.getElementById('action').onclick=()=>{document.getElementById('menu').hidden=true;document.getElementById('dialog').hidden=false;};
