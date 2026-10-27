@@ -35,6 +35,19 @@
     d’audience ni serveur applicatif n’est utilisé.
   </p>
   <p>
+    Les identifiants des profils déjà traités sont mémorisés localement pour
+    accélérer les passages suivants. Cette mémoire est séparée par compte, à
+    partir du pseudo et d’une empreinte de la référence publique de son avatar.
+    Elle est limitée à cinq comptes et ne quitte pas le navigateur. Si ce repère
+    manque, l’extension traite la liste sans utiliser cette mémoire. Un
+    changement d’avatar peut entraîner une nouvelle vérification complète.
+  </p>
+  <p>
+    Ce relevé local ne permet pas de savoir si vous avez ensuite débloqué
+    quelqu’un dans X. L’option « Tout revérifier » contrôle à nouveau toute la
+    liste. Désinstaller l’extension efface son stockage local.
+  </p>
+  <p>
     La liste est téléchargée depuis un fichier public GitHub. Son hébergeur
     reçoit les informations techniques habituelles d’une requête HTTP, dont
     votre adresse IP. La liste contient uniquement des données, aucun code
@@ -60,5 +73,11 @@
     peut entraîner une restriction du compte et dépend de la structure du site.
     L’extension s’arrête si un contrôle ou une vérification inattendue apparaît.
     L’interface X doit être en français ou en anglais.
+  </p>
+  <p>
+    Les compteurs visibles sur GitHub mesurent les téléchargements des fichiers
+    publiés dans les releases. L’extension ne communique aucun nombre de
+    blocages, aucune information sur le compte connecté et aucun événement
+    d’utilisation pour alimenter ces compteurs.
   </p>
 </html>

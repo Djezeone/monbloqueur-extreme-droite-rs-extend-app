@@ -1,5 +1,13 @@
 # Changements
 
+## 2.3.0
+
+- Nouveau popup, suivi du compte connecté et bilan détaillé.
+- Les profils déjà traités sont mémorisés par compte ; « Tout revérifier » relance une vérification complète.
+- Reprise bornée après un chargement en échec, avec attente explicite quand X limite les requêtes.
+- Contrôle de l’identité dans l’en-tête du profil et prise en charge des comptes sans publications.
+- Versions téléchargeables dans GitHub Releases, avec compteurs par navigateur et empreintes SHA-256.
+
 ## 2.2.0
 
 - Versions Firefox et Edge, avec un paquet par navigateur.

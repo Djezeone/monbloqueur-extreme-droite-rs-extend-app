@@ -1,0 +1,101 @@
+name: Publier une version
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag de la version à publier, identique au manifeste"
+        type: string
+        required: true
+        default: "v2.3.0"
+permissions:
+  contents: read
+concurrency:
+  group: release-${{ github.event_name == 'push' && github.ref_name || inputs.tag }}
+  cancel-in-progress: false
+jobs:
+  preparer:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      tag: ${{ steps.paquets.outputs.tag }}
+      commit: ${{ steps.paquets.outputs.commit }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run validate:list
+      - run: npm run build
+      - run: npm run lint:firefox
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - run: npm run test:firefox
+      - name: Vérifier les paquets et leurs empreintes
+        id: paquets
+        env:
+          RELEASE_TAG: ${{ github.event_name == 'push' && github.ref_name || inputs.tag }}
+        run: |
+          node scripts/release.mjs --tag "$RELEASE_TAG"
+          echo "tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paquets-${{ steps.paquets.outputs.tag }}
+          path: dist/releases/${{ steps.paquets.outputs.tag }}/
+          if-no-files-found: error
+          retention-days: 7
+  publier:
+    needs: preparer
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: paquets-${{ needs.preparer.outputs.tag }}
+          path: release/
+      - name: Publier les trois paquets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ needs.preparer.outputs.tag }}
+          RELEASE_COMMIT: ${{ needs.preparer.outputs.commit }}
+        run: |
+          existing_release=$(gh api "repos/$GITHUB_REPOSITORY/releases?per_page=100" --paginate \
+            --jq ".[] | select(.tag_name == \"$RELEASE_TAG\") | .id")
+          if [ -n "$existing_release" ]; then
+            echo "Une release existe déjà pour $RELEASE_TAG. Aucun fichier n’est remplacé."
+            exit 1
+          fi
+          tag_count=$(gh api "repos/$GITHUB_REPOSITORY/git/matching-refs/tags/$RELEASE_TAG" \
+            --jq "map(select(.ref == \"refs/tags/$RELEASE_TAG\")) | length")
+          if [ "$tag_count" = "0" ]; then
+            gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \
+              -f ref="refs/tags/$RELEASE_TAG" -f sha="$RELEASE_COMMIT" --silent
+          fi
+          actual_commit=$(gh api "repos/$GITHUB_REPOSITORY/commits/tags/$RELEASE_TAG" --jq '.sha')
+          if [ "$actual_commit" != "$RELEASE_COMMIT" ]; then
+            echo "Le tag ne correspond pas au commit vérifié. Aucune release n’est créée."
+            exit 1
+          fi
+          gh release create "$RELEASE_TAG" \
+            release/extension-chrome.zip release/extension-chrome.zip.sha256 \
+            release/extension-edge.zip release/extension-edge.zip.sha256 \
+            release/extension-firefox.zip release/extension-firefox.zip.sha256 \
+            release/SHA256SUMS.txt \
+            --repo "$GITHUB_REPOSITORY" --target "$RELEASE_COMMIT" --title "$RELEASE_TAG" \
+            --notes-file release/NOTES.md --draft --verify-tag
+          actual_commit=$(gh api "repos/$GITHUB_REPOSITORY/commits/tags/$RELEASE_TAG" --jq '.sha')
+          if [ "$actual_commit" != "$RELEASE_COMMIT" ]; then
+            echo "Le tag ne correspond pas au commit vérifié. La release reste en brouillon."
+            exit 1
+          fi
+          gh release edit "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --draft=false --latest

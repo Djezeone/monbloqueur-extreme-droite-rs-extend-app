@@ -1,4 +1,6 @@
-import { cp, readFile, writeFile, mkdir } from "node:fs/promises";
+import { cp, readFile, writeFile, mkdir, rm } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import { relative } from "node:path";
 import { createHash } from "node:crypto";
 import { manifestFor } from "./manifests.mjs";
 import { packageDirectory } from "./package.mjs";
@@ -26,6 +28,13 @@ await mkdir(new URL("dist/", root), { recursive: true });
 for (const target of targets) {
   const adapted = manifestFor(manifest, target),
     folder = new URL("dist/" + target + "/", root);
+  const insideDist = relative(
+    fileURLToPath(new URL("dist/", root)),
+    fileURLToPath(folder),
+  );
+  if (insideDist !== target || !["chrome", "edge", "firefox"].includes(target))
+    throw Error("Dossier de paquet incorrect.");
+  await rm(folder, { recursive: true, force: true });
   await mkdir(folder, { recursive: true });
   await cp(source, folder, { recursive: true });
   await writeFile(

@@ -12,7 +12,10 @@ function crc32(bytes) {
 
 async function entries(folder, prefix = "") {
   const result = [];
-  for (const entry of await readdir(folder, { withFileTypes: true })) {
+  const sorted = (await readdir(folder, { withFileTypes: true })).sort((a, b) =>
+    a.name.localeCompare(b.name, "en"),
+  );
+  for (const entry of sorted) {
     const path = new URL(entry.name + (entry.isDirectory() ? "/" : ""), folder);
     if (entry.isDirectory())
       result.push(...(await entries(path, prefix + entry.name + "/")));

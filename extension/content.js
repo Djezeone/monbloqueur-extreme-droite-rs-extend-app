@@ -11,6 +11,56 @@
       ? new URL(link.href).pathname.split("/").filter(Boolean)[0]
       : null;
   };
+  const failure = (code, message) =>
+    Object.assign(new Error(message), { code });
+  async function ownerKey(username) {
+    const avatar = find('[data-testid="SideNav_AccountSwitcher_Button"] img');
+    if (!avatar || !username) return null;
+    try {
+      const url = new URL(avatar.currentSrc || avatar.src);
+      if (
+        url.hostname !== "pbs.twimg.com" ||
+        !/^\/profile_images\/\d+\//.test(url.pathname)
+      )
+        return null;
+      const reference =
+        username.toLowerCase() +
+        "|" +
+        url.pathname.replace(/_(normal|bigger|mini)(?=\.)/, "");
+      const digest = await crypto.subtle.digest(
+        "SHA-256",
+        new TextEncoder().encode(reference),
+      );
+      return Array.from(new Uint8Array(digest), (byte) =>
+        byte.toString(16).padStart(2, "0"),
+      ).join("");
+    } catch {
+      return null;
+    }
+  }
+  function siteIssue() {
+    if (/^\/(login|i\/flow\/(login|challenge))\b/.test(location.pathname)) {
+      return failure("auth", "Connectez-vous à X, puis reprenez le blocage.");
+    }
+    const notices = Array.from(
+      document.querySelectorAll(
+        '[role="alert"],[data-testid="toast"],[data-testid="error-detail"],[data-testid="emptyState"]',
+      ),
+    ).filter(visible);
+    if (
+      notices.some((el) =>
+        /rate limit|too many requests|limite de (?:taux|requetes)|trop de (?:requetes|demandes)|limite.{0,25}atteinte/.test(
+          normalize(el.textContent),
+        ),
+      )
+    ) {
+      return failure(
+        "rate",
+        "X limite les requêtes. La progression est conservée.",
+      );
+    }
+    return null;
+  }
   function waitFor(fn, timeout = 12000) {
     return new Promise((resolve, reject) => {
       let observer, timer;
@@ -20,6 +70,8 @@
       };
       const check = () => {
         try {
+          const issue = siteIssue();
+          if (issue) throw issue;
           const value = fn();
           if (value) {
             stop();
@@ -45,7 +97,8 @@
         () => {
           stop();
           reject(
-            Error(
+            failure(
+              "loading",
               "X ne répond pas correctement ou limite les requêtes. La progression est conservée. Attendez avant de reprendre avec « Vérifier X ».",
             ),
           );
@@ -78,13 +131,25 @@
       throw Error(
         "Le compte X connecté a changé. Revenez au compte utilisé au lancement.",
       );
+    if (message.ownerKey && (await ownerKey(logged)) !== message.ownerKey)
+      throw failure(
+        "identity",
+        "L’identité du compte connecté a changé. Le blocage est en pause.",
+      );
     if (logged.toLowerCase() === account.username.toLowerCase())
       return "unavailable";
     const header = await waitFor(() => {
-      const unavailable = find('[data-testid="emptyState"]');
-      if (unavailable) return { unavailable: true };
       const name = find('[data-testid="UserName"]');
-      return name ? { name } : null;
+      if (name) return { name };
+      const empty = find('[data-testid="emptyState"]');
+      if (
+        empty &&
+        /(?:ce compte n.existe pas|compte suspendu|account (?:doesn.t exist|suspended)|this account doesn.t exist)/i.test(
+          empty.textContent,
+        )
+      )
+        return { unavailable: true };
+      return null;
     });
     if (header.unavailable) return "unavailable";
     if (
@@ -94,30 +159,63 @@
     )
       throw Error("Le profil affiché ne correspond pas à la liste.");
     // L’identifiant stable empêche de bloquer le nouveau propriétaire d’un pseudo.
-    const profileButtons = Array.from(
-      document.querySelectorAll("main [data-testid]"),
-    ).filter(visible);
-    const identified =
-      profileButtons.some((el) =>
-        new RegExp(`^${account.id}-(follow|unfollow|unblock)$`).test(
-          el.getAttribute("data-testid"),
-        ),
-      ) ||
-      Array.from(document.images).some(
-        (img) =>
-          visible(img) &&
-          img.currentSrc.includes(`/profile_banners/${account.id}/`),
+    const controls = await waitFor(() => {
+      const column =
+        document.querySelector('[data-testid="primaryColumn"]') ||
+        document.querySelector("main");
+      const more = Array.from(
+        column?.querySelectorAll('[data-testid="userActions"]') || [],
+      ).find(
+        (el) => visible(el) && !el.closest('article,[data-testid="UserCell"]'),
       );
-    if (!identified)
-      throw Error(
-        "X ne permet pas de vérifier l’identité de ce profil. Le blocage est en pause.",
-      );
-    const already = find(
-      `main [data-testid="${account.id}-unblock"],main [data-testid="unblock"]`,
-    );
-    if (blockedButton(already)) return "already";
-    const more = await waitFor(() => find('main [data-testid="userActions"]'));
-    more.click();
+      if (!more) return false;
+      for (
+        let group = more.parentElement, depth = 0;
+        group && group !== column && depth < 3;
+        group = group.parentElement, depth++
+      ) {
+        const buttons = Array.from(
+          group.querySelectorAll("button[data-testid]"),
+        ).filter(
+          (el) =>
+            visible(el) && !el.closest('article,[data-testid="UserCell"]'),
+        );
+        const ids = buttons
+          .map(
+            (el) =>
+              /^(\d+)-(?:follow|unfollow|unblock)$/.exec(
+                el.getAttribute("data-testid"),
+              )?.[1],
+          )
+          .filter(Boolean);
+        if (!ids.length) {
+          const generic = buttons.find(
+            (el) =>
+              el.getAttribute("data-testid") === "unblock" && blockedButton(el),
+          );
+          // Aucun clic ni cache d’identifiant si X masque l’identité numérique.
+          if (generic) return { more, group, identityVerified: false };
+          continue;
+        }
+        if (ids.length !== 1 || ids[0] !== account.id)
+          throw failure(
+            "identity",
+            "X ne permet pas de vérifier l’identité de ce profil. Le blocage est en pause.",
+          );
+        return { more, group };
+      }
+      return false;
+    }, 8000);
+    const already = Array.from(
+      controls.group.querySelectorAll(
+        `[data-testid="${account.id}-unblock"],[data-testid="unblock"]`,
+      ),
+    ).find(visible);
+    if (blockedButton(already))
+      return controls.identityVerified === false
+        ? { outcome: "already", identityVerified: false }
+        : "already";
+    controls.more.click();
     const action = await waitFor(() =>
       find('[role="menuitem"][data-testid="block"]'),
     );
@@ -174,6 +272,10 @@
     return "blocked";
   }
   api.runtime.onMessage.addListener((message, sender, respond) => {
+    if (sender.id === api.runtime.id && message?.type === "probe") {
+      respond({ owner: owner(), url: location.href });
+      return;
+    }
     if (
       sender.id !== api.runtime.id ||
       !["inspect", "block", "navigate"].includes(message?.type)
@@ -184,7 +286,7 @@
       return;
     }
     running = message.attempt;
-    deadline = Date.now() + 25000;
+    deadline = Date.now() + 18000;
     respond({ accepted: true });
     (async () => {
       if (message.type === "navigate") {
@@ -216,8 +318,10 @@
                   .includes("@" + message.account.username.toLowerCase()))
             );
           }, 10000);
-        } catch {
+        } catch (error) {
           type = "navigateFailed";
+          message.code = error.code;
+          message.error = error.message;
         } finally {
           running = null;
         }
@@ -227,6 +331,8 @@
             jobId: message.jobId,
             attempt: message.attempt,
             url: location.href,
+            code: message.code,
+            error: message.error,
           })
           .catch(() => {});
         return;
@@ -237,11 +343,20 @@
         type: message.type === "inspect" ? "sessionResult" : "blockResult",
       };
       try {
-        if (message.type === "inspect") result.owner = await waitFor(owner);
-        else result.outcome = await block(message);
+        if (message.type === "inspect") {
+          result.owner = await waitFor(owner);
+          result.ownerKey = await ownerKey(result.owner);
+        } else {
+          const outcome = await block(message);
+          Object.assign(
+            result,
+            typeof outcome === "string" ? { outcome } : outcome,
+          );
+        }
       } catch (error) {
         result.outcome = "error";
         result.error = error.message;
+        result.code = error.code || "interface";
       } finally {
         running = null;
       }

@@ -1,6 +1,6 @@
 # Distribuer les trois versions
 
-Les ZIP sont préparés par `npm run build`. Le dépôt propose aussi leur téléchargement direct dans `downloads/`.
+Les ZIP sont préparés par `npm run build`. Les versions destinées au partage sont publiées dans [GitHub Releases](https://github.com/LaRosette/bloquer-extreme-droite-x/releases), avec leurs empreintes SHA-256. Le processus est décrit dans [distribution.md](distribution.md).
 
 ## Chrome
 

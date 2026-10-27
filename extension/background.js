@@ -14,7 +14,9 @@ api.runtime.onMessage.addListener((message, sender, respond) => {
   if (
     !(
       popup &&
-      ["state", "refresh", "start", "cancel", "inspect"].includes(message?.type)
+      ["state", "refresh", "start", "rescan", "cancel", "inspect"].includes(
+        message?.type,
+      )
     ) &&
     !(
       content &&

@@ -1,6 +1,6 @@
 {
   "name": "bloquer-extreme-droite-x",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,6 +11,7 @@
     "assets": "node scripts/assets.mjs",
     "build": "node scripts/build.mjs",
     "build:dev": "node scripts/build.mjs --development",
+    "release:prepare": "node scripts/release.mjs",
     "build:chrome": "node scripts/build.mjs --browser chrome",
     "build:edge": "node scripts/build.mjs --browser edge",
     "build:firefox": "node scripts/build.mjs --browser firefox",

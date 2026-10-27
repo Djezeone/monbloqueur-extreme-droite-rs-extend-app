@@ -49,6 +49,7 @@ function fixture() {
       sendMessage: async (id, msg) => {
         if (msg.type === "navigate") return { accepted: !!f.softNavigation };
         f.sent = msg;
+        if (f.rpcError) throw f.rpcError;
         return { accepted: true };
       },
     },
@@ -81,10 +82,14 @@ function fixture() {
       { type, jobId: local.job.id, attempt: local.job.attempt, ...data },
       { tab: { id: tabId }, frameId: 0 },
     );
-  f.begin = async () => {
-    await f.runner.dispatch({ type: "start" });
+  f.begin = async (
+    owner = "CompteTest",
+    ownerKey = null,
+    command = "start",
+  ) => {
+    await f.runner.dispatch({ type: command });
     await f.runner.tick();
-    await f.result("sessionResult", { owner: "CompteTest" });
+    await f.result("sessionResult", { owner, ownerKey });
     await f.runner.tick();
   };
   return f;
@@ -122,6 +127,17 @@ test("un compte indisponible est conservé dans le bilan et les suivants continu
   assert.equal(f.local.job.index, 1);
   assert.equal(f.local.job.confirmed, 0);
   assert.equal(f.local.job.failed.length, 1);
+});
+test("un blocage déjà visible sans identité numérique ne remplit pas le cache", async () => {
+  const f = fixture();
+  await f.begin("CompteTest", "a".repeat(64));
+  await f.result("blockResult", {
+    outcome: "already",
+    identityVerified: false,
+  });
+  assert.equal(f.local.job.index, 1);
+  assert.equal(f.local.job.already, 1);
+  assert.equal(f.local.processedHistory, undefined);
 });
 test("refuse les résultats venant d’un autre onglet ou d’une tentative ancienne", async () => {
   const f = fixture();
@@ -171,13 +187,206 @@ test("une liste invalide ou inaccessible ne lance aucun blocage", async () => {
   await assert.rejects(f.runner.dispatch({ type: "start" }));
   assert.equal(f.tabs.size, 0);
 });
-test("une réponse perdue expire et suspend la file", async () => {
+test("une réponse perdue déclenche une récupération bornée puis une pause", async () => {
   const f = fixture();
   await f.begin();
   f.local.job.deadline = 0;
   await f.runner.tick();
+  assert.equal(f.local.job.phase, "cooldown");
+  f.local.job.retryAt = 0;
+  await f.runner.tick();
+  f.local.job.deadline = 0;
+  await f.runner.tick();
   assert.equal(f.local.job.status, "paused");
   assert.equal(f.local.job.index, 0);
+});
+
+test("un script absent conserve l’échéance puis déclenche la récupération", async (t) => {
+  for (const command of ["inspect", "block"]) {
+    await t.test(command, async () => {
+      const f = fixture();
+      await f.runner.dispatch({ type: "start" });
+      if (command === "block") {
+        await f.runner.tick();
+        await f.result("sessionResult", { owner: "CompteTest" });
+      }
+      const deadline = Date.now() + 10000;
+      f.local.job.deadline = deadline;
+      f.rpcError = Error("Receiving end does not exist");
+      for (let attempt = 0; attempt < 3; attempt++) {
+        await f.runner.tick();
+        assert.equal(f.sent.type, command);
+        assert.equal(
+          f.local.job.phase,
+          command === "inspect" ? "sessionLoading" : "loading",
+        );
+        assert.equal(f.local.job.deadline, deadline);
+        assert.equal(f.local.job.index, 0);
+      }
+      f.local.job.deadline = 0;
+      await f.runner.tick();
+      assert.equal(f.local.job.phase, "cooldown");
+      assert.equal(f.local.job.retries, 1);
+      assert.equal(f.local.job.confirmed, 0);
+    });
+  }
+});
+
+test("deux reprises après limitation X sont suivies d’une pause de quinze minutes", async () => {
+  const f = fixture();
+  const owner = "UtilisateurA";
+  const ownerKey = "a".repeat(64);
+  await f.begin(owner, ownerKey);
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const before = Date.now();
+    await f.result("blockResult", { outcome: "error", code: "rate" });
+    const retryAt = f.local.job.retryAt;
+    assert.equal(f.local.job.status, "running");
+    assert.equal(f.local.job.phase, "cooldown");
+    assert.equal(f.local.job.retries, attempt + 1);
+    assert.ok(retryAt >= before + 60000 * 2 ** attempt);
+    assert.equal(f.alarms.get("block-next").when, retryAt);
+    await f.runner.tick();
+    assert.equal(f.local.job.phase, "cooldown");
+    assert.equal(f.local.job.retryAt, retryAt);
+    f.local.job.retryAt = 0;
+    await f.runner.tick();
+    await f.runner.tick();
+    await f.result("sessionResult", { owner, ownerKey });
+    await f.runner.tick();
+    assert.equal(f.local.job.phase, "blocking");
+    assert.equal(f.local.job.index, 0);
+  }
+  const before = Date.now();
+  await f.result("blockResult", { outcome: "error", code: "rate" });
+  assert.equal(f.local.job.status, "paused");
+  assert.equal(f.local.job.retries, 2);
+  assert.ok(f.local.job.retryAt >= before + 15 * 60000);
+  assert.equal(f.local.job.index, 0);
+  assert.equal(f.local.job.confirmed, 0);
+  assert.equal(f.createdTabs.length, 1);
+  assert.equal(f.alarms.has("block-next"), false);
+  await assert.rejects(f.runner.dispatch({ type: "start" }), /pause/);
+  await assert.rejects(f.runner.dispatch({ type: "rescan" }), /pause/);
+});
+
+test("un nouveau passage saute les comptes déjà traités pour le même compte", async () => {
+  const f = fixture();
+  const key = "a".repeat(64);
+  await f.begin("UtilisateurA", key);
+  await f.result("blockResult", { outcome: "blocked" });
+  f.local.job.nextAt = 0;
+  await f.runner.tick();
+  await f.runner.tick();
+  await f.result("blockResult", { outcome: "already" });
+  assert.equal(f.local.job.created, 1);
+  assert.equal(f.local.job.already, 1);
+  await f.begin("UtilisateurA", key);
+  assert.equal(f.local.job.status, "done");
+  assert.equal(f.local.job.cached, 2);
+  assert.equal(f.local.job.created, 0);
+  assert.equal(f.local.job.confirmed, 2);
+  assert.equal(f.tabs.size, 0);
+});
+
+test("le cache ne passe jamais d’un utilisateur à l’autre", async () => {
+  const f = fixture();
+  const key = "a".repeat(64);
+  await f.begin("UtilisateurA", key);
+  await f.result("blockResult", { outcome: "blocked" });
+  await f.runner.dispatch({ type: "cancel" });
+  await f.begin("UtilisateurB", "b".repeat(64));
+  assert.equal(f.local.job.cached, 0);
+  assert.equal(f.local.job.phase, "blocking");
+  assert.equal(f.sent.account.id, "11");
+});
+
+test("Tout revérifier ignore le cache et conserve une liste fraîche", async () => {
+  const f = fixture();
+  const key = "a".repeat(64);
+  await f.begin("UtilisateurA", key);
+  await f.result("blockResult", { outcome: "blocked" });
+  await f.runner.dispatch({ type: "cancel" });
+  await f.begin("UtilisateurA", key, "rescan");
+  assert.equal(f.local.job.force, true);
+  assert.equal(f.local.job.cached, 0);
+  assert.equal(f.sent.account.id, "11");
+});
+
+test("la limitation de X impose une pause même pour Tout revérifier", async () => {
+  const f = fixture();
+  await f.begin();
+  await f.result("blockResult", { outcome: "error", code: "rate" });
+  assert.equal(f.local.job.phase, "cooldown");
+  assert.ok(f.local.job.retryAt > Date.now() + 59000);
+  f.local.job.status = "paused";
+  await assert.rejects(f.runner.dispatch({ type: "start" }), /pause/);
+  await assert.rejects(f.runner.dispatch({ type: "rescan" }), /pause/);
+});
+
+test("une identité de compte différente bloque la reprise du cache", async () => {
+  const f = fixture();
+  await f.begin("UtilisateurA", "a".repeat(64));
+  await f.result("blockResult", { outcome: "error" });
+  await f.runner.dispatch({ type: "start" });
+  await f.runner.tick();
+  await f.result("sessionResult", {
+    owner: "UtilisateurA",
+    ownerKey: "b".repeat(64),
+  });
+  assert.equal(f.local.job.status, "paused");
+  assert.match(f.local.job.message, /identité/);
+});
+
+test("une identité devenue indisponible suspend la reprise et conserve la clé connue", async () => {
+  const f = fixture();
+  const key = "a".repeat(64);
+  f.local.processedHistory = [
+    {
+      key,
+      username: "UtilisateurA",
+      ids: ["12"],
+      updatedAt: Date.now(),
+    },
+  ];
+  await f.begin("UtilisateurA", key);
+  await f.result("blockResult", { outcome: "error" });
+  await f.runner.dispatch({ type: "start" });
+  await f.runner.tick();
+  await f.result("sessionResult", {
+    owner: "UtilisateurA",
+    ownerKey: null,
+  });
+  assert.equal(f.local.job.status, "paused");
+  assert.equal(f.local.job.ownerKey, key);
+  assert.equal(f.local.job.index, 0);
+  assert.equal(f.local.job.confirmed, 0);
+  assert.deepEqual(f.local.job.skipIds, ["12"]);
+  assert.equal(f.sent.type, "inspect");
+});
+
+test("un premier passage sans clé fonctionne sans enregistrer ni réutiliser de cache", async () => {
+  const f = fixture();
+  await f.begin("UtilisateurA", null);
+  assert.equal(f.local.job.ownerKey, null);
+  assert.deepEqual(f.local.job.skipIds, []);
+  assert.equal(f.local.job.cached, 0);
+  assert.equal(f.sent.account.id, "11");
+  await f.result("blockResult", { outcome: "blocked" });
+  assert.equal(f.local.processedHistory, undefined);
+  f.local.job.nextAt = 0;
+  await f.runner.tick();
+  await f.runner.tick();
+  assert.equal(f.sent.account.id, "12");
+  await f.result("blockResult", { outcome: "blocked" });
+  assert.equal(f.local.job.status, "done");
+  assert.equal(f.local.job.created, 2);
+  assert.equal(f.local.job.confirmed, 2);
+  assert.equal(f.local.processedHistory, undefined);
+  await f.begin("UtilisateurA", null);
+  assert.equal(f.local.job.phase, "blocking");
+  assert.equal(f.local.job.cached, 0);
+  assert.equal(f.sent.account.id, "11");
 });
 test("le signal du contenu permet de traiter avant le chargement complet", async () => {
   const f = fixture();
