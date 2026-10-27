@@ -1,7 +1,7 @@
 {
   "verifiedAt": "2026-10-27",
-  "method": "Profils publics X : identité affichée, biographie et identifiant concordant dans les liens de suggestions et la bannière de profil. Aucune action de blocage réalisée pendant la vérification.",
-  "scope": "Liste éditoriale initiale demandée par l’éditeur, complétée par les comptes officiels des partis directement cités par ces responsables publics. Liste non exhaustive ; aucune inférence sur des personnes privées.",
+  "method": "Profils publics X : pseudo affiché et identifiant stable du bouton de suivi ; concordance avec la bannière et les liens du profil lorsqu’ils sont présents. Aucune action de blocage pendant la vérification.",
+  "scope": "Sélection éditoriale du propriétaire du dépôt : comptes expressément demandés et comptes officiels de partis déjà retenus. Aucune classification ou inférence automatique sur les opinions des titulaires.",
   "accounts": [
     {
       "id": "217749896",
@@ -51,6 +51,86 @@
       "name": "Identité Libertés",
       "basis": "Compte officiel du mouvement cité par Marion Maréchal dans sa biographie publique",
       "source": "https://x.com/ID_Libertes"
+    },
+    {
+      "id": "408398312",
+      "username": "BrunoRetailleau",
+      "name": "Bruno Retailleau",
+      "basis": "Compte expressément demandé par l’éditeur",
+      "source": "https://x.com/BrunoRetailleau",
+      "verifiedAt": "2026-10-27"
+    },
+    {
+      "id": "379718466",
+      "username": "GabrielAttal",
+      "name": "Gabriel Attal",
+      "basis": "Compte expressément demandé par l’éditeur",
+      "source": "https://x.com/GabrielAttal",
+      "verifiedAt": "2026-10-27"
+    },
+    {
+      "id": "1111901164487000064",
+      "username": "knafo_sarah",
+      "name": "Sarah Knafo",
+      "basis": "Compte expressément demandé par l’éditeur",
+      "source": "https://x.com/knafo_sarah",
+      "verifiedAt": "2026-10-27"
+    },
+    {
+      "id": "133663801",
+      "username": "BFMTV",
+      "name": "BFM",
+      "basis": "Compte expressément demandé par l’éditeur",
+      "source": "https://x.com/BFMTV",
+      "verifiedAt": "2026-10-27"
+    },
+    {
+      "id": "1357358878674059265",
+      "username": "Frontieresmedia",
+      "name": "Frontières",
+      "basis": "Compte expressément demandé par l’éditeur",
+      "source": "https://x.com/Frontieresmedia",
+      "verifiedAt": "2026-10-27"
+    },
+    {
+      "id": "112754792",
+      "username": "Valeurs",
+      "name": "Valeurs actuelles",
+      "basis": "Compte expressément demandé par l’éditeur",
+      "source": "https://x.com/Valeurs",
+      "verifiedAt": "2026-10-27"
+    },
+    {
+      "id": "18396319",
+      "username": "CNEWS",
+      "name": "CNEWS",
+      "basis": "Compte expressément demandé par l’éditeur",
+      "source": "https://x.com/CNEWS",
+      "verifiedAt": "2026-10-27"
+    },
+    {
+      "id": "92849144",
+      "username": "F_Desouche",
+      "name": "Fdesouche.com est une revue de presse",
+      "basis": "Compte expressément demandé par l’éditeur",
+      "source": "https://x.com/F_Desouche",
+      "verifiedAt": "2026-10-27"
+    },
+    {
+      "id": "1189178129501298688",
+      "username": "Coll_Nemesis",
+      "name": "Collectif Némésis",
+      "basis": "Compte expressément demandé par l’éditeur",
+      "source": "https://x.com/Coll_Nemesis",
+      "verifiedAt": "2026-10-27"
+    },
+    {
+      "id": "1862559135964811264",
+      "username": "TwitchGauchiste",
+      "name": "TwitchGauchiste",
+      "basis": "Compte expressément demandé par l’éditeur",
+      "source": "https://x.com/TwitchGauchiste",
+      "verifiedAt": "2026-10-27"
     }
   ]
 }

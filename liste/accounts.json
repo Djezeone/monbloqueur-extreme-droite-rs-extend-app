@@ -1,13 +1,74 @@
 {
   "schemaVersion": 1,
-  "version": "2026-10-27.2",
+  "version": "2026-10-27.3",
   "accounts": [
-    { "id": "217749896", "username": "MLP_officiel" },
-    { "id": "1499400284", "username": "J_Bardella" },
-    { "id": "520449734", "username": "MarionMarechal" },
-    { "id": "1183418538285027329", "username": "ZemmourEric" },
-    { "id": "78085410", "username": "RNational_off" },
-    { "id": "1466151854425923585", "username": "Reconquete_off" },
-    { "id": "1842533759695958016", "username": "ID_Libertes" }
+    {
+      "id": "217749896",
+      "username": "MLP_officiel"
+    },
+    {
+      "id": "1499400284",
+      "username": "J_Bardella"
+    },
+    {
+      "id": "520449734",
+      "username": "MarionMarechal"
+    },
+    {
+      "id": "1183418538285027329",
+      "username": "ZemmourEric"
+    },
+    {
+      "id": "78085410",
+      "username": "RNational_off"
+    },
+    {
+      "id": "1466151854425923585",
+      "username": "Reconquete_off"
+    },
+    {
+      "id": "1842533759695958016",
+      "username": "ID_Libertes"
+    },
+    {
+      "id": "408398312",
+      "username": "BrunoRetailleau"
+    },
+    {
+      "id": "379718466",
+      "username": "GabrielAttal"
+    },
+    {
+      "id": "1111901164487000064",
+      "username": "knafo_sarah"
+    },
+    {
+      "id": "133663801",
+      "username": "BFMTV"
+    },
+    {
+      "id": "1357358878674059265",
+      "username": "Frontieresmedia"
+    },
+    {
+      "id": "112754792",
+      "username": "Valeurs"
+    },
+    {
+      "id": "18396319",
+      "username": "CNEWS"
+    },
+    {
+      "id": "92849144",
+      "username": "F_Desouche"
+    },
+    {
+      "id": "1189178129501298688",
+      "username": "Coll_Nemesis"
+    },
+    {
+      "id": "1862559135964811264",
+      "username": "TwitchGauchiste"
+    }
   ]
 }
