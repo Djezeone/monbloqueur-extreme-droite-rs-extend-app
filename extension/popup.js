@@ -1,10 +1,11 @@
+const api = globalThis.browser ?? globalThis.chrome;
 const $ = (id) => document.getElementById(id);
 let busy = false,
   state,
   rendering = Promise.resolve(),
   signature;
 const send = async (type) => {
-  const reply = await chrome.runtime.sendMessage({ type });
+  const reply = await api.runtime.sendMessage({ type });
   if (!reply?.ok) throw Error(reply?.error || "Extension indisponible.");
   return reply.data;
 };
@@ -66,7 +67,7 @@ async function act(type) {
 $("start").onclick = () => act("start");
 $("cancel").onclick = () => act("cancel");
 $("inspect").onclick = () => act("inspect");
-chrome.storage.onChanged.addListener(() => render().catch(() => {}));
+api.storage.onChanged.addListener(() => render().catch(() => {}));
 await render();
 if (state.job?.status !== "running")
   send("refresh")

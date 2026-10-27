@@ -1,3 +1,4 @@
+import { accounts, sitePage } from "../tests/fixtures/site.mjs";
 import { chromium } from "@playwright/test";
 import assert from "node:assert/strict";
 import { cp, mkdir, writeFile, readFile } from "node:fs/promises";
@@ -11,11 +12,6 @@ const fixture = new URL("extension/", scratch),
   profile = new URL("profile/", scratch);
 await mkdir(scratch, { recursive: true });
 await cp(new URL("extension/", root), fixture, { recursive: true });
-const accounts = [
-  { id: "11", username: "CompteTest_A" },
-  { id: "12", username: "CompteTest_B" },
-  { id: "13", username: "CompteTest_C" },
-];
 const original = await readFile(new URL("background.js", fixture), "utf8");
 await writeFile(
   new URL("background.js", fixture),
@@ -49,30 +45,11 @@ const context = await chromium.launchPersistentContext(fileURLToPath(profile), {
 });
 const blocked = [],
   errors = [];
-let owner = "CompteDeTest";
-function sitePage(url) {
-  const handle = new URL(url).pathname.slice(1),
-    account = accounts.find((a) => a.username === handle);
-  if (!account)
-    return `<a href="/${owner}" data-testid="AppTabBar_Profile_Link">Profil</a><main>Accueil de test</main>`;
-  if (handle === "CompteTest_C")
-    return `<a href="/${owner}" data-testid="AppTabBar_Profile_Link">Profil</a><main><div data-testid="emptyState">Ce compte n’existe pas</div></main>`;
-  const already = handle === "CompteTest_B";
-  return `<!doctype html><html><meta charset="utf-8"><body>
- <a href="/${owner}" data-testid="AppTabBar_Profile_Link">Profil</a><main>
- <div data-testid="UserName">Compte de test @${handle}</div>
- <button id="state" data-testid="${account.id}-${already ? "unblock" : "follow"}">${already ? "Bloqué" : "Suivre"}</button>
- <button id="more" data-testid="userActions">Plus</button>
- <div id="menu" role="menu" hidden><button id="action" role="menuitem" data-testid="block">${already ? "Débloquer" : "Bloquer"} @${handle}</button></div>
- <div id="dialog" role="alertdialog" hidden>Bloquer @${handle} ?<button id="confirm" data-testid="confirmationSheetConfirm">Bloquer</button></div></main>
- <script>
- document.getElementById('more').onclick=()=>document.getElementById('menu').hidden=false;
- document.getElementById('action').onclick=()=>{document.getElementById('menu').hidden=true;document.getElementById('dialog').hidden=false;};
- document.getElementById('confirm').onclick=()=>{document.getElementById('dialog').hidden=true;const state=document.getElementById('state');state.dataset.testid='${account.id}-unblock';state.textContent='Bloqué';fetch('/__test__/blocked?username=${handle}');};
- </script></body></html>`;
-}
+let documents = 0;
+
 await context.route("https://x.com/**", async (route) => {
   const url = new URL(route.request().url());
+  if (route.request().resourceType() === "document") documents++;
   if (url.pathname === "/__test__/blocked") {
     blocked.push(url.searchParams.get("username"));
     return route.fulfill({ body: "ok" });
@@ -107,6 +84,11 @@ try {
   assert.equal(job.failed.length, 1);
   assert.equal(job.status, "done");
   assert.deepEqual(blocked, ["CompteTest_A"]);
+  assert.equal(
+    documents,
+    1,
+    "Un seul chargement complet de X pour tout le lot",
+  );
   const elapsed = Date.now() - started;
   const { testTabs } = await worker.evaluate(
     async () => await chrome.storage.session.get("testTabs"),
@@ -178,7 +160,7 @@ try {
     .waitFor();
   assert.deepEqual(errors, []);
   await writeFile(
-    new URL("verification/navigateur.json", root),
+    new URL(`verification/${channel}.json`, root),
     JSON.stringify(
       {
         date: new Date().toISOString(),
@@ -201,15 +183,16 @@ try {
           "un seul onglet dans la fenêtre courante pour toute la liste",
           "onglet créé sans activation et aucune fenêtre popup",
           "bouton Vérifier X réservé à une opération en pause",
+          "navigation interne : un seul chargement complet pour tout le lot",
         ],
-        result: "13 contrôles réussis",
+        result: "14 contrôles réussis",
       },
       null,
       2,
     ),
   );
   console.log(
-    "13 contrôles navigateur réussis. Durée du lot simulé : " +
+    "14 contrôles navigateur réussis. Durée du lot simulé : " +
       elapsed +
       " ms. Capture : verification/interface-minimaliste.png",
   );

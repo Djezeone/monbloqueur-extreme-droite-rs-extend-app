@@ -1,5 +1,13 @@
 # Changements
 
+## 2.2.0
+
+- Versions Firefox et Edge, avec un paquet par navigateur.
+- Guide d’installation commun.
+- Navigation interne dans X pour éviter de recharger le site entre chaque profil.
+- Tableau des comptes dans le README, actualisé à partir du fichier de liste.
+- Liste élargie aux comptes demandés par MEYTRED.
+
 ## 2.1.0
 
 - Le même onglet sert à toute la liste et aux reprises, sans ouverture de fenêtre séparée.

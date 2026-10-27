@@ -97,13 +97,35 @@ export function createRunner(
       }
       job.phase = "loading";
       job.documentReady = false;
+      job.softNavigation = false;
       job.attempt = crypto.randomUUID();
       job.deadline = Date.now() + 60000;
       await save(job);
       try {
+        try {
+          const accepted =
+            !job.navigationFallback &&
+            (await chrome.tabs.sendMessage(job.tabId, {
+              type: "navigate",
+              jobId: job.id,
+              attempt: job.attempt,
+              account: job.accounts[job.index],
+              owner: job.owner,
+            }));
+          if (accepted?.accepted) {
+            job.softNavigation = true;
+            await save(job);
+            await schedule(job.deadline + 100);
+            return;
+          }
+        } catch {}
         await chrome.tabs.update(job.tabId, {
           url: `https://x.com/${job.accounts[job.index].username}`,
         });
+        // Firefox peut encore renvoyer l’ancienne URL juste après update().
+        // Le nouveau document nous prévient dès que son script est prêt.
+        await schedule(Date.now() + 1000);
+        return;
       } catch {
         await pause(
           job,
@@ -133,8 +155,15 @@ export function createRunner(
       );
       return;
     }
-    if (tab.status !== "complete" && !job.documentReady) {
+    if (
+      (tab.status !== "complete" || job.softNavigation) &&
+      !job.documentReady
+    ) {
       await schedule(Date.now() + 1000);
+      return;
+    }
+    if (!tab.url || tab.url === "about:blank") {
+      await schedule(Date.now() + 500);
       return;
     }
     let url;
@@ -244,12 +273,43 @@ export function createRunner(
         return chrome.storage.local.get(["list", "job", "checkedAt"]);
       if (message?.type === "refresh") return list();
       return locked(async () => {
+        if (message?.type === "navigateFailed") {
+          const job = await read();
+          if (
+            job?.status !== "running" ||
+            job.phase !== "loading" ||
+            !job.softNavigation ||
+            job.tabId !== sender.tab?.id ||
+            sender.frameId !== 0 ||
+            job.id !== message.jobId ||
+            job.attempt !== message.attempt
+          )
+            return;
+          job.softNavigation = false;
+          job.navigationFallback = true;
+          job.documentReady = false;
+          await save(job);
+          try {
+            await chrome.tabs.update(job.tabId, {
+              url: `https://x.com/${job.accounts[job.index].username}`,
+            });
+            await schedule(Date.now() + 1000);
+          } catch {
+            await pause(
+              job,
+              "L’onglet de blocage a été fermé. Cliquez pour reprendre.",
+            );
+          }
+          return;
+        }
         if (message?.type === "ready") {
           const job = await read();
           if (
             job?.status !== "running" ||
             job.tabId !== sender.tab?.id ||
             sender.frameId !== 0 ||
+            (message.jobId &&
+              (message.jobId !== job.id || message.attempt !== job.attempt)) ||
             !["loading", "sessionLoading"].includes(job.phase)
           )
             return;
@@ -257,7 +317,7 @@ export function createRunner(
             job.phase === "sessionLoading"
               ? "/home"
               : `/${job.accounts[job.index].username.toLowerCase()}`;
-          const url = new URL(sender.url);
+          const url = new URL(message.url || sender.url);
           if (
             url.hostname !== "x.com" ||
             url.pathname.toLowerCase() !== expected
@@ -315,6 +375,7 @@ export function createRunner(
           phase: "sessionLoading",
           ...work,
           documentReady: false,
+          softNavigation: false,
           attempt: crypto.randomUUID(),
           deadline: Date.now() + 60000,
           message: "Vérification de votre session X…",
@@ -328,7 +389,10 @@ export function createRunner(
       locked(async () => {
         const job = await read();
         if (job?.status === "running")
-          await pause(job, "Chrome a redémarré. Cliquez pour reprendre.");
+          await pause(
+            job,
+            "Le navigateur a redémarré. Cliquez pour reprendre.",
+          );
       }),
   };
 }

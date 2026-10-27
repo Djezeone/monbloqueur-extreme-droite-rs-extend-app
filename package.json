@@ -1,18 +1,26 @@
 {
   "name": "bloquer-extreme-droite-x",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "test": "node --test tests/*.test.js",
     "test:browser": "node scripts/test-browser.mjs",
     "validate:list": "node scripts/validate-list.mjs",
+    "update:table": "node scripts/update-readme.mjs",
     "assets": "node scripts/assets.mjs",
     "build": "node scripts/build.mjs",
-    "build:dev": "node scripts/build.mjs --development"
+    "build:dev": "node scripts/build.mjs --development",
+    "build:chrome": "node scripts/build.mjs --browser chrome",
+    "build:edge": "node scripts/build.mjs --browser edge",
+    "build:firefox": "node scripts/build.mjs --browser firefox",
+    "test:firefox": "node scripts/test-firefox.mjs",
+    "lint:firefox": "web-ext lint --source-dir dist/firefox --warnings-as-errors"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",
-    "prettier": "3.9.10"
+    "prettier": "3.9.10",
+    "selenium-webdriver": "4.51.0",
+    "web-ext": "10.8.0"
   }
 }

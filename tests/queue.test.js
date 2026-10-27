@@ -47,6 +47,7 @@ function fixture() {
         return tabs.get(id);
       },
       sendMessage: async (id, msg) => {
+        if (msg.type === "navigate") return { accepted: !!f.softNavigation };
         f.sent = msg;
         return { accepted: true };
       },
@@ -84,6 +85,7 @@ function fixture() {
     await f.runner.dispatch({ type: "start" });
     await f.runner.tick();
     await f.result("sessionResult", { owner: "CompteTest" });
+    await f.runner.tick();
   };
   return f;
 }
@@ -106,6 +108,7 @@ test("succès et compte déjà bloqué comptent sans jamais débloquer", async (
   await f.begin();
   await f.result("blockResult", { outcome: "blocked" });
   f.local.job.nextAt = 0;
+  await f.runner.tick();
   await f.runner.tick();
   await f.result("blockResult", { outcome: "already" });
   assert.equal(f.local.job.status, "done");
@@ -139,6 +142,7 @@ test("erreur de X met en pause et un clic reprend sans perdre la progression", a
   await f.runner.dispatch({ type: "start" });
   await f.runner.tick();
   await f.result("sessionResult", { owner: "CompteTest" });
+  await f.runner.tick();
   assert.equal(f.local.job.index, 0);
   assert.equal(f.local.job.phase, "blocking");
   assert.equal(f.createdTabs.length, 1);
@@ -152,7 +156,7 @@ test("un changement de compte X bloque la reprise", async () => {
   await f.result("sessionResult", { owner: "AutreCompte" });
   assert.equal(f.local.job.status, "paused");
 });
-test("le redémarrage de Chrome suspend et l’arrêt ferme seulement l’onglet de travail", async () => {
+test("le redémarrage du navigateur suspend et l’arrêt ferme seulement l’onglet de travail", async () => {
   const f = fixture();
   await f.begin();
   await f.runner.startup();
@@ -210,4 +214,56 @@ test("l’onglet X est activé seulement sur demande en cas de pause", async () 
   await f.runner.dispatch({ type: "start" });
   assert.equal(f.createdTabs.length, 1);
   assert.equal(f.local.job.tabId, id);
+});
+
+test("une navigation attend le nouveau document avant de lire son URL", async () => {
+  const f = fixture();
+  await f.runner.dispatch({ type: "start" });
+  await f.runner.tick();
+  await f.result("sessionResult", { owner: "CompteTest" });
+  assert.equal(f.local.job.phase, "loading");
+  assert.equal(f.local.job.status, "running");
+  const tab = f.tabs.get(f.local.job.tabId);
+  await f.runner.dispatch(
+    { type: "ready" },
+    { tab: { id: tab.id }, frameId: 0, url: tab.url },
+  );
+  assert.equal(f.local.job.phase, "blocking");
+});
+
+test("une navigation interne conserve la page et attend le bon profil", async () => {
+  const f = fixture();
+  f.softNavigation = true;
+  await f.runner.dispatch({ type: "start" });
+  await f.runner.tick();
+  await f.result("sessionResult", { owner: "CompteTest" });
+  assert.equal(f.local.job.softNavigation, true);
+  const tab = f.tabs.get(f.local.job.tabId);
+  assert.equal(tab.url, "https://x.com/home");
+  await f.runner.tick();
+  assert.equal(f.local.job.phase, "loading");
+  tab.url = "https://x.com/CompteTest_A";
+  await f.runner.dispatch(
+    {
+      type: "ready",
+      url: tab.url,
+      jobId: f.local.job.id,
+      attempt: f.local.job.attempt,
+    },
+    { tab: { id: tab.id }, frameId: 0, url: "https://x.com/home" },
+  );
+  assert.equal(f.local.job.phase, "blocking");
+});
+
+test("un routeur indisponible déclenche une seule navigation de secours", async () => {
+  const f = fixture();
+  f.softNavigation = true;
+  await f.runner.dispatch({ type: "start" });
+  await f.runner.tick();
+  await f.result("sessionResult", { owner: "CompteTest" });
+  await f.result("navigateFailed", { attempt: "ancienne" });
+  assert.equal(f.local.job.softNavigation, true);
+  await f.result("navigateFailed");
+  assert.equal(f.local.job.softNavigation, false);
+  assert.equal(f.tabs.get(f.local.job.tabId).url, "https://x.com/CompteTest_A");
 });

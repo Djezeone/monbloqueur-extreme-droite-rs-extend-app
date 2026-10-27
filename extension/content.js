@@ -1,4 +1,5 @@
 (() => {
+  const api = globalThis.browser ?? globalThis.chrome;
   let running = null,
     deadline = 0;
   const visible = (element) => element && element.getClientRects().length > 0;
@@ -43,7 +44,11 @@
       timer = setTimeout(
         () => {
           stop();
-          reject(Error("X n’a pas affiché le contrôle attendu."));
+          reject(
+            Error(
+              "X ne répond pas correctement ou limite les requêtes. La progression est conservée. Attendez avant de reprendre avec « Vérifier X ».",
+            ),
+          );
         },
         Math.max(1, Math.min(timeout, deadline - Date.now())),
       );
@@ -168,10 +173,10 @@
     }, 12000);
     return "blocked";
   }
-  chrome.runtime.onMessage.addListener((message, sender, respond) => {
+  api.runtime.onMessage.addListener((message, sender, respond) => {
     if (
-      sender.id !== chrome.runtime.id ||
-      !["inspect", "block"].includes(message?.type)
+      sender.id !== api.runtime.id ||
+      !["inspect", "block", "navigate"].includes(message?.type)
     )
       return;
     if (running) {
@@ -182,6 +187,50 @@
     deadline = Date.now() + 25000;
     respond({ accepted: true });
     (async () => {
+      if (message.type === "navigate") {
+        let type = "ready";
+        try {
+          if (!/^[A-Za-z0-9_]{1,15}$/.test(message.account?.username))
+            throw Error("Profil incorrect.");
+          if (owner()?.toLowerCase() !== message.owner?.toLowerCase())
+            throw Error("Session différente.");
+          const path = "/" + message.account.username;
+          const changed =
+            location.pathname.toLowerCase() !== path.toLowerCase();
+          const previousEmpty = find('[data-testid="emptyState"]');
+          if (changed) {
+            // Le routeur de X réutilise la page, la session et les scripts chargés.
+            history.pushState(null, "", path);
+            window.dispatchEvent(
+              new PopStateEvent("popstate", { state: null }),
+            );
+          }
+          await waitFor(() => {
+            const name = find('[data-testid="UserName"]');
+            const empty = find('[data-testid="emptyState"]');
+            return (
+              location.pathname.toLowerCase() === path.toLowerCase() &&
+              ((empty && (!changed || empty !== previousEmpty)) ||
+                name?.textContent
+                  .toLowerCase()
+                  .includes("@" + message.account.username.toLowerCase()))
+            );
+          }, 10000);
+        } catch {
+          type = "navigateFailed";
+        } finally {
+          running = null;
+        }
+        await api.runtime
+          .sendMessage({
+            type,
+            jobId: message.jobId,
+            attempt: message.attempt,
+            url: location.href,
+          })
+          .catch(() => {});
+        return;
+      }
       const result = {
         jobId: message.jobId,
         attempt: message.attempt,
@@ -196,8 +245,10 @@
       } finally {
         running = null;
       }
-      await chrome.runtime.sendMessage(result).catch(() => {});
+      await api.runtime.sendMessage(result).catch(() => {});
     })();
   });
-  chrome.runtime.sendMessage({ type: "ready" }).catch(() => {});
+  api.runtime
+    .sendMessage({ type: "ready", url: location.href })
+    .catch(() => {});
 })();

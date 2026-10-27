@@ -1,12 +1,13 @@
 import { CONFIG } from "./config.js";
 import { createRunner } from "./runner.js";
-const runner = createRunner(chrome, CONFIG);
-chrome.runtime.onMessage.addListener((message, sender, respond) => {
+const api = globalThis.browser ?? globalThis.chrome;
+const runner = createRunner(api, CONFIG);
+api.runtime.onMessage.addListener((message, sender, respond) => {
   const popup =
-    sender.id === chrome.runtime.id &&
-    sender.url === chrome.runtime.getURL("popup.html");
+    sender.id === api.runtime.id &&
+    sender.url === api.runtime.getURL("popup.html");
   const content =
-    sender.id === chrome.runtime.id &&
+    sender.id === api.runtime.id &&
     sender.tab &&
     sender.frameId === 0 &&
     /^https:\/\/(x\.com|twitter\.com)\//.test(sender.url || "");
@@ -17,7 +18,9 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
     ) &&
     !(
       content &&
-      ["ready", "sessionResult", "blockResult"].includes(message?.type)
+      ["ready", "navigateFailed", "sessionResult", "blockResult"].includes(
+        message?.type,
+      )
     )
   )
     return;
@@ -27,11 +30,11 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
   );
   return true;
 });
-chrome.alarms.onAlarm.addListener((alarm) => {
+api.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === "block-next") runner.tick().catch(() => {});
 });
-chrome.tabs.onUpdated.addListener((id, change) => {
+api.tabs.onUpdated.addListener((id, change) => {
   if (change.status === "complete") runner.tick().catch(() => {});
 });
-chrome.runtime.onStartup.addListener(() => runner.startup().catch(() => {}));
-chrome.runtime.onInstalled.addListener(() => runner.startup().catch(() => {}));
+api.runtime.onStartup.addListener(() => runner.startup().catch(() => {}));
+api.runtime.onInstalled.addListener(() => runner.startup().catch(() => {}));

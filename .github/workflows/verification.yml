@@ -16,8 +16,11 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run validate:list
+      - run: npm run build:dev
+      - run: npm run lint:firefox
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser
+      - run: npm run test:firefox
       - uses: actions/upload-artifact@v4
         if: always()
         with:

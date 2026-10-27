@@ -1,6 +1,6 @@
 {
   "verifiedAt": "2026-10-27",
-  "method": "Profils publics X : pseudo affiché et identifiant stable du bouton de suivi ; concordance avec la bannière et les liens du profil lorsqu’ils sont présents. Aucune action de blocage pendant la vérification.",
+  "method": "Identifiants relevés sur les profils X ou rapprochés de leur pseudo dans les annuaires publics cités par compte. L’extension vérifie le pseudo et l’identifiant stable avant chaque blocage. Aucun compte bloqué pendant la préparation de la liste.",
   "scope": "Sélection éditoriale du propriétaire du dépôt : comptes expressément demandés et comptes officiels de partis déjà retenus. Aucune classification ou inférence automatique sur les opinions des titulaires.",
   "accounts": [
     {
@@ -131,6 +131,888 @@
       "basis": "Compte expressément demandé par l’éditeur",
       "source": "https://x.com/TwitchGauchiste",
       "verifiedAt": "2026-10-27"
+    },
+    {
+      "id": "1821135380432687104",
+      "username": "furet_angeline",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/furet_angeline"
+    },
+    {
+      "id": "1812857393849806848",
+      "username": "thierryperez_",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/thierryperez_"
+    },
+    {
+      "id": "1805984872558637056",
+      "username": "ClaireBeuil",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/ClaireBeuil"
+    },
+    {
+      "id": "1802995739536003072",
+      "username": "LeBourgeois7610",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/LeBourgeois7610"
+    },
+    {
+      "id": "1802355173727105024",
+      "username": "Bay_Christophe",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Bay_Christophe"
+    },
+    {
+      "id": "1801005818378104834",
+      "username": "FredericVos",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/FredericVos"
+    },
+    {
+      "id": "1785716008986046464",
+      "username": "PierrePimpie",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/PierrePimpie"
+    },
+    {
+      "id": "1783570272789966848",
+      "username": "SJosserand30",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/SJosserand30"
+    },
+    {
+      "id": "1783114373281558528",
+      "username": "PascalePiera",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/PascalePiera"
+    },
+    {
+      "id": "1770754532114378752",
+      "username": "MalikaSorel",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/MalikaSorel"
+    },
+    {
+      "id": "1765330447066611712",
+      "username": "AlexandreVaraut",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/AlexandreVaraut"
+    },
+    {
+      "id": "1758061038279225344",
+      "username": "FabriceLeggeri",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/FabriceLeggeri"
+    },
+    {
+      "id": "1667543705832620034",
+      "username": "C_Jaouen_84",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/C_Jaouen_84"
+    },
+    {
+      "id": "1635763762031362050",
+      "username": "MoniqueGriseti",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/MoniqueGriseti"
+    },
+    {
+      "id": "1627372197655322624",
+      "username": "JulienGabarron",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/JulienGabarron"
+    },
+    {
+      "id": "1599411938416533506",
+      "username": "Julien_Limongi",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Julien_Limongi"
+    },
+    {
+      "id": "1579863270399287296",
+      "username": "groupeRN_off",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/groupeRN_off"
+    },
+    {
+      "id": "1577661549648482304",
+      "username": "LevavasseurK",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/LevavasseurK"
+    },
+    {
+      "id": "1552204078767300608",
+      "username": "Anais_Sabatini",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Anais_Sabatini"
+    },
+    {
+      "id": "1550968212606648320",
+      "username": "C_GirardRN",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/C_GirardRN"
+    },
+    {
+      "id": "1549142184288522242",
+      "username": "Cengrand_",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Cengrand_"
+    },
+    {
+      "id": "1541365185847361536",
+      "username": "ChristineLoirRN",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/ChristineLoirRN"
+    },
+    {
+      "id": "1538786373968314370",
+      "username": "BarthesChristop",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/BarthesChristop"
+    },
+    {
+      "id": "1527188940029149184",
+      "username": "LRDehault",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/LRDehault"
+    },
+    {
+      "id": "1526227912222990336",
+      "username": "FalconFrederic",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/FalconFrederic"
+    },
+    {
+      "id": "1525806145310445568",
+      "username": "thierry_frappe",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/thierry_frappe"
+    },
+    {
+      "id": "1522966362267734017",
+      "username": "ChudeauR",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/ChudeauR"
+    },
+    {
+      "id": "1521865560828649473",
+      "username": "AnneSicard1",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/AnneSicard1"
+    },
+    {
+      "id": "1496184473439899657",
+      "username": "angelique_ranc",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/angelique_ranc"
+    },
+    {
+      "id": "1487084725521063936",
+      "username": "BlairyEmmanuel",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/BlairyEmmanuel"
+    },
+    {
+      "id": "1473415154058551296",
+      "username": "Th_Bnrdt",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Th_Bnrdt"
+    },
+    {
+      "id": "1471984978183528450",
+      "username": "FlorenceGoulet4",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/FlorenceGoulet4"
+    },
+    {
+      "id": "1464671963121692672",
+      "username": "gisele_lelouis",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/gisele_lelouis"
+    },
+    {
+      "id": "1462873748403474436",
+      "username": "GalzyStephanie",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/GalzyStephanie"
+    },
+    {
+      "id": "1461639594521378818",
+      "username": "YaelMenache",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/YaelMenache"
+    },
+    {
+      "id": "1459094447753469964",
+      "username": "Meurin_P",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Meurin_P"
+    },
+    {
+      "id": "1456335129731911684",
+      "username": "sRambaudRN",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/sRambaudRN"
+    },
+    {
+      "id": "1453357110255931399",
+      "username": "JorysB3",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/JorysB3"
+    },
+    {
+      "id": "1448914405861871649",
+      "username": "Serge_Muller24",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Serge_Muller24"
+    },
+    {
+      "id": "1437390141354610693",
+      "username": "Au_Evrard",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Au_Evrard"
+    },
+    {
+      "id": "1432839907559542785",
+      "username": "mvalet_officiel",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/mvalet_officiel"
+    },
+    {
+      "id": "1432640674231422977",
+      "username": "SandraDELANNOY1",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/SandraDELANNOY1"
+    },
+    {
+      "id": "1431646297744887816",
+      "username": "MaximeAmblard5",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/MaximeAmblard5"
+    },
+    {
+      "id": "1397542849122553859",
+      "username": "CColombier_RN",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/CColombier_RN"
+    },
+    {
+      "id": "1369220576905166854",
+      "username": "ValerieDeloge",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/ValerieDeloge"
+    },
+    {
+      "id": "1320313369379954689",
+      "username": "Al_Nikolic",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Al_Nikolic"
+    },
+    {
+      "id": "1319560178958815232",
+      "username": "TaverneMichael",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/TaverneMichael"
+    },
+    {
+      "id": "1315334499077681153",
+      "username": "MichleMartinez3",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/MichleMartinez3"
+    },
+    {
+      "id": "1306473142366416896",
+      "username": "Rivirejoseph1",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Rivirejoseph1"
+    },
+    {
+      "id": "1263385251176484864",
+      "username": "Flo_Joubert",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Flo_Joubert"
+    },
+    {
+      "id": "1238476209291476993",
+      "username": "GrangierGe",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/GrangierGe"
+    },
+    {
+      "id": "1222799668150665216",
+      "username": "ASabatou",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/ASabatou"
+    },
+    {
+      "id": "1181874470564384774",
+      "username": "MarcDeFleurian",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/MarcDeFleurian"
+    },
+    {
+      "id": "1180615972597764096",
+      "username": "BaubryR",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/BaubryR"
+    },
+    {
+      "id": "1176830490894118913",
+      "username": "MAndrouet",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/MAndrouet"
+    },
+    {
+      "id": "1173524445169934336",
+      "username": "MarchioMatthieu",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/MarchioMatthieu"
+    },
+    {
+      "id": "1160270849871613953",
+      "username": "marine_hamelet",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/marine_hamelet"
+    },
+    {
+      "id": "1159815717811867649",
+      "username": "BeaurainJose",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/BeaurainJose"
+    },
+    {
+      "id": "1156135942660460544",
+      "username": "AndreRougeOff",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/AndreRougeOff"
+    },
+    {
+      "id": "1121349820747264000",
+      "username": "PhOlivierRN",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/PhOlivierRN"
+    },
+    {
+      "id": "1100772609321512961",
+      "username": "Ph_Schreck",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Ph_Schreck"
+    },
+    {
+      "id": "1089589855875727360",
+      "username": "BrunoClavet",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/BrunoClavet"
+    },
+    {
+      "id": "1073862562792521729",
+      "username": "Parmentier_RN",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Parmentier_RN"
+    },
+    {
+      "id": "1070414962437296133",
+      "username": "villedieu_a",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/villedieu_a"
+    },
+    {
+      "id": "1063004128211845120",
+      "username": "FrankGiletti",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/FrankGiletti"
+    },
+    {
+      "id": "1026316258214588417",
+      "username": "RTolassy",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/RTolassy"
+    },
+    {
+      "id": "985438173831618560",
+      "username": "LopezLiguori",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/LopezLiguori"
+    },
+    {
+      "id": "970259667434770437",
+      "username": "phlottiaux",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/phlottiaux"
+    },
+    {
+      "id": "967709351359246337",
+      "username": "BeneAuzanot",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/BeneAuzanot"
+    },
+    {
+      "id": "961687644290904070",
+      "username": "RomainTonussi",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/RomainTonussi"
+    },
+    {
+      "id": "958813131500908544",
+      "username": "ArnaudSa3",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/ArnaudSa3"
+    },
+    {
+      "id": "949675222436892672",
+      "username": "seb_humbert",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/seb_humbert"
+    },
+    {
+      "id": "917502220576460801",
+      "username": "EddyCasterman",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/EddyCasterman"
+    },
+    {
+      "id": "902788871460724740",
+      "username": "FranceLorho",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/FranceLorho"
+    },
+    {
+      "id": "857607035252297729",
+      "username": "Sandrine_Dogor",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Sandrine_Dogor"
+    },
+    {
+      "id": "836693613430046724",
+      "username": "GonzalezJoseRN",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/GonzalezJoseRN"
+    },
+    {
+      "id": "830514488415760386",
+      "username": "NathCarvalho91",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/NathCarvalho91"
+    },
+    {
+      "id": "822445524905291777",
+      "username": "guillaumefl59",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/guillaumefl59"
+    },
+    {
+      "id": "822197735428333568",
+      "username": "S_Werbrouck",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/S_Werbrouck"
+    },
+    {
+      "id": "790535381062152192",
+      "username": "LisettePollet",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/LisettePollet"
+    },
+    {
+      "id": "789179329854869507",
+      "username": "HeleneLaporteRN",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/HeleneLaporteRN"
+    },
+    {
+      "id": "759014652332249088",
+      "username": "JocelynDessigny",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/JocelynDessigny"
+    },
+    {
+      "id": "736637327389396993",
+      "username": "antoine_golliot",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/antoine_golliot"
+    },
+    {
+      "id": "733415876637163520",
+      "username": "CathRimbert84",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/CathRimbert84"
+    },
+    {
+      "id": "708306997637226496",
+      "username": "A_Dutremble",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/A_Dutremble"
+    },
+    {
+      "id": "703306285580754945",
+      "username": "Tiffany_Joncour",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Tiffany_Joncour"
+    },
+    {
+      "id": "4865214225",
+      "username": "AymericDurox",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/AymericDurox"
+    },
+    {
+      "id": "4838317882",
+      "username": "diaz_edwige",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/diaz_edwige"
+    },
+    {
+      "id": "4581833027",
+      "username": "joshuaHochart",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/joshuaHochart"
+    },
+    {
+      "id": "4507234275",
+      "username": "e_Fouquart",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/e_Fouquart"
+    },
+    {
+      "id": "4181419349",
+      "username": "M_Dauchy",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/M_Dauchy"
+    },
+    {
+      "id": "4067518516",
+      "username": "J_Rancoule",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/J_Rancoule"
+    },
+    {
+      "id": "3890744956",
+      "username": "melanie_disdier",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/melanie_disdier"
+    },
+    {
+      "id": "3360454371",
+      "username": "A_Masson06",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/A_Masson06"
+    },
+    {
+      "id": "2991912647",
+      "username": "v_joron",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/v_joron"
+    },
+    {
+      "id": "2909481429",
+      "username": "JLechanteux",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/JLechanteux"
+    },
+    {
+      "id": "2784005936",
+      "username": "ljacobelli",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/ljacobelli"
+    },
+    {
+      "id": "2734007490",
+      "username": "JLeonardelli_",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/JLeonardelli_"
+    },
+    {
+      "id": "2463372510",
+      "username": "MarieLuceBC",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/MarieLuceBC"
+    },
+    {
+      "id": "138810824",
+      "username": "franckallisio",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/franckallisio",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "1030167852",
+      "username": "BallardPhilippe",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/BallardPhilippe",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "93939435",
+      "username": "BentzChristophe",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/BentzChristophe",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "1635233568",
+      "username": "BrunoBilde",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/BrunoBilde",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "2233497227",
+      "username": "sblanc66000",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/sblanc66000",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "345332120",
+      "username": "Boccaletti83",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Boccaletti83",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "125094848",
+      "username": "jerome_buisson",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/jerome_buisson",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "493833484",
+      "username": "sebchenu",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/sebchenu",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "36350521",
+      "username": "NicolasDragon",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/NicolasDragon",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "51018189",
+      "username": "asfrigout",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/asfrigout",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "98735932",
+      "username": "YoannGillet30",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/YoannGillet30",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "106782026",
+      "username": "MichelGuiniot",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/MichelGuiniot",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "1318978447",
+      "username": "jordan_guitton",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/jordan_guitton",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "365241641",
+      "username": "T_Houssin",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/T_Houssin",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "120521019",
+      "username": "alexisjollyrn",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/alexisjollyrn",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "1151540791",
+      "username": "LaureLavalette",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/LaureLavalette",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "782118072",
+      "username": "AlexandreLoubet",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/AlexandreLoubet",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "1503229705",
+      "username": "HdeLepinau",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/HdeLepinau",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "293620822",
+      "username": "MassonBryan",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/MassonBryan",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "898253869",
+      "username": "MauvieuxKevin",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/MauvieuxKevin",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "773854656",
+      "username": "NMeizonnet",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/NMeizonnet",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "2362654915",
+      "username": "JoelleMelinRN",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/JoelleMelinRN",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "560346582",
+      "username": "Thomas_Mng",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Thomas_Mng",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "440914834",
+      "username": "JulienOdoul",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/JulienOdoul",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "22993455",
+      "username": "K_Pfeffer",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/K_Pfeffer",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "290794764",
+      "username": "RoullaudBeatric",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/RoullaudBeatric",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "493628470",
+      "username": "EmericSalmon",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/EmericSalmon",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "288854464",
+      "username": "JphTanguy",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/JphTanguy",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "2164568108",
+      "username": "Lionel_Tivoli",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Lionel_Tivoli",
+      "idSource": "https://raw.githubusercontent.com/regardscitoyens/twitter-parlementaires/9a1adb309b71e62a9522a12870d27005975ff96d/data/deputes.json",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "732726264",
+      "username": "AlexandreDfss",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/AlexandreDfss",
+      "idSource": "https://www.wikidata.org/wiki/Q126949564",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "2194423693",
+      "username": "Guillaume_Bigot",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/Guillaume_Bigot",
+      "idSource": "https://www.wikidata.org/wiki/Q15869276",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "1098578904",
+      "username": "G_Dussausaye",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/G_Dussausaye",
+      "idSource": "https://www.wikidata.org/wiki/Q30729075",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "95599164",
+      "username": "jllacapelle",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/jllacapelle",
+      "idSource": "https://www.wikidata.org/wiki/Q42099949",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "2175883022",
+      "username": "GillesPennelle",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/GillesPennelle",
+      "idSource": "https://www.wikidata.org/wiki/Q46489779",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "966076399",
+      "username": "FranceJamet",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/FranceJamet",
+      "idSource": "https://www.wikidata.org/wiki/Q5478286",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
+    },
+    {
+      "id": "87212906",
+      "username": "ThierryMARIANI",
+      "basis": "Compte demandé par MEYTRED",
+      "source": "https://x.com/ThierryMARIANI",
+      "idSource": "https://www.wikidata.org/wiki/Q63655",
+      "idMethod": "Correspondance du pseudo et de son identifiant dans un annuaire public ; identité contrôlée sur X avant tout blocage."
     }
   ]
 }

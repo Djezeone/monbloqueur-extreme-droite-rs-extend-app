@@ -106,4 +106,4 @@ const id = Array.from(
 )
   .map((byte) => String.fromCharCode(97 + (byte >> 4), 97 + (byte & 15)))
   .join("");
-console.log(`Icônes générées. Identifiant Chrome de développement : ${id}`);
+console.log(`Icônes prêtes. Identifiant de développement : ${id}`);
