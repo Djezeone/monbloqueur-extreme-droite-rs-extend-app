@@ -29,6 +29,14 @@ try {
   const context = await browser.newContext({ viewport: { width: 320, height: 800 } });
   const page = await context.newPage();
   await page.goto(server.url, { waitUntil: "networkidle" });
+  await check("navigation: single-word tab labels remain unbroken at 320px", async () => {
+    for (const name of ["Accueil", "Historique", "Réglages"]) {
+      const lines = await page.getByRole("button", { name, exact:true }).evaluate(element => {
+        const range = document.createRange(); range.selectNodeContents(element); return range.getClientRects().length;
+      });
+      assert.equal(lines, 1, name);
+    }
+  });
   await check("keyboard: skip link focuses main content", async () => {
     await page.keyboard.press("Tab");
     assert.equal(await page.evaluate(() => document.activeElement.className), "skip");
@@ -42,12 +50,12 @@ try {
       const style = getComputedStyle(element);
       return { id: element.id, visible: element.matches(":focus-visible"), outline: style.outlineStyle, width: parseFloat(style.outlineWidth) };
     });
-    assert.equal(focus.id, "active-list");
+    assert.equal(focus.id, "start-flows");
     assert.equal(focus.visible, true);
     assert.notEqual(focus.outline, "none");
     assert.ok(focus.width >= 2);
   });
-  for (const view of ["Accueil", "Mes listes", "Historique", "Réglages"]) {
+  for (const view of ["Accueil", "Mes flux", "Mes listes", "Historique", "Réglages"]) {
     await page.getByRole("button", { name: view, exact: true }).click();
     if (view === "Mes listes") {
       await page.locator("#handle").fill("qa_synthetic");
@@ -96,7 +104,7 @@ try {
   await check("privacy: axe automated A/AA rules", () => scan(page));
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto(server.url, { waitUntil: "networkidle" });
-  for (const view of ["Accueil", "Mes listes", "Historique", "Réglages"]) {
+  for (const view of ["Accueil", "Mes flux", "Mes listes", "Historique", "Réglages"]) {
     await page.getByRole("button", { name: view, exact: true }).click();
     await check(`${view}: 1280px bounds`, () => reflow(page));
     await check(`${view}: desktop axe automated A/AA rules`, () => scan(page));

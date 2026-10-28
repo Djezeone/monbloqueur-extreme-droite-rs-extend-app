@@ -1,7 +1,7 @@
-const CACHE = "fil-clair-shell-v3";
+const CACHE = "fil-clair-shell-v4";
 // Only this public application shell may enter Cache Storage. OAuth callbacks,
 // queries, API replies and future connector resources must bypass this worker.
-const ASSETS = ["./", "./index.html", "./styles.css", "./app.js", "./core.js", "./privacy.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
+const ASSETS = ["./", "./index.html", "./styles.css", "./app.js", "./core.js", "./flow-core.js", "./platforms.js", "./flows.js", "./privacy.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 const SHELL = new Set(ASSETS.map(path => new URL(path, self.registration.scope).href));
 self.addEventListener("install", event => {
   const requests = [...SHELL].map(url => new Request(url, {

@@ -7,6 +7,7 @@ button { cursor:pointer }
 button:disabled { opacity:.5; cursor:not-allowed }
 a { color:var(--mint) }
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible { outline:3px solid var(--mint); outline-offset:3px }
+summary:focus-visible { outline:3px solid var(--mint); outline-offset:3px }
 [hidden] { display:none!important }
 .skip { position:absolute; top:-200px; left:12px; z-index:10; padding:12px; background:#fff; color:#111 }
 .skip:focus { top:5px }
@@ -22,7 +23,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible { 
 .tabs { display:flex; gap:8px; padding:7px; margin:6px 0 28px; border:1px solid #293a50; background:#101b2d; border-radius:18px; width:max-content; max-width:100% }
 .tab { background:transparent; color:var(--muted); padding:11px 18px; border:0; border-radius:12px; min-height:44px; white-space:nowrap; font-weight:700 }
 .tab:hover,.tab.active { color:#10212f; background:var(--mint) }
-.view { display:grid; gap:22px }
+.view { display:grid; gap:22px; min-width:0 }
 .hero { min-height:255px; border-radius:28px; padding:37px 44px; display:flex; align-items:center; justify-content:space-between; gap:25px; background:linear-gradient(118deg,#213250,#1a3f4b); border:1px solid #3e6070; overflow:hidden }
 .hero h1 { font-size:clamp(30px,4.5vw,55px); max-width:620px; line-height:1.08; letter-spacing:-.035em; margin:10px 0 14px }
 .hero p { max-width:540px; font-size:17px; color:#d5e6f1; margin:0 }
@@ -36,7 +37,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible { 
 .metric strong { display:block; font-size:33px; letter-spacing:-.04em; margin-top:7px; font-variant-numeric:tabular-nums }
 .panel { background:var(--surface); padding:26px; border-radius:var(--radius); border:1px solid var(--border); min-width:0 }
 .panel h2 { font-size:21px; margin:0 0 12px }
-.section-heading { display:flex; gap:15px; justify-content:space-between; align-items:center }
+.section-heading { display:flex; gap:15px; justify-content:space-between; align-items:center; flex-wrap:wrap; min-width:0 }
+.section-heading>* { min-width:0; max-width:100% }
 .section-heading h1,.section-heading h2 { margin:4px 0 14px }
 .section-heading h1 { font-size:34px }
 .section-heading > span { font-variant-numeric:tabular-nums; color:var(--mint); font-size:28px; font-weight:800 }
@@ -84,5 +86,28 @@ input,select { min-height:47px; border-radius:12px; color:var(--text); backgroun
 .notice { margin-bottom:16px; border:1px solid var(--mint); color:var(--text); background:#173a41; padding:13px 17px; border-radius:12px }
 .notice.error { border-color:#e28888; background:#492b35 }
 footer { max-width:1160px; padding:20px 22px 44px; margin:auto; border-top:1px solid #2c3b50; display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between; color:var(--muted); font-size:12px }
-@media(max-width:760px) { .topbar { padding:16px } .private { display:none } .shell { padding:8px 13px 40px } .tabs { display:grid; grid-template-columns:repeat(4,1fr); width:100%; gap:2px; margin-bottom:15px } .tab { padding:8px 4px; font-size:12px } .hero { padding:28px 22px; min-height:220px } .hero-art { display:none } .metrics { gap:8px } .metric { padding:15px 11px } .metric span { font-size:11px } .metric strong { font-size:24px } .panel { padding:19px } .steps { grid-template-columns:1fr; gap:8px } .steps > div { padding:12px; display:grid; grid-template-columns:36px 1fr; column-gap:9px } .steps .step { grid-row:span 2; margin:0 } .steps p { margin:0 } .form-grid,.filters { grid-template-columns:1fr } .toolbar select,.toolbar .button { width:100% } .section-heading h1 { font-size:27px } .actions { width:100% } .actions a,.actions button { flex:1 } }
+.start-panel p { max-width:760px }
+.flow-fieldset { border:0; padding:0; margin:20px 0; min-width:0 }
+.flow-fieldset legend { font-weight:700 }
+.choice-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px }
+.choice-card { display:flex; align-items:flex-start; gap:12px; padding:15px; border:1px solid var(--border); border-radius:12px; background:var(--surface2); cursor:pointer; min-width:0; overflow-wrap:anywhere }
+.choice-card:has(input:checked) { border-color:var(--mint) }
+.choice-card input { width:24px; height:24px; min-height:24px; flex:0 0 24px; margin:3px 0 0; accent-color:var(--mint) }
+.choice-card strong,.choice-card small { display:block }
+.choice-card small { color:var(--muted); margin-top:5px }
+.flow-form { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; align-items:end }
+.flow-form>* { min-width:0 }
+.flow-target { grid-column:1 / -1 }
+.flow-items { list-style:none; padding:0; margin:22px 0 0; display:grid; gap:16px }
+.flow-items>li { padding:20px; border:1px solid var(--border); border-radius:16px; background:var(--surface2); overflow-wrap:anywhere; min-width:0 }
+.flow-items h3 { font-size:1.1rem; margin:0; overflow-wrap:anywhere; min-width:0 }
+.flow-items .section-heading { align-items:flex-start; flex-wrap:wrap }
+.section-heading>.flow-status { font-size:.8rem; font-weight:700; color:var(--text); padding:7px 10px; background:#25364c; border:1px solid var(--border); border-radius:10px; max-width:100% }
+details { margin:16px 0; min-width:0 }
+summary { cursor:pointer; min-height:44px; padding:10px 0; font-weight:700; overflow-wrap:anywhere }
+details p,details li { overflow-wrap:anywhere }
+#flow-control-info { padding:4px 15px; border-left:3px solid var(--mint) }
+#flow-workspace select { text-overflow:ellipsis }
+@media(max-width:760px) { .choice-grid,.flow-form { grid-template-columns:1fr } .flow-items>li { padding:15px } #flow-setup .import-row { align-items:stretch } #flow-setup .button { flex:1 1 44% } }
+@media(max-width:760px) { .topbar { padding:16px } .private { display:none } .shell { padding:8px 13px 40px } .tabs { display:flex; flex-wrap:wrap; width:100%; gap:4px; margin-bottom:15px } .tab { flex:1 1 80px; padding:8px 4px; font-size:12px; white-space:normal; overflow-wrap:normal } .hero { padding:28px 22px; min-height:220px } .hero-art { display:none } .metrics { gap:8px } .metric { padding:15px 11px } .metric span { font-size:11px } .metric strong { font-size:24px } .panel { padding:19px } .steps { grid-template-columns:1fr; gap:8px } .steps > div { padding:12px; display:grid; grid-template-columns:36px 1fr; column-gap:9px } .steps .step { grid-row:span 2; margin:0 } .steps p { margin:0 } .form-grid,.filters { grid-template-columns:1fr } .toolbar select,.toolbar .button { width:100% } .section-heading h1 { font-size:27px } .actions { width:100% } .actions a,.actions button { flex:1 } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; animation:none!important } }

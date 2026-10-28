@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { servePwa, launchPwaBrowser } from "./pwa-test-utils.mjs";
 import { newState, parseBackup, MAX_BACKUP_BYTES } from "../pwa/core.js";
+import { newFlows } from "../pwa/flow-core.js";
 
 const server = await servePwa();
 const temp = await mkdtemp(join(tmpdir(), "fil-clair-recovery-"));
@@ -41,6 +42,10 @@ try {
   const instance = ["a".repeat(63), "b".repeat(63), "c".repeat(63), "d".repeat(60)].join(".");
   const accounts = Array.from({length:5000}, (_, i) => ({network:"mastodon", handle:"qa" + String(i).padStart(78,"0"), instance}));
   for (let i = 0; i < 5; i++) large.lists.push({id:"size-"+i,title:"Synthetic size fixture",accounts});
+  large.flows = { ...newFlows(), setupComplete:true, items:Array.from({ length:500 }, (_, i) => ({
+    id:"flow-size-" + i, platform:"local", control:"topic-less", target:"Sujet synthétique " + i + "é".repeat(160),
+    status:"local", createdAt:1793150000000, updatedAt:1793150000000
+  })) };
   const raw = JSON.stringify(large);
   assert.ok(Buffer.byteLength(raw) < MAX_BACKUP_BYTES);
   assert.ok(Buffer.byteLength(JSON.stringify(large,null,2)) > MAX_BACKUP_BYTES, "Fixture must expose pretty-printed backup overflow");
@@ -59,8 +64,9 @@ try {
   const exported = await readFile(largePath,"utf8");
   assert.ok(Buffer.byteLength(exported) <= MAX_BACKUP_BYTES,"A valid state must export within the restore byte limit");
   assert.equal(parseBackup(exported).lists[1].accounts.length,5000);
+  assert.deepEqual(parseBackup(exported).flows, large.flows, "All 500 multibyte preferences must survive the near-limit backup");
   await bounded.close();
-  console.log("near-limit valid state: compact export within 10MB and strict restore PASS");
+  console.log("near-limit valid state: " + Buffer.byteLength(exported) + " UTF-8 bytes, 500 multibyte preferences and lists roundtrip within 10MB PASS");
 } catch (error) {
   console.error(error);
   process.exitCode = 1;

@@ -1,4 +1,6 @@
 import { NETWORKS, normalise, profileUrl, accountKey, uniqueAccounts, parseImport, cleanTitle, newState, loadState, markDecision, decisionKey, progress, MAX_BACKUP_BYTES, parseBackup, listMetadata, exportList, removeAccount, removeList } from "./core.js";
+import { mountFlows } from "./flows.js";
+import { getControl } from "./platforms.js";
 
 const STORAGE = "fil-clair-v1";
 const SOURCE = "https://raw.githubusercontent.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/b7cd31b036cca17b48dbf726c047847191c01a5b/liste/accounts.json";
@@ -10,6 +12,8 @@ let storageSource = null;
 let storageRead = false;
 let storageConflict = false;
 let saving = false;
+let sessionMode = false;
+let flowsUI = null;
 try {
   storageSource = localStorage.getItem(STORAGE);
   storageRead = true;
@@ -33,6 +37,15 @@ function notify(message, error = false) {
   el.hidden = false;
 }
 async function persist(next, message, replaceRecovery = false) {
+  if (saving) { notify("Enregistrement en cours. Attendez sa fin avant une autre modification.", true); return false; }
+  if (sessionMode) {
+    if (new Blob([JSON.stringify(next)]).size > MAX_BACKUP_BYTES) {
+      notify("État supérieur à 10 Mo : modification refusée pour conserver une sauvegarde restaurable.", true);
+      return false;
+    }
+    applyState(next, message, replaceRecovery);
+    return true;
+  }
   if (!storageRead) {
     notify("Stockage initial inaccessible : modification refusée pour préserver les données existantes. Rechargez après rétablissement du stockage.", true);
     return false;
@@ -43,7 +56,6 @@ async function persist(next, message, replaceRecovery = false) {
   }
   const conflictMessage = "Conflit : les données ont changé dans un autre onglet. Modification refusée. Exportez votre vue si nécessaire, puis rechargez pour retrouver la version enregistrée.";
   if (storageConflict) { notify(conflictMessage, true); return false; }
-  if (saving) { notify("Enregistrement en cours. Attendez sa fin avant une autre modification.", true); return false; }
   if (!navigator.locks?.request) {
     notify("Verrou de stockage indisponible dans ce navigateur : lecture et export disponibles, modifications suspendues pour éviter une perte entre onglets.", true);
     return false;
@@ -66,22 +78,8 @@ async function persist(next, message, replaceRecovery = false) {
       }
       localStorage.setItem(STORAGE, serialized);
       storageSource = serialized;
-      state = next;
       if (replaceRecovery) { recoveryRaw = null; startupError = ""; }
-      const focused = document.activeElement;
-      const focus = focused?.dataset?.action ? {
-        action: focused.dataset.action, account: focused.dataset.account, index: Number(focused.dataset.index)
-      } : null;
-      render();
-      $("export-recovery").hidden = recoveryRaw === null;
-      if (focus) {
-        const buttons = [...$("accounts").querySelectorAll("button[data-action]")];
-        const same = buttons.find(button => button.dataset.account === focus.account && button.dataset.action === focus.action);
-        const rows = $("accounts").children;
-        const neighbour = rows[Math.min(focus.index, rows.length - 1)]?.querySelector("button[data-action]");
-        (same || neighbour || $("search")).focus();
-      }
-      if (message) notify(message);
+      applyState(next, message, replaceRecovery);
       return true;
     });
   } catch {
@@ -89,12 +87,30 @@ async function persist(next, message, replaceRecovery = false) {
     return false;
   } finally { saving = false; }
 }
+function applyState(next, message, resetFlows = false) {
+  const focused = document.activeElement;
+  const focus = focused?.dataset?.action ? {
+    action: focused.dataset.action, account: focused.dataset.account, index: Number(focused.dataset.index)
+  } : null;
+  state = next;
+  if (resetFlows) flowsUI?.resetDraft();
+  render();
+  $("export-recovery").hidden = recoveryRaw === null;
+  if (focus) {
+    const buttons = [...$("accounts").querySelectorAll("button[data-action]")];
+    const same = buttons.find(button => button.dataset.account === focus.account && button.dataset.action === focus.action);
+    const rows = $("accounts").children;
+    const neighbour = rows[Math.min(focus.index, rows.length - 1)]?.querySelector("button[data-action]");
+    (same || neighbour || $("search")).focus();
+  }
+  if (message) notify(message);
+}
 function active() {
   return state.lists.find(l => l.id === state.activeList) || state.lists[0];
 }
 function show(view) {
   currentView = view;
-  for (const name of ["home", "lists", "history", "settings"]) $("view-" + name).hidden = name !== view;
+  for (const name of ["home", "flows", "lists", "history", "settings"]) $("view-" + name).hidden = name !== view;
   for (const tab of document.querySelectorAll("[data-view]")) {
     const selected = tab.dataset.view === view;
     tab.classList.toggle("active", selected);
@@ -203,9 +219,10 @@ function renderAccounts() {
     open.rel = "noopener noreferrer";
     open.textContent = "Ouvrir le profil ↗";
     open.setAttribute("aria-label", "Ouvrir le profil de @" + a.handle + " sur " + NETWORKS[a.network]);
-    actions.append(open,
-      actionButton("✓ Bloqué", "blocked", i, current === "blocked" ? "declared" : ""),
-      actionButton("◌ Masqué", "muted", i, current === "muted" ? "declared" : ""),
+    actions.append(open);
+    if (getControl(a.network, "block")) actions.append(actionButton("✓ Bloqué", "blocked", i, current === "blocked" ? "declared" : ""));
+    if (getControl(a.network, "mute")) actions.append(actionButton("◌ Masqué", "muted", i, current === "muted" ? "declared" : ""));
+    actions.append(
       actionButton("À vérifier", "review", i),
       actionButton("Ignorer", "skipped", i),
       actionButton("Annuler", "todo", i),
@@ -243,6 +260,9 @@ function render() {
   renderOverview();
   if (currentView === "lists") renderAccounts();
   if (currentView === "history") renderHistory();
+  flowsUI?.render();
+  $("session-warning").hidden = !sessionMode;
+  $("session-mode").disabled = sessionMode;
 }
 function guessAccount(raw, network, instance) {
   const text = raw.trim();
@@ -292,6 +312,10 @@ function downloadText(filename, text) {
 // Use the same representation as persist/parseBackup's byte limit. Pretty
 // printing may make a valid near-limit state impossible to restore.
 function download(filename, value) { downloadText(filename, JSON.stringify(value)); }
+function exportAll() {
+  if (!sessionMode && recoveryRaw !== null) downloadText("fil-clair-recuperation.json", recoveryRaw);
+  else download("fil-clair-sauvegarde.json", state);
+}
 function setupRecovery() {
   const button = document.createElement("button");
   button.id = "export-recovery";
@@ -335,6 +359,7 @@ function setupListToolbar() {
 }
 function bindEvents() {
   document.querySelectorAll("[data-view]").forEach(tab => tab.addEventListener("click", () => show(tab.dataset.view)));
+  $("start-flows").addEventListener("click", () => { show("flows"); flowsUI.openSetup(); });
   $("active-list").addEventListener("change", e => persist({...state,activeList:e.target.value}));
   $("network").addEventListener("change", e => { $("instance-field").hidden = e.target.value !== "mastodon"; });
   $("add-account").addEventListener("submit", async e => {
@@ -358,7 +383,11 @@ function bindEvents() {
       await persist(removeAccount(state, active().id, account), "Compte et déclaration retirés de cette liste. L'historique est conservé.");
       return;
     }
-    if (["blocked", "muted"].includes(action) && !confirm("Avez-vous bien " + (action==="blocked" ? "bloqué" : "masqué") + " @" + account.handle + " directement sur " + NETWORKS[account.network] + " ?\n\nFIL CLAIR ne vérifie pas cette action.")) return;
+    if (["blocked", "muted"].includes(action)) {
+      const control = getControl(account.network, action === "blocked" ? "block" : "mute");
+      if (!control) return notify("Ce contrôle n’est pas qualifié pour ce service. Consultez Mes flux pour les guides disponibles.", true);
+      if (!confirm("Avez-vous bien " + (action==="blocked" ? "bloqué" : "masqué") + " @" + account.handle + " directement sur " + NETWORKS[account.network] + " ?\n\nPortée : " + control.scope + "\n\nFIL CLAIR ne vérifie pas cette action.")) return;
+    }
     try {
       await persist(markDecision(state,active().id,account,action), action==="todo" ? "Déclaration annulée dans FIL CLAIR. Aucun déblocage n'est effectué sur la plateforme." : "Votre déclaration est enregistrée sur cet appareil.");
     } catch (error) { notify(error.message, true); }
@@ -412,13 +441,20 @@ function bindEvents() {
     finally { button.disabled=false; button.textContent="Charger la liste X du dépôt"; }
   });
   $("export-list").addEventListener("click", () => download("fil-clair-liste.json", exportList(active())));
-  $("export-history").addEventListener("click", () => {
-    if (recoveryRaw !== null) downloadText("fil-clair-recuperation.json", recoveryRaw);
-    else download("fil-clair-sauvegarde.json",state);
+  $("export-history").addEventListener("click", exportAll);
+  $("export-all").addEventListener("click", exportAll);
+  $("restore-all").addEventListener("click", () => $("file").click());
+  $("session-export").addEventListener("click", () => download("fil-clair-espace-temporaire.json", state));
+  $("session-mode").addEventListener("click", () => {
+    if (saving || sessionMode) return;
+    if (!confirm("Ouvrir un nouvel espace vide, en mémoire uniquement ?\n\nExportez d’abord vos données actuelles si nécessaire. Les données enregistrées ne seront ni remplacées ni effacées. Le nouvel espace sera perdu à la fermeture ou au rechargement : exportez-le avant de partir.")) return;
+    sessionMode = true;
+    applyState(newState(), "Espace temporaire ouvert. Sauvegardez-le avant de fermer ou de recharger cette page.", true);
   });
   $("erase").addEventListener("click", async () => {
-    if (!confirm("Effacer toutes les listes, déclarations et l'historique de cet appareil ? Cette action est irréversible.")) return;
-    if (await persist(newState(),"Listes, déclarations et historique locaux effacés. Les fichiers déjà téléchargés et les actions sur les réseaux sociaux restent inchangés.", true)) show("home");
+    if (!confirm(sessionMode ? "Effacer toutes les données de cet espace temporaire ? Les données déjà enregistrées dans le navigateur resteront intactes." : "Effacer toutes les listes, préférences de flux, déclarations et l’historique de ce navigateur ? Cette action est irréversible.")) return;
+    const message = sessionMode ? "Espace temporaire effacé ; données persistantes intactes." : "Listes, préférences de flux, déclarations et historique locaux effacés. Les fichiers déjà téléchargés et les actions sur les réseaux sociaux restent inchangés.";
+    if (await persist(newState(), message, true)) show("home");
   });
   addEventListener("beforeinstallprompt", e => { e.preventDefault(); installPrompt=e; $("install").hidden=false; });
   $("install").addEventListener("click", async () => {
@@ -430,7 +466,7 @@ function bindEvents() {
 }
 
 addEventListener("storage", event => {
-  if ((event.key === STORAGE || event.key === null) && storageRead && event.newValue !== storageSource) {
+  if (!sessionMode && (event.key === STORAGE || event.key === null) && storageRead && event.newValue !== storageSource) {
     storageConflict = true;
     notify("Conflit : données modifiées dans un autre onglet. Exportez votre vue si nécessaire, puis rechargez avant toute modification.", true);
   }
@@ -439,9 +475,15 @@ addEventListener("storage", event => {
 populateNetworks();
 setupListToolbar();
 setupRecovery();
+flowsUI = mountFlows({ getState:() => state, save:persist, notify, navigate:show });
 bindEvents();
 render();
 if (startupError) notify(startupError, true);
-if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
-  navigator.serviceWorker.register("./sw.js").catch(() => {});
+function registerWorker() {
+  // An already controlled offline page needs no registration/update request.
+  // Defer this optional network work until the browser reports connectivity.
+  if (navigator.onLine && "serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost"))
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
 }
+registerWorker();
+addEventListener("online", registerWorker);

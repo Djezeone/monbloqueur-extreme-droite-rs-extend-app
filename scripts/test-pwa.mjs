@@ -46,9 +46,15 @@ try {
     for(const key of keys){const cache=await caches.open(key);urls.push(...(await cache.keys()).map(request=>new URL(request.url).pathname+new URL(request.url).search));}
     return urls;
   });
-  assert.deepEqual(cacheUrls.sort(),["/","/index.html","/styles.css","/app.js","/core.js","/privacy.html","/manifest.webmanifest","/icon.svg","/icon-192.png","/icon-512.png"].sort());
+  assert.deepEqual(cacheUrls.sort(),["/","/index.html","/styles.css","/app.js","/core.js","/flow-core.js","/platforms.js","/flows.js","/privacy.html","/manifest.webmanifest","/icon.svg","/icon-192.png","/icon-512.png"].sort());
+  // Firefox may revalidate sw.js outside Playwright's page network emulation.
+  // Stop the origin too: offline success must not rely on a reachable server.
+  await server.pause();
+  assert.equal(server.listening(), false);
   const beforeOffline=server.requests.length;
   await context.setOffline(true);
+  assert.equal(await page.evaluate(() => navigator.onLine), false, "Browser must report offline for this scenario");
+  console.log("offline transport: HTTP origin stopped and navigator.onLine=false");
   await page.reload({waitUntil:"domcontentloaded"});
   await page.getByRole("button",{name:"Mes listes",exact:true}).click();
   assert.equal(await page.locator(".account-id strong").first().textContent(),"@qa_profil");
@@ -60,7 +66,8 @@ try {
   await page.goto(url,{waitUntil:"domcontentloaded"});
   await page.getByRole("button",{name:"Mes listes",exact:true}).click();
   assert.equal(await page.locator("#accounts li").count(),2);
-  assert.equal(server.requests.length,beforeOffline,"Offline shell interactions must not reach the HTTP server");
+  assert.equal(server.requests.length,beforeOffline,"Offline shell interactions must not reach the HTTP server: " + JSON.stringify(server.requests.slice(beforeOffline)));
+  await server.resume();
   await context.setOffline(false);
   // La sauvegarde malformée doit laisser intactes les données existantes.
   await page.locator("#file").setInputFiles({name:"backup.json",mimeType:"application/json",buffer:Buffer.from('{"version":1,"lists":[]}')});

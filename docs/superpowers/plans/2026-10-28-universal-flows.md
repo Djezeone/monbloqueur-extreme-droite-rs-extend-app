@@ -33,11 +33,11 @@
 
 ### Task 2: Onboarding, carnet et repli navigateur
 **Files:** Create `pwa/flows.js`, `scripts/test-pwa-flows.mjs`; modify `pwa/app.js`, `pwa/index.html`, `pwa/styles.css`, `pwa/sw.js`, `scripts/pwa-test-utils.mjs`, `scripts/audit-pwa.mjs`, `scripts/test-pwa-sw.mjs`.
-**Interfaces:** `mountFlows({getState,save,notify,navigate}) → {render,openSetup}` ; le module UI ne touche jamais au stockage directement.
-- [ ] Écrire E2E premier démarrage sans compte, trois étapes, choix modifiables, fiche locale, déclaration guidée confirmée/annulée, sauvegarde/restauration, offline et repli mémoire ; constater RED.
-- [ ] Implémenter UI responsive et accessible, navigation « Mes flux », repli mémoire consenti, cache v4 strict et aide installation/stockage.
-- [ ] Exécuter nouveaux parcours sur trois moteurs, puis matrice existante touchée par shell/persistence ; vérifier axe, reflow iPhone/iPad/Android émulés et absence de requêtes externes.
-- [ ] Commit du code/tests seulement après succès vérifié.
+**Interfaces:** `mountFlows({getState,save,notify,navigate}) → {render,openSetup,resetDraft}` ; le module UI ne touche jamais au stockage directement.
+- [x] Écrire E2E premier démarrage sans compte, trois étapes, choix modifiables, fiche locale, déclaration guidée confirmée/annulée, sauvegarde/restauration, offline et repli mémoire ; constater RED.
+- [x] Implémenter UI responsive et accessible, navigation « Mes flux », repli mémoire consenti, cache v4 strict et aide installation/stockage.
+- [x] Exécuter nouveaux parcours sur trois moteurs, puis matrice existante touchée par shell/persistence ; vérifier axe, reflow iPhone/iPad/Android émulés et absence de requêtes externes.
+- [x] Commit du code/tests seulement après succès vérifié.
 
 ### Task 3: Documentation, recette et revue
 **Files:** Modify mission, PWA README/privacy, docs de confidentialité/exploitation/connecteurs ; create `docs/UNIVERSAL_FLOWS.md`, `docs/USER_GUIDE.md`, `docs/evidence/2026-10-28-universal-v2.md` ; ajouter le nouveau test à la CI standard existante.
@@ -54,3 +54,8 @@
 
 - Task 1: complet localement ; 8 nouveaux tests RED (fonctions/catalogue absents), puis suite 133/133 GREEN. Sortie /tmp/fil-clair-v2-unit.log ; commit produit modèle/catalogue séparé.
 - Task 2: première tentative E2E bloquée par absence de binaires navigateur, aucun PASS produit attribué ; spécialiste QA restaure les binaires officiels sans modifier les dépendances.
+
+- Task 2: complet localement : flux Chromium17/17, Firefox16/16, WebKit18/18 ; qualité30/30,29/29,30/30 ; anciens parcours/stockage/récupération/concurrence verts sur trois moteurs. Snapshot9 769 347 octets avec500 préférences multioctets restauré. Node133/133, SW8/8.
+- Régressions constatées puis corrigées : reflow200% (378px/320), découpe Historique sur2lignes, ancien brouillon masquant une restauration (resetDraft explicite). Tests avant/après exécutés.
+- Diagnostic offline : Firefox peut envoyer sw.js malgré émulation réseau. Le garde navigator.onLine ne suffisait pas à cet oracle ; le serveur HTTP est désormais arrêté pendant le parcours puis repris au même port. Les trois moteurs passent avec serveur effectivement arrêté, sans ignorer une URL de la comparaison.
+- Corrections des oracles : sélecteur de fiches limité aux enfants directs (hors étapes imbriquées), fixture X réduite à15caractères et seed validée par parseBackup, attente de fin d’effacement avant lecture du stockage. Aucune de ces anciennes sorties rouges ne sert de preuve finale.

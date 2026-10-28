@@ -2,7 +2,7 @@
   "id": "./",
   "name": "FIL CLAIR — Mon fil, mon choix",
   "short_name": "FIL CLAIR",
-  "description": "Gérer librement les comptes que vous souhaitez masquer ou bloquer sur les réseaux sociaux.",
+  "description": "Votre carnet local de comptes, sources, sujets et recommandations, avec des guides officiels facultatifs et sans inscription.",
   "lang": "fr",
   "start_url": "./index.html",
   "scope": "./",

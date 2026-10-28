@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { resolve, join, extname } from "node:path";
 import { chromium, firefox, webkit } from "@playwright/test";
 
-const files = new Set(["index.html", "app.js", "core.js", "styles.css", "sw.js", "privacy.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png"]);
+const files = new Set(["index.html", "app.js", "core.js", "flow-core.js", "platforms.js", "flows.js", "styles.css", "sw.js", "privacy.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png"]);
 const mime = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".webmanifest": "application/manifest+json", ".svg": "image/svg+xml", ".png": "image/png" };
 
 export async function servePwa() {
@@ -27,8 +27,15 @@ export async function servePwa() {
     } catch { res.writeHead(404); res.end(); }
   });
   await new Promise(done => server.listen(0, "localhost", done));
+  const port = server.address().port;
   // app.js registers its worker for localhost; 127.0.0.1 would skip registration.
-  return { url: "http://localhost:" + server.address().port, requests, close: () => new Promise(done => server.close(done)) };
+  const close = () => new Promise(done => server.close(done));
+  return { url:"http://localhost:" + port, requests, close, pause:close,
+    listening:() => server.listening,
+    resume:() => new Promise((resolve, reject) => {
+      server.once("error", reject);
+      server.listen(port, "localhost", () => { server.removeListener("error", reject); resolve(); });
+    }) };
 }
 
 export async function launchPwaBrowser() {
