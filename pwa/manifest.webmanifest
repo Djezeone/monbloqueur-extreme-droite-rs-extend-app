@@ -1,0 +1,25 @@
+{
+  "id": "./",
+  "name": "FIL CLAIR — Mon fil, mon choix",
+  "short_name": "FIL CLAIR",
+  "description": "Gérer librement les comptes que vous souhaitez masquer ou bloquer sur les réseaux sociaux.",
+  "lang": "fr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#090e1b",
+  "theme_color": "#10192d",
+  "orientation": "any",
+  "categories": [
+    "utilities",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
