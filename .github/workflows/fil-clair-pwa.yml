@@ -1,0 +1,53 @@
+name: FIL CLAIR · Qualité PWA
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: fil-clair-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  pwa-quality-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Node.js 24
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '24'
+      - name: Installer dépendances verrouillées
+        run: npm ci
+      - name: Tests unitaires
+        run: npm test
+      - name: Validité de la liste historique
+        run: npm run validate:list
+      - name: Audit statique PWA
+        run: node scripts/audit-pwa.mjs
+      - name: Dépendances sans vulnérabilité élevée connue
+        run: npm audit --audit-level=high
+      - name: Installer les moteurs de test standards
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: E2E, récupération, stockage et accessibilité, sans action sociale réelle
+        shell: bash
+        run: |
+          set -euo pipefail
+          for engine in chromium firefox webkit; do
+            export PWA_BROWSER="$engine"
+            node scripts/test-pwa.mjs
+            node scripts/test-pwa-storage.mjs
+            node scripts/test-pwa-recovery.mjs
+            node scripts/test-pwa-concurrency.mjs
+            node scripts/test-pwa-quality.mjs
+            node scripts/test-pwa-flows.mjs
+            node scripts/test-pwa-replacements.mjs
+          done
+# Public repository + ubuntu-latest standard runner: free execution.
+# No uploaded artifacts, Actions cache, Copilot, paid runner or paid service.

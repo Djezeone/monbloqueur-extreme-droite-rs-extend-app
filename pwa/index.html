@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#10192d">
+  <meta name="description" content="Organisez vos comptes, sources, sujets et recommandations. Carnet local sans inscription et guides officiels, sans service Google ou Apple obligatoire.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://raw.githubusercontent.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>FIL CLAIR — Mon fil, mon choix</title>
+</head>
+<body>
+  <a class="skip" href="#content">Aller au contenu</a>
+  <header class="topbar">
+    <div class="brand"><div class="brand-icon" aria-hidden="true">✦</div><div><strong>FIL CLAIR</strong><span>MON FIL, MON CHOIX</span></div></div>
+    <span class="private"><span aria-hidden="true">●</span> Choix stockés sur cet appareil</span>
+  </header>
+  <div class="shell">
+    <nav class="tabs" aria-label="Navigation principale">
+      <button type="button" class="tab active" data-view="home" aria-current="page">Accueil</button>
+      <button type="button" class="tab" data-view="flows">Mes flux</button>
+      <button type="button" class="tab" data-view="lists">Mes listes</button>
+      <button type="button" class="tab" data-view="history">Historique</button>
+      <button type="button" class="tab" data-view="settings">Réglages</button>
+    </nav>
+    <main id="content" tabindex="-1">
+      <div id="session-warning" class="notice error" role="note" hidden><strong>Espace temporaire : données en mémoire uniquement.</strong><p>Fermer ou recharger cette page les perd. Vos données déjà enregistrées dans le navigateur restent séparées. Exportez cet espace avant de partir.</p><button id="session-export" class="button outline" type="button">Sauvegarder cet espace temporaire</button></div>
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+      <section id="view-home" class="view">
+        <div class="hero">
+          <div><div class="eyebrow">VOTRE ESPACE NUMÉRIQUE</div><h1>Un fil qui vous ressemble.</h1><p>Comptes, médias, sujets, recommandations : vos choix, à votre rythme, sur votre appareil.</p></div>
+          <div class="hero-art" aria-hidden="true"><span>✦</span><small>À VOUS DE CHOISIR</small></div>
+        </div>
+        <div class="panel start-panel"><div><h2>Vos services, vos choix.</h2><p>Commencez sans inscription. Le carnet personnel fonctionne sans Google, Apple ou réseau social. Les guides officiels vous accompagnent quand vous choisissez d’agir ailleurs.</p></div><button id="start-flows" class="button primary" type="button">Choisir mes services</button><p class="fine">Aucun abonnement ni extension requis. Une note locale ne filtre pas les autres applications.</p></div>
+        <div class="metrics" role="group" aria-label="Votre progression">
+          <div class="metric"><span>Comptes dans la liste</span><strong id="metric-total">0</strong></div>
+          <div class="metric"><span>Actions déclarées</span><strong id="metric-done">0</strong></div>
+          <div class="metric"><span>Étoiles personnelles</span><strong id="metric-stars">0 ★</strong></div>
+        </div>
+        <div class="panel journey">
+          <div class="section-heading"><div><span class="eyebrow">UN GESTE À LA FOIS</span><h2 id="progress-label">Mon parcours</h2></div><span id="percent">0 %</span></div>
+          <div class="track" role="progressbar" aria-labelledby="progress-label" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="bar"></div></div>
+          <p id="home-summary" class="muted">Ajoutez un compte ou chargez une liste pour commencer.</p>
+          <div class="toolbar">
+            <label for="active-list">Liste active</label><select id="active-list"></select>
+            <button id="go-next" class="button primary" type="button">Voir le prochain compte</button>
+          </div>
+        </div>
+        <div class="panel onboarding">
+          <span class="eyebrow">COMMENT ÇA MARCHE ?</span>
+          <div class="steps">
+            <div><span class="step">1</span><strong>Je choisis</strong><p>J'ajoute un compte ou une liste.</p></div>
+            <div><span class="step">2</span><strong>J'ouvre le profil</strong><p>Le réseau s'ouvre dans son interface officielle.</p></div>
+            <div><span class="step">3</span><strong>Je déclare</strong><p>Je note ce que j'ai fait, sans robot.</p></div>
+          </div>
+          <p class="fine">Vos choix n'affectent que votre propre expérience. Aucun blocage n'est exécuté par FIL CLAIR : vous agissez directement dans le réseau social.</p>
+        </div>
+      </section>
+      <section id="view-flows" class="view" hidden>
+        <div class="section-heading"><div><span class="eyebrow">COMPTES · SOURCES · SUJETS · RECOMMANDATIONS</span><h1>Mes flux</h1></div><button id="flow-edit" class="button subtle" type="button">Modifier mes choix</button></div>
+        <p class="muted">Un carnet local pour vos intentions, des guides pour agir chez vos fournisseurs. Aucune connexion sociale ni synchronisation n’est activée.</p>
+        <form id="flow-setup" class="panel" hidden>
+          <p id="flow-step-count" class="eyebrow" aria-live="polite"></p>
+          <h2 id="flow-step-heading" tabindex="-1"></h2>
+          <fieldset id="flow-platforms" class="flow-fieldset"><legend>Services facultatifs</legend><p>Sans sélection, utilisez pleinement le carnet Local / autres services. Vous pourrez changer ces choix plus tard.</p><div id="flow-platform-options" class="choice-grid"></div></fieldset>
+          <fieldset id="flow-categories" class="flow-fieldset" hidden><legend>Catégories à gérer</legend><p>Choisissez aussi ce que vous souhaitez voir davantage. Au moins une catégorie.</p><div id="flow-category-options" class="choice-grid"></div></fieldset>
+          <div id="flow-preview" hidden></div>
+          <div class="import-row"><button id="flow-back" class="button outline" type="button" hidden>Retour</button><button id="flow-next" class="button primary" type="button">Continuer</button><button id="flow-finish" class="button primary" type="submit" hidden>Enregistrer mes choix</button><button id="flow-cancel" class="button subtle" type="button">Plus tard</button></div>
+        </form>
+        <div id="flow-workspace" class="view" hidden>
+          <div class="panel">
+            <h2>Ajouter un choix</h2>
+            <form id="flow-add" class="flow-form">
+              <label class="field"><span>Service</span><select id="flow-platform" required></select></label>
+              <label class="field"><span>Catégorie</span><select id="flow-category" required></select></label>
+              <label class="field"><span>Action ou préférence</span><select id="flow-control" required></select></label>
+              <label class="field flow-target"><span>Compte, source, sujet ou réglage à retenir</span><input id="flow-target" type="text" required maxlength="200" autocomplete="off" placeholder="Un nom ou une courte note personnelle" aria-describedby="flow-sensitive"></label>
+              <button id="flow-add-button" class="button primary" type="submit">Ajouter ce choix</button>
+            </form>
+            <p id="flow-sensitive" class="fine">Ces choix peuvent être sensibles. N’inscrivez aucun mot de passe ou secret. La cible reste sur cet appareil et dans vos exports ; elle n’est jamais envoyée dans le lien d’aide.</p>
+            <details class="control-details" open><summary>Portée, mode et étapes du contrôle choisi</summary><div id="flow-control-info"></div></details>
+          </div>
+          <div class="panel"><h2>Agir et suivre</h2><p id="flow-count" class="fine" role="status"></p><p class="fine">« Déclaré effectué » est votre déclaration après une manipulation chez le fournisseur. « Confirmé par API » exige une preuve indépendante : cette version n’en produit aucune. Retirer une fiche ou la remettre à faire n’annule aucune action distante.</p><label class="field"><span>Rechercher dans mes choix</span><input id="flow-filter" type="search" placeholder="Service, source ou sujet…"></label><ul id="flow-items" class="flow-items"></ul><p id="flow-empty" class="empty">Aucun choix affiché. Ajoutez une note ou changez la recherche.</p></div>
+        </div>
+      </section>
+      <section id="view-lists" class="view" hidden>
+        <div class="section-heading"><div><span class="eyebrow">VOUS GARDEZ LE CONTRÔLE</span><h1>Mes listes</h1></div><button class="button subtle" id="new-list" type="button">+ Nouvelle liste</button></div>
+        <div class="panel">
+          <h2>Ajouter un compte</h2>
+          <form id="add-account" class="form-grid">
+            <label class="field"><span>Réseau</span><select id="network" required></select></label>
+            <label class="field"><span>Pseudo ou lien du profil</span><input id="handle" type="text" placeholder="@pseudo ou https://…" required maxlength="450" autocomplete="off"></label>
+            <label class="field" id="instance-field" hidden><span>Instance Mastodon</span><input id="instance" type="text" placeholder="mastodon.social" maxlength="253" autocomplete="off"></label>
+            <button type="submit" class="button primary add-button">Ajouter à ma liste</button>
+          </form>
+          <div class="import-row">
+            <button id="import-public" class="button outline" type="button">Charger la liste X du dépôt</button>
+            <button id="import-file" class="button subtle" type="button">Importer un fichier JSON</button>
+            <input id="file" type="file" accept=".json,application/json" hidden>
+          </div>
+          <p class="fine">La liste publique du dépôt est une sélection éditoriale à examiner, pas une classification vérifiée. Aucun compte n'est bloqué à son importation.</p>
+        </div>
+        <div class="panel">
+          <div class="section-heading"><h2>Profils à examiner</h2><span id="list-count" class="count">0</span></div>
+          <div class="filters">
+            <label class="field"><span>Rechercher</span><input id="search" type="search" placeholder="Chercher un pseudo…"></label>
+            <label class="field"><span>Réseau</span><select id="filter-network"><option value="">Tous</option></select></label>
+            <label class="field"><span>Statut</span><select id="filter-status"><option value="">Tous</option><option value="todo">À faire</option><option value="blocked">Bloqué (déclaré)</option><option value="muted">Masqué (déclaré)</option><option value="skipped">Ignoré</option><option value="review">À vérifier</option></select></label>
+          </div>
+          <ul id="accounts" class="accounts"></ul>
+          <p id="empty-list" class="empty" hidden>Rien à afficher. Ajoutez votre premier profil ci-dessus.</p>
+        </div>
+      </section>
+      <section id="view-history" class="view" hidden>
+        <div class="section-heading"><div><span class="eyebrow">SANS SURVEILLANCE EXTERNE</span><h1>Mon historique</h1></div><button id="export-history" class="button outline" type="button">Exporter mes données</button></div>
+        <div class="panel"><p class="fine">Cet historique des profils correspond à vos déclarations personnelles. Il ne vérifie pas l’état réel sur les réseaux sociaux. Le suivi des sources, sujets et recommandations se trouve dans Mes flux.</p><ul id="history" class="history"></ul><p id="no-history" class="empty" hidden>Aucune action enregistrée pour le moment.</p></div>
+      </section>
+      <section id="view-settings" class="view" hidden>
+        <div class="section-heading"><div><span class="eyebrow">PARAMÈTRES</span><h1>Confidentialité et sécurité</h1></div></div>
+        <div class="panel"><h2>Le mode prudent est permanent</h2><p>Pas de scraping, pas de mots de passe, pas d'exécution en masse, pas de connexion API non autorisée. Cette version ouvre les profils officiels et vous demande de confirmer les actions effectuées.</p><p class="fine">La version PWA ne peut ni contrôler X, Instagram ou TikTok dans leurs applications, ni connaître leurs listes de blocage. Pour une automatisation future : OAuth officiel, accord explicite et validation du réseau.</p></div>
+        <div class="panel"><h2>Mes données</h2><p>Listes, préférences de flux, états déclarés et historique restent dans ce navigateur. L’application ne synchronise pas leur contenu et n’intègre pas de mesure d’audience. L’hébergeur peut traiter des métadonnées techniques de visite, comme l’adresse IP. Une sauvegarde est un fichier lisible pouvant révéler vos préférences : gardez-le dans un endroit sûr.</p><p class="fine"><a href="./privacy.html">Lire la notice de confidentialité</a> pour les connexions, les exports et l’effacement.</p><div class="import-row"><button id="export-all" class="button primary" type="button">Sauvegarder toutes mes données</button><button id="restore-all" class="button outline" type="button">Restaurer une sauvegarde</button><button id="export-list" class="button outline" type="button">Exporter la liste active</button><button id="erase" class="button danger" type="button">Effacer toutes mes données</button></div><p class="fine">La sauvegarde complète inclut Mes flux ; l’export de la liste active contient seulement ses comptes et sa provenance. L’effacement du navigateur, une éviction de stockage, un changement de domaine ou de contexte peuvent faire perdre vos données. Aucune récupération par compte ou sauvegarde iCloud n’est garantie.</p></div>
+        <div class="panel"><h2>Installer sur mon appareil</h2><p>L’installation est facultative. FIL CLAIR reste utilisable dans votre navigateur sans compte Google ou Apple.</p><details><summary>iPhone et iPad · Safari</summary><p>Ouvrez le site dans Safari, utilisez Partager puis l’ajout à l’écran d’accueil. Activez le mode app web si proposé. Si la commande manque, consultez les actions de partage ou gardez un favori.</p><p>Sur Mac, Safari peut proposer l’ajout au Dock. Les données d’une app web et celles de l’onglet peuvent être séparées : exportez puis restaurez votre sauvegarde pour transférer vos choix. Aucune installation système n’est validée par les tests d’émulation.</p><a href="https://support.apple.com/fr-fr/guide/iphone/iphea86e5236/ios" target="_blank" rel="noopener noreferrer">Guide officiel Apple d’ajout à l’accueil ↗</a></details><details><summary>Android · Chrome, Samsung Internet et Firefox</summary><p>Consultez le menu du navigateur : installation, ajout à l’accueil ou raccourci selon le navigateur et sa version. Si aucune commande n’est disponible, utilisez le site et un favori. Chrome n’est pas nécessaire au carnet local.</p></details><details><summary>Windows, macOS et Linux</summary><p>Utilisez le site dans votre navigateur habituel. Chrome ou Edge peuvent proposer l’installation ; Safari sur Mac propose une app web selon sa version. Firefox Windows dispose aussi de fonctions d’app web sur certaines versions. La commande dépend du système ; aucun changement de navigateur n’est requis.</p></details><button id="install" class="button primary" type="button" hidden>Installer FIL CLAIR</button><p class="fine">Le hors ligne nécessite un premier chargement complet et un cache conservé par le navigateur. Les réglages des fournisseurs, les liens d’aide et le chargement d’une liste publique nécessitent Internet. Cette version est en recette ; les marques, appareils et installations physiques non testés ne sont pas certifiés.</p></div>
+        <div class="panel"><h2>Si le stockage n’est pas disponible</h2><p>En navigation privée ou avec des restrictions, le navigateur peut refuser ou supprimer le stockage. Sans verrou de stockage, les écritures sont suspendues pour préserver vos onglets. Lecture et export restent disponibles si les données sont accessibles.</p><p>Vous pouvez ouvrir un espace temporaire vide, indépendant de vos données déjà enregistrées. Il restera seulement en mémoire jusqu’à la fermeture ou au rechargement : sauvegardez-le avant de partir.</p><button id="session-mode" class="button outline" type="button">Ouvrir un espace temporaire</button></div>
+      </section>
+    </main>
+  </div>
+  <footer><span>FIL CLAIR · V2 en recette · UNTAKA</span><a href="./privacy.html">Confidentialité</a><span>Choix personnels · Aucune action sociale automatique</span></footer>
+  <noscript><p>JavaScript est nécessaire au carnet local. Aucune inscription n’est requise. La notice de confidentialité reste accessible par le lien ci-dessus.</p></noscript>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

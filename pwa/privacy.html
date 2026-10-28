@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'unsafe-inline'; img-src 'none'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="description" content="Confidentialité du prototype FIL CLAIR : données locales, hébergement, exports et effacement.">
+  <title>Confidentialité — FIL CLAIR</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #0b1220; color: #eef4ff; line-height: 1.65; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    header, main, footer { width: min(100% - 2rem, 48rem); margin-inline: auto; }
+    header { padding-block: 1.25rem; border-bottom: 1px solid #46566f; }
+    main { padding-block: 1.5rem 3rem; }
+    footer { padding-block: 1rem 2rem; border-top: 1px solid #46566f; color: #bbcce3; }
+    h1, h2 { line-height: 1.25; text-wrap: balance; }
+    h1 { font-size: clamp(1.8rem, 6vw, 2.6rem); margin-block: 0.5rem 1rem; }
+    h2 { font-size: 1.3rem; margin-top: 2.25rem; scroll-margin-top: 1rem; }
+    p, li, dd { overflow-wrap: anywhere; }
+    a { color: #9dd6ff; text-underline-offset: 0.2em; }
+    a:focus-visible { outline: 3px solid #ffda80; outline-offset: 5px; border-radius: 2px; }
+    header a, footer a, nav a { display: inline-block; min-height: 44px; padding-block: 0.55rem; }
+    nav ul { margin-block: 0.5rem; padding-left: 1.5rem; }
+    .skip { position: absolute; top: 0; left: 1rem; padding: 0.75rem; background: #eef4ff; color: #0b1220; transform: translateY(-150%); z-index: 1; }
+    .skip:focus { transform: translateY(0); }
+    .status { border: 2px solid #ffda80; border-radius: 0.75rem; background: #192236; padding: 1rem; }
+    .status strong { color: #ffda80; }
+    .meta { color: #bbcce3; }
+    dt { font-weight: 700; margin-top: 1rem; }
+    dd { margin: 0.25rem 0 1rem; }
+    code { font-size: 0.95em; overflow-wrap: anywhere; }
+    @media print {
+      :root { color-scheme: light; background: white; color: black; }
+      a, .meta, footer, .status strong { color: black; }
+      .status { background: white; border-color: black; }
+      .skip { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#contenu">Aller au contenu</a>
+  <header><a href="./">← Retour à FIL CLAIR</a></header>
+  <main id="contenu">
+    <p class="meta">FIL CLAIR · Prototype PWA V2 · Mise à jour : 28 octobre 2026</p>
+    <h1>Vos données, vos choix</h1>
+    <div class="status" role="note" aria-labelledby="statut">
+      <p id="statut"><strong>Notice préparatoire — publication publique bloquée.</strong></p>
+      <p>Le responsable du traitement, son adresse et le contact pour vos droits et le support ne sont pas encore renseignés. Les bases légales, le traitement éventuel de données sensibles et les conditions d’hébergement restent à valider avant toute ouverture au public.</p>
+    </div>
+    <p>FIL CLAIR permet de préparer des listes de profils et un carnet personnel de comptes, sources, sujets et préférences de recommandation. Le carnet local fonctionne sans compte FIL CLAIR, Google, Apple ou autre fournisseur, sans extension et sans abonnement. Le choix d’un service est facultatif ; « Local / autres services » reste disponible.</p>
+    <p>Une note ne filtre pas le contenu d’une autre application. Un guide explique une manipulation à effectuer vous-même chez le fournisseur, qui peut demander son propre compte. Ouvrir ce guide n’exécute ni ne confirme rien. Les statuts « déclaré effectué », « bloqué » ou « masqué » restent vos déclarations, sans vérification de leur état réel par FIL CLAIR.</p>
+    <nav aria-label="Dans cette notice">
+      <ul>
+        <li><a href="#donnees">Données utilisées</a></li>
+        <li><a href="#memoire">Espace temporaire en mémoire</a></li>
+        <li><a href="#reseau">Connexions et hébergement</a></li>
+        <li><a href="#conservation">Conservation et sauvegarde</a></li>
+        <li><a href="#effacement">Effacer et exercer vos droits</a></li>
+        <li><a href="#evolutions">Connexions futures aux réseaux</a></li>
+      </ul>
+    </nav>
+    <section aria-labelledby="donnees">
+      <h2 id="donnees">Données utilisées sur cet appareil</h2>
+      <p>Le navigateur conserve les titres et profils de vos listes, la liste active, vos statuts déclarés et les dates de l’historique dans son stockage local. Les profils contiennent le réseau, le pseudo et, pour Mastodon, l’instance. Une liste importée peut conserver une révision, un libellé de source, son URL et une date de récupération. Ces informations sont déclaratives.</p>
+      <p>Le carnet conserve aussi vos services et catégories choisis, l’étape de configuration terminée et jusqu’à 500 fiches. Une fiche contient un identifiant local, le service et le contrôle choisis, une cible de 1 à 200 caractères, un statut et les dates de création et de mise à jour. Les statuts sont « à faire », « déclaré effectué » ou « note locale » selon le contrôle ; aucune confirmation API n’est enregistrable dans ce carnet.</p>
+      <p>Ces informations servent à afficher et retrouver vos choix, calculer votre progression et préparer vos exports. Le carnet ne se connecte pas à vos comptes et ne transmet pas ses cibles à un réseau social. Il n’ajoute ni authentification, ni synchronisation, ni outil de mesure d’audience, de publicité ou de suivi applicatif.</p>
+      <p>Un pseudo peut identifier une autre personne. Le contenu d’une liste ou vos sujets, sources et préférences peuvent révéler des informations sensibles, notamment des opinions politiques, les vôtres ou celles prêtées à d’autres personnes. Une sélection éditoriale n’est pas une classification vérifiée. Notez seulement ce qui est nécessaire ; évitez les mots de passe, secrets et détails sensibles inutiles.</p>
+      <p>Le stockage local et les fichiers JSON exportés ne sont pas chiffrés par FIL CLAIR. Une personne qui accède à votre appareil, à votre profil de navigateur ou à une sauvegarde peut les lire. Le navigateur ou le système peut également sauvegarder des données selon vos réglages.</p>
+    </section>
+    <section aria-labelledby="memoire">
+      <h2 id="memoire">Espace temporaire en mémoire</h2>
+      <p>Si le stockage ou les verrous nécessaires à son écriture sont indisponibles, la lecture et l’export portent sur les données accessibles dans l’onglet ; ils ne permettent pas de lire des données que le navigateur refuse d’ouvrir. Vous pouvez choisir explicitement un nouvel espace temporaire, après avertissement et confirmation. Il commence vide : il ne copie, ne remplace et n’efface pas les données déjà enregistrées dans le navigateur.</p>
+      <p>Dans cet espace, les changements restent uniquement en mémoire et sont perdus à la fermeture ou au rechargement de la page. Une bannière vous rappelle d’exporter avant de partir. L’effacement ou la restauration dans ce mode concerne cet espace temporaire ; les données persistantes restent intactes. Ce mode ne garantit aucune persistance en navigation privée.</p>
+    </section>
+    <section aria-labelledby="reseau">
+      <h2 id="reseau">Connexions et hébergement</h2>
+      <dl>
+        <dt>Ouvrir FIL CLAIR</dt>
+        <dd>Le site est hébergé sur Vercel. Une visite ou une mise à jour en ligne sollicite cet hébergeur, qui peut traiter des données techniques, dont votre adresse IP, des informations sur le navigateur, les requêtes et leurs dates, pour fournir et sécuriser le service. L’absence de télémétrie dans l’application ne signifie donc pas l’absence de traces d’hébergement. Les réglages, lieux de traitement et durées effectivement applicables au projet restent à documenter.</dd>
+        <dt>Charger la liste publique</dt>
+        <dd>Après votre clic sur « Charger la liste X du dépôt », le navigateur télécharge un fichier depuis <code>raw.githubusercontent.com</code>, service de GitHub. GitHub reçoit les métadonnées de cette requête, notamment l’adresse IP. Le code omet les identifiants de connexion pour ce téléchargement ; il ne lui envoie pas vos listes ni votre historique.</dd>
+        <dt>Ouvrir un profil</dt>
+        <dd>Le navigateur ouvre le site officiel choisi. Ce site reçoit votre visite et peut reconnaître votre session si vous y êtes connecté. Les liens de profils du prototype utilisent <code>noreferrer</code>. Les règles de confidentialité et les actions effectuées sur ce réseau relèvent aussi de ce réseau.</dd>
+        <dt>Consulter un guide du carnet</dt>
+        <dd>Le catalogue et les étapes sont embarqués dans l’application. L’aide externe s’ouvre seulement à votre demande, via une adresse fixe : FIL CLAIR n’y ajoute ni votre cible ni le contenu de la fiche. Ce lien utilise <code>noreferrer</code>, mais le fournisseur reçoit les métadonnées de votre visite et peut reconnaître sa session. Ce que vous saisissez ou faites ensuite sur son site relève de ses règles.</dd>
+        <dt>Importer un fichier ou lire cette notice</dt>
+        <dd>L’import JSON est lu dans le navigateur, sans envoi prévu par ce parcours. Cette page ne contient ni script, ni police distante, ni contenu externe chargé automatiquement.</dd>
+      </dl>
+      <p>Les fichiers de l’application et son catalogue statique peuvent être mis en cache après un premier chargement complet. Les cibles personnelles n’entrent pas dans ce cache. Charger une liste publique, ouvrir une aide externe ou un réseau, ou récupérer une mise à jour demande une connexion. Un lien peut s’ouvrir dans une application selon votre système. L’installation ne rend pas les visites en ligne anonymes.</p>
+    </section>
+    <section aria-labelledby="conservation">
+      <h2 id="conservation">Conservation et sauvegarde</h2>
+      <p>Il n’existe pas de délai automatique d’expiration des listes, fiches et déclarations locales enregistrées. Elles restent jusqu’à leur effacement, leur remplacement lors d’une restauration ou leur suppression par le navigateur. Les limites de 500 fiches et 1 000 événements d’historique sont des limites de quantité, pas des durées de conservation.</p>
+      <p>Retirer un profil ou une liste efface ses décisions actives, mais conserve les événements historiques qui le mentionnent. Utilisez l’effacement global pour retirer aussi cet historique. Une ancienne sauvegarde importée peut également contenir des références à des profils retirés.</p>
+      <p>Retirer une fiche du carnet efface cette fiche et sa déclaration de l’espace courant, sans journal parallèle de ses changements. Changer la sélection des services ou catégories ne supprime pas les fiches existantes. Remettre une fiche « à faire » modifie seulement son suivi : cela n’annule aucune action chez un fournisseur.</p>
+      <p>Après un effacement ou une restauration réussis, ou l’ouverture consentie d’un espace temporaire neuf, les brouillons non enregistrés, recherches et filtres de l’interface sont aussi vidés. Ils sont conservés si vous annulez ou si l’écriture est refusée. La confirmation de restauration précise toutes les données remplacées et avertit lorsqu’une sauvegarde ancienne ne contient pas le carnet.</p>
+      <p>« Exporter la liste active » produit un JSON de cette liste, sans le carnet. L’export complet inclut les listes, statuts, historique et le carnet lorsqu’il est présent. L’export de l’espace temporaire conserve uniquement cet espace. Tous ces fichiers sont en clair : protégez-les et gérez séparément leurs copies, téléchargements, corbeilles et sauvegardes système.</p>
+      <p>En cas de données illisibles, « Exporter la source de récupération » conserve le texte brut d’origine dans <code>fil-clair-recuperation.json</code>. Hors de l’espace temporaire, l’export complet produit également ce fichier si une récupération est en cours. Ce fichier brut n’est pas une sauvegarde validée.</p>
+      <p>Une restauration remplace l’espace courant après validation du fichier et confirmation. Vérifiez la sauvegarde avec la V2 dans un profil de navigateur séparé avant de remplacer des données utiles. Avant de revenir à une ancienne application, gardez un export complet testé sur V2 : une version qui ignore le carnet peut le perdre en réenregistrant les données. Aucun aller-retour vers une ancienne version n’est garanti. Une sauvegarde ne prouve jamais qu’une action est actuellement confirmée par un réseau social.</p>
+    </section>
+    <section aria-labelledby="effacement">
+      <h2 id="effacement">Effacer et exercer vos droits</h2>
+      <p>Dans les réglages, « Effacer toutes mes données » réinitialise les listes, le carnet, les statuts et l’historique enregistrés de cette application, si l’écriture locale réussit. En mode temporaire, ce bouton efface seulement l’espace en mémoire et laisse les données persistantes intactes. Aucun de ces gestes ne supprime les fichiers déjà téléchargés, les copies système, les traces de l’hébergeur ou les données des réseaux sociaux ; aucun ne débloque, ne réabonne ou ne réautorise une source à distance.</p>
+      <p>Pour retirer aussi les fichiers de l’application mis en cache, utilisez les réglages du navigateur afin d’effacer les données de ce site, dont le stockage et les caches. La désinstallation seule peut laisser des données. Supprimez séparément les JSON téléchargés et leurs copies ou corbeilles si vous ne souhaitez plus les conserver. Ces gestes ne garantissent pas un effacement physique sécurisé du support.</p>
+      <p>Selon le traitement et les conditions du RGPD, vous pouvez notamment demander l’accès, la rectification, l’effacement, la limitation, la portabilité ou vous opposer au traitement. Le canal de demande auprès du responsable est <strong>non renseigné</strong> : c’est un blocage de publication à résoudre. N’envoyez pas vos listes ou une sauvegarde sensible dans un ticket public.</p>
+      <p>Vous pouvez adresser une réclamation à l’autorité compétente, par exemple à la <a href="https://www.cnil.fr/fr/adresser-une-plainte" rel="noreferrer">CNIL en France</a>.</p>
+    </section>
+    <section aria-labelledby="evolutions">
+      <h2 id="evolutions">Connexions futures aux réseaux</h2>
+      <p>Aucune connexion OAuth de production n’est qualifiée par cette notice. Toute évolution devra préciser les données échangées, les permissions, les destinataires, les durées, la sécurité des jetons et le moyen de révoquer l’accès. Les jetons et réponses authentifiées devront être exclus des exports ordinaires, journaux et caches publics.</p>
+      <p>Autoriser une connexion à un réseau ne constitue pas, à lui seul, une validation de toutes les bases légales ou du traitement d’opinions politiques concernant des tiers. Ces points, ainsi que l’analyse d’impact, restent à instruire avant activation.</p>
+    </section>
+    <section aria-labelledby="references">
+      <h2 id="references">Pour en savoir plus</h2>
+      <ul>
+        <li><a href="https://www.cnil.fr/fr/reglement-europeen-protection-donnees" rel="noreferrer">RGPD — texte présenté par la CNIL</a></li>
+        <li><a href="https://www.cnil.fr/fr/ce-quil-faut-savoir-sur-lanalyse-dimpact-relative-la-protection-des-donnees-aipd" rel="noreferrer">CNIL — comprendre l’analyse d’impact</a></li>
+        <li><a href="https://vercel.com/legal/privacy-notice" rel="noreferrer">Vercel — notice de confidentialité</a></li>
+      </ul>
+    </section>
+  </main>
+  <footer><a href="./">Retour à FIL CLAIR</a><p>Cette notice doit être complétée et validée avant publication publique.</p></footer>
+</body>
+</html>
