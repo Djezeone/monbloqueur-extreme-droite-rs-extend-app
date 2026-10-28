@@ -42,3 +42,33 @@ Poursuivre en autonomie l'industrialisation FIL CLAIR en 8 lots : (1) sécurité
 - Statuts huit lots + huit critères de recette
 - Risques/réserves explicitement bloquants
 - Décision sur la fusion et publication (par défaut non)
+
+## Complément prioritaire V2 — universalité et contrôle des flux (28 octobre 2026)
+
+Ce complément **s’ajoute** aux huit lots et aux livraisons A SAFE → B CONNECT → C PUBLIC ; aucune porte existante n’est supprimée ou présumée acquise.
+
+FIL CLAIR vise un centre de contrôle personnel utilisable sur Android (Chrome, Samsung Internet, Firefox et navigateurs compatibles), iPhone/iPad (Safari et navigateurs compatibles), macOS (Safari, Chrome, Firefox), Windows (Chrome, Edge, Firefox) et Linux (navigateurs modernes). Safari est prioritaire. Une preuve de moteur Playwright ou de profil mobile émulé ne vaut pas une recette du navigateur commercial, de son OS ou d’un appareil physique.
+
+Fonctions essentielles : carnet local sans inscription, compte Google/Apple/social, Chrome, extension ou abonnement requis. Installation PWA facultative lorsque proposée et réellement qualifiée ; repli navigateur/favori et, si stockage ou Web Locks manque, espace temporaire **consenti**, exportable et clairement sans persistance. Aucune détection intrusive de navigation privée ni promesse de récupération après effacement.
+
+Quatre catégories : **comptes et chaînes**, **médias et sources**, **sujets et centres d’intérêt**, **préférences algorithmiques**. Distinguer blocage, sourdine, désabonnement, désintérêt, exclusion de recommandation, note locale, déclaration manuelle et preuve API. Supprimer une fiche ou réinitialiser une déclaration ne modifie aucun fournisseur.
+
+Modules documentés : Google Discover et Recherche, YouTube, X, Facebook, Instagram, Threads, TikTok, Bluesky, Mastodon, Reddit, LinkedIn, Safari ; carnet générique toujours disponible. Discover reste entièrement facultatif. Safari ne doit pas être présenté comme un flux Discover ; Apple News et Siri sont des produits distincts. API officielle uniquement si accès/contrat/scopes et recette sont établis, sinon guide manuel à portée explicite. Aucune interface sociale automatisée clandestinement.
+
+Onboarding modifiable : (1) services facultatifs avec noms, descriptions et cases, (2) catégories et intérêts, (3) actions, portée/mode et suivi des résultats. Aucun consentement indispensable n’est supprimé. Local-first ; aucune synchronisation activée. Préférences potentiellement sensibles, minimisation, export complet, suppression et future révocation OAuth explicite.
+
+| Lot conservé | Critère V2 ajouté à sa recette |
+| --- | --- |
+| 01 Sécurité/CI | Modules sans secrets, trafic/cibles sensibles absents, sauvegardes falsifiées refusées, CI gratuite standard et main protégée. |
+| 02 UX/PWA | Trois étapes simples, cinq vues, parité du carnet sans Google, Safari iPhone/iPad, clavier/tactile/zoom, installation et secours honnêtes. |
+| 03 Listes/historique | Préférences des quatre catégories conservées avec listes, export/restauration/effacement communs, aucune perte à la désélection ou entre onglets. |
+| 04 Connecteurs officiels | Catalogue modulaire à sources officielles, guide vs API non confondus, permissions/finalité/révocation à qualifier avant activation. |
+| 05 Orchestration | À faire/déclaré/local distincts ; aucune progression ou restauration ne crée une confirmation fournisseur ; mémoire et persistance séparées. |
+| 06 RGPD | Cartographie des sources/sujets sensibles, fichiers lisibles et liens externes ; synchronisation consentie seulement si développée ; bases légales/article 9/AIPD non éludés. |
+| 07 QA | Trois moteurs, émulations Android/iPhone/iPad identifiées, sauvegarde/restauration/hors ligne/sécurité/portées, matrice physique par OS/navigateur, WCAG 2.2 AA. |
+| 08 Publication/opérations | Guide utilisateur universel, supervision et récupération/rollback préservant les flux V2 ; aucune publication générale sans recette complète. |
+
+### Budget et gouvernance reconduits
+**Aucune dépense supplémentaire autorisée.** Le quota GitHub mensuel exact doit être identifié en lecture seule si les droits le permettent ; tant qu’inconnu, aucune ressource payante, crédit Copilot/premium/agent, recharge ou abonnement. Privilégier Work, spécialistes et tests locaux ; regrouper les commits et éviter les CI redondantes. Actions n’est autorisé qu’après preuve de gratuité du scénario exact. GitHub reste source de vérité. Aucun usage essentiel ne dépend de Copilot.
+
+Références de réalisation : [conception](superpowers/specs/2026-10-28-universal-flows-design.md), [plan/ledger](superpowers/plans/2026-10-28-universal-flows.md), [contrat fonctionnel et technique](UNIVERSAL_FLOWS.md), [guide débutant](USER_GUIDE.md), [protocole de recette universelle/Safari](research/2026-10-28-universal-qa-protocol.md). Les statuts acquis et les limites figurent dans le journal de preuves V2 ; le présent document ne certifie aucune livraison.
