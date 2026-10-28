@@ -32,7 +32,7 @@
 - [x] Exécuter `npm test` : toute la suite verte ; consigner la sortie ; commit cohérent.
 
 ### Task 2: Onboarding, carnet et repli navigateur
-**Files:** Create `pwa/flows.js`, `scripts/test-pwa-flows.mjs`; modify `pwa/app.js`, `pwa/index.html`, `pwa/styles.css`, `pwa/sw.js`, `scripts/pwa-test-utils.mjs`, `scripts/audit-pwa.mjs`, `scripts/test-pwa-sw.mjs`.
+**Files:** Create `pwa/flows.js`, `scripts/test-pwa-flows.mjs`, `scripts/test-pwa-replacements.mjs`; modify `pwa/app.js`, `pwa/index.html`, `pwa/styles.css`, `pwa/sw.js`, `scripts/pwa-test-utils.mjs`, `scripts/audit-pwa.mjs`, `scripts/test-pwa-sw.mjs`.
 **Interfaces:** `mountFlows({getState,save,notify,navigate}) → {render,openSetup,resetDraft}` ; le module UI ne touche jamais au stockage directement.
 - [x] Écrire E2E premier démarrage sans compte, trois étapes, choix modifiables, fiche locale, déclaration guidée confirmée/annulée, sauvegarde/restauration, offline et repli mémoire ; constater RED.
 - [x] Implémenter UI responsive et accessible, navigation « Mes flux », repli mémoire consenti, cache v4 strict et aide installation/stockage.
@@ -59,3 +59,8 @@
 - Régressions constatées puis corrigées : reflow200% (378px/320), découpe Historique sur2lignes, ancien brouillon masquant une restauration (resetDraft explicite). Tests avant/après exécutés.
 - Diagnostic offline : Firefox peut envoyer sw.js malgré émulation réseau. Le garde navigator.onLine ne suffisait pas à cet oracle ; le serveur HTTP est désormais arrêté pendant le parcours puis repris au même port. Les trois moteurs passent avec serveur effectivement arrêté, sans ignorer une URL de la comparaison.
 - Corrections des oracles : sélecteur de fiches limité aux enfants directs (hors étapes imbriquées), fixture X réduite à15caractères et seed validée par parseBackup, attente de fin d’effacement avant lecture du stockage. Aucune de ces anciennes sorties rouges ne sert de preuve finale.
+
+- Revue finale indépendante au candidat91d1d1a : aucun Critical identifié, I1 brouillons/filtres sensibles après remplacement, I2 confirmation de restauration incomplète acceptés Important. Six scénarios échouent avant correction (5/11 PASS), puis11/11 GREEN sur chaque moteur ; suite complète relancée après les changements de persistance/UI.
+- I1 corrigé : effacement/restauration réussis et mémoire consentie vident brouillons, filtres, sélections dépendantes et anciens nœuds ; annulations et refus de stockage les conservent. I2 corrigé : toutes données remplacées nommées, mémoire distincte, avertissement sauvegarde ancienne sans flux.
+- M1 concernait le registre documentaire encore en consolidation dans Task3 ; tableau14modules/43contrôles maintenant présent. Pas de nouveau chantier de finition ajouté.
+- Décisions sur les éléments non certifiés par le reviewer : conserver toutes les portes physiques/menusfournisseurs/OAuth/juridique/gouvernancebudgetdéploiement/rollback/sécuritéexhaustive ouvertes, motifs et risques explicites dans docs/evidence/2026-10-28-universal-v2-review.md. Aucune seconde revue ne remplace ces preuves ; corrections vérifiées par régressions et suite.

@@ -212,6 +212,9 @@ export function mountFlows({ getState, save, notify, navigate }) {
   }
   function resetDraft() {
     setupOpen = !current().setupComplete;
+    $("flow-target").value = "";
+    $("flow-filter").value = "";
+    for (const id of ["flow-platform", "flow-category", "flow-control"]) $(id).value = "";
     step = 1; configSignature = ""; loadDraft();
   }
   return { render, openSetup, resetDraft };

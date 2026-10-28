@@ -93,7 +93,17 @@ function applyState(next, message, resetFlows = false) {
     action: focused.dataset.action, account: focused.dataset.account, index: Number(focused.dataset.index)
   } : null;
   state = next;
-  if (resetFlows) flowsUI?.resetDraft();
+  if (resetFlows) {
+    // A successful replacement starts a new space, including unsaved UI data.
+    // Rejected/cancelled writes never reach this path and retain the drafts.
+    for (const id of ["handle", "instance", "search", "filter-network", "filter-status"]) $(id).value = "";
+    $("network").value = "x";
+    $("instance-field").hidden = true;
+    filtered = [];
+    $("accounts").replaceChildren();
+    $("history").replaceChildren();
+    flowsUI?.resetDraft();
+  }
   render();
   $("export-recovery").hidden = recoveryRaw === null;
   if (focus) {
@@ -416,8 +426,13 @@ function bindEvents() {
       if (parsed?.version === 1 && Array.isArray(parsed.lists)) {
         // Reject incomplete or corrupted backups before asking to replace user data.
         const restored = parseBackup(text);
-        if (confirm("Restaurer cette sauvegarde ? Toutes les listes et l'historique actuels seront remplacés.")) {
-          if (await persist(restored, "Sauvegarde locale restaurée.", true)) show("home");
+        const scope = sessionMode
+          ? "Tout l’espace temporaire en mémoire sera remplacé : listes, préférences Mes flux, déclarations et historique. Les données persistantes du navigateur resteront intactes."
+          : "Tout l’espace courant du navigateur sera remplacé : listes, préférences Mes flux, déclarations et historique.";
+        const legacyWarning = Object.hasOwn(restored, "flows") ? "" : "\n\nCette sauvegarde ne contient pas Mes flux : les préférences actuelles de cet espace seront retirées.";
+        if (confirm("Restaurer cette sauvegarde ?\n\n" + scope + legacyWarning + "\n\nAucun réglage ne sera modifié chez un fournisseur.")) {
+          const message = sessionMode ? "Sauvegarde restaurée dans l’espace temporaire ; données persistantes intactes." : "Sauvegarde locale restaurée.";
+          if (await persist(restored, message, true)) show("home");
         }
       } else {
         const imported = parseImport(text);

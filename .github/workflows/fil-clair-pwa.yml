@@ -47,6 +47,7 @@ jobs:
             node scripts/test-pwa-concurrency.mjs
             node scripts/test-pwa-quality.mjs
             node scripts/test-pwa-flows.mjs
+            node scripts/test-pwa-replacements.mjs
           done
 # Public repository + ubuntu-latest standard runner: free execution.
 # No uploaded artifacts, Actions cache, Copilot, paid runner or paid service.
