@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { normalise, profileUrl, accountKey, uniqueAccounts, parseImport, restoreState, newState, markDecision, progress } from "../pwa/core.js";
+import { normalise, profileUrl, accountKey, uniqueAccounts, parseImport, restoreState, newState, markDecision, progress, parseBackup, MAX_BACKUP_BYTES } from "../pwa/core.js";
 
 test("10 réseaux, URL HTTPS officielle et dédoublonnage", () => {
   const cases = [
@@ -50,4 +50,27 @@ test("historique explicite réversible et progression séparée par liste", () =
   assert.equal(s.history.length,2);
   assert.equal(restoreState(JSON.stringify(s)).history.length,2);
   assert.equal(restoreState("bad").lists.length,1);
+});
+
+test("une sauvegarde corrompue ne peut pas déclencher une restauration vide", () => {
+  assert.throws(() => parseBackup("{not json"));
+  assert.throws(() => parseBackup("{}"));
+  assert.throws(() => parseBackup(JSON.stringify({version:1, lists:[], activeList:"personal", decisions:{}, history:[]})));
+  assert.throws(() => parseBackup("x".repeat(MAX_BACKUP_BYTES+1)));
+  const valid=newState();
+  const restored=parseBackup(JSON.stringify(valid));
+  assert.equal(restored.activeList,"personal");
+  assert.equal(restored.lists.length,1);
+  const poisoned={...valid, activeList:"missing"};
+  assert.throws(()=>parseBackup(JSON.stringify(poisoned)));
+  const dup={...valid,lists:[valid.lists[0],valid.lists[0]]};
+  assert.throws(()=>parseBackup(JSON.stringify(dup)));
+});
+test("un statut à vérifier ne compte pas comme blocage confirmé", () => {
+  const a={network:"x",handle:"alice"};
+  let s=newState();
+  s.lists[0].accounts=[a];
+  s=markDecision(s,"personal",a,"review");
+  assert.equal(progress(s,s.lists[0]).remaining,1);
+  assert.equal(parseBackup(JSON.stringify(s)).decisions["personal|x::alice"].status,"review");
 });

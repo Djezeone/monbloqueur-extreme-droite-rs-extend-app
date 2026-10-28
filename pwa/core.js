@@ -92,7 +92,7 @@ export function restoreState(text) {
     }));
     const validIds = new Set(lists.map(l => l.id));
     const decisions = Object.fromEntries(Object.entries(input.decisions || {}).filter(([k, v]) =>
-      k.length < 240 && v && ["blocked", "muted", "skipped"].includes(v.status) && Number.isFinite(v.at) && v.at > 0
+      k.length < 240 && v && ["blocked", "muted", "skipped", "review"].includes(v.status) && Number.isFinite(v.at) && v.at > 0
     ).slice(-10000));
     const history = Array.isArray(input.history) ? input.history.filter(e =>
       e && typeof e === "object" && Number.isFinite(e.at) && typeof e.key === "string" && typeof e.status === "string"
@@ -104,7 +104,7 @@ export function decisionKey(listId, account) {
   return listId + "|" + accountKey(account);
 }
 export function markDecision(state, listId, account, status, now = Date.now()) {
-  if (!["blocked", "muted", "skipped", "todo"].includes(status)) throw Error("Action inconnue.");
+  if (!["blocked", "muted", "skipped", "review", "todo"].includes(status)) throw Error("Action inconnue.");
   const key = decisionKey(listId, account);
   const decisions = { ...state.decisions };
   if (status === "todo") delete decisions[key];
@@ -121,4 +121,56 @@ export function progress(state, list) {
     if (status === "skipped") skipped++;
   }
   return { total: list.accounts.length, blocked, muted, skipped, remaining: list.accounts.length - blocked - muted - skipped };
+}
+
+export const MAX_BACKUP_BYTES = 10_000_000;
+
+/**
+ * Strict restore path for user-supplied backups. Unlike restoreState() (the tolerant
+ * startup loader), malformed backups MUST throw, never silently erase local data.
+ * Does not contact any network or modify state.
+ */
+export function parseBackup(text) {
+  if (typeof text !== "string" || new Blob([text]).size > MAX_BACKUP_BYTES)
+    throw Error("Sauvegarde supérieure à 10 Mo ou invalide.");
+  let raw;
+  try { raw = JSON.parse(text); }
+  catch { throw Error("Sauvegarde JSON illisible."); }
+  if (!raw || raw.version !== 1 || !Array.isArray(raw.lists) ||
+      !raw.lists.length || raw.lists.length > 30)
+    throw Error("Format de sauvegarde FIL CLAIR non reconnu.");
+  const ids = new Set();
+  const lists = raw.lists.map(list => {
+    if (!list || typeof list.id !== "string" ||
+        !/^[a-zA-Z0-9-]{1,80}$/.test(list.id) || ids.has(list.id))
+      throw Error("Identifiant de liste absent, dangereux ou en double.");
+    ids.add(list.id);
+    return { id: list.id, title: cleanTitle(list.title),
+      accounts: uniqueAccounts(list.accounts) };
+  });
+  if (typeof raw.activeList !== "string" || !ids.has(raw.activeList))
+    throw Error("La liste active n'existe pas.");
+  if (!raw.decisions || typeof raw.decisions !== "object" || Array.isArray(raw.decisions) ||
+      Object.keys(raw.decisions).length > 10_000)
+    throw Error("Décisions de sauvegarde invalides.");
+  const decisions = Object.create(null);
+  for (const [key, val] of Object.entries(raw.decisions)) {
+    if (key.length > 240 || !/^[a-zA-Z0-9-]{1,80}\|/.test(key) ||
+        !val || typeof val !== "object" ||
+        !["blocked","muted","skipped","review"].includes(val.status) ||
+        !Number.isFinite(val.at) || val.at <= 0)
+      throw Error("Décision de sauvegarde incorrecte.");
+    decisions[key] = {status:val.status, at:val.at};
+  }
+  if (!Array.isArray(raw.history) || raw.history.length > 1000)
+    throw Error("Historique de sauvegarde invalide.");
+  const history = raw.history.map(entry => {
+    if (!entry || typeof entry.key !== "string" || entry.key.length > 240 ||
+        !/^[a-zA-Z0-9-]{1,80}\|/.test(entry.key) ||
+        !["blocked","muted","skipped","review","todo"].includes(entry.status) ||
+        !Number.isFinite(entry.at) || entry.at <= 0)
+      throw Error("Historique de sauvegarde incorrect.");
+    return {key:entry.key,status:entry.status,at:entry.at};
+  });
+  return {version:1, activeList:raw.activeList, lists, decisions, history};
 }

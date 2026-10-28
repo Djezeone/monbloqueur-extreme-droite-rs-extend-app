@@ -1,4 +1,4 @@
-import { NETWORKS, normalise, profileUrl, accountKey, uniqueAccounts, parseImport, cleanTitle, newState, restoreState, markDecision, decisionKey, progress, MAX_IMPORT_BYTES } from "./core.js";
+import { NETWORKS, normalise, profileUrl, accountKey, uniqueAccounts, parseImport, cleanTitle, newState, restoreState, markDecision, decisionKey, progress, MAX_IMPORT_BYTES, MAX_BACKUP_BYTES, parseBackup } from "./core.js";
 
 const STORAGE = "fil-clair-v1";
 const SOURCE = "https://raw.githubusercontent.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/main/liste/accounts.json";
@@ -80,7 +80,7 @@ function renderOverview() {
     : "Aucun profil dans cette liste. Commencez par en ajouter un ou importer la sélection existante.";
   $("go-next").textContent = p.remaining ? "Voir le prochain compte" : "Gérer mes listes";
 }
-const STATUS = { todo:"À faire", blocked:"Bloqué · déclaré", muted:"Masqué · déclaré", skipped:"Ignoré" };
+const STATUS = { todo:"À faire", blocked:"Bloqué · déclaré", muted:"Masqué · déclaré", skipped:"Ignoré", review:"À vérifier" };
 function actionButton(label, action, i, kind = "") {
   const button = document.createElement("button");
   button.type = "button";
@@ -127,6 +127,7 @@ function renderAccounts() {
     actions.append(open,
       actionButton("✓ Bloqué", "blocked", i, current === "blocked" ? "declared" : ""),
       actionButton("◌ Masqué", "muted", i, current === "muted" ? "declared" : ""),
+      actionButton("À vérifier", "review", i),
       actionButton("Ignorer", "skipped", i),
       actionButton("Annuler", "todo", i),
       actionButton("Retirer", "delete", i, "delete")
@@ -281,12 +282,14 @@ function bindEvents() {
   $("file").addEventListener("change", async e => {
     const file = e.target.files?.[0]; if(!file) return;
     try {
-      if (file.size > MAX_IMPORT_BYTES) throw Error("Fichier trop volumineux.");
+      if (file.size > MAX_BACKUP_BYTES) throw Error("Fichier trop volumineux.");
       const text = await file.text();
       const parsed = JSON.parse(text);
       if (parsed?.version === 1 && Array.isArray(parsed.lists)) {
+        // Reject incomplete or corrupted backups before asking to replace user data.
+        const restored = parseBackup(text);
         if (confirm("Restaurer cette sauvegarde ? Toutes les listes et l'historique actuels seront remplacés.")) {
-          persist(restoreState(text), "Sauvegarde locale restaurée.");
+          persist(restored, "Sauvegarde locale restaurée.");
           show("home");
         }
       } else {
