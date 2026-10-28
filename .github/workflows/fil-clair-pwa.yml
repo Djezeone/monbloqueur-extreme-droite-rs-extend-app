@@ -3,25 +3,12 @@ on:
   push:
     branches:
       - main
-      - feat/fil-clair-pwa-safe-v1
-    paths:
-      - 'pwa/**'
-      - 'scripts/test-pwa.mjs'
-      - 'scripts/audit-pwa.mjs'
-      - 'tests/pwa-core.test.js'
-      - '.github/workflows/fil-clair-pwa.yml'
   pull_request:
-    paths:
-      - 'pwa/**'
-      - 'scripts/test-pwa.mjs'
-      - 'scripts/audit-pwa.mjs'
-      - 'tests/pwa-core.test.js'
-      - '.github/workflows/fil-clair-pwa.yml'
   workflow_dispatch:
 permissions:
   contents: read
 concurrency:
-  group: fil-clair-${{ github.workflow }}-${{ github.ref }}
+  group: fil-clair-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
   pwa-quality-gate:
@@ -32,11 +19,10 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
-      - name: Node.js 22
+      - name: Node.js 24
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: '22'
-          cache: npm
+          node-version: '24'
       - name: Installer dépendances verrouillées
         run: npm ci
       - name: Tests unitaires
@@ -45,7 +31,21 @@ jobs:
         run: npm run validate:list
       - name: Audit statique PWA
         run: node scripts/audit-pwa.mjs
-      - name: Installer Chromium de test
-        run: npx playwright install --with-deps chromium
-      - name: E2E PWA, sans action sociale réelle
-        run: node scripts/test-pwa.mjs
+      - name: Dépendances sans vulnérabilité élevée connue
+        run: npm audit --audit-level=high
+      - name: Installer les moteurs de test standards
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: E2E, récupération, stockage et accessibilité, sans action sociale réelle
+        shell: bash
+        run: |
+          set -euo pipefail
+          for engine in chromium firefox webkit; do
+            export PWA_BROWSER="$engine"
+            node scripts/test-pwa.mjs
+            node scripts/test-pwa-storage.mjs
+            node scripts/test-pwa-recovery.mjs
+            node scripts/test-pwa-concurrency.mjs
+            node scripts/test-pwa-quality.mjs
+          done
+# Public repository + ubuntu-latest standard runner: free execution.
+# No uploaded artifacts, Actions cache, Copilot, paid runner or paid service.
