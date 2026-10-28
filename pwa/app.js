@@ -1,11 +1,27 @@
-import { NETWORKS, normalise, profileUrl, accountKey, uniqueAccounts, parseImport, cleanTitle, newState, restoreState, markDecision, decisionKey, progress, MAX_IMPORT_BYTES, MAX_BACKUP_BYTES, parseBackup } from "./core.js";
+import { NETWORKS, normalise, profileUrl, accountKey, uniqueAccounts, parseImport, cleanTitle, newState, loadState, markDecision, decisionKey, progress, MAX_BACKUP_BYTES, parseBackup, listMetadata, exportList, removeAccount, removeList } from "./core.js";
 
 const STORAGE = "fil-clair-v1";
-const SOURCE = "https://raw.githubusercontent.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/main/liste/accounts.json";
+const SOURCE = "https://raw.githubusercontent.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/b7cd31b036cca17b48dbf726c047847191c01a5b/liste/accounts.json";
 const $ = id => document.getElementById(id);
-let state;
-try { state = restoreState(localStorage.getItem(STORAGE)); }
-catch { state = newState(); }
+let state = newState();
+let recoveryRaw = null;
+let startupError = "";
+let storageSource = null;
+let storageRead = false;
+let storageConflict = false;
+let saving = false;
+try {
+  storageSource = localStorage.getItem(STORAGE);
+  storageRead = true;
+  const loaded = loadState(storageSource);
+  if (loaded.ok) state = loaded.state;
+  else {
+    recoveryRaw = loaded.raw;
+    startupError = "Données locales illisibles : " + loaded.error + " Exportez la source de récupération dans Réglages, puis restaurez une sauvegarde ou effacez explicitement ces données. Les modifications sont suspendues.";
+  }
+} catch {
+  startupError = "Stockage inaccessible. Aucun enregistrement n'est possible ; vos données existantes ne sont pas remplacées.";
+}
 let currentView = "home";
 let filtered = [];
 let installPrompt = null;
@@ -16,17 +32,62 @@ function notify(message, error = false) {
   el.classList.toggle("error", error);
   el.hidden = false;
 }
-function persist(next, message) {
-  try {
-    localStorage.setItem(STORAGE, JSON.stringify(next));
-    state = next;
-    render();
-    if (message) notify(message);
-    return true;
-  } catch {
-    notify("Enregistrement impossible : espace insuffisant ou stockage privé désactivé. Exportez vos données avant de fermer.", true);
+async function persist(next, message, replaceRecovery = false) {
+  if (!storageRead) {
+    notify("Stockage initial inaccessible : modification refusée pour préserver les données existantes. Rechargez après rétablissement du stockage.", true);
     return false;
   }
+  if (recoveryRaw !== null && !replaceRecovery) {
+    notify(startupError, true);
+    return false;
+  }
+  const conflictMessage = "Conflit : les données ont changé dans un autre onglet. Modification refusée. Exportez votre vue si nécessaire, puis rechargez pour retrouver la version enregistrée.";
+  if (storageConflict) { notify(conflictMessage, true); return false; }
+  if (saving) { notify("Enregistrement en cours. Attendez sa fin avant une autre modification.", true); return false; }
+  if (!navigator.locks?.request) {
+    notify("Verrou de stockage indisponible dans ce navigateur : lecture et export disponibles, modifications suspendues pour éviter une perte entre onglets.", true);
+    return false;
+  }
+  const base = storageSource;
+  saving = true;
+  try {
+    return await navigator.locks.request("fil-clair-v1-write", {mode:"exclusive"}, () => {
+      // Compare and replace inside one origin-wide lock. A stale tab must never
+      // overwrite another tab's whole snapshot, including during reset/restore.
+      if (storageConflict || localStorage.getItem(STORAGE) !== base) {
+        storageConflict = true;
+        notify(conflictMessage, true);
+        return false;
+      }
+      const serialized = JSON.stringify(next);
+      if (new Blob([serialized]).size > MAX_BACKUP_BYTES) {
+        notify("État supérieur à 10 Mo : modification refusée pour conserver une sauvegarde restaurable. Exportez vos données avant de réduire les listes.", true);
+        return false;
+      }
+      localStorage.setItem(STORAGE, serialized);
+      storageSource = serialized;
+      state = next;
+      if (replaceRecovery) { recoveryRaw = null; startupError = ""; }
+      const focused = document.activeElement;
+      const focus = focused?.dataset?.action ? {
+        action: focused.dataset.action, account: focused.dataset.account, index: Number(focused.dataset.index)
+      } : null;
+      render();
+      $("export-recovery").hidden = recoveryRaw === null;
+      if (focus) {
+        const buttons = [...$("accounts").querySelectorAll("button[data-action]")];
+        const same = buttons.find(button => button.dataset.account === focus.account && button.dataset.action === focus.action);
+        const rows = $("accounts").children;
+        const neighbour = rows[Math.min(focus.index, rows.length - 1)]?.querySelector("button[data-action]");
+        (same || neighbour || $("search")).focus();
+      }
+      if (message) notify(message);
+      return true;
+    });
+  } catch {
+    notify("Enregistrement impossible : stockage, espace ou verrou indisponible. Exportez vos données avant de fermer.", true);
+    return false;
+  } finally { saving = false; }
 }
 function active() {
   return state.lists.find(l => l.id === state.activeList) || state.lists[0];
@@ -42,6 +103,9 @@ function show(view) {
   }
   window.scrollTo({ top: 0, behavior: "instant" });
   render();
+  const heading = $("view-" + view).querySelector("h1");
+  heading.tabIndex = -1;
+  heading.focus({ preventScroll: true });
 }
 function selected(el, value) {
   el.value = value;
@@ -67,13 +131,25 @@ function renderSelectors() {
     other.replaceChildren(...state.lists.map(l => makeOption(l.id, l.title)));
     selected(other, active().id);
   }
+  const list = active();
+  const metadata = $("list-metadata");
+  if (metadata) {
+    const details = [];
+    if (list.revision) details.push("Révision source : " + list.revision);
+    if (list.provenance) details.push("Provenance déclarée : " + (list.provenance.label || list.provenance.url));
+    metadata.textContent = details.length ? details.join(" · ") + " · À vérifier avant toute action." : "Liste personnelle ; aucune provenance vérifiée par FIL CLAIR.";
+  }
 }
 function renderOverview() {
   const list = active(), p = progress(state, list), done = p.blocked + p.muted;
   $("metric-total").textContent = p.total.toLocaleString("fr-FR");
   $("metric-done").textContent = done.toLocaleString("fr-FR");
   $("metric-stars").textContent = done + " ★";
-  $("percent").textContent = (p.total ? Math.round((p.total - p.remaining) / p.total * 100) : 0) + " %";
+  const percent = p.total ? Math.round((p.total - p.remaining) / p.total * 100) : 0;
+  $("percent").textContent = percent + " %";
+  const track = document.querySelector(".track");
+  track.setAttribute("aria-valuenow", String(percent));
+  track.setAttribute("aria-valuetext", (p.total - p.remaining) + " comptes examinés sur " + p.total + " ; déclarations personnelles");
   $("bar").style.width = (p.total ? (p.total - p.remaining) / p.total * 100 : 0) + "%";
   $("home-summary").textContent = p.total
     ? p.remaining + " comptes à examiner · " + p.blocked + " bloqués · " + p.muted + " masqués · " + p.skipped + " ignorés (déclarations personnelles)."
@@ -87,6 +163,9 @@ function actionButton(label, action, i, kind = "") {
   button.textContent = label;
   button.dataset.action = action;
   button.dataset.index = i;
+  const account = filtered[i];
+  button.dataset.account = accountKey(account);
+  button.setAttribute("aria-label", label + " · @" + account.handle + " sur " + NETWORKS[account.network] + (account.instance ? " · " + account.instance : ""));
   if (kind) button.classList.add(kind);
   return button;
 }
@@ -193,21 +272,37 @@ function guessAccount(raw, network, instance) {
 function updateList(accounts, message) {
   const list = active();
   const lists = state.lists.map(l => l.id === list.id ? { ...l, accounts: uniqueAccounts(accounts) } : l);
-  persist({ ...state, lists }, message);
+  return persist({ ...state, lists }, message);
 }
-function newList(title, accounts = []) {
+async function newList(title, accounts = [], metadata = {}) {
   if (state.lists.length >= 30) throw Error("Maximum : 30 listes.");
   const id = "list-" + crypto.randomUUID();
-  const next = { ...state, activeList:id, lists:[...state.lists, { id, title:cleanTitle(title), accounts:uniqueAccounts(accounts) }] };
-  persist(next, "Liste créée. Vous pouvez l'adapter librement.");
+  const next = { ...state, activeList:id, lists:[...state.lists, { id, title:cleanTitle(title), accounts:uniqueAccounts(accounts), ...listMetadata(metadata) }] };
+  if (!await persist(next, "Liste créée. Vous pouvez l'adapter librement.")) return false;
   show("lists");
+  return true;
 }
-function download(filename, value) {
-  const blob = new Blob([JSON.stringify(value, null, 2)], { type:"application/json" });
+function downloadText(filename, text) {
+  const blob = new Blob([text], { type:"application/json" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url; link.download = filename; document.body.append(link); link.click(); link.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+// Use the same representation as persist/parseBackup's byte limit. Pretty
+// printing may make a valid near-limit state impossible to restore.
+function download(filename, value) { downloadText(filename, JSON.stringify(value)); }
+function setupRecovery() {
+  const button = document.createElement("button");
+  button.id = "export-recovery";
+  button.className = "button outline";
+  button.type = "button";
+  button.textContent = "Exporter la source de récupération";
+  button.hidden = recoveryRaw === null;
+  button.addEventListener("click", () => {
+    if (recoveryRaw !== null) downloadText("fil-clair-recuperation.json", recoveryRaw);
+  });
+  $("view-settings").querySelector(".import-row").prepend(button);
 }
 function setupListToolbar() {
   const bar = document.createElement("div");
@@ -219,38 +314,40 @@ function setupListToolbar() {
   selector.addEventListener("change", () => { persist({ ...state, activeList:selector.value }); });
   const rename = document.createElement("button");
   rename.className="button subtle"; rename.type="button"; rename.textContent="Renommer";
-  rename.addEventListener("click", () => {
+  rename.addEventListener("click", async () => {
     const title = prompt("Nouveau nom de la liste :", active().title);
     if (title === null) return;
-    try { const lists = state.lists.map(l => l.id === active().id ? {...l,title:cleanTitle(title)}:l); persist({...state,lists},"Liste renommée."); }
+    try { const lists = state.lists.map(l => l.id === active().id ? {...l,title:cleanTitle(title)}:l); await persist({...state,lists},"Liste renommée."); }
     catch(e) { notify(e.message,true); }
   });
   const remove = document.createElement("button");
   remove.className="button danger"; remove.type="button"; remove.textContent="Supprimer la liste";
-  remove.addEventListener("click", () => {
+  remove.addEventListener("click", async () => {
     if (!confirm("Supprimer cette liste et ses profils ? L'historique sera conservé.")) return;
-    const lists=state.lists.filter(l=>l.id!==active().id);
-    persist({...state,lists:lists.length?lists:newState().lists,activeList:lists[0]?.id||"personal"},"Liste supprimée.");
+    await persist(removeList(state, active().id), "Liste supprimée ; ses déclarations sont retirées. L'historique reste disponible.");
   });
   bar.append(label,selector,rename,remove);
   $("view-lists").insertBefore(bar,$("view-lists").children[1]);
+  const metadata = document.createElement("p");
+  metadata.id = "list-metadata";
+  metadata.className = "fine";
+  bar.after(metadata);
 }
 function bindEvents() {
   document.querySelectorAll("[data-view]").forEach(tab => tab.addEventListener("click", () => show(tab.dataset.view)));
   $("active-list").addEventListener("change", e => persist({...state,activeList:e.target.value}));
   $("network").addEventListener("change", e => { $("instance-field").hidden = e.target.value !== "mastodon"; });
-  $("add-account").addEventListener("submit", e => {
+  $("add-account").addEventListener("submit", async e => {
     e.preventDefault();
     try {
       const a = guessAccount($("handle").value, $("network").value, $("instance").value);
       const list = active();
       if (list.accounts.some(item => accountKey(item) === accountKey(a))) return notify("Ce compte figure déjà dans cette liste.");
-      updateList([...list.accounts, a], "Profil ajouté. Il n'a pas été bloqué.");
-      $("handle").value = "";
+      if (await updateList([...list.accounts, a], "Profil ajouté. Il n'a pas été bloqué.")) $("handle").value = "";
     } catch (error) { notify(error.message, true); }
   });
   ["search", "filter-network", "filter-status"].forEach(id => $(id).addEventListener("input", renderAccounts));
-  $("accounts").addEventListener("click", e => {
+  $("accounts").addEventListener("click", async e => {
     const button = e.target.closest("button[data-action]");
     if (!button) return;
     const account = filtered[Number(button.dataset.index)];
@@ -258,16 +355,18 @@ function bindEvents() {
     const action = button.dataset.action;
     if (action === "delete") {
       if (!confirm("Retirer @" + account.handle + " de votre liste ?")) return;
-      updateList(active().accounts.filter(a => accountKey(a) !== accountKey(account)), "Compte retiré de cette liste.");
+      await persist(removeAccount(state, active().id, account), "Compte et déclaration retirés de cette liste. L'historique est conservé.");
       return;
     }
     if (["blocked", "muted"].includes(action) && !confirm("Avez-vous bien " + (action==="blocked" ? "bloqué" : "masqué") + " @" + account.handle + " directement sur " + NETWORKS[account.network] + " ?\n\nFIL CLAIR ne vérifie pas cette action.")) return;
-    persist(markDecision(state,active().id,account,action), action==="todo" ? "Statut remis à « À faire »." : "Votre déclaration est enregistrée sur cet appareil.");
+    try {
+      await persist(markDecision(state,active().id,account,action), action==="todo" ? "Déclaration annulée dans FIL CLAIR. Aucun déblocage n'est effectué sur la plateforme." : "Votre déclaration est enregistrée sur cet appareil.");
+    } catch (error) { notify(error.message, true); }
   });
-  $("new-list").addEventListener("click", () => {
+  $("new-list").addEventListener("click", async () => {
     const title = prompt("Nom de votre nouvelle liste :");
     if (title === null) return;
-    try { newList(title); } catch(e) { notify(e.message,true); }
+    try { await newList(title); } catch(e) { notify(e.message,true); }
   });
   $("go-next").addEventListener("click", () => {
     $("search").value = "";
@@ -289,13 +388,12 @@ function bindEvents() {
         // Reject incomplete or corrupted backups before asking to replace user data.
         const restored = parseBackup(text);
         if (confirm("Restaurer cette sauvegarde ? Toutes les listes et l'historique actuels seront remplacés.")) {
-          persist(restored, "Sauvegarde locale restaurée.");
-          show("home");
+          if (await persist(restored, "Sauvegarde locale restaurée.", true)) show("home");
         }
       } else {
         const imported = parseImport(text);
-        newList(imported.title, imported.accounts);
-        notify(imported.accounts.length + " profils importés dans une nouvelle liste. Vérifiez-les avant d'agir.");
+        if (await newList(imported.title, imported.accounts, imported))
+          notify(imported.accounts.length + " profils importés dans une nouvelle liste. Vérifiez-les avant d'agir.");
       }
     } catch(err) { notify(err.message,true); }
     finally { e.target.value=""; }
@@ -307,17 +405,20 @@ function bindEvents() {
       if (!res.ok) throw Error("La liste distante n'est pas accessible.");
       const payload=await res.text();
       const imported=parseImport(payload);
-      newList("Sélection publique X · à vérifier",imported.accounts);
-      notify(imported.accounts.length + " comptes importés. Aucun blocage effectué. Examinez librement cette sélection.");
+      if (await newList("Sélection publique X · à vérifier", imported.accounts, { ...imported,
+        provenance: { label: "Sélection éditoriale du dépôt · non vérifiée", url: SOURCE, retrievedAt: Date.now() }
+      })) notify(imported.accounts.length + " comptes importés. Aucun blocage effectué. Examinez librement cette sélection.");
     } catch(err) { notify("Impossible d'importer : "+err.message,true); }
     finally { button.disabled=false; button.textContent="Charger la liste X du dépôt"; }
   });
-  $("export-list").addEventListener("click", () => download("fil-clair-liste.json",{format:"fil-clair-v1",title:active().title,accounts:active().accounts}));
-  $("export-history").addEventListener("click", () => download("fil-clair-sauvegarde.json",state));
-  $("erase").addEventListener("click", () => {
+  $("export-list").addEventListener("click", () => download("fil-clair-liste.json", exportList(active())));
+  $("export-history").addEventListener("click", () => {
+    if (recoveryRaw !== null) downloadText("fil-clair-recuperation.json", recoveryRaw);
+    else download("fil-clair-sauvegarde.json",state);
+  });
+  $("erase").addEventListener("click", async () => {
     if (!confirm("Effacer toutes les listes, déclarations et l'historique de cet appareil ? Cette action est irréversible.")) return;
-    persist(newState(),"Données locales effacées.");
-    show("home");
+    if (await persist(newState(),"Listes, déclarations et historique locaux effacés. Les fichiers déjà téléchargés et les actions sur les réseaux sociaux restent inchangés.", true)) show("home");
   });
   addEventListener("beforeinstallprompt", e => { e.preventDefault(); installPrompt=e; $("install").hidden=false; });
   $("install").addEventListener("click", async () => {
@@ -328,10 +429,19 @@ function bindEvents() {
   });
 }
 
+addEventListener("storage", event => {
+  if ((event.key === STORAGE || event.key === null) && storageRead && event.newValue !== storageSource) {
+    storageConflict = true;
+    notify("Conflit : données modifiées dans un autre onglet. Exportez votre vue si nécessaire, puis rechargez avant toute modification.", true);
+  }
+});
+
 populateNetworks();
 setupListToolbar();
+setupRecovery();
 bindEvents();
 render();
+if (startupError) notify(startupError, true);
 if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
   navigator.serviceWorker.register("./sw.js").catch(() => {});
 }

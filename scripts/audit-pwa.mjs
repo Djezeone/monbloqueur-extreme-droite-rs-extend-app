@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
 
 const html = await readFile("pwa/index.html","utf8");
 const app = await readFile("pwa/app.js","utf8");
@@ -19,4 +20,7 @@ assert.match(app, /credentials:"omit"/,"Téléchargement de liste sans cookies o
 assert.ok(!app.includes("fetch(profileUrl") && !sw.includes("https://x.com"),"Le moteur ne doit pas agir sur les comptes sociaux");
 assert.ok(manifest.icons.some(icon=>icon.sizes==="192x192"),"Icône PWA 192 manquante");
 assert.ok(manifest.icons.some(icon=>icon.sizes==="512x512"),"Icône PWA 512 manquante");
+// Execute the worker in an isolated Web API harness: text matching cannot prove
+// that an OAuth callback or an authenticated response stays out of Cache Storage.
+execFileSync(process.execPath,["--test","scripts/test-pwa-sw.mjs"],{stdio:"inherit"});
 console.log("FIL CLAIR security invariants: PASS");

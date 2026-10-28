@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'unsafe-inline'; img-src 'none'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="description" content="Confidentialité du prototype FIL CLAIR : données locales, hébergement, exports et effacement.">
+  <title>Confidentialité — FIL CLAIR</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #0b1220; color: #eef4ff; line-height: 1.65; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    header, main, footer { width: min(100% - 2rem, 48rem); margin-inline: auto; }
+    header { padding-block: 1.25rem; border-bottom: 1px solid #46566f; }
+    main { padding-block: 1.5rem 3rem; }
+    footer { padding-block: 1rem 2rem; border-top: 1px solid #46566f; color: #bbcce3; }
+    h1, h2 { line-height: 1.25; text-wrap: balance; }
+    h1 { font-size: clamp(1.8rem, 6vw, 2.6rem); margin-block: 0.5rem 1rem; }
+    h2 { font-size: 1.3rem; margin-top: 2.25rem; scroll-margin-top: 1rem; }
+    p, li, dd { overflow-wrap: anywhere; }
+    a { color: #9dd6ff; text-underline-offset: 0.2em; }
+    a:focus-visible { outline: 3px solid #ffda80; outline-offset: 5px; border-radius: 2px; }
+    header a, footer a, nav a { display: inline-block; min-height: 44px; padding-block: 0.55rem; }
+    nav ul { margin-block: 0.5rem; padding-left: 1.5rem; }
+    .skip { position: absolute; top: 0; left: 1rem; padding: 0.75rem; background: #eef4ff; color: #0b1220; transform: translateY(-150%); z-index: 1; }
+    .skip:focus { transform: translateY(0); }
+    .status { border: 2px solid #ffda80; border-radius: 0.75rem; background: #192236; padding: 1rem; }
+    .status strong { color: #ffda80; }
+    .meta { color: #bbcce3; }
+    dt { font-weight: 700; margin-top: 1rem; }
+    dd { margin: 0.25rem 0 1rem; }
+    code { font-size: 0.95em; overflow-wrap: anywhere; }
+    @media print {
+      :root { color-scheme: light; background: white; color: black; }
+      a, .meta, footer, .status strong { color: black; }
+      .status { background: white; border-color: black; }
+      .skip { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#contenu">Aller au contenu</a>
+  <header><a href="./">← Retour à FIL CLAIR</a></header>
+  <main id="contenu">
+    <p class="meta">FIL CLAIR · Prototype PWA · Mise à jour : 28 octobre 2026</p>
+    <h1>Vos données, vos choix</h1>
+    <div class="status" role="note" aria-labelledby="statut">
+      <p id="statut"><strong>Notice préparatoire — publication publique bloquée.</strong></p>
+      <p>Le responsable du traitement, son adresse et le contact pour vos droits et le support ne sont pas encore renseignés. Les bases légales, le traitement éventuel de données sensibles et les conditions d’hébergement restent à valider avant toute ouverture au public.</p>
+    </div>
+    <p>Cette notice décrit le prototype PWA. Il sert à préparer des listes de profils et à noter vos propres déclarations. Dans le parcours manuel, vous effectuez les actions dans l’interface du réseau social : un statut « bloqué » ou « masqué » déclaré ici ne prouve pas l’état réel sur ce réseau.</p>
+    <nav aria-label="Dans cette notice">
+      <ul>
+        <li><a href="#donnees">Données utilisées</a></li>
+        <li><a href="#reseau">Connexions et hébergement</a></li>
+        <li><a href="#conservation">Conservation et sauvegarde</a></li>
+        <li><a href="#effacement">Effacer et exercer vos droits</a></li>
+        <li><a href="#evolutions">Connexions futures aux réseaux</a></li>
+      </ul>
+    </nav>
+    <section aria-labelledby="donnees">
+      <h2 id="donnees">Données utilisées sur cet appareil</h2>
+      <p>Le navigateur conserve les titres et profils de vos listes, la liste active, vos statuts déclarés et les dates de l’historique dans son stockage local. Les profils contiennent le réseau, le pseudo et, pour Mastodon, l’instance. Une liste importée peut conserver une révision, un libellé de source, son URL et une date de récupération. Ces informations sont déclaratives.</p>
+      <p>Ces informations servent à afficher et retrouver vos choix, calculer votre progression et préparer vos exports. Le code du prototype ne transmet pas le contenu de vos listes à un serveur de synchronisation et n’intègre pas d’outil de mesure d’audience, de publicité ou de suivi applicatif.</p>
+      <p>Un pseudo peut identifier une autre personne. Le contenu ou le titre d’une liste peut aussi révéler ou laisser déduire des opinions politiques, les vôtres ou celles prêtées à d’autres personnes. Une sélection éditoriale n’est pas une classification vérifiée. Limitez vos listes aux informations nécessaires et évitez les titres contenant des informations sensibles.</p>
+      <p>Le stockage local et les fichiers JSON exportés ne sont pas chiffrés par FIL CLAIR. Une personne qui accède à votre appareil, à votre profil de navigateur ou à une sauvegarde peut les lire. Le navigateur ou le système peut également sauvegarder des données selon vos réglages.</p>
+    </section>
+    <section aria-labelledby="reseau">
+      <h2 id="reseau">Connexions et hébergement</h2>
+      <dl>
+        <dt>Ouvrir FIL CLAIR</dt>
+        <dd>Le site est hébergé sur Vercel. Une visite ou une mise à jour en ligne sollicite cet hébergeur, qui peut traiter des données techniques, dont votre adresse IP, des informations sur le navigateur, les requêtes et leurs dates, pour fournir et sécuriser le service. L’absence de télémétrie dans l’application ne signifie donc pas l’absence de traces d’hébergement. Les réglages, lieux de traitement et durées effectivement applicables au projet restent à documenter.</dd>
+        <dt>Charger la liste publique</dt>
+        <dd>Après votre clic sur « Charger la liste X du dépôt », le navigateur télécharge un fichier depuis <code>raw.githubusercontent.com</code>, service de GitHub. GitHub reçoit les métadonnées de cette requête, notamment l’adresse IP. Le code omet les identifiants de connexion pour ce téléchargement ; il ne lui envoie pas vos listes ni votre historique.</dd>
+        <dt>Ouvrir un profil</dt>
+        <dd>Le navigateur ouvre le site officiel choisi. Ce site reçoit votre visite et peut reconnaître votre session si vous y êtes connecté. Les liens de profils du prototype utilisent <code>noreferrer</code>. Les règles de confidentialité et les actions effectuées sur ce réseau relèvent aussi de ce réseau.</dd>
+        <dt>Importer un fichier ou lire cette notice</dt>
+        <dd>L’import JSON est lu dans le navigateur, sans envoi prévu par ce parcours. Cette page ne contient ni script, ni police distante, ni contenu externe chargé automatiquement.</dd>
+      </dl>
+      <p>Les fichiers de l’application peuvent être mis en cache pour permettre certaines fonctions locales hors connexion après un premier chargement réussi. Charger une liste publique, ouvrir un réseau ou récupérer une mise à jour demande une connexion. L’installation ne rend pas les visites en ligne anonymes.</p>
+    </section>
+    <section aria-labelledby="conservation">
+      <h2 id="conservation">Conservation et sauvegarde</h2>
+      <p>Il n’existe pas de délai automatique d’expiration des listes et déclarations locales. Elles restent jusqu’à leur effacement, leur remplacement lors d’une restauration ou leur suppression par le navigateur. L’historique est limité à 1 000 événements : cette limite de quantité n’est pas une durée de conservation.</p>
+      <p>Retirer un profil ou une liste efface ses décisions actives, mais conserve les événements historiques qui le mentionnent. Utilisez l’effacement global pour retirer aussi cet historique. Une ancienne sauvegarde importée peut également contenir des références à des profils retirés.</p>
+      <p>« Exporter la liste active » produit un JSON de cette liste. « Exporter mes données » produit une sauvegarde JSON incluant les listes, les statuts et l’historique. Conservez ces fichiers dans un emplacement protégé. Les téléchargements, corbeilles et copies de sauvegarde de votre système sont sous votre contrôle ; FIL CLAIR n’en assure ni la conservation ni l’effacement.</p>
+      <p>Si les données locales sont illisibles, « Exporter mes données » et « Exporter la source de récupération » conservent le texte brut d’origine dans <code>fil-clair-recuperation.json</code>. Ce fichier de récupération n’est pas une sauvegarde validée.</p>
+      <p>Une restauration remplace les données locales après validation du fichier et confirmation. Vérifiez la sauvegarde sur un profil de navigateur séparé avant de remplacer des données utiles. Une sauvegarde ne prouve jamais qu’une action est actuellement confirmée par un réseau social.</p>
+    </section>
+    <section aria-labelledby="effacement">
+      <h2 id="effacement">Effacer et exercer vos droits</h2>
+      <p>Dans les réglages, « Effacer toutes mes données » réinitialise les listes, statuts et historique de cette application dans le navigateur, si l’écriture locale réussit. Ce bouton ne supprime pas les fichiers déjà téléchargés, les copies système, les traces de l’hébergeur ou les données des réseaux sociaux.</p>
+      <p>Pour retirer aussi les fichiers de l’application mis en cache, utilisez les réglages du navigateur afin d’effacer les données de ce site, dont le stockage et les caches. La désinstallation seule peut laisser des données. Supprimez séparément les JSON téléchargés et leurs copies ou corbeilles si vous ne souhaitez plus les conserver. Ces gestes ne garantissent pas un effacement physique sécurisé du support.</p>
+      <p>Selon le traitement et les conditions du RGPD, vous pouvez notamment demander l’accès, la rectification, l’effacement, la limitation, la portabilité ou vous opposer au traitement. Le canal de demande auprès du responsable est <strong>non renseigné</strong> : c’est un blocage de publication à résoudre. N’envoyez pas vos listes ou une sauvegarde sensible dans un ticket public.</p>
+      <p>Vous pouvez adresser une réclamation à l’autorité compétente, par exemple à la <a href="https://www.cnil.fr/fr/adresser-une-plainte" rel="noreferrer">CNIL en France</a>.</p>
+    </section>
+    <section aria-labelledby="evolutions">
+      <h2 id="evolutions">Connexions futures aux réseaux</h2>
+      <p>Aucune connexion OAuth de production n’est qualifiée par cette notice. Toute évolution devra préciser les données échangées, les permissions, les destinataires, les durées, la sécurité des jetons et le moyen de révoquer l’accès. Les jetons et réponses authentifiées devront être exclus des exports ordinaires, journaux et caches publics.</p>
+      <p>Autoriser une connexion à un réseau ne constitue pas, à lui seul, une validation de toutes les bases légales ou du traitement d’opinions politiques concernant des tiers. Ces points, ainsi que l’analyse d’impact, restent à instruire avant activation.</p>
+    </section>
+    <section aria-labelledby="references">
+      <h2 id="references">Pour en savoir plus</h2>
+      <ul>
+        <li><a href="https://www.cnil.fr/fr/reglement-europeen-protection-donnees" rel="noreferrer">RGPD — texte présenté par la CNIL</a></li>
+        <li><a href="https://www.cnil.fr/fr/ce-quil-faut-savoir-sur-lanalyse-dimpact-relative-la-protection-des-donnees-aipd" rel="noreferrer">CNIL — comprendre l’analyse d’impact</a></li>
+        <li><a href="https://vercel.com/legal/privacy-notice" rel="noreferrer">Vercel — notice de confidentialité</a></li>
+      </ul>
+    </section>
+  </main>
+  <footer><a href="./">Retour à FIL CLAIR</a><p>Cette notice doit être complétée et validée avant publication publique.</p></footer>
+</body>
+</html>

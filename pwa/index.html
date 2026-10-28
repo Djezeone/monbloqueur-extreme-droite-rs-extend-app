@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#10192d">
-  <meta name="description" content="Choisissez les comptes que vous ne souhaitez plus voir. Parcours guidé, privé, sans robot ni mot de passe.">
+  <meta name="description" content="Choisissez les comptes que vous ne souhaitez plus voir. Parcours guidé, choix stockés sur cet appareil, sans robot ni mot de passe.">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://raw.githubusercontent.com; object-src 'none'; base-uri 'none'; form-action 'self'">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./icon.svg" type="image/svg+xml">
@@ -16,7 +16,7 @@
   <a class="skip" href="#content">Aller au contenu</a>
   <header class="topbar">
     <div class="brand"><div class="brand-icon" aria-hidden="true">✦</div><div><strong>FIL CLAIR</strong><span>MON FIL, MON CHOIX</span></div></div>
-    <span class="private"><span aria-hidden="true">●</span> Privé · sur cet appareil</span>
+    <span class="private"><span aria-hidden="true">●</span> Choix stockés sur cet appareil</span>
   </header>
   <div class="shell">
     <nav class="tabs" aria-label="Navigation principale">
@@ -25,21 +25,21 @@
       <button type="button" class="tab" data-view="history">Historique</button>
       <button type="button" class="tab" data-view="settings">Réglages</button>
     </nav>
-    <main id="content">
+    <main id="content" tabindex="-1">
       <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
       <section id="view-home" class="view">
         <div class="hero">
           <div><div class="eyebrow">VOTRE ESPACE NUMÉRIQUE</div><h1>Un fil qui vous ressemble.</h1><p>Choisissez ce que vous souhaitez voir. Une personne, un compte, une décision à la fois.</p></div>
           <div class="hero-art" aria-hidden="true"><span>✦</span><small>À VOUS DE CHOISIR</small></div>
         </div>
-        <div class="metrics" aria-label="Votre progression">
+        <div class="metrics" role="group" aria-label="Votre progression">
           <div class="metric"><span>Comptes dans la liste</span><strong id="metric-total">0</strong></div>
           <div class="metric"><span>Actions déclarées</span><strong id="metric-done">0</strong></div>
           <div class="metric"><span>Étoiles personnelles</span><strong id="metric-stars">0 ★</strong></div>
         </div>
         <div class="panel journey">
-          <div class="section-heading"><div><span class="eyebrow">UN GESTE À LA FOIS</span><h2>Mon parcours</h2></div><span id="percent">0 %</span></div>
-          <div class="track" aria-label="Progression"><div id="bar"></div></div>
+          <div class="section-heading"><div><span class="eyebrow">UN GESTE À LA FOIS</span><h2 id="progress-label">Mon parcours</h2></div><span id="percent">0 %</span></div>
+          <div class="track" role="progressbar" aria-labelledby="progress-label" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="bar"></div></div>
           <p id="home-summary" class="muted">Ajoutez un compte ou chargez une liste pour commencer.</p>
           <div class="toolbar">
             <label for="active-list">Liste active</label><select id="active-list"></select>
@@ -91,12 +91,12 @@
       <section id="view-settings" class="view" hidden>
         <div class="section-heading"><div><span class="eyebrow">PARAMÈTRES</span><h1>Confidentialité et sécurité</h1></div></div>
         <div class="panel"><h2>Le mode prudent est permanent</h2><p>Pas de scraping, pas de mots de passe, pas d'exécution en masse, pas de connexion API non autorisée. Cette version ouvre les profils officiels et vous demande de confirmer les actions effectuées.</p><p class="fine">La version PWA ne peut ni contrôler X, Instagram ou TikTok dans leurs applications, ni connaître leurs listes de blocage. Pour une automatisation future : OAuth officiel, accord explicite et validation du réseau.</p></div>
-        <div class="panel"><h2>Mes données</h2><p>Listes, états déclarés, historique et étoiles restent dans le navigateur de cet appareil. Aucune synchronisation ni télémétrie. Les données peuvent disparaître si le stockage du navigateur est effacé.</p><div class="import-row"><button id="export-list" class="button outline" type="button">Exporter la liste active</button><button id="erase" class="button danger" type="button">Effacer toutes mes données</button></div></div>
+        <div class="panel"><h2>Mes données</h2><p>Listes, états déclarés, historique et étoiles restent dans le navigateur de cet appareil. L’application ne synchronise pas leur contenu et n’intègre pas de mesure d’audience. L’hébergeur peut traiter des métadonnées techniques de visite, comme l’adresse IP. Les données locales peuvent disparaître si le stockage du navigateur est effacé.</p><p class="fine"><a href="./privacy.html">Lire la notice de confidentialité</a> pour les connexions, les exports et l’effacement.</p><div class="import-row"><button id="export-list" class="button outline" type="button">Exporter la liste active</button><button id="erase" class="button danger" type="button">Effacer toutes mes données</button></div></div>
         <div class="panel"><h2>Installer sur mon appareil</h2><p>Android : menu du navigateur → « Installer l'application ». iOS : Safari → Partager → « Sur l'écran d'accueil ».</p><button id="install" class="button primary" type="button" hidden>Installer FIL CLAIR</button><p class="fine">Installation et fonctionnement hors ligne après une première ouverture. Le chargement d'une nouvelle liste publique nécessite Internet.</p></div>
       </section>
     </main>
   </div>
-  <footer><span>FIL CLAIR · Prototype PWA 0.1 · UNTAKA</span><span>100 % choix personnels · Aucun blocage automatique</span></footer>
+  <footer><span>FIL CLAIR · Prototype PWA 0.1 · UNTAKA</span><a href="./privacy.html">Confidentialité</a><span>100 % choix personnels · Aucun blocage automatique</span></footer>
   <script type="module" src="./app.js"></script>
 </body>
 </html>
