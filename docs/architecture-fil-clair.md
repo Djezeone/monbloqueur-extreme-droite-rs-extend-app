@@ -37,7 +37,7 @@ TinyFish contrôle des navigateurs et le clic automatisé sur X enfreindrait les
 ## Roadmap
 
 - **P0 fait dans la branche** : PWA statique sans build, 10 réseaux, multi-listes, saisie par lien/pseudo, import de la liste historique X, recherche et filtres, suivi déclaratif, historique, étoiles, export et effacement, cache offline, tests unitaires.
-- **P1** : iconographie raster complète, tests end-to-end mobile + audits WCAG, onboarding simplifié avec tutoriel visuel, traductions.
+- **P1** : tests end-to-end mobile + audits WCAG, onboarding simplifié avec tutoriel visuel, traductions.
 - **P2** : OAuth officiel Bluesky / Mastodon, opérations unitaires explicites et contrôles de conformité + réconciliation réelle de l'état, avec option d'annuler.
 - **P3** : comptes multi-appareils facultatifs, chiffrage par utilisateur, sync RGPD EU, journalisation et RGPD, gamification inclusive.
 - **P4** : publication sous marque et conditions d'utilisation, politique de confidentialité, audits externes et tests avec utilisateurs peu technophiles.

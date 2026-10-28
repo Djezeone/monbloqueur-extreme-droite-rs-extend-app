@@ -35,4 +35,4 @@ Ouvrir http://localhost:8080/pwa/ (ne pas utiliser file://). Pour déployer sur 
 node --test tests/pwa-core.test.js
 ```
 
-Vérifier manuellement sur Chrome Android et Safari iOS après déploiement HTTPS. Les icônes raster 192/512 restent à fournir pour une installation optimale sur tous navigateurs.
+Vérifier manuellement sur Chrome Android et Safari iOS après déploiement HTTPS. Les icônes PNG 192/512 sont présentes. Tester les parcours d’installation Android et iOS sur HTTPS avant publication.

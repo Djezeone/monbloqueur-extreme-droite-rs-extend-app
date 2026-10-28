@@ -282,9 +282,18 @@ function bindEvents() {
     const file = e.target.files?.[0]; if(!file) return;
     try {
       if (file.size > MAX_IMPORT_BYTES) throw Error("Fichier trop volumineux.");
-      const imported = parseImport(await file.text());
-      newList(imported.title, imported.accounts);
-      notify(imported.accounts.length + " profils importés dans une nouvelle liste. Vérifiez-les avant d'agir.");
+      const text = await file.text();
+      const parsed = JSON.parse(text);
+      if (parsed?.version === 1 && Array.isArray(parsed.lists)) {
+        if (confirm("Restaurer cette sauvegarde ? Toutes les listes et l'historique actuels seront remplacés.")) {
+          persist(restoreState(text), "Sauvegarde locale restaurée.");
+          show("home");
+        }
+      } else {
+        const imported = parseImport(text);
+        newList(imported.title, imported.accounts);
+        notify(imported.accounts.length + " profils importés dans une nouvelle liste. Vérifiez-les avant d'agir.");
+      }
     } catch(err) { notify(err.message,true); }
     finally { e.target.value=""; }
   });

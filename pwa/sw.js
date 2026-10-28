@@ -1,5 +1,5 @@
-const CACHE = "fil-clair-shell-v1";
-const ASSETS = ["./", "./index.html", "./styles.css", "./app.js", "./core.js", "./manifest.webmanifest", "./icon.svg"];
+const CACHE = "fil-clair-shell-v2";
+const ASSETS = ["./", "./index.html", "./styles.css", "./app.js", "./core.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
 });
