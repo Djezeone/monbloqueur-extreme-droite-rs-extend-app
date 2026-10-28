@@ -1,3 +1,5 @@
+import { validateFlows } from "./flow-core.js";
+
 export const NETWORKS = Object.freeze({
   x: "X", bluesky: "Bluesky", mastodon: "Mastodon",
   instagram: "Instagram", threads: "Threads", tiktok: "TikTok",
@@ -243,7 +245,8 @@ export function parseBackup(text) {
       throw Error("Historique de sauvegarde incorrect.");
     return {key:entry.key,status:entry.status,at:entry.at};
   });
-  return {version:1, activeList:raw.activeList, lists, decisions, history};
+  return {version:1, activeList:raw.activeList, lists, decisions, history,
+    ...(Object.hasOwn(raw, "flows") ? { flows:validateFlows(raw.flows) } : {})};
 }
 
 function validDecisionKey(key) {
