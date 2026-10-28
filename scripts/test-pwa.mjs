@@ -25,7 +25,7 @@ try {
   const page=await context.newPage();
   await page.goto(url,{waitUntil:"networkidle"});
   await assert.doesNotReject(()=>page.getByRole("heading",{name:"Un fil qui vous ressemble."}).waitFor());
-  await page.getByRole("button",{name:"Mes listes"}).click();
+  await page.getByRole("button",{name:"Mes listes",exact:true}).click();
   await page.locator("#handle").fill("qa_profil");
   await page.getByRole("button",{name:"Ajouter à ma liste"}).click();
   assert.equal(await page.locator(".account-id strong").first().textContent(),"@qa_profil");
@@ -33,11 +33,11 @@ try {
   assert.match(await page.locator(".status").first().textContent(),/vérifier/i);
   await page.getByRole("button",{name:"Historique"}).click();
   assert.match(await page.locator("#history").textContent(),/qa_profil/);
-  await page.getByRole("button",{name:"Mes listes"}).click();
+  await page.getByRole("button",{name:"Mes listes",exact:true}).click();
   await page.locator('button[data-action="todo"]').first().click();
   assert.match(await page.locator(".status").first().textContent(),/faire/i);
   await page.reload();
-  await page.getByRole("button",{name:"Mes listes"}).click();
+  await page.getByRole("button",{name:"Mes listes",exact:true}).click();
   assert.equal(await page.locator(".account-id strong").first().textContent(),"@qa_profil");
   // La sauvegarde malformée doit laisser intactes les données existantes.
   await page.locator("#file").setInputFiles({name:"backup.json",mimeType:"application/json",buffer:Buffer.from('{"version":1,"lists":[]}')});
@@ -51,18 +51,18 @@ try {
   await page.getByRole("button",{name:"Réglages"}).click();
   page.once("dialog",d=>d.accept());
   await page.getByRole("button",{name:"Effacer toutes mes données"}).click();
-  await page.getByRole("button",{name:"Mes listes"}).click();
+  await page.getByRole("button",{name:"Mes listes",exact:true}).click();
   assert.equal(await page.locator("#accounts li").count(),0);
   page.once("dialog",dialog=>dialog.accept());
   await page.locator("#file").setInputFiles(backupFile);
-  await page.getByRole("button",{name:"Mes listes"}).click();
+  await page.getByRole("button",{name:"Mes listes",exact:true}).click();
   assert.equal(await page.locator(".account-id strong").first().textContent(),"@qa_profil");
   await context.close();
 
   const mobile=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
   const mobilePage=await mobile.newPage();
   await mobilePage.goto(url,{waitUntil:"domcontentloaded"});
-  await mobilePage.getByRole("button",{name:"Mes listes"}).click();
+  await mobilePage.getByRole("button",{name:"Mes listes",exact:true}).click();
   assert.equal(await mobilePage.locator("#add-account").count(),1);
   await mobile.close();
   console.log("E2E FIL CLAIR : ajout, à vérifier, historique, annulation, persistance, sauvegarde corrompue, export/effacement/restauration, viewport mobile PASS");
