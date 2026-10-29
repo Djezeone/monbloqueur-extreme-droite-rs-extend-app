@@ -263,5 +263,6 @@ export function mountFlows({ getState, save, notify, navigate }) {
     step = 1; configSignature = ""; loadDraft();
     registry.reset();
   }
-  return { render, openSetup, openCategory, resetDraft };
+  function showTarget(target){setupOpen=false;$("flow-filter").value=target;render();$("flow-count").tabIndex=-1;$("flow-count").focus();}
+  return { render, openSetup, openCategory, resetDraft, showTarget };
 }

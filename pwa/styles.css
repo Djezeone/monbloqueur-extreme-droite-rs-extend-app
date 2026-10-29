@@ -135,3 +135,14 @@ details p,details li { overflow-wrap:anywhere }
 @media(max-width:760px) { .choice-grid,.flow-form { grid-template-columns:1fr } .flow-items>li { padding:15px } #flow-setup .import-row { align-items:stretch } #flow-setup .button { flex:1 1 44% } }
 @media(max-width:760px) { .topbar { padding:16px } .private { display:none } .shell { padding:8px 13px 40px } .tabs { display:flex; flex-wrap:wrap; width:100%; gap:4px; margin-bottom:15px } .tab { flex:1 1 80px; padding:8px 4px; font-size:12px; white-space:normal; overflow-wrap:normal } .hero { padding:20px; min-height:0 } .hero-art { display:none } .metrics { gap:8px } .metric { padding:15px 11px } .metric span { font-size:11px } .metric strong { font-size:24px } .panel { padding:19px } .steps { grid-template-columns:1fr; gap:8px } .steps > div { padding:12px; display:grid; grid-template-columns:36px 1fr; column-gap:9px } .steps .step { grid-row:span 2; margin:0 } .steps p { margin:0 } .form-grid,.filters { grid-template-columns:1fr } .toolbar select,.toolbar .button { width:100% } .section-heading h1 { font-size:27px } .actions { width:100% } .actions a,.actions button { flex:1 } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; animation:none!important } }
+:root .assistant-dialog{width:min(44rem,calc(100% - 1.5rem));max-height:90dvh;overflow-y:auto;box-sizing:border-box;padding:1.25rem;border:1px solid #4b607b;border-radius:1rem;background:#10192d;color:#f1f5fa;overflow-wrap:anywhere}
+.assistant-dialog::backdrop{background:rgb(0 0 0 / .7)}
+.assistant-dialog .section-heading{align-items:flex-start;flex-wrap:wrap;gap:.6rem}
+.assistant-dialog h2{margin:0;font-size:1.45rem}
+.assistant-dialog .field{margin-block:1rem}
+.assistant-dialog details{margin-block:.75rem}
+.assistant-dialog summary{cursor:pointer;min-height:44px;padding:.65rem .25rem;box-sizing:border-box}
+.assistant-dialog .flow-fieldset{margin-block:1rem}
+.assistant-dialog .choice-card{margin-block:.5rem}
+.assistant-dialog input:not([type=checkbox]),.assistant-dialog select{max-width:100%;box-sizing:border-box}
+footer details{max-width:28rem}footer details p{line-height:1.6}footer summary{min-height:44px;cursor:pointer;padding:.65rem}

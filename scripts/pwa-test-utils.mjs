@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { resolve, join, extname } from "node:path";
 import { chromium, firefox, webkit } from "@playwright/test";
 
-const files = new Set(["index.html", "app.js", "core.js", "flow-core.js", "platforms.js", "flows.js", "actions.js", "effects.js", "register-view.js", "styles.css", "sw.js", "privacy.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png"]);
+const files = new Set(["index.html", "app.js", "core.js", "flow-core.js", "platforms.js", "flows.js", "actions.js", "effects.js", "register-view.js", "guided-core.js", "guided.js", "help-data.js", "help.js", "support-config.js", "styles.css", "sw.js", "privacy.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png"]);
 const mime = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".webmanifest": "application/manifest+json", ".svg": "image/svg+xml", ".png": "image/png" };
 
 export async function servePwa() {

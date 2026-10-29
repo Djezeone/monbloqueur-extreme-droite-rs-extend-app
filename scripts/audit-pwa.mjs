@@ -5,7 +5,7 @@ import { execFileSync } from "node:child_process";
 const html = await readFile("pwa/index.html","utf8");
 const app = await readFile("pwa/app.js","utf8");
 const core = await readFile("pwa/core.js","utf8");
-const flowModules = await Promise.all(["flow-core", "platforms", "flows", "actions", "effects", "register-view"].map(name => readFile("pwa/" + name + ".js", "utf8")));
+const flowModules = await Promise.all(["flow-core", "platforms", "flows", "actions", "effects", "register-view", "guided-core", "guided", "help-data", "help", "support-config"].map(name => readFile("pwa/" + name + ".js", "utf8")));
 const application = [app, core, ...flowModules].join("\n");
 const sw = await readFile("pwa/sw.js","utf8");
 const manifest = JSON.parse(await readFile("pwa/manifest.webmanifest","utf8"));

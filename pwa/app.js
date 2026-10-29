@@ -2,6 +2,8 @@ import { NETWORKS, normalise, profileUrl, accountKey, uniqueAccounts, parseImpor
 import { mountFlows } from "./flows.js";
 import { getControl } from "./platforms.js";
 import { flowMetrics } from "./actions.js";
+import { mountGuided } from "./guided.js";
+import { mountHelp } from "./help.js";
 
 const STORAGE = "fil-clair-v1";
 const SOURCE = "https://raw.githubusercontent.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/b7cd31b036cca17b48dbf726c047847191c01a5b/liste/accounts.json";
@@ -15,6 +17,7 @@ let storageConflict = false;
 let saving = false;
 let sessionMode = false;
 let flowsUI = null;
+let guidedUI = null, helpUI = null;
 try {
   storageSource = localStorage.getItem(STORAGE);
   storageRead = true;
@@ -62,12 +65,16 @@ async function persist(next, message, replaceRecovery = false) {
     return false;
   }
   const base = storageSource;
+  const unavailable = "Enregistrement impossible : stockage, espace ou verrou indisponible. Exportez vos données avant de fermer.";
   saving = true;
   try {
     return await navigator.locks.request("fil-clair-v1-write", {mode:"exclusive"}, () => {
       // Compare and replace inside one origin-wide lock. A stale tab must never
       // overwrite another tab's whole snapshot, including during reset/restore.
-      if (storageConflict || localStorage.getItem(STORAGE) !== base) {
+      let actualSource;
+      try { actualSource = localStorage.getItem(STORAGE); }
+      catch { notify(unavailable, true); return false; }
+      if (storageConflict || actualSource !== base) {
         storageConflict = true;
         notify(conflictMessage, true);
         return false;
@@ -77,14 +84,17 @@ async function persist(next, message, replaceRecovery = false) {
         notify("État supérieur à 10 Mo : modification refusée pour conserver une sauvegarde restaurable. Exportez vos données avant de réduire les listes.", true);
         return false;
       }
-      localStorage.setItem(STORAGE, serialized);
+      // Catch inside the Web Locks callback: Firefox can report the callback's
+      // rejected exception globally even when the outer request is awaited.
+      try { localStorage.setItem(STORAGE, serialized); }
+      catch { notify(unavailable, true); return false; }
       storageSource = serialized;
       if (replaceRecovery) { recoveryRaw = null; startupError = ""; }
       applyState(next, message, replaceRecovery);
       return true;
     });
   } catch {
-    notify("Enregistrement impossible : stockage, espace ou verrou indisponible. Exportez vos données avant de fermer.", true);
+    notify(unavailable, true);
     return false;
   } finally { saving = false; }
 }
@@ -104,6 +114,7 @@ function applyState(next, message, resetFlows = false) {
     $("accounts").replaceChildren();
     $("history").replaceChildren();
     flowsUI?.resetDraft();
+    guidedUI?.reset(); helpUI?.reset();
   }
   render();
   $("export-recovery").hidden = recoveryRaw === null;
@@ -501,6 +512,8 @@ populateNetworks();
 setupListToolbar();
 setupRecovery();
 flowsUI = mountFlows({ getState:() => state, save:persist, notify, navigate:show });
+guidedUI = mountGuided({ getState:() => state, save:persist, notify, navigate:show, onSaved:target=>flowsUI.showTarget(target) });
+helpUI = mountHelp();
 bindEvents();
 render();
 if (startupError) notify(startupError, true);
