@@ -24,23 +24,23 @@
 ### Task1 — journal transactionnel borné
 Files : `pwa/connectors/operation-journal.js`, `tests/operation-journal.test.js`, `scripts/test-operation-journal.mjs`.
 Produces : `createOperationJournal({indexedDB,timeoutMs})`, read(lane), compareAndSet(lane,expectedRevision,next). Record/raison et règles : spec.
-- [ ] Écrire tests RED validation et véritable transaction navigateur ; vérifier le refus observable avant implémentation.
-- [ ] Implémenter validation, CAS, borne, intégrité tuple/clé, résolution sur complete et refus sûr.
-- [ ] Passer tests Node et navigateur ; conserver logs RED/GREEN, commit cohérent.
+- [x] Écrire tests RED validation et véritable transaction navigateur ; vérifier le refus observable avant implémentation.
+- [x] Implémenter validation, CAS, borne, intégrité tuple/clé, résolution sur complete et refus sûr.
+- [x] Passer tests Node et navigateur ; conserver logs RED/GREEN, commit cohérent.
 
 ### Task2 — exécution et récupération sans rejeu
 Files : `pwa/connectors/durable-orchestration.js`, `pwa/connectors/{orchestration,mastodon,bluesky}.js`, `scripts/test-durable-orchestration.mjs`, `tests/durable-orchestration.test.js`.
 Consumes : journal task1 ; connectorImplementation et createOrchestrator existants.
 Produces : createDurableOrchestrator, grantConsent/execute/recover/getCheckpoint/cancel ; hooks beforeSend attendus avant chaque POST.
-- [ ] Tests RED : concurrence/reload, prelecture suspendue, envoi incertain, tentative inverse, checkpoint refusé/aborted, expiration, quota, auth, suppressions multiples.
-- [ ] Implémenter enveloppe de consentement, réservation/checkpoints/clôture, récupération lecture seule et quarantaine.
-- [ ] Suite Node complète, intégration journal et fournisseur simulé, trois moteurs ; logs et commit.
+- [x] Tests RED : concurrence/reload, prelecture suspendue, envoi incertain, tentative inverse, checkpoint refusé/aborted, expiration, quota, auth, suppressions multiples.
+- [x] Implémenter enveloppe de consentement, réservation/checkpoints/clôture, récupération lecture seule et quarantaine.
+- [x] Suite Node complète, intégration journal et fournisseur simulé, trois moteurs ; logs et commit.
 
 ### Task3 — preuve d'inactivité, revue et livraison traçable
 Files : workflow PWA existant, configurations Vercel branche, `docs/DURABLE_OPERATIONS.md`, mission, queue, privacy, opérations, journal de session, preuves.
-- [ ] Ajouter scripts au workflow standard existant et empêcher autobuild Vercel de cette seule branche ; aucun service/dépendance ajouté.
-- [ ] Vérifier absence d'import dans le shell/précache et absence de réseau réel dans les tests ; audits existants + non-régression appropriée.
-- [ ] Revue indépendante de toute la branche ; une passe RED→GREEN pour constats importants ; conserver réserves non jugées.
+- [x] Ajouter scripts au workflow standard existant et empêcher autobuild Vercel de cette seule branche ; aucun service/dépendance ajouté.
+- [x] Vérifier absence d'import dans le shell/précache et absence de réseau réel dans les tests ; audits existants + non-régression appropriée.
+- [x] Revue indépendante de toute la branche ; une passe RED→GREEN pour constats importants ; conserver réserves non jugées.
 - [ ] Commits groupés, vérifier arbres, nouvelle PR draft ; CI uniquement si dépôt public/runners standards et absence cache/upload revérifiés.
 - [ ] Lire CI au SHA exact et absence de nouveau déploiement ; cockpit8lots/8portes/session actualisé et relu. Aucun A/B/C validé par ce seul changement.
 
@@ -50,3 +50,17 @@ Files : workflow PWA existant, configurations Vercel branche, `docs/DURABLE_OPER
 - Ruling : worktree frère `fil-clair-durable` branche dédiée, dépendances déjà présentes liées localement sans installation ; aucun changement dans le checkout V3.2.
 - Pre-flight : tâche1 produit CAS/read exactement consommées par tâche2 ; adaptateurs doivent await beforeWrite. Le journal ne sait pas restaurer un ticket ni une preuve. Tâche3 qualifie code/test, pas production.
 - Exécution : tâche1 spécialisée sur ses fichiers seulement ; tâche2 exécutée par root, revue finale distincte. Aucun script de workflow externe téléchargé/exécuté ; ce ledger versionné porte les transitions.
+
+## Revue indépendante et décisions
+- Revue fraîche gpt-6-astra/high, range839049a..f998b0f :0Critical,2Important et1Minor. Le relecteur a exécuté178Node et9SW+audit ; aucun navigateur réexécuté par lui.
+- Final: Ruling: le diagnostic fournisseur assimilé à une erreur de journal est reclassé Important, intégré au correctif d'arrêt/reprise — un diagnostic erroné pourrait inciter à une récupération destructive.
+- Final: Ruling: OAuth réel, durabilité matérielle/éviction, intégrité face au code malveillant de même origine, export/effacement/rétention/révocation/déverrouillage restent hors qualification et bloquent l'activation — risques explicités, aucun B CONNECT livré.
+- Final: Ruling: déploiement/coût, protection main et CI distante sont vérifiés par le coordinateur, pas par la revue ; UX physique/WCAG restent ouverts — aucune portée élargie des tests synthétiques.
+- RED revue :5échecs/20Node avant correction (arrêt/cooldown en recover,429 en lecture, acceptation connue sur2échecs de clôture),15pass. Le test d'expiration au deuxième checkpoint passe déjà : couverture ajoutée sans prétendre un bug produit. Une seule passe de correction prévue, pas de seconde revue.
+
+- Task1: complete337633d — Node12/12, journal10/10 par moteur ; mutation de résolution prématurée RED observée contre abort-after-put, puis vraie transaction GREEN.
+- Task2: complete66c5dcb et correctif de revue — durablerunner20/20Node,14/14 par moteur ; suite complète183/183.
+- Final: fixed arrêt/cooldown/diagnostic de recover —5testsNode RED,3scénarios navigateur RED puis GREEN ; une passe de correction, aucune seconde revue.
+- Final: fixed préservation des effets acceptés lors d'échec durable — deux régressionsNode RED→GREEN et test navigateur abort persistant ; confirmation/evidence restentfalse/null.
+- Final: minor(deferred): aucun ; le diagnostic fournisseur a été reclassé Important et corrigé.
+- Qualification finale locale :183Node,9SW+audit, journal30scénarios, exécuteur42scénarios et3PWA E2E moteursPASS. Registre14/43 et liste162valides ; audit seuilhighPASS,3lowdev héritées. CI distante/cockpit seront consignés dans la PR et Airtable après push pour éviter une poussée documentaire redondante.

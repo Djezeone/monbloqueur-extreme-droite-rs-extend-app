@@ -50,6 +50,24 @@ function fixture(options = {}) {
   return f;
 }
 
+function partialFixture() {
+  const actor="did:plc:aaaaaaaaaaaaaaaaaaaaaaaa",did="did:plc:bbbbbbbbbbbbbbbbbbbbbbbb",rkey="3lfilclair222";
+  const records=new Map([rkey,"3lfilclair223"].map(key=>[key,{uri:`at://${actor}/app.bsky.graph.block/${key}`,cid:`cid-${key}`,value:{$type:"app.bsky.graph.block",subject:did,createdAt:"2026-10-29T00:00:00Z"}}]));
+  const f={now:1000,records,journal:memoryJournal(),writes:0,reads:0};
+  f.connector=createBlueskyConnector({session:{type:"official-oauth",provider:"bluesky",accountId:actor,origin:"https://pds.example",scopes:["atproto","repo:app.bsky.graph.block?action=create&action=delete"]},allowedOrigins:["https://pds.example"],transport:async r=>{
+    if(r.method==="POST")f.writes++;else f.reads++;
+    const custom=await f.handle?.(r,f);if(custom!==undefined)return custom;
+    if(r.url.includes("getSession"))return reply(r,{did:actor});
+    if(r.url.includes("listRecords"))return reply(r,{records:[...records.values()]});
+    if(r.url.includes("deleteRecord")){records.delete(r.body.rkey);return reply(r,{});}
+    throw Error("Unexpected simulated route");
+  }});
+  f.create=()=>durable.createDurableOrchestrator({connector:f.connector,journal:f.journal,now:()=>f.now});
+  const target={did,rkey};
+  f.run=runner=>runner.execute({consent:runner.grantConsent({accountId:actor,target,action:"unblock",explicit:true}),target,action:"unblock"});
+  return f;
+}
+
 test("the private gate is awaited before a Mastodon POST starts",async()=>{
   const f=fixture();const entered=wait();const release=wait();
   const runner=createOrchestrator({connector:f.connector,now:()=>f.now,beforeSend:()=>{entered.resolve();return release.promise;}});
@@ -136,6 +154,7 @@ test("failure to commit completion withholds provider confirmation and preserves
   const f=fixture();const original=f.journal.compareAndSet;
   f.journal.compareAndSet=async(lane,revision,next)=>{if(next.phase==="closed")throw new ConnectorError("journal-storage-error");return original(lane,revision,next);};
   const result=await f.run(f.create());assert.equal(result.status,"unknown");assert.equal(result.confirmed,false);assert.equal(result.evidence,null);
+  assert.equal(result.accepted,true);assert.equal(result.changed,true);
   assert.equal((await f.create().getCheckpoint()).checkpoint.phase,"sending");assert.equal(f.writes.length,1);
 });
 
@@ -185,4 +204,46 @@ test("Bluesky awaits each checkpoint and preserves partial effects if the second
   const result=await runner.execute({consent,target,action:"unblock"});
   assert.equal(result.status,"unknown");assert.equal(result.accepted,true);assert.equal(result.confirmed,false);
   assert.equal(writes,1);assert.equal(records.size,1);assert.equal((await runner.getCheckpoint()).checkpoint.phase,"quarantined");
+});
+
+test("recovery respects a durable pause after partial acceptance without any GET",async()=>{
+  const f=partialFixture();f.handle=r=>r.method==="POST"&&f.writes===2?reply(r,{},429,{"Retry-After":"2"}):undefined;
+  assert.equal((await f.run(f.create())).accepted,true);
+  const reads=f.reads;const recovered=await f.create().recover();
+  assert.equal(recovered.status,"cooldown");assert.equal(recovered.retryAt,3000);assert.equal(f.reads,reads);assert.equal(f.writes,2);
+});
+
+test("429 during recovery persists its pause for the next runner",async()=>{
+  const f=fixture({timeoutMs:10,handle:r=>r.method==="POST"?new Promise(()=>{}):undefined});
+  await f.run(f.create());
+  f.handle=r=>r.url.includes("verify_credentials")?reply(r,{},429,{"Retry-After":"2"}):undefined;
+  const first=await f.create().recover();assert.equal(first.status,"cooldown");assert.equal(first.retryAt,3000);
+  const reads=f.reads.length;assert.equal((await f.create().recover()).status,"cooldown");assert.equal(f.reads.length,reads);
+});
+
+test("recovery authentication failures stop current and fresh runners without false storage reasons",async()=>{
+  for(const error of [401,403,"identity"]){
+    const f=fixture({timeoutMs:10,handle:r=>r.method==="POST"?new Promise(()=>{}):undefined});
+    await f.run(f.create());
+    f.handle=r=>r.url.includes("verify_credentials")?reply(r,{id:"8"},error==="identity"?200:error):undefined;
+    const runner=f.create();const result=await runner.recover();assert.equal(result.reason,"session-stopped");
+    const reads=f.reads.length;
+    assert.equal((await runner.recover()).reason,"session-stopped");assert.equal((await f.create().recover()).reason,"session-stopped");
+    assert.equal(f.reads.length,reads);assert.equal((await runner.getCheckpoint()).checkpoint.phase,"quarantined");
+  }
+});
+
+test("persistent journal failure preserves a known partial deletion without confirmation",async()=>{
+  const f=partialFixture(),original=f.journal.compareAndSet;let failed=false;
+  f.journal.compareAndSet=async(...args)=>{if(args[2].phase==="sending"&&args[2].attempts===2)failed=true;if(failed)throw new ConnectorError("journal-storage-error");return original(...args);};
+  const result=await f.run(f.create());assert.equal(result.status,"unknown");assert.equal(result.accepted,true);assert.equal(result.changed,true);
+  assert.equal(result.confirmed,false);assert.equal(result.evidence,null);assert.equal(f.writes,1);assert.equal(f.records.size,1);
+  assert.equal((await f.create().getCheckpoint()).checkpoint.phase,"sending");
+});
+
+test("consent expiry at the second Bluesky checkpoint preserves the first deletion only",async()=>{
+  const f=partialFixture(),original=f.journal.compareAndSet;
+  f.journal.compareAndSet=async(...args)=>{const saved=await original(...args);if(args[2].phase==="sending"&&args[2].attempts===2)f.now=61000;return saved;};
+  const result=await f.run(f.create());assert.equal(result.status,"unknown");assert.equal(result.accepted,true);assert.equal(result.changed,true);
+  assert.equal(result.confirmed,false);assert.equal(f.writes,1);assert.equal(f.records.size,1);
 });

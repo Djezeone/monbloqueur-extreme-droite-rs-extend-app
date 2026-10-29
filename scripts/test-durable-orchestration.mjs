@@ -101,6 +101,55 @@ try{
     assert.equal(result.result.status,"unknown");assert.equal(result.result.accepted,true);assert.equal(result.result.confirmed,false);assert.equal(result.writes.length,1);assert.equal(result.remaining,1);
     assert.equal(result.writes[0].swapRecord,"cid-3lfilclair222");assert.equal(result.checkpoint.checkpoint.phase,"quarantined");
   });
+  await check("recovery respects partial 429 pause and persists a second read-only 429",async c=>{
+    const p=await pageIn(c);
+    const result=await p.evaluate(async()=>{
+      const f=window.lab.makeBlueskyFixture();let sends=0,reads=0;
+      f.handle=(r,f,reply)=>{if(r.method==="POST"&&++sends===2)return reply(r,{},429,{"Retry-After":"2"});if(r.method!=="POST")reads++;};
+      const first=await f.run(f.create()),before=reads;
+      const paused=await f.create().recover(),during=reads;
+      f.now=3001;f.handle=(r,f,reply)=>{if(r.method!=="POST"){reads++;return reply(r,{},429,{"Retry-After":"2"});}};
+      const limited=await f.create().recover(),after=reads;
+      const again=await f.create().recover();
+      return {first,paused,limited,again,before,during,after,reads,remaining:f.records.size};
+    });
+    assert.equal(result.first.accepted,true);assert.equal(result.paused.status,"cooldown");assert.equal(result.paused.retryAt,3000);
+    assert.equal(result.before,result.during);assert.equal(result.limited.status,"cooldown");assert.equal(result.limited.retryAt,5001);
+    assert.equal(result.again.status,"cooldown");assert.equal(result.after,result.reads);assert.equal(result.remaining,1);
+  });
+  await check("a quarantined recovery 401 stops same-page and reloaded recovery reads",async c=>{
+    const p=await pageIn(c);
+    const first=await p.evaluate(async()=>{
+      const f=window.lab.makeFixture({timeoutMs:10,handle:r=>r.method==="POST"?new Promise(()=>{}):undefined});await f.run(f.create());
+      f.handle=(r,f,reply)=>r.url.includes("verify_credentials")?reply(r,{},401):undefined;
+      const runner=f.create(),one=await runner.recover(),before=f.reads.length,two=await runner.recover();return {one,two,before,after:f.reads.length};
+    });
+    assert.equal(first.one.reason,"session-stopped");assert.equal(first.two.reason,"session-stopped");assert.equal(first.before,first.after);
+    await p.reload();await p.waitForFunction(()=>window.lab);
+    const second=await p.evaluate(async()=>{const f=window.lab.makeFixture();const result=await f.create().recover();return {result,reads:f.reads.length};});
+    assert.equal(second.result.reason,"session-stopped");assert.equal(second.reads,0);
+  });
+  await check("persistent journal abort keeps known partial acceptance but never provider confirmation",async c=>{
+    const p=await pageIn(c);
+    const result=await p.evaluate(async()=>{
+      const original=IDBObjectStore.prototype.put;let failed=false;
+      IDBObjectStore.prototype.put=function(value,...args){const request=original.call(this,value,...args);if(value.checkpoint.phase==="sending"&&value.checkpoint.attempts===2)failed=true;if(failed){const tx=this.transaction;request.addEventListener("success",()=>tx.abort());}return request;};
+      try{const f=window.lab.makeBlueskyFixture(),runner=f.create();const result=await f.run(runner);return {result,writes:f.writes.length,remaining:f.records.size,checkpoint:await runner.getCheckpoint()};}finally{IDBObjectStore.prototype.put=original;}
+    });
+    assert.equal(result.result.status,"unknown");assert.equal(result.result.accepted,true);assert.equal(result.result.changed,true);
+    assert.equal(result.result.confirmed,false);assert.equal(result.result.evidence,null);assert.equal(result.writes,1);assert.equal(result.remaining,1);
+    assert.equal(result.checkpoint.checkpoint.phase,"sending");
+  });
+  await check("second-checkpoint consent expiry prevents the next Bluesky deletion",async c=>{
+    const p=await pageIn(c);
+    const result=await p.evaluate(async()=>{
+      const f=window.lab.makeBlueskyFixture(),real=f.journal;
+      f.journal={read:real.read,compareAndSet:async(...args)=>{const saved=await real.compareAndSet(...args);if(args[2].phase==="sending"&&args[2].attempts===2)f.now=61000;return saved;}};
+      const r=await f.run(f.create());return {result:r,writes:f.writes.length,remaining:f.records.size};
+    });
+    assert.equal(result.result.status,"unknown");assert.equal(result.result.accepted,true);assert.equal(result.result.changed,true);
+    assert.equal(result.result.confirmed,false);assert.equal(result.writes,1);assert.equal(result.remaining,1);
+  });
   console.log(JSON.stringify({browser:launched.name,version:launched.version,results,outsideRequests:outside},null,2));
   assert.equal(outside.length,0,"No external network requests allowed");
   assert.equal(results.filter(x=>x.result==="FAIL").length,0,"Durable browser scenarios failed");

@@ -1,4 +1,4 @@
-import { ConnectorError, connectorImplementation } from "./internal.js";
+import { ConnectorError, connectorImplementation, cooldownTime } from "./internal.js";
 import { createOrchestrator } from "./orchestration.js";
 
 const authFailures = new Set(["unauthorized", "forbidden", "identity-mismatch"]);
@@ -44,10 +44,12 @@ export function createDurableOrchestrator({ connector, journal, now = Date.now }
     tickets.set(ticket,{target:JSON.stringify(ticket.target),action:ticket.action,expiresAt:ticket.expiresAt,used:false});
     return ticket;
   }
-  function storageFailure(context) {
+  function storageFailure(context, known = {}) {
     const possible = (context.record?.attempts ?? 0) > 0;
     return terminal(possible ? "unknown" : "rejected","journal-write-failed",{
-      operationId:context.record?.operationId ?? null,accepted:possible ? null : false
+      operationId:context.record?.operationId ?? null,
+      accepted:known.accepted === true ? true : possible ? null : false,
+      changed:known.changed === true
     });
   }
   async function finish(context, result) {
@@ -59,7 +61,7 @@ export function createDurableOrchestrator({ connector, journal, now = Date.now }
     try {
       await checkpoint(context,{phase:uncertain ? "quarantined" : "closed",reason,retryAt:result.retryAt ?? 0});
       return {...result,operationId:context.record.operationId};
-    } catch { return storageFailure(context); }
+    } catch { return storageFailure(context,result); }
   }
   async function execute({consent,target:input,action,signal} = {}) {
     let target;
@@ -103,11 +105,14 @@ export function createDurableOrchestrator({ connector, journal, now = Date.now }
     return {checkpoint:await journal.read(lane),confirmed:false,evidence:null};
   }
   async function recover() {
+    if (stopped) return terminal("rejected","session-stopped");
     if (active) return terminal("rejected","operation-active");
     const context = {kind:"recover",controller:new AbortController(),record:null};
     active=context;
     try {
       context.record=await journal.read(lane);
+      if (context.record?.reason === "session-stopped") {stopped=true;return terminal("rejected","session-stopped");}
+      if ((context.record?.retryAt ?? 0) > clock()) return terminal("cooldown","rate-limited",{retryAt:context.record.retryAt});
       if (!context.record || context.record.phase === "closed") return terminal("rejected","no-unresolved-operation");
       if (context.record.phase === "prepared") {
         await checkpoint(context,{phase:"closed",reason:"interrupted-before-send"});
@@ -122,11 +127,16 @@ export function createDurableOrchestrator({ connector, journal, now = Date.now }
       // Even matching GETs cannot prove that an older POST will not apply later.
       return terminal("unknown",matches ? "observed-match" : "observed-differs",{operationId:context.record.operationId,accepted:null,observation:{...observation,source:"provider-readback"}});
     } catch (error) {
+      if (typeof error?.code === "string" && error.code.startsWith("journal-")) return storageFailure(context);
       if (authFailures.has(error?.code)) stopped=true;
+      const limited=error?.code === "rate-limited";
+      const reason=stopped ? "session-stopped" : limited ? "rate-limited" : "read-failed";
+      const retryAt=limited ? Math.max(context.record?.retryAt ?? 0,cooldownTime(error.headers,clock())) : context.record?.retryAt ?? 0;
       if ((context.record?.attempts ?? 0) > 0) {
-        try {await checkpoint(context,{phase:"quarantined",reason:stopped ? "session-stopped" : "read-failed"});} catch {}
+        try {await checkpoint(context,{phase:"quarantined",reason,retryAt});}
+        catch {return storageFailure(context);}
       }
-      return storageFailure(context);
+      return terminal(limited ? "cooldown" : "unknown",reason,{operationId:context.record?.operationId ?? null,accepted:null,...(limited ? {retryAt} : {})});
     } finally {active=null;}
   }
   return Object.freeze({grantConsent,execute,recover,getCheckpoint,cancel(operationId=active?.record?.operationId){
