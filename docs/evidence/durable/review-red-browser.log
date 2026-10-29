@@ -1,0 +1,84 @@
+{
+  "browser": "chromium",
+  "version": "156.0.8078.4",
+  "results": [
+    {
+      "name": "fresh confirmation requires commit; reload returns metadata without restored proof",
+      "result": "PASS"
+    },
+    {
+      "name": "two pages cannot claim the same account simultaneously",
+      "result": "PASS"
+    },
+    {
+      "name": "recovering prepared in another page fences a suspended sender",
+      "result": "PASS"
+    },
+    {
+      "name": "matching cross-page readback preserves quarantine against a late POST and inverse consent",
+      "result": "PASS"
+    },
+    {
+      "name": "timeout, reload and a new consent never replay an uncertain mutation",
+      "result": "PASS"
+    },
+    {
+      "name": "an aborted sending transaction after put success prevents the POST",
+      "result": "PASS"
+    },
+    {
+      "name": "consent serialized before reload has no execution authority",
+      "result": "PASS"
+    },
+    {
+      "name": "429 pause survives reload; expiry grants no automatic write",
+      "result": "PASS"
+    },
+    {
+      "name": "401 stops future runners on the account without persisting provider text",
+      "result": "PASS"
+    },
+    {
+      "name": "second Bluesky sending checkpoint abort preserves the first accepted deletion",
+      "result": "PASS"
+    },
+    {
+      "name": "recovery respects partial 429 pause and persists a second read-only 429",
+      "result": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'unknown'\n- 'cooldown'\n\n    at file:///workspace/scratch/0729b58f0643/fil-clair-durable/scripts/test-durable-orchestration.mjs:116:53\n    at async check (file:///workspace/scratch/0729b58f0643/fil-clair-durable/scripts/test-durable-orchestration.mjs:12:7)\n    at async file:///workspace/scratch/0729b58f0643/fil-clair-durable/scripts/test-durable-orchestration.mjs:104:3"
+    },
+    {
+      "name": "a quarantined recovery 401 stops same-page and reloaded recovery reads",
+      "result": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'journal-write-failed'\n- 'session-stopped'\n\n    at file:///workspace/scratch/0729b58f0643/fil-clair-durable/scripts/test-durable-orchestration.mjs:127:12\n    at async check (file:///workspace/scratch/0729b58f0643/fil-clair-durable/scripts/test-durable-orchestration.mjs:12:7)\n    at async file:///workspace/scratch/0729b58f0643/fil-clair-durable/scripts/test-durable-orchestration.mjs:120:3"
+    },
+    {
+      "name": "persistent journal abort keeps known partial acceptance but never provider confirmation",
+      "result": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\nnull !== true\n\n    at file:///workspace/scratch/0729b58f0643/fil-clair-durable/scripts/test-durable-orchestration.mjs:139:57\n    at async check (file:///workspace/scratch/0729b58f0643/fil-clair-durable/scripts/test-durable-orchestration.mjs:12:7)\n    at async file:///workspace/scratch/0729b58f0643/fil-clair-durable/scripts/test-durable-orchestration.mjs:132:3"
+    },
+    {
+      "name": "second-checkpoint consent expiry prevents the next Bluesky deletion",
+      "result": "PASS"
+    }
+  ],
+  "outsideRequests": []
+}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Durable browser scenarios failed
+
+3 !== 0
+
+    at file:///workspace/scratch/0729b58f0643/fil-clair-durable/scripts/test-durable-orchestration.mjs:155:10 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 3,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.1

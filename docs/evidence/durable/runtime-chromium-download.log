@@ -1,0 +1,7 @@
+{"engine": "chromium", "started": 1793301840.879292, "source": "committed docs/research/2026-10-29-browser-environment.md", "expected_size": 125797539, "expected_sha256": "c3e50596aef52c58f8fda3c6b3411c33d34c88b177b3ed1c2243359fd3b8ba20"}
+{"command": "curl --fail --location --silent --show-error --connect-timeout 20 --max-time 600 --output /tmp/fil-clair-durable-runtime/archives/chromium.zip.part https://storage.googleapis.com/chrome-for-testing-public/156.0.8078.4/linux64/chrome-headless-shell-linux64.zip"}
+{"download_exit": 0}
+{"actual_size": 125797539, "sha256": "c3e50596aef52c58f8fda3c6b3411c33d34c88b177b3ed1c2243359fd3b8ba20"}
+{"zip_crc": "PASS", "entries": 287}
+{"command": "unzip -q /tmp/fil-clair-durable-runtime/archives/chromium.zip -d /tmp/fil-clair-durable-runtime/browsers/chromium"}
+{"result": "PASS", "destination": "/tmp/fil-clair-durable-runtime/browsers/chromium", "finished": 1793301857.4644012}
