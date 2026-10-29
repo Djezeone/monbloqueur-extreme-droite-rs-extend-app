@@ -52,6 +52,8 @@ jobs:
             node scripts/test-pwa-replacements.mjs
             node scripts/test-pwa-v3.mjs
             node scripts/test-pwa-v32.mjs
+            node scripts/test-operation-journal.mjs
+            node scripts/test-durable-orchestration.mjs
           done
 # Public repository + ubuntu-latest standard runner: free execution.
 # No uploaded artifacts, Actions cache, Copilot, paid runner or paid service.

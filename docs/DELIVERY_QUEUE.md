@@ -15,3 +15,8 @@
 |P2 ·02/06/08|Activer l'unique lien Soutenir FIL CLAIR|URL officielle FIL CLAIR sur CONTRIB.OS, contenu opérationnel et preuve datée. Aucun domaine définitif ni moyen de paiement inventé.|
 
 Conditions de sortie : CI réellement verte au head exact ; contrôles bloquants satisfaits ; recette physique/accessibilité et conformité ; décision de livraison traçable. Aucune fusion ni publication générale avant ces preuves. Les parties déjà validées à leur SHA ne sont pas reconstruites.
+
+## Reprise du29octobre — journal durable isolé
+Le cycle V3.2 est clos techniquement dans PR#3 au839049a (deuxCI vertes), sans livraison A/B/C. Ses tâches validées ne sont pas reprises. Les P1lots04/05/07 avancent dans une branche dépendante distincte : [journal des opérations](DURABLE_OPERATIONS.md), CAS IndexedDB et récupération lecture seule sans rejouer une écriture incertaine. Ce socle reste inactif et ne remplace pas les réserves OAuth/serveur/révocation, ni les tests réels.
+
+Ordre suivant : revue et qualification de ce socle → cycle de session et transport officiels sans rejeu → environnement/coût/comptes test autorisés → recette B. En parallèle, main/admin, preview/coût, physique/accessibilité et décisions RGPD restent ouverts. Le nouveau stockage devra avoir information/export/effacement et procédure de sortie de quarantaine avant activation. Aucune simple lecture conforme ne vaut autorisation de reprise.
