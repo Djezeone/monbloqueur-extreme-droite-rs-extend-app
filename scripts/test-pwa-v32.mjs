@@ -108,9 +108,13 @@ try{
   await check("enregistrement lent : navigation et aide figées jusqu’au résultat, aucun nouveau brouillon perdu",async()=>{
     await choices("Source en cours",["local"],["local:source-avoid"]);await page.locator("#guided-next").click();
     await page.evaluate(()=>{
-      const original=navigator.locks.request.bind(navigator.locks);
-      navigator.locks.request=(...args)=>new Promise((resolve,reject)=>{window.qaResumeSave=()=>original(...args).then(resolve,reject);});
+      // WebKit may collect an unreferenced DOM wrapper and its expando mock.
+      // Retain this exact LockManager through the forced GC below.
+      window.qaLockManager=navigator.locks;
+      const original=window.qaLockManager.request.bind(window.qaLockManager);
+      window.qaLockManager.request=(...args)=>new Promise((resolve,reject)=>{window.qaResumeSave=()=>original(...args).then(resolve,reject);});
     });
+    await page.requestGC();
     await page.locator("#guided-save").click();await expect.poll(()=>page.evaluate(()=>typeof window.qaResumeSave)).toBe("function");
     for(const selector of ["#guided-back","#guided-cancel","#guided-next",'#guided-dialog [data-help]'])await expect(page.locator(selector)).toBeDisabled();
     await page.keyboard.press("Escape");await expect(page.locator("#guided-dialog")).toBeVisible();
