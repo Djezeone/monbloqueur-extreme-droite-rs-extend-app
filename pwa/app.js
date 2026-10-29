@@ -4,6 +4,7 @@ import { getControl } from "./platforms.js";
 import { flowMetrics } from "./actions.js";
 import { mountGuided } from "./guided.js";
 import { mountHelp } from "./help.js";
+import { commitSnapshot } from "./persistence.js";
 
 const STORAGE = "fil-clair-v1";
 const SOURCE = "https://raw.githubusercontent.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/b7cd31b036cca17b48dbf726c047847191c01a5b/liste/accounts.json";
@@ -68,7 +69,7 @@ async function persist(next, message, replaceRecovery = false) {
   const unavailable = "Enregistrement impossible : stockage, espace ou verrou indisponible. Exportez vos données avant de fermer.";
   saving = true;
   try {
-    return await navigator.locks.request("fil-clair-v1-write", {mode:"exclusive"}, () => {
+    return await navigator.locks.request("fil-clair-v1-write", {mode:"exclusive"}, async () => {
       // Compare and replace inside one origin-wide lock. A stale tab must never
       // overwrite another tab's whole snapshot, including during reset/restore.
       let actualSource;
@@ -86,8 +87,13 @@ async function persist(next, message, replaceRecovery = false) {
       }
       // Catch inside the Web Locks callback: Firefox can report the callback's
       // rejected exception globally even when the outer request is awaited.
-      try { localStorage.setItem(STORAGE, serialized); }
-      catch { notify(unavailable, true); return false; }
+      try { await commitSnapshot({base, next:serialized, write:()=>localStorage.setItem(STORAGE,serialized)}); }
+      catch(error){
+        if(error.code==="snapshot-conflict"){
+          storageConflict=true;notify("Conflit de cohérence : données modifiées ou enregistrement interrompu. Exportez les données accessibles puis rechargez avant de modifier. Si le blocage persiste, utilisez l’aide de récupération.",true);
+        }else notify(unavailable+" La vérification de cohérence doit aussi être disponible. Le mode temporaire reste proposé dans Réglages.",true);
+        return false;
+      }
       storageSource = serialized;
       if (replaceRecovery) { recoveryRaw = null; startupError = ""; }
       applyState(next, message, replaceRecovery);

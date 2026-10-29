@@ -5,7 +5,7 @@ import { runInNewContext } from "node:vm";
 
 const source = await readFile(new URL("../pwa/sw.js", import.meta.url), "utf8");
 const scope = "https://fil-clair.example/pwa/";
-const assets = ["", "index.html", "styles.css", "app.js", "core.js", "flow-core.js", "platforms.js", "flows.js", "actions.js", "effects.js", "register-view.js", "guided-core.js", "guided.js", "help-data.js", "help.js", "support-config.js", "privacy.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png"];
+const assets = ["", "index.html", "styles.css", "app.js", "core.js", "flow-core.js", "platforms.js", "flows.js", "actions.js", "effects.js", "register-view.js", "guided-core.js", "guided.js", "help-data.js", "help.js", "support-config.js","persistence.js", "privacy.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png"];
 
 function worker({ networkResponse } = {}) {
   const handlers = new Map();

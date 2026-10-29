@@ -78,7 +78,7 @@ export function mountGuided({getState,save,notify,navigate,onSaved}) {
       const result=buildGuidedPlan(current(),selectedInput()),savedTarget=target.trim();
       if(await save({...getState(),flows:result.flows},result.added+" choix enregistrés ; "+result.existing+" existants conservés. Aucune action distante effectuée.")){
         dialog.close();navigate("flows");onSaved(savedTarget);
-      }else error("Aucun choix n’a été ajouté. Votre brouillon est conservé. Consultez le message d’enregistrement puis sauvegardez les données accessibles si nécessaire.");
+      }else error("Enregistrement non confirmé. Votre brouillon est conservé. Consultez le message d’enregistrement puis sauvegardez les données accessibles si nécessaire.");
     }catch(e){error(e.message);notify(e.message,true);}finally{busy=false;$("guided-save").disabled=false;}
   });
   return {open,reset(){if(dialog.open)dialog.close();step=1;target="";category="sources";platforms.clear();selections.clear();body.replaceChildren();error("");}};
