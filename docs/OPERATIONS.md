@@ -190,3 +190,12 @@ Sources existantes réutilisées pour l’actualisation V3, sans nouvelle vérif
 - **[V1]** [Vercel — Accessing Deployments through Generated URLs](https://vercel.com/docs/deployments/generated-urls), distinction URL de commit / alias de branche et rétention.
 - **[V2]** [Vercel — Deployment Protection](https://vercel.com/docs/deployment-protection), périmètre à vérifier dans le projet.
 - **[V3]** [Vercel — Performing an Instant Rollback on a Deployment](https://vercel.com/docs/instant-rollback), éligibilité, configuration conservée et état après rollback.
+## Delta d'exploitation V3.2
+
+Parcours guidé et FAQ utilisent le catalogue/snapshot existants ; le remplacement réussi d'espace efface aussi leurs brouillons/recherches. Le soutien CONTRIB.OS est une URL publique secondaire désactivée par défaut, aucun SDK financier ou appel de disponibilité. Tester sa configuration avec une URL synthétique interceptée ne valide aucune page réelle. Activation uniquement après preuve de destination officielle et revue Git.
+
+Le [protocole de cohérence](LOCAL_PERSISTENCE.md) ajoute un témoin IndexedDB contenant une seule empreinte, sans snapshot personnel. Fermer les anciennes versions avant changement. Ne pas réinitialiser automatiquement un témoin invalide/décalé pour « débloquer » l'écriture : exporter la source accessible, préserver une sauvegarde vérifiée et suivre la récupération explicite. Les données locales ne peuvent être promises récupérables après effacement sans export. Un downgrade antérieur à ce protocole ne coopère pas avec lui.
+
+La configuration Vercel désactive uniquement l'auto-déploiement Git de la branche `feat/fil-clair-v32-guided-help`, selon la documentation officielle [git.deploymentEnabled](https://vercel.com/docs/project-configuration/git-configuration), lue le29/10. Aucun plan/coût n'est présumé depuis un404 de facturation. Ne pas retirer ce frein ni déclencher un build distant tant que gratuité et destination ne sont pas qualifiées. Aucun réglage de domaine/protection existant n'a été modifié.
+
+Le drill V3.2 des loaders exacts de V2 confirme seulement : refus du nouveau format, conservation de la source brute, reprise par le loader courant. Il n'exerce pas un rollback Vercel ni une restauration sur appareil physique. Les procédures générales et gates A/B/C demeurent.

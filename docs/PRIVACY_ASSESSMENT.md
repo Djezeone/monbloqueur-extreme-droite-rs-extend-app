@@ -160,3 +160,12 @@ Sources du 2026-10-28 réutilisées pour cette actualisation documentaire V3, sa
 - **[A3]** [Commission européenne / G29 — index officiel des lignes directrices wp248rev.01](https://ec.europa.eu/newsroom/article29/items/611236). L’index a été ouvert ; le téléchargement du PDF a renvoyé un type de contenu non pris en charge. Les neuf critères ci-dessus ont été vérifiés via [A1], sans prétendre avoir relu ce PDF.
 - **[H1]** [Vercel — Privacy Notice, informations de trafic d’utilisateurs finaux](https://vercel.com/legal/privacy-notice), version affichée du 1er juin 2026.
 - **[H2]** [Vercel — Log Drains Reference, sources statiques et schéma de requête](https://vercel.com/docs/drains/reference/logs). La présence d’un drain sur le projet n’est pas présumée.
+## Delta de minimisation V3.2
+
+L'aide FAQ et sa recherche sont locales, sans fournisseur IA ni transmission du carnet. Le nom du parcours guidé est une cible personnelle, pas une identité fournisseur vérifiée ; il n'est copié que dans les fiches explicitement choisies et la sauvegarde habituelle. Brouillons/recherches sont retirés sur remplacement réussi d'espace.
+
+Le témoin de cohérence IndexedDB conserve uniquement une empreinte SHA256, sans copie de cible, historique ou secret ; détail et récupération dans [LOCAL_PERSISTENCE.md](LOCAL_PERSISTENCE.md). Cette empreinte ne remplace pas une sauvegarde et peut être sensible par inférence locale ; ne pas la collecter dans les journaux/cockpit. Le protocole n'autorise aucune synchronisation ni journal fournisseur.
+
+CONTRIB.OS reste un environnement séparé : aucun compte, cookie, session, liste ou secret FIL CLAIR partagé par l'application. Le lien, désactivé sans destination officielle, supprime le référent et les paramètres privés ; aucun ping ou pixel. Une visite volontaire externe pourra être traitée par le navigateur et ce fournisseur selon ses propres règles. Aucune donnée financière ni connecteur de collecte dans FIL CLAIR.
+
+Ces mesures techniques ne constituent pas un Go juridique. Responsable/contact, bases légales/article9/AIPD, contrats/hébergement/rétention/transferts restent à arrêter avant ouverture générale.

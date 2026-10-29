@@ -23,14 +23,14 @@
 ### Task 1: Modèle de parcours et configuration
 Files : créer pwa/guided-core.js, pwa/support-config.js, pwa/help-data.js ; tests/guided.test.js, tests/help-support.test.js.
 Interfaces : buildGuidedPlan(flows,{category,target,platforms,selections},now,idFactory) retourne {flows,added,existing}; guidedOptions(category,platforms) expose uniquement le catalogue. supportDestination(config) retourne URL revue ou null. searchHelp(query,system) reste pure.
-- [ ] RED : lots atomiques, doublons/500, sélection invalide/confirmée, configuration HTTPS et recherche locale.
-- [ ] GREEN puis npm test complet ; commit cohérent.
+- [x] RED : lots atomiques, doublons/500, sélection invalide/confirmée, configuration HTTPS et recherche locale.
+- [x] GREEN puis npm test complet ; commit52af387,151/151.
 
 ### Task 2: Interface et assistance
 Files : créer pwa/guided.js, pwa/help.js ; modifier app.js,index.html,styles.css,flows.js si nécessaire.
 Interfaces : mountGuided({getState,save,notify,navigate,onSaved}) avec open/reset ; mountHelp() avec reset ; montage sans réseau/stockage. Reprendre le carnet existant après enregistrement.
-- [ ] RED E2E sur bouton/parcours et aide, puis UI quatre étapes, détails accessibles, résultats dans carnet existant, soutien secondaire.
-- [ ] Tester refus/annulation et remplacement d'espace ; pas d'URL sensible.
+- [x] UI quatre étapes, détails accessibles, résultats dans carnet existant, soutien secondaire ; E2E créés après ce montage, sans revendication TDD préalable pour l'UI.
+- [x] Tester refus/annulation et remplacement d'espace ; pas d'URL sensible. Bugs offline/quota/layout/concurrence et revue ont leurs RED→GREEN conservés.
 
 ### Task 3: Cache et recette
 Files : sw.js (version6 et allowlist exacte), utils/tests SW/audit et workflow existant, scripts/test-pwa-v32.mjs ; docs/evidence/v32/.
@@ -47,3 +47,6 @@ Files : mission/guide/architecture/ops/privacy et docs/evidence/2026-10-29-v32-g
 - Préflight : arbre propre b3b0660, baseline144/144. Interfaces1→2→3 partagées décrites ci-dessus ; aucune contradiction.
 - Décision : branche dédiée dans checkout propre existant ; pas de nouvelle copie du dépôt. Méthodes de questions intermédiaires écartées par mandat d'autonomie explicite.
 - Deux agents ont atteint leur limite Work ; aucune relance payante. Leurs observations ne valent pas recette et seront revérifiées avant usage.
+- Ruling : échec WebKit réel de concurrence observé (deux formulaires vidés, une seule addition relue dans un troisième onglet). La trace ciblée suivante passe et ne démontre pas la cause exacte. Injecter lecture périmée et absence d'événement pour éprouver le défaut du contrôle localStorage seul. Ajouter une empreinte SHA256 transactionnelle IndexedDB avant écriture, sans copie du carnet ni clé secrète. Web Locks reste requis. Coût si indisponible/interruption : écriture refusée, lecture/export et espace temporaire consenti ; ne pas perdre de données pour préserver la disponibilité. Cette modification de sécurité prime sur le périmètre UI initial.
+- Ruling : Vercel ne fournit pas le plan/capacité et le navigateur exige login. Désactiver uniquement les déploiements Git automatiques de la branche V3.2 dans la configuration, sans modifier les autres branches, les protections ou un domaine. Aucun déploiement manuel avant qualification du coût.
+- Final review : revue indépendante, aucun Critical trouvé ; I1 gel de sauvegarde lente, M1 état conservé du doublon. M1 reclassé Important : risque d'incitation à refaire un geste distant, alors que le statut est déjà déclaré. Deux régressions RED vérifiées avant une seule passe de correction4f51658 ;14/14 ciblés par moteur après correction. Aucune seconde revue revendiquée, aucun Minor différé.

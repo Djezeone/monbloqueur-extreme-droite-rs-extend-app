@@ -76,3 +76,16 @@ Le navigateur peut refuser ou supprimer les données : mode privé, paramètres 
 ## Niveau de validation
 
 Les résultats des [journaux V2](evidence/2026-10-28-universal-v2.md) et [V3](evidence/2026-10-29-universal-v3.md) indiquent exactement les moteurs et émulations testés. Les recettes sur appareils physiques, l’installation système, VoiceOver/TalkBack et la conformité WCAG complète restent à établir séparément. Le [protocole universel](research/2026-10-28-universal-qa-protocol.md) liste les manipulations à réaliser ; ce guide ne les transforme pas en tests réussis.
+## Nouveau parcours V3.2
+
+**Gérer une source** sur l'accueil : choisissez la catégorie, saisissez un nom ou l'exemple CNEWS, choisissez vos services puis cochez les actions proposées. **Retour** conserve vos choix ; **Fermer le parcours** n'enregistre rien. Le récapitulatif annonce les nouvelles fiches et celles déjà présentes. L'enregistrement est groupé : les doublons gardent leurs états/historiques. Une difficulté conserve le brouillon et ne devient pas un succès annoncé.
+
+Le carnet Local suffit sans aucun service externe. CNEWS n'est qu'un exemple de nom ; FIL CLAIR ne connaît pas automatiquement ses comptes ou ceux de tiers associés. **Non disponible** signifie qu'aucun contrôle de cette catégorie n'est documenté dans ce module. Choisissez le carnet local ou une autre catégorie plutôt que de déclarer un geste inexistant.
+
+Après l'enregistrement, ouvrez l'aide officielle de chaque fiche, vérifiez la bonne identité et agissez chez le fournisseur. Revenez déclarer le geste si vous l'avez fait. **Confirmé par le fournisseur** n'est produit par aucune connexion dans cette version. Retour d'état et retrait restent locaux.
+
+**Besoin d'aide ?** propose13questions, le choix iPhone/iPad, Android ou ordinateur et une recherche facultative. Dans le parcours, **Comprendre les résultats** et les détails de portée apportent une aide contextuelle. Fermer l'aide reprend le parcours. Aucune IA payante, voix ou compte n'est nécessaire ; aucune préférence n'est envoyée à un assistant externe.
+
+**À propos → Soutenir FIL CLAIR** reste désactivé tant qu'une page officielle CONTRIB.OS n'est pas validée. Aucun don ou paiement dans FIL CLAIR. Si un lien externe validé devient indisponible, fermez son onglet et continuez le carnet.
+
+La cohérence des écritures requiert Web Locks, IndexedDB et Web Crypto dans un contexte compatible. Si une capacité manque, exportez les données accessibles ; l'espace temporaire consenti demeure disponible. Après un conflit, fermez les autres onglets puis rechargez. Une interruption peut exiger la procédure de récupération de l'aide : sauvegarde vérifiée, fermeture de tous les onglets, effacement **choisi par vous** des données du site puis restauration dans un seul onglet. Aucun réancrage ou effacement automatique. Les limites Safari/stockage privé et la recette physique restent documentées, sans certification déduite de l'émulation.
