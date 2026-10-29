@@ -54,6 +54,9 @@
 - [ ] Lire CI au SHA exact sans relance inutile, Vercel/absence de nouveau déploiement, mettre à jour huit lots/huit portes et nouvelle session Airtable Fait/Ouvert/Vérifié comment/Périmé puis relire.
 
 ## Ledger
+Task 2: complete — quatre tests RED (registre/fonctions absents), puis `npm test` 143/143. Registre43contrôles immuable, péremption/retrait/API inactive, preuves X par composant au SHA5ed7963. Sources du28 réutilisées comme documentation, codeX relu le29, production non vérifiée.
+Task 1: complete — six tests nouveaux, cinq échecs attendus avant implémentation (modèle absent, états refusés et historique absent), suite complète `npm test` 139/139, 0 échec. Historique falsifié déjà refusé avant changement et encore après ; aucune preuve API importée.
+Ruling : la projection commune conserve une révocation générique prudente et renvoie au registre pour les conditions particulières ; elle ne dépend pas du registre, ce qui supprime le cycle Task1/Task2. Coût si incorrect : détails de retrait moins précis dans la seule projection, détails complets visibles dans le registre.
 Pré-vol : Task1 produit le modèle/statuts consommés par Task3 ; Task2 produit getEffect et sources consommés par Task1/actionRecord et Task3. Pour éviter cycle, actionRecord conserve les métadonnées d'action du catalogue et lit getEffect seulement une fois Task2 intégrée ; aucune copie modifiable côté snapshot.
 Ruling : exécution native dans le checkout dédié avec deux spécialistes documentaires, puis revue indépendante — les changements UI/modèle partagent trop d'interfaces pour des implémentations concurrentes.
 Transition V2 : 29/10, PR#1 au51abcd3, deux CI success et0artefact, cockpit8lots/8portes relu, sessionrecSl5qjw0wmOQvyg. Blocages consignés dans la spec ; V3 autorisée sans automatisation future programmée.
