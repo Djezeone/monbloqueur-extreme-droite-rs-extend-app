@@ -31,16 +31,25 @@
       <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
       <section id="view-home" class="view">
         <div class="hero">
-          <div><div class="eyebrow">VOTRE ESPACE NUMÉRIQUE</div><h1>Un fil qui vous ressemble.</h1><p>Comptes, médias, sujets, recommandations : vos choix, à votre rythme, sur votre appareil.</p></div>
+          <div><div class="eyebrow">VOTRE ESPACE NUMÉRIQUE</div><h1>Que souhaitez-vous maîtriser dans votre fil ?</h1><p>Vos choix personnels, sans compte obligatoire.</p></div>
           <div class="hero-art" aria-hidden="true"><span>✦</span><small>À VOUS DE CHOISIR</small></div>
         </div>
+        <div class="category-grid" role="group" aria-label="Que maîtriser dans mon fil ?">
+          <button type="button" id="home-accounts" class="category-card" data-home-category="accounts"><span aria-hidden="true">◎</span><strong>COMPTES</strong><small>Comptes et chaînes, relations et choix personnels.</small></button>
+          <button type="button" class="category-card" data-home-category="sources"><span aria-hidden="true">▤</span><strong>SOURCES</strong><small>Médias, sites et communautés à gérer.</small></button>
+          <button type="button" class="category-card" data-home-category="topics"><span aria-hidden="true">✦</span><strong>SUJETS</strong><small>Vos intérêts, ce que vous voulez voir plus ou moins.</small></button>
+          <button type="button" class="category-card" data-home-category="recommendations"><span aria-hidden="true">☷</span><strong>ALGORITHMES</strong><small>Recommandations et réglages officiels expliqués.</small></button>
+        </div>
+        <p class="fine">Chaque accès ouvre votre carnet local. Les services et catégories restent modifiables avec « Choisir mes services ». Les autres modules restent dans les réglages et le registre.</p>
         <div class="panel start-panel"><div><h2>Vos services, vos choix.</h2><p>Commencez sans inscription. Le carnet personnel fonctionne sans Google, Apple ou réseau social. Les guides officiels vous accompagnent quand vous choisissez d’agir ailleurs.</p></div><button id="start-flows" class="button primary" type="button">Choisir mes services</button><p class="fine">Aucun abonnement ni extension requis. Une note locale ne filtre pas les autres applications.</p></div>
         <div class="metrics" role="group" aria-label="Votre progression">
-          <div class="metric"><span>Comptes dans la liste</span><strong id="metric-total">0</strong></div>
+          <div class="metric"><span>Entrées enregistrées</span><strong id="metric-total">0</strong></div>
           <div class="metric"><span>Actions déclarées</span><strong id="metric-done">0</strong></div>
-          <div class="metric"><span>Étoiles personnelles</span><strong id="metric-stars">0 ★</strong></div>
+          <div class="metric"><span>Actions restantes</span><strong id="metric-pending">0</strong></div>
         </div>
-        <div class="panel journey">
+        <p id="home-followup" class="fine" role="status"></p>
+        <details id="profile-journey" class="panel"><summary>Gérer mes listes de profils · avancé</summary>
+        <div class="journey">
           <div class="section-heading"><div><span class="eyebrow">UN GESTE À LA FOIS</span><h2 id="progress-label">Mon parcours</h2></div><span id="percent">0 %</span></div>
           <div class="track" role="progressbar" aria-labelledby="progress-label" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="bar"></div></div>
           <p id="home-summary" class="muted">Ajoutez un compte ou chargez une liste pour commencer.</p>
@@ -49,7 +58,7 @@
             <button id="go-next" class="button primary" type="button">Voir le prochain compte</button>
           </div>
         </div>
-        <div class="panel onboarding">
+        <div class="onboarding">
           <span class="eyebrow">COMMENT ÇA MARCHE ?</span>
           <div class="steps">
             <div><span class="step">1</span><strong>Je choisis</strong><p>J'ajoute un compte ou une liste.</p></div>
@@ -58,9 +67,10 @@
           </div>
           <p class="fine">Vos choix n'affectent que votre propre expérience. Aucun blocage n'est exécuté par FIL CLAIR : vous agissez directement dans le réseau social.</p>
         </div>
+        </details>
       </section>
       <section id="view-flows" class="view" hidden>
-        <div class="section-heading"><div><span class="eyebrow">COMPTES · SOURCES · SUJETS · RECOMMANDATIONS</span><h1>Mes flux</h1></div><button id="flow-edit" class="button subtle" type="button">Modifier mes choix</button></div>
+        <div class="section-heading"><div><span class="eyebrow">COMPTES · SOURCES · SUJETS · ALGORITHMES</span><h1>Mes flux</h1></div><button id="flow-edit" class="button subtle" type="button">Modifier mes choix</button></div>
         <p class="muted">Un carnet local pour vos intentions, des guides pour agir chez vos fournisseurs. Aucune connexion sociale ni synchronisation n’est activée.</p>
         <form id="flow-setup" class="panel" hidden>
           <p id="flow-step-count" class="eyebrow" aria-live="polite"></p>
@@ -85,6 +95,13 @@
           </div>
           <div class="panel"><h2>Agir et suivre</h2><p id="flow-count" class="fine" role="status"></p><p class="fine">« Déclaré effectué » est votre déclaration après une manipulation chez le fournisseur. « Confirmé par API » exige une preuve indépendante : cette version n’en produit aucune. Retirer une fiche ou la remettre à faire n’annule aucune action distante.</p><label class="field"><span>Rechercher dans mes choix</span><input id="flow-filter" type="search" placeholder="Service, source ou sujet…"></label><ul id="flow-items" class="flow-items"></ul><p id="flow-empty" class="empty">Aucun choix affiché. Ajoutez une note ou changez la recherche.</p></div>
         </div>
+        <details id="effects-register" class="panel"><summary>Ce que font les actions · registre des effets</summary>
+          <p>Les effets ci-dessous sont documentés, sans action ni mesure sur votre compte. Une source officielle ne prouve pas qu’une action a été effectuée. Chaque fournisseur garde ses particularités.</p>
+          <label class="field"><span>Services du registre</span><select id="registry-service"><option value="">Mes services et le carnet local</option></select></label>
+          <p id="registry-count" class="fine" role="status"></p><ul id="registry-items" class="registry-items"></ul>
+          <details id="x-code-evidence"><summary>X · comprendre les limites du code public</summary><div id="x-code-content"></div></details>
+          <p class="fine">Les dates qualifient la documentation, jamais un test fournisseur. Les menus peuvent changer avant la prochaine revue ; vérifiez toujours dans le service. Aucune API sociale n’est connectée.</p>
+        </details>
       </section>
       <section id="view-lists" class="view" hidden>
         <div class="section-heading"><div><span class="eyebrow">VOUS GARDEZ LE CONTRÔLE</span><h1>Mes listes</h1></div><button class="button subtle" id="new-list" type="button">+ Nouvelle liste</button></div>
@@ -127,7 +144,7 @@
       </section>
     </main>
   </div>
-  <footer><span>FIL CLAIR · V2 en recette · UNTAKA</span><a href="./privacy.html">Confidentialité</a><span>Choix personnels · Aucune action sociale automatique</span></footer>
+  <footer><span>FIL CLAIR · V3 en recette · UNTAKA.CORP</span><a href="./privacy.html">Confidentialité</a><span>Choix personnels · Aucune action sociale automatique</span></footer>
   <noscript><p>JavaScript est nécessaire au carnet local. Aucune inscription n’est requise. La notice de confidentialité reste accessible par le lien ci-dessus.</p></noscript>
   <script type="module" src="./app.js"></script>
 </body>

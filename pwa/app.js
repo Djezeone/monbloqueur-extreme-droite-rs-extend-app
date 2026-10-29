@@ -1,6 +1,7 @@
 import { NETWORKS, normalise, profileUrl, accountKey, uniqueAccounts, parseImport, cleanTitle, newState, loadState, markDecision, decisionKey, progress, MAX_BACKUP_BYTES, parseBackup, listMetadata, exportList, removeAccount, removeList } from "./core.js";
 import { mountFlows } from "./flows.js";
 import { getControl } from "./platforms.js";
+import { flowMetrics } from "./actions.js";
 
 const STORAGE = "fil-clair-v1";
 const SOURCE = "https://raw.githubusercontent.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/b7cd31b036cca17b48dbf726c047847191c01a5b/liste/accounts.json";
@@ -168,9 +169,15 @@ function renderSelectors() {
 }
 function renderOverview() {
   const list = active(), p = progress(state, list), done = p.blocked + p.muted;
-  $("metric-total").textContent = p.total.toLocaleString("fr-FR");
-  $("metric-done").textContent = done.toLocaleString("fr-FR");
-  $("metric-stars").textContent = done + " ★";
+  const flows = flowMetrics(state.flows);
+  const decisions = Object.values(state.decisions);
+  const declared = decisions.filter(d => ["blocked", "muted"].includes(d.status)).length;
+  const pending = state.lists.reduce((total, entry) => total + progress(state, entry).remaining, 0);
+  $("metric-total").textContent = (state.lists.reduce((total, entry) => total + entry.accounts.length, 0) + flows.total).toLocaleString("fr-FR");
+  $("metric-done").textContent = (declared + flows.declared).toLocaleString("fr-FR");
+  $("metric-pending").textContent = (pending + flows.planned + flows.failed + flows.review).toLocaleString("fr-FR");
+  $("home-followup").textContent = `${flows.local} notes locales · ${flows.failed} en échec · ${flows.review} à vérifier · ${flows.cancelled} suivis annulés dans le carnet · 0 confirmation API. Les déclarations ne mesurent aucun compte pénalisé.`;
+  for (const button of document.querySelectorAll("[data-home-category]")) button.hidden = state.flows?.setupComplete ? !state.flows.categories.includes(button.dataset.homeCategory) : false;
   const percent = p.total ? Math.round((p.total - p.remaining) / p.total * 100) : 0;
   $("percent").textContent = percent + " %";
   const track = document.querySelector(".track");
@@ -370,6 +377,7 @@ function setupListToolbar() {
 function bindEvents() {
   document.querySelectorAll("[data-view]").forEach(tab => tab.addEventListener("click", () => show(tab.dataset.view)));
   $("start-flows").addEventListener("click", () => { show("flows"); flowsUI.openSetup(); });
+  for (const button of document.querySelectorAll("[data-home-category]")) button.addEventListener("click", () => flowsUI.openCategory(button.dataset.homeCategory));
   $("active-list").addEventListener("change", e => persist({...state,activeList:e.target.value}));
   $("network").addEventListener("change", e => { $("instance-field").hidden = e.target.value !== "mastodon"; });
   $("add-account").addEventListener("submit", async e => {

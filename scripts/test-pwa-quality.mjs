@@ -50,7 +50,7 @@ try {
       const style = getComputedStyle(element);
       return { id: element.id, visible: element.matches(":focus-visible"), outline: style.outlineStyle, width: parseFloat(style.outlineWidth) };
     });
-    assert.equal(focus.id, "start-flows");
+    assert.equal(focus.id, "home-accounts");
     assert.equal(focus.visible, true);
     assert.notEqual(focus.outline, "none");
     assert.ok(focus.width >= 2);
