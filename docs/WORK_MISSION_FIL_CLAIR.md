@@ -99,3 +99,25 @@ Indicateurs : entrées gérées, préférences enregistrées, déclarations/conf
 Budget : alerte officielle identifiée (3 000 minutes Actions incluses épuisées le16/10, remise à zéro annoncée01/11 ; compteur live non accessible). Gratuité des runners standards publics revérifiée ; zéro achat/dépense/Copilot/crédit supplémentaire. Voir [gouvernance](GITHUB_GOVERNANCE.md).
 
 Références V3 : [architecture](UNIVERSAL_CONTROL_V3.md), [matrice/registre](EFFECTS_REGISTER.md), [recherche X](research/2026-10-29-x-algorithm.md), [conception](superpowers/specs/2026-10-29-universal-v3-design.md), [plan](superpowers/plans/2026-10-29-universal-v3.md), [journal](evidence/2026-10-29-universal-v3.md). Les résultats et blocages de livraison sont ceux des preuves, jamais présumés par ce mandat.
+## Mandat V3.2 — UX universelle et CONTRIB.OS (29 octobre 2026)
+
+Cette mission s'ajoute aux huit lots. La passe de reprise précédente est close sur constats : PR#2 draft inchangée, main non protégée/rulesets absents, anciens déploiements seuls, lecture de facturation Vercel404 et navigateur non connecté. Aucun développement social n'était engagé lors de l'arrivée de V3.2 ; ses travaux non qualifiés restent dans la suite d'exécution, sans déclaration de clôture.
+
+Priorité : interface par boutons/QCM/cases/listes/cartes, Retour/Suivant, détails et progression, sans chatbot, voix, saisie complexe ou compte externe imposés. Parcours « Gérer une source » : nom libre/exemple CNEWS, services, actions réellement documentées, récapitulatif puis suivi. Aucune identité ni tiers associé n'est exclu automatiquement. Garder quatre catégories, états et preuves distincts. FAQ locale gratuite et aide appareil ; aucun envoi automatique à une IA.
+
+Financement **exclusivement UNTAKA CONTRIB.OS**, produit indépendant (dépôt, admin, données, secrets, auth, déploiements et logs). FIL CLAIR ne développe aucun don/paiement/cagnotte/crypto/transaction/connecteur financier. Une seule entrée secondaire **Soutenir FIL CLAIR** ; URL HTTPS configurable, validée sur preuve, désactivée sans destination opérationnelle. Aucun domaine inventé, partage de session ou donnée personnelle dans le lien ; aucune panne de soutien ne doit empêcher le carnet.
+
+| Lot | Critères V3.2 ajoutés |
+|---|---|
+|01 Sécurité/CI|Aucun fournisseur IA/finance/secret ajouté, URL sûre sans fuite, main protégée, CI gratuite ; cohérence inter-onglets testée et refus sûr des capacités indisponibles.|
+|02 UX/PWA|Parcours novice par boutons, quatre catégories, Retour/Suivant, choix multiples, aide contextuelle/FAQ, appareils/lecteurs d'écran et WCAG complet.|
+|03 Listes/historique|Lot atomique sans doublon réinitialisé, brouillon conservé sur refus et effacé sur remplacement réussi, sauvegarde/restauration communes.|
+|04 API officielles|Guides manuels/API distingués, aucun contrôle absent fictif, aucune activation ni cible liée automatiquement par nom.|
+|05 Orchestration|À faire/déclaré/confirmé/revue/échec/non disponible sans confusion ; journal fournisseur durable et consentement réel restent nécessaires.|
+|06 RGPD|Assistance sur appareil, données/URL/sessions CONTRIB.OS séparées, métadonnées de cohérence minimales et aucun transfert IA automatique.|
+|07 QA|Boutons/QCM/aide, local sans compte, soutien désactivé/validé synthétique/panne, absence de fuite, offline avec styles, sauvegarde, régression et physique distingués.|
+|08 Release/opérations|URL unique revue, indépendance du soutien, déploiement à coût vérifié, supervision/support/rollback et Go public documentés.|
+
+Décision de sécurité issue de la recette : [cohérence locale](LOCAL_PERSISTENCE.md), empreinte transactionnelle sans copie du carnet, refus sûr en cas d'interruption. Cette décision ne réalise pas l'orchestration sociale durable. Configuration de branche Vercel sans déploiement Git automatique tant que sa capacité gratuite n'est pas établie. Aucune fusion/publication générale ni dépense supplémentaire.
+
+Références : [architecture/UX V3.2](UNIVERSAL_UX_V32.md), [suite d'exécution](DELIVERY_QUEUE.md), [plan](superpowers/plans/2026-10-29-v32-guided-help.md), [journal V3.2](evidence/2026-10-29-v32-guided-help.md). Une intention, du code, un test local et une validation de production restent des niveaux distincts.

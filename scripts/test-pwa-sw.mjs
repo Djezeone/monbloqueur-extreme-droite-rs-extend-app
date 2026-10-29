@@ -5,7 +5,7 @@ import { runInNewContext } from "node:vm";
 
 const source = await readFile(new URL("../pwa/sw.js", import.meta.url), "utf8");
 const scope = "https://fil-clair.example/pwa/";
-const assets = ["", "index.html", "styles.css", "app.js", "core.js", "flow-core.js", "platforms.js", "flows.js", "actions.js", "effects.js", "register-view.js", "privacy.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png"];
+const assets = ["", "index.html", "styles.css", "app.js", "core.js", "flow-core.js", "platforms.js", "flows.js", "actions.js", "effects.js", "register-view.js", "guided-core.js", "guided.js", "help-data.js", "help.js", "support-config.js","persistence.js", "privacy.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png"];
 
 function worker({ networkResponse } = {}) {
   const handlers = new Map();
@@ -62,9 +62,10 @@ function worker({ networkResponse } = {}) {
       handlers.get("activate")({ waitUntil: work => { pending = work; } });
       await pending;
     },
-    async fetch(path, { navigation = false, ...options } = {}) {
+    async fetch(path, { navigation = false, destination = "", ...options } = {}) {
       const request = new Request(new URL(path, scope), options);
       if (navigation) Object.defineProperty(request, "mode", { value: "navigate" });
+      if (destination) Object.defineProperty(request, "destination", { value: destination });
       let intercepted = false;
       let response;
       handlers.get("fetch")({ request, respondWith: work => { intercepted = true; response = work; } });
@@ -111,6 +112,19 @@ test("browser navigations may load the public cached shell with include credenti
   assert.equal(result.intercepted, true);
   assert.equal(await result.response.text(), "shell");
   assert.equal((await sw.fetch("oauth/callback?code=synthetic", { navigation: true, credentials: "include" })).intercepted, false);
+});
+
+test("native public styles and icons can read the precache offline without caching private replies",async()=>{
+  const sw=worker();await sw.install();const before=sw.network.length;
+  for(const [path,destination] of [["styles.css","style"],["icon-192.png","image"],["icon.svg","image"]]){
+    const result=await sw.fetch(path,{destination,mode:"no-cors",credentials:"include"});
+    assert.equal(result.intercepted,true,path);assert.equal(await result.response.text(),"shell");
+  }
+  assert.equal(sw.network.length,before);
+  for(const [path,options] of [["styles.css",{destination:"style",credentials:"include",headers:{Authorization:"Bearer synthetic"}}],
+    ["styles.css",{credentials:"include"}],["styles.css?private=yes",{destination:"style",credentials:"include"}],
+    ["api/private",{destination:"style",credentials:"include"}],["index.html",{destination:"image",credentials:"include"}]])
+    assert.equal((await sw.fetch(path,options)).intercepted,false,path);
 });
 
 test("installed shell requests are served without a runtime network write", async () => {

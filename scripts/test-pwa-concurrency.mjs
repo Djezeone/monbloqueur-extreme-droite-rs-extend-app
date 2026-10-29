@@ -173,6 +173,42 @@ try {
       } else assert.deepEqual(handles, ["qa_race_a", "qa_race_b"]);
     } finally { await context.close(); }
   });
+  await check("transaction witness refuses a second writer even when renderer storage reads and events are stale",async()=>{
+    const context=await browser.newContext({serviceWorkers:"block"});
+    try{
+      await context.addInitScript(()=>{
+        const originalGet=Storage.prototype.getItem;
+        window.qaActualSnapshot=()=>originalGet.call(localStorage,"fil-clair-v1");
+        Storage.prototype.getItem=function(key){return key==="fil-clair-v1"?null:originalGet.call(this,key);};
+        addEventListener("storage",event=>event.stopImmediatePropagation(),true);
+      });
+      const [a,b]=await Promise.all([openLists(context),openLists(context)]);
+      await a.locator("#handle").fill("qa_stale_a");await b.locator("#handle").fill("qa_stale_b");
+      await Promise.all([clickAdd(a),clickAdd(b)]);await settleWrites(a);
+      const fresh=await context.newPage();await fresh.goto(server.url,{waitUntil:"networkidle"});
+      const raw=await fresh.evaluate(()=>window.qaActualSnapshot());const saved=parseBackup(raw).lists[0].accounts.map(x=>x.handle);
+      assert.equal(saved.length,1);
+      const loser=saved[0]==="qa_stale_a"?b:a,expected=saved[0]==="qa_stale_a"?"qa_stale_b":"qa_stale_a";
+      await expect(loser.locator("#notice")).toContainText(/conflit|interrompu|cohérence/i);
+      assert.equal(await loser.locator("#handle").inputValue(),expected,"A stale cached read cannot authorize another accepted write");
+    }finally{await context.close();}
+  });
+  await check("unavailable, corrupt or interrupted transaction witness refuses writes without erasing drafts",async()=>{
+    for(const kind of ["denied","corrupt","interrupted"]){
+      const context=await browser.newContext({serviceWorkers:"block"});
+      try{
+        if(kind==="denied")await context.addInitScript(()=>Object.defineProperty(window,"indexedDB",{get(){throw new DOMException("Synthetic IDB denial","SecurityError");}}));
+        const page=await openLists(context);
+        if(kind!=="denied")await page.evaluate(kind=>new Promise((resolve,reject)=>{
+          const req=indexedDB.open("fil-clair-integrity-v1",1);req.onupgradeneeded=()=>req.result.createObjectStore("state");req.onerror=()=>reject(req.error);
+          req.onsuccess=()=>{const db=req.result,tx=db.transaction("state","readwrite");tx.objectStore("state").put(kind==="corrupt"?{version:1,digest:"invalid",extra:"synthetic"}:{version:1,digest:"a".repeat(64)},"snapshot");tx.oncomplete=()=>{db.close();resolve();};tx.onerror=()=>reject(tx.error);};
+        }),kind);
+        await page.locator("#handle").fill("qa_guard_fail");await clickAdd(page);await settleWrites(page);
+        await expect(page.locator("#notice")).toContainText(/impossible|cohérence/i);assert.equal(await page.locator("#handle").inputValue(),"qa_guard_fail");
+        assert.equal(await page.evaluate(()=>localStorage.getItem("fil-clair-v1")),null);
+      }finally{await context.close();}
+    }
+  });
   await check("one initial SecurityError cannot authorize an unknown overwrite before reload", async () => {
     const context = await browser.newContext({ serviceWorkers: "block" });
     try {

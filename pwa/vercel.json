@@ -1,5 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "git": {
+    "deploymentEnabled": {
+      "feat/fil-clair-v32-guided-help": false
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",

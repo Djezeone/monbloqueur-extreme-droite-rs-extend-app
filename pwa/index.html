@@ -17,6 +17,7 @@
   <header class="topbar">
     <div class="brand"><div class="brand-icon" aria-hidden="true">✦</div><div><strong>FIL CLAIR</strong><span>MON FIL, MON CHOIX</span></div></div>
     <span class="private"><span aria-hidden="true">●</span> Choix stockés sur cet appareil</span>
+    <button id="help-open" class="button subtle" type="button" data-help>Besoin d’aide ?</button>
   </header>
   <div class="shell">
     <nav class="tabs" aria-label="Navigation principale">
@@ -40,6 +41,7 @@
           <button type="button" class="category-card" data-home-category="topics"><span aria-hidden="true">✦</span><strong>SUJETS</strong><small>Vos intérêts, ce que vous voulez voir plus ou moins.</small></button>
           <button type="button" class="category-card" data-home-category="recommendations"><span aria-hidden="true">☷</span><strong>ALGORITHMES</strong><small>Recommandations et réglages officiels expliqués.</small></button>
         </div>
+        <div class="import-row"><button id="guided-open" class="button primary" type="button">Gérer une source</button><button class="button outline" type="button" data-help="source">Comment faire ?</button></div>
         <p class="fine">Chaque accès ouvre votre carnet local. Les services et catégories restent modifiables avec « Choisir mes services ». Les autres modules restent dans les réglages et le registre.</p>
         <div class="panel start-panel"><div><h2>Vos services, vos choix.</h2><p>Commencez sans inscription. Le carnet personnel fonctionne sans Google, Apple ou réseau social. Les guides officiels vous accompagnent quand vous choisissez d’agir ailleurs.</p></div><button id="start-flows" class="button primary" type="button">Choisir mes services</button><p class="fine">Aucun abonnement ni extension requis. Une note locale ne filtre pas les autres applications.</p></div>
         <div class="metrics" role="group" aria-label="Votre progression">
@@ -144,7 +146,22 @@
       </section>
     </main>
   </div>
-  <footer><span>FIL CLAIR · V3 en recette · UNTAKA.CORP</span><a href="./privacy.html">Confidentialité</a><span>Choix personnels · Aucune action sociale automatique</span></footer>
+  <dialog id="guided-dialog" class="assistant-dialog" aria-labelledby="guided-title">
+    <div class="section-heading"><h2 id="guided-title" tabindex="-1">Gérer une source</h2><button id="guided-cancel" class="button subtle" type="button">Fermer le parcours</button></div>
+    <p id="guided-progress" class="eyebrow" role="status"></p>
+    <div id="guided-body"></div>
+    <p id="guided-error" class="notice error" role="alert" hidden></p>
+    <div class="import-row"><button id="guided-back" class="button outline" type="button">Retour</button><button id="guided-next" class="button primary" type="button">Suivant</button><button id="guided-save" class="button primary" type="button" hidden>Enregistrer et passer aux actions</button><button type="button" class="button subtle" data-help="states">Comprendre les résultats</button></div>
+  </dialog>
+  <dialog id="help-dialog" class="assistant-dialog" aria-labelledby="help-title">
+    <div class="section-heading"><h2 id="help-title" tabindex="-1">Besoin d’aide ?</h2><button id="help-close" class="button outline" type="button">Reprendre mon parcours</button></div>
+    <p>Une aide gratuite sur cet appareil. Aucune conversation ni donnée personnelle n’est envoyée à une IA.</p>
+    <label class="field"><span>Mon appareil</span><select id="help-system"><option value="all">Tous les appareils</option><option value="ios">iPhone / iPad · Safari</option><option value="android">Android</option><option value="desktop">Ordinateur</option></select></label>
+    <label class="field"><span>Rechercher dans l’aide (facultatif)</span><input id="help-search" type="search" maxlength="120" autocomplete="off" placeholder="Sauvegarde, masquer, iPhone…"></label>
+    <p id="help-count" class="fine" role="status"></p><div id="help-results"></div>
+    <details><summary>Ouvrir les réglages ou l’aide officielle</summary><p>Choisissez le service. Les liens sont fixes et ne contiennent aucun nom de votre carnet. Ils nécessitent Internet.</p><div id="help-official" class="import-row"></div></details>
+  </dialog>
+  <footer><span>FIL CLAIR · V3.2 en recette · UNTAKA.CORP</span><a href="./privacy.html">Confidentialité</a><details><summary>À propos</summary><p>Le carnet reste indépendant de tout financement.</p><span id="support-entry"><button id="support-button" class="button subtle" type="button" disabled aria-describedby="support-status">Soutenir FIL CLAIR</button></span><p id="support-status">Page officielle CONTRIB.OS non validée : soutien indisponible. Aucune collecte dans FIL CLAIR.</p></details></footer>
   <noscript><p>JavaScript est nécessaire au carnet local. Aucune inscription n’est requise. La notice de confidentialité reste accessible par le lien ci-dessus.</p></noscript>
   <script type="module" src="./app.js"></script>
 </body>
