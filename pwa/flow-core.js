@@ -106,10 +106,12 @@ export function setFlowStatus(flows, id, status, now = Date.now()) {
 }
 
 /** Return to the previous local status, recording that change. Never call a provider. */
-export function undoFlowStatus(flows, id, now = Date.now()) {
+export function undoFlowStatus(flows, id, now = Date.now(), { redeclare = false } = {}) {
   const current = validateFlows(flows), item = current.items.find(entry => entry.id === id);
   if (!item || !time(now) || now < item.updatedAt) throw Error("Préférence absente ou date antérieure au dernier changement.");
   if (!item.events || item.events.length < 2) throw Error("Aucun état précédent disponible dans cet historique.");
+  if (item.events.at(-2).status === "declared" && redeclare !== true)
+    throw Error("Une nouvelle déclaration explicite est nécessaire pour rétablir cet état déclaré.");
   return setFlowStatus(current, id, item.events.at(-2).status, now);
 }
 

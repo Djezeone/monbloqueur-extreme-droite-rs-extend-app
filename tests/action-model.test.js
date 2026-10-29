@@ -92,3 +92,16 @@ test("métriques ne récompensent ni signalements ni pénalités de comptes", ()
   assert.deepEqual(result,{total:6,local:0,planned:2,declared:1,failed:1,review:1,cancelled:1,providerConfirmed:0});
   assert.equal(Object.hasOwn(result,"stars"),false); assert.equal(Object.hasOwn(result,"penalized"),false);
 });
+
+test("restaurer declared exige une nouvelle déclaration explicite, datée comme telle", () => {
+  const declared=core.setFlowStatus(guided(),"a","declared",now+1);
+  for(const status of ["failed","cancelled"]) {
+    const changed=core.setFlowStatus(declared,"a",status,now+2), before=JSON.stringify(changed);
+    assert.throws(()=>core.undoFlowStatus(changed,"a",now+3),/nouvelle déclaration/i);
+    assert.equal(JSON.stringify(changed),before);
+    const fresh=core.undoFlowStatus(changed,"a",now+3,{redeclare:true});
+    const record=actions.actionRecord(fresh.items[0]);
+    assert.equal(record.state,"declared"); assert.equal(record.verification.at,now+3);
+    assert.equal(record.verification.providerConfirmed,false);
+  }
+});

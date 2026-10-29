@@ -170,8 +170,10 @@ function renderSelectors() {
 function renderOverview() {
   const list = active(), p = progress(state, list), done = p.blocked + p.muted;
   const flows = flowMetrics(state.flows);
-  const decisions = Object.values(state.decisions);
-  const declared = decisions.filter(d => ["blocked", "muted"].includes(d.status)).length;
+  const declared = state.lists.reduce((total, entry) => {
+    const current = progress(state, entry);
+    return total + current.blocked + current.muted;
+  }, 0);
   const pending = state.lists.reduce((total, entry) => total + progress(state, entry).remaining, 0);
   $("metric-total").textContent = (state.lists.reduce((total, entry) => total + entry.accounts.length, 0) + flows.total).toLocaleString("fr-FR");
   $("metric-done").textContent = (declared + flows.declared).toLocaleString("fr-FR");

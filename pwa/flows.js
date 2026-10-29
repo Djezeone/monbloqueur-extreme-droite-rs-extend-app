@@ -191,7 +191,10 @@ export function mountFlows({ getState, save, notify, navigate }) {
   }
   function focusItem(id, action) {
     const buttons = [...$("flow-items").querySelectorAll("button")];
-    const button=buttons.find(button => button.dataset.flowId === id && button.dataset.flowAction === action && !button.disabled);
+    const row=[...$("flow-items").children].find(row=>row.dataset.flowId===id);
+    const button=buttons.find(button => button.dataset.flowId === id && button.dataset.flowAction === action && !button.disabled)
+      || buttons.find(button=>button.dataset.flowId===id && button.dataset.flowAction==="reset" && !button.disabled)
+      || row?.querySelector(".flow-advanced > summary");
     if(button?.closest("details")) button.closest("details").open=true;
     (button || $("flow-filter")).focus();
   }
@@ -230,13 +233,19 @@ export function mountFlows({ getState, save, notify, navigate }) {
     const button = event.target.closest("button[data-flow-action]"); if (!button) return;
     const item = current().items.find(item => item.id === button.dataset.flowId); if (!item) return;
     const action = button.dataset.flowAction, control = getControl(item.platform, item.control);
+    const redeclare=action === "undo" && item.events?.at(-2)?.status === "declared";
     if (action === "declare" && !confirm("Avez-vous effectué « " + control.label + " » vous-même chez " + PLATFORMS[item.platform].label + " pour « " + item.target + " » ?\n\nPortée : " + control.scope + "\n\nCeci est votre déclaration, sans vérification API par FIL CLAIR.")) return;
     if (action === "remove" && !confirm("Retirer ce choix et sa déclaration de FIL CLAIR ? Aucune action ne sera annulée sur la plateforme.")) return;
-    if (action === "undo" && !confirm("Revenir à l’état précédent du suivi dans FIL CLAIR ? Aucune action n’est effectuée ou annulée chez le fournisseur ; aucune nouvelle preuve n’est créée.")) return;
+    if (action === "undo") {
+      const question = redeclare
+        ? "L’état précédent est « Déclaré effectué ». Confirmez-vous de nouveau avoir effectué « " + control.label + " » vous-même chez " + PLATFORMS[item.platform].label + " pour « " + item.target + " » ?\n\nPortée : " + control.scope + "\n\nCette confirmation constitue une nouvelle déclaration personnelle datée maintenant. Elle ne prouve pas la date de l’action distante, ne modifie aucun réglage fournisseur et n’est pas une confirmation API."
+        : "Revenir à l’état précédent du suivi dans FIL CLAIR ? Aucune action n’est effectuée ou annulée chez le fournisseur ; aucune nouvelle preuve n’est créée.";
+      if (!confirm(question)) return;
+    }
     try {
-      const flows = action === "remove" ? removeFlow(current(), item.id) : action === "undo" ? undoFlowStatus(current(),item.id)
+      const flows = action === "remove" ? removeFlow(current(), item.id) : action === "undo" ? undoFlowStatus(current(),item.id,Date.now(),{redeclare})
         : setFlowStatus(current(), item.id, action === "declare" ? "declared" : action === "reset" ? (control.mode === "local" ? "local" : "planned") : action);
-      const message = action === "declare" ? "Déclaration personnelle enregistrée, non confirmée par API."
+      const message = action === "declare" || redeclare ? "Nouvelle déclaration personnelle enregistrée, non confirmée par API ; aucune date d’action distante n’est vérifiée."
         : "Choix local mis à jour ; aucune action n’est effectuée ou annulée sur la plateforme.";
       if (await save({ ...getState(), flows }, message)) focusItem(item.id, action === "declare" ? "reset" : action === "remove" ? "absent" : "declare");
     } catch (error) { notify(error.message, true); }

@@ -5,7 +5,8 @@ import { join } from "node:path";
 import { expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { servePwa, launchPwaBrowser, waitForShell } from "./pwa-test-utils.mjs";
-import { parseBackup } from "../pwa/core.js";
+import { newState, parseBackup } from "../pwa/core.js";
+import { newFlows, configureFlows, addFlow, setFlowStatus } from "../pwa/flow-core.js";
 
 const server=await servePwa(), temp=await mkdtemp(join(tmpdir(),"fil-clair-v3-"));
 const checks=[]; let browser;
@@ -135,6 +136,48 @@ try {
     assert.deepEqual(external,[]); assert.deepEqual(errors,[]);
   });
   await context.close();
+  const regressions=[];
+  async function regression(name,state,work) {
+    const ctx=await browser.newContext();
+    try {
+      const source=JSON.stringify(state); parseBackup(source);
+      await ctx.addInitScript(source=>localStorage.setItem("fil-clair-v1",source),source);
+      const p=await ctx.newPage(); await p.goto(server.url,{waitUntil:"networkidle"});
+      await work(p); checks.push({name,result:"PASS"});
+    } catch(error) { regressions.push({name,error:error.message});console.log(JSON.stringify({name,result:"FAIL",error:error.message})); }
+    finally {await ctx.close();}
+  }
+  let prior=configureFlows(newFlows(),["x"],["accounts"]), at=Date.now()-10000;
+  prior=addFlow(prior,{id:"proof",platform:"x",control:"mute",target:"Cible provenance synthétique"},at);
+  prior=setFlowStatus(prior,"proof","declared",at+1); prior=setFlowStatus(prior,"proof","failed",at+2);
+  await regression("revue I1 : retour déclaré ciblé, refus inchangé et nouvelle attestation explicite",{...newState(),flows:prior},async p=>{
+    await p.getByRole("button",{name:"Mes flux",exact:true}).click();const row=p.locator("#flow-items > li");
+    await row.locator(".flow-advanced > summary").click(); const before=await snapshot(p);
+    let pending=p.waitForEvent("dialog"), click=row.locator('[data-flow-action="undo"]').click(), dialog=await pending;
+    const message=dialog.message(); await dialog.dismiss(); await click;
+    assert.equal(await snapshot(p),before); assert.match(message,/nouvelle déclaration/i);
+    assert.match(message,/Cible provenance synthétique/); assert.match(message,/Masquer un compte/);
+    assert.match(message,/Portée/); assert.match(message,/X/);
+    pending=p.waitForEvent("dialog"); click=row.locator('[data-flow-action="undo"]').click();dialog=await pending;
+    await dialog.accept();await click;await expect(row.locator(".flow-status")).toContainText("Déclaré");
+    const updated=JSON.parse(await snapshot(p)).flows.items[0];assert.equal(updated.status,"declared");assert.ok(updated.updatedAt>at+2);
+    assert.equal(updated.events.at(-1).status,"declared");
+  });
+  const orphan=newState(); orphan.decisions["deleted|x::synthetic"]={status:"muted",at:Date.now()-5000};
+  await regression("revue M1 : déclaration orpheline importée conservée, compteur courant à zéro",orphan,async p=>{
+    await expect(p.locator("#metric-total")).toHaveText("0");await expect(p.locator("#metric-done")).toHaveText("0");
+    assert.deepEqual(JSON.parse(await snapshot(p)).decisions,orphan.decisions);
+  });
+  const local=addFlow(configureFlows(newFlows(),[],["sources"]),{id:"focus",platform:"local",control:"source-avoid",target:"Source focus synthétique"},Date.now()-5000);
+  await regression("revue M2 : annuler et reprendre une note conserve le focus dans sa fiche",{...newState(),flows:local},async p=>{
+    await p.getByRole("button",{name:"Mes flux",exact:true}).click();const row=p.locator("#flow-items > li");
+    await row.locator(".flow-advanced > summary").click();await row.locator('[data-flow-action="cancelled"]').click();
+    await expect(row.locator(".flow-status")).toContainText("annulé");
+    assert.equal(await row.evaluate(el=>el.contains(document.activeElement)),true,"Focus doit rester dans la fiche annulée");
+    await p.keyboard.press("Enter");await expect(row.locator(".flow-status")).toContainText("Note locale");
+    assert.equal(await row.evaluate(el=>el.contains(document.activeElement)),true,"Focus doit rester dans la fiche reprise");
+  });
+  assert.deepEqual(regressions,[],"Régressions de revue non corrigées");
 } finally { if(browser)await browser.close();await server.close();await rm(temp,{recursive:true,force:true}); }
 checks.forEach(c=>console.log(JSON.stringify(c)));
 console.log(`Universal V3: ${checks.length}/${checks.length} checks passed; emulation only, no provider action or full WCAG claim.`);
