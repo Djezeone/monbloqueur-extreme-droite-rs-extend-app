@@ -1,0 +1,233 @@
+{
+  "capturedAtParis": "2026-10-29T01:11:15.361790+01:00",
+  "sourceCommitLocal": "12ab9be18e064ecf67f07f8105b9bd458fa78716",
+  "baseRemoteSHA": "51abcd35adefb757cc4f8831d23131a465b9f52a",
+  "physicalDevice": false,
+  "providerActions": 0,
+  "providerConfirmed": 0,
+  "node": {
+    "passed": 144,
+    "failed": 0
+  },
+  "serviceWorker": {
+    "passed": 8,
+    "failed": 0
+  },
+  "scripts": {
+    "chromium": {
+      "test-pwa": {
+        "log": "chromium-test-pwa.log",
+        "sha256": "00526338d7aa5fe2fe985a2350d9cf1275c14fa2aba94e484e82cc4f4d58bab4",
+        "tail": "E2E FIL CLAIR : ajout, à vérifier, historique, annulation, persistance, sauvegarde corrompue, export/effacement/restauration, SW installé et contrôlant, cache allowlist, reload et écriture hors ligne, confidentialité hors ligne, suppression/réajout profil et dernière liste sans résurrection, focus voisin, métadonnées affichées et exportées, viewport tactile PASS",
+        "exitCode": 0
+      },
+      "test-pwa-storage": {
+        "log": "chromium-test-pwa-storage.log",
+        "sha256": "dc0cd1fb09ed9033cf30221aee73de286023e024661c0d850f23ab9c6cc0a25d",
+        "tail": "storage QuotaExceededError: existing data unchanged and exportable, rejected write absent PASS",
+        "exitCode": 0
+      },
+      "test-pwa-recovery": {
+        "log": "chromium-test-pwa-recovery.log",
+        "sha256": "d87ee50f1692a7c553de978fb868b083a510ac6115c302276bc62f34e64bda89",
+        "tail": "near-limit valid state: 9769347 UTF-8 bytes, 500 multibyte preferences and lists roundtrip within 10MB PASS",
+        "exitCode": 0
+      },
+      "test-pwa-concurrency": {
+        "log": "chromium-test-pwa-concurrency.log",
+        "sha256": "8b726f038ba78b8cea037f260cf4ce2ff9a485ed653ede7982a1e0b7e04596de",
+        "tail": "PWA concurrency: 4/4 scenarios passed.",
+        "exitCode": 0
+      },
+      "test-pwa-quality": {
+        "log": "chromium-test-pwa-quality.log",
+        "sha256": "0e07724a3af750be9f9e6fa4493f86a29668a62f116a425d8e95b56dda0d6b5c",
+        "tail": "PWA quality: 30/30 checks passed. Automated checks do not establish full WCAG 2.2 AA conformance or physical-device acceptance.",
+        "exitCode": 0
+      },
+      "test-pwa-flows": {
+        "log": "chromium-test-pwa-flows.log",
+        "sha256": "caa0973f54accfa3819bb4aae649e4c4556fb0d1c0145938f5cbb8ef9bd89881",
+        "tail": "Universal flows: 17/17 checks passed; emulation only, no provider action or full WCAG claim.",
+        "exitCode": 0
+      },
+      "test-pwa-replacements": {
+        "log": "chromium-test-pwa-replacements.log",
+        "sha256": "4712ea7df7c02e58d5eb9a6d2a1f0ca739c5eaa91ae94fbdfe5c11714f3cdc5b",
+        "tail": "Space replacements: 11/11 checks passed.",
+        "exitCode": 0
+      },
+      "test-pwa-v3": {
+        "log": "chromium-test-pwa-v3.log",
+        "sha256": "9eded544ec8837ef006aef528f76d64f7f9375100b7e4a2445bc49c0b3d0535a",
+        "tail": "Universal V3: 15/15 checks passed; emulation only, no provider action or full WCAG claim.",
+        "exitCode": 0
+      }
+    },
+    "firefox": {
+      "test-pwa": {
+        "log": "firefox-test-pwa.log",
+        "sha256": "94988a170bb3814ecad05decb85329a40d86ab2ef12bb8f5761747abcbb54dd4",
+        "tail": "E2E FIL CLAIR : ajout, à vérifier, historique, annulation, persistance, sauvegarde corrompue, export/effacement/restauration, SW installé et contrôlant, cache allowlist, reload et écriture hors ligne, confidentialité hors ligne, suppression/réajout profil et dernière liste sans résurrection, focus voisin, métadonnées affichées et exportées, viewport tactile PASS",
+        "exitCode": 0
+      },
+      "test-pwa-storage": {
+        "log": "firefox-test-pwa-storage.log",
+        "sha256": "59f1e4e09e8fff5055ff7901c2533f24ab59d9be9b245749a8f7f759d4c19f19",
+        "tail": "storage QuotaExceededError: existing data unchanged and exportable, rejected write absent PASS",
+        "exitCode": 0
+      },
+      "test-pwa-recovery": {
+        "log": "firefox-test-pwa-recovery.log",
+        "sha256": "40ced48b6514c657ce72cd10a374834b5ad480d30b2cf13034e2553c2f048799",
+        "tail": "near-limit valid state: 9769347 UTF-8 bytes, 500 multibyte preferences and lists roundtrip within 10MB PASS",
+        "exitCode": 0
+      },
+      "test-pwa-concurrency": {
+        "log": "firefox-test-pwa-concurrency.log",
+        "sha256": "f54e95c608958cb74a5c1c901619d2061c21b56c64e0d8ec0df61908943c98de",
+        "tail": "PWA concurrency: 4/4 scenarios passed.",
+        "exitCode": 0
+      },
+      "test-pwa-quality": {
+        "log": "firefox-test-pwa-quality.log",
+        "sha256": "0a430497d835cfa7a5a287548d7c196efeeb7ee867d300fd908e3eaa2bbcd1b4",
+        "tail": "PWA quality: 29/29 checks passed. Automated checks do not establish full WCAG 2.2 AA conformance or physical-device acceptance.",
+        "exitCode": 0
+      },
+      "test-pwa-flows": {
+        "log": "firefox-test-pwa-flows.log",
+        "sha256": "d9e049bb087b980b897a8eee9d4f44f865d49b180a07f944291f8ee424a2f579",
+        "tail": "Universal flows: 16/16 checks passed; emulation only, no provider action or full WCAG claim.",
+        "exitCode": 0
+      },
+      "test-pwa-replacements": {
+        "log": "firefox-test-pwa-replacements.log",
+        "sha256": "fbd80c062bc5e76a4ac9d77f70e4c37d78082dd1e53a47f9c0ada94501ecea86",
+        "tail": "Space replacements: 11/11 checks passed.",
+        "exitCode": 0
+      },
+      "test-pwa-v3": {
+        "log": "firefox-test-pwa-v3.log",
+        "sha256": "c5925a6ba6da8b380733ff9edc7ac21c0bebfb21fd2b1642d39782c510774a48",
+        "tail": "Universal V3: 15/15 checks passed; emulation only, no provider action or full WCAG claim.",
+        "exitCode": 0
+      }
+    },
+    "webkit": {
+      "test-pwa": {
+        "log": "webkit-test-pwa.log",
+        "sha256": "f0e37b581ec4b9135d247a2b93056181bca4559f809bbf8e362a4cfdc0028a21",
+        "tail": "E2E FIL CLAIR : ajout, à vérifier, historique, annulation, persistance, sauvegarde corrompue, export/effacement/restauration, SW installé et contrôlant, cache allowlist, reload et écriture hors ligne, confidentialité hors ligne, suppression/réajout profil et dernière liste sans résurrection, focus voisin, métadonnées affichées et exportées, viewport tactile PASS",
+        "exitCode": 0
+      },
+      "test-pwa-storage": {
+        "log": "webkit-test-pwa-storage.log",
+        "sha256": "cdff2e81d22cebac5f09c68c248119d2e2b8a4c6b1f7b8ecd8801d072e67faae",
+        "tail": "storage QuotaExceededError: existing data unchanged and exportable, rejected write absent PASS",
+        "exitCode": 0
+      },
+      "test-pwa-recovery": {
+        "log": "webkit-test-pwa-recovery.log",
+        "sha256": "eebeef60df7cb74c1ed7a3344dcb2edf97f142c17cb90fc5c7161600bb0493b7",
+        "tail": "near-limit valid state: 9769347 UTF-8 bytes, 500 multibyte preferences and lists roundtrip within 10MB PASS",
+        "exitCode": 0
+      },
+      "test-pwa-concurrency": {
+        "log": "webkit-test-pwa-concurrency.log",
+        "sha256": "e3fcde5a350eb645304a2a6e56b83f30887970e1f960e5cc664efce0c83dfca5",
+        "tail": "PWA concurrency: 4/4 scenarios passed.",
+        "exitCode": 0
+      },
+      "test-pwa-quality": {
+        "log": "webkit-test-pwa-quality.log",
+        "sha256": "1e7ee423b1f569a5df2ed5cdf8582716d5ccedbe5956e0cab3312354c595ee33",
+        "tail": "PWA quality: 30/30 checks passed. Automated checks do not establish full WCAG 2.2 AA conformance or physical-device acceptance.",
+        "exitCode": 0
+      },
+      "test-pwa-flows": {
+        "log": "webkit-test-pwa-flows.log",
+        "sha256": "bece732a0a0ba94085d31592cdfff1ae11e259485b06a900267eed8c4877ed10",
+        "tail": "Universal flows: 18/18 checks passed; emulation only, no provider action or full WCAG claim.",
+        "exitCode": 0
+      },
+      "test-pwa-replacements": {
+        "log": "webkit-test-pwa-replacements.log",
+        "sha256": "93eb6a523429712deceb803adc8af3cf61386e58b0416c54501d486f89c2baad",
+        "tail": "Space replacements: 11/11 checks passed.",
+        "exitCode": 0
+      },
+      "test-pwa-v3": {
+        "log": "webkit-test-pwa-v3.log",
+        "sha256": "8f096373a660d79bd1d8e331edab87bea116a37ec15f9387f29dacaba1860ea3",
+        "tail": "Universal V3: 15/15 checks passed; emulation only, no provider action or full WCAG claim.",
+        "exitCode": 0
+      }
+    }
+  },
+  "axe": {
+    "scans": 66,
+    "violations": 0,
+    "incompleteScans": 63
+  },
+  "sourceHashes": {
+    ".github/workflows/fil-clair-pwa.yml": "64236b976eac91ca5f5319b3340db3d34e74ca56a9aab35a044d812dcef343d7",
+    ".github/workflows/release.yml": "7bcbf5b51cefd2c1dc7018629a736957c64a2e43c09cc1c33e6a594076e6ef74",
+    ".github/workflows/tableau.yml": "22ec8989849a0d0fe1ab9456a327235a4dfdff427b153502644e94c0515d2f23",
+    ".github/workflows/verification.yml": "69053efa8c09a892317b99e75dc151f21cb987c09aa56a4d90ee06733fb5f711",
+    "package-lock.json": "1187803ea986f212fb2d9a13fe6d2229a08c3ce80f158c66fc55ae975c8a1160",
+    "package.json": "86f5f0d2944e047db72a3aff456fbf0f86b91999c8663bb65c39df4959fe0dfe",
+    "pwa/actions.js": "780be7c8f454a359c381cf6eb4db7f5b4a4e62a2ece31bb9df4e18ec59d710d4",
+    "pwa/app.js": "b1fd81aa3886d2b50a0ab7abfab591d8d52834eab3e79e20b06f2981b0512a60",
+    "pwa/connectors/bluesky.js": "988195613cab62adf91274403a08103712567c1ce6598d4fa2a0a4d9a8616398",
+    "pwa/connectors/internal.js": "4ab4a137b480142211d49bdd86608b5dcddedb5a8927a464f3365a315c200275",
+    "pwa/connectors/mastodon.js": "400463be1675829577038f1d9e49b98e4cbf2455c49af4497870020fa2b93be3",
+    "pwa/connectors/orchestration.js": "5f718f8915408276ad1915ce40c7e0ebb6b59d8c64a2a6229a5323e20fbd044d",
+    "pwa/core.js": "6a0f33241173d8f62d9feee124dd490c7ccd18bb152b093fe277da2b8a2839e3",
+    "pwa/effects.js": "2c35d3be934f9b62ad5added952c52147558ec5689dc31d7da1eedbd0b5dd0f9",
+    "pwa/flow-core.js": "462ff7f6f181df1ef588c23d89d39e81d958808d447679a42144721969c4855b",
+    "pwa/flows.js": "6e4f87dce5ea79171707a078b95e5dc82f8f6bf0090dda275b141d919556391a",
+    "pwa/index.html": "66041a3ebd9adab8c06c6aa19fa9d8cd456bcc6e5fec44588a65699c62a043e2",
+    "pwa/manifest.webmanifest": "d17c8005f264132d74bd74303f4181dae02db11a0010256737ee8613572c9e74",
+    "pwa/platforms.js": "955d2b87dabff6ed83acee1b548239e13498e173f22d114301147d1f1b16257b",
+    "pwa/privacy.html": "c652c6283c8abb9903c338c161ae0f6a40d15356a0dc45551502d660d74a9acb",
+    "pwa/register-view.js": "89e12fcf616578ba561d2ab4e6205f10effd59a171573a6fc88d7262cdc44fff",
+    "pwa/styles.css": "65f52cebf5529dd0d4d2110746650aafb8e1783bb79ef6efb0c6f9fe94a87871",
+    "pwa/sw.js": "66deb4cdf0a6e7db275a6648ea55499e838640206d8af371e1aa315d53deace7",
+    "pwa/vercel.json": "385777fc86ceff5f002adb9edd14db70b9a4d1b918fc80f02982cea2cda72060",
+    "scripts/audit-pwa.mjs": "76eb2e72ea5f9945212344504a0631c7a1e941c0e0d9c97d810e3ae52225b348",
+    "scripts/pwa-test-utils.mjs": "835ecbd1ca0563319d78ab3792698b8755e71b8240e9dead16ac03e500960b55",
+    "scripts/test-pwa-concurrency.mjs": "0d892e6cc74cb1cee8c3171f1b02bc2f29b60c069f85457dcd9e1af19f747373",
+    "scripts/test-pwa-flows.mjs": "aae51550bbdde8b970336b3d9163ed9703e4ea9b1d7928e4e6e1c01387c34a83",
+    "scripts/test-pwa-quality.mjs": "13f1bd460173839cbe90abb66b3565d5793396c46e4b5d072c9a325f2650b284",
+    "scripts/test-pwa-recovery.mjs": "d564a89391c144b588a479a458208c444831ed7b74ca8053c028af97d1e13a6b",
+    "scripts/test-pwa-replacements.mjs": "edd55e9ba35df7b188287e03a7381b690b7347ec0aa7d72aabaded9990be5b05",
+    "scripts/test-pwa-storage.mjs": "4d9c51c01f2f90844ab699624681a83a386cd5b63c55cc54526deaaa2a67d6a8",
+    "scripts/test-pwa-sw.mjs": "77bbb6f0e07dce6b293985fdb5ac525cfe277aa860f36eba5533e17834af9ce6",
+    "scripts/test-pwa-v3.mjs": "bf9fa43741a07436607bcbc9db60eea0a4bf8c53bff641debe09077447e1c3c7",
+    "scripts/test-pwa.mjs": "4f63c87884f63c9245d81fa50eb0ca03fd1ee529b98a5f5c6662bed9835f62a9",
+    "scripts/update-effects-register.mjs": "ee5ae27325e3ea7c791a5fe4bc254e9badf211fb81bffcfa07423891e49adde1",
+    "tests/action-model.test.js": "9a045879b67a9c6665354134da68d369c17759d91f85751c49dba3d7843b9283",
+    "tests/connectors.test.js": "3eb83008cf1e6cd935ad4384baad0cdbbfc997ab165a3aa3bc3c43abcc50aba1",
+    "tests/core.test.js": "32df8a750cb8a6532fe8bbb928b03c848b24b7fa21b594964d855de6c770a194",
+    "tests/effects.test.js": "0a67eb06a51907deedc2fbca2a2c33591eda4b493273d215bebe5dd938e3d6ad",
+    "tests/flow-core.test.js": "8d1c6202af6e8d1356776836fe0adc455386ab4a7e25329c4678758a4c6e4e61",
+    "tests/history.test.js": "7b0778c470a5b0617731320c1086b0c975762435738800c269e300e22b3ea55a",
+    "tests/orchestration.test.js": "41486f1b9c79db500dc449d1d339daa54c1ec68f04b6b00aeb5bb222963b9be5",
+    "tests/pwa-core.test.js": "1128cb14e4338291eb5ce2ee6c121a22e45974a6d0d091e421e40796b5ff5368",
+    "tests/queue.test.js": "4b4c370c03854adb87220dceed9b3fc0331d88bf2bdd62f34ba2b966387833a2"
+  },
+  "ci": "Not yet run for V3; PR and Airtable hold final post-push outcomes.",
+  "production": "No V3 deployment verified; A/B/C remain No-Go.",
+  "sourceTreeLocal": "36c72e530278b00ed7f8e29603c6920dad55169d",
+  "review": {
+    "reviewedCodeLocalSHA": "23f51af2e4082174b520d7f170e5372e6f66dd8f",
+    "fixCommitLocalSHA": "12ab9be18e064ecf67f07f8105b9bd458fa78716",
+    "criticalFound": 0,
+    "importantFixed": 3,
+    "unresolvedFindings": 0,
+    "rereview": false,
+    "regressionMethod": "Node and three E2E findings RED to GREEN; full suite then all 24 browser scenarios."
+  },
+  "collectionNote": "WebKit concurrency log was empty despite shell exit0; no PASS inferred from that file. The targeted rerun recorded four named scenarios and 4/4 PASS, exit0, and replaced that missing evidence."
+}

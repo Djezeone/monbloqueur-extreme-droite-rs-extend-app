@@ -72,3 +72,30 @@ Onboarding modifiable : (1) services facultatifs avec noms, descriptions et case
 **Aucune dépense supplémentaire autorisée.** Le quota GitHub mensuel exact doit être identifié en lecture seule si les droits le permettent ; tant qu’inconnu, aucune ressource payante, crédit Copilot/premium/agent, recharge ou abonnement. Privilégier Work, spécialistes et tests locaux ; regrouper les commits et éviter les CI redondantes. Actions n’est autorisé qu’après preuve de gratuité du scénario exact. GitHub reste source de vérité. Aucun usage essentiel ne dépend de Copilot.
 
 Références de réalisation : [conception](superpowers/specs/2026-10-28-universal-flows-design.md), [plan/ledger](superpowers/plans/2026-10-28-universal-flows.md), [contrat fonctionnel et technique](UNIVERSAL_FLOWS.md), [guide débutant](USER_GUIDE.md), [protocole de recette universelle/Safari](research/2026-10-28-universal-qa-protocol.md). Les statuts acquis et les limites figurent dans le journal de preuves V2 ; le présent document ne certifie aucune livraison.
+
+## Mandat V3 — contrôle universel et effets vérifiés (29 octobre 2026)
+
+L'ordre différé complète V2 et les huit lots. La clôture technique V2 est consignée dans PR#1 au SHA51abcd3 et Airtable (session recSl5qjw0wmOQvyg) : deux CI vertes et réserves précises. La V3 est donc engagée dans cette même session ; **aucune automatisation future n'est programmée**. Les travaux V2 validés ne sont pas reconstruits. Branche V3 et PR distinctes dépendantes de #1 ; aucune fusion/publication générale.
+
+Accueil : **« Que souhaitez-vous maîtriser dans votre fil ? »**, quatre accès **Comptes — Sources — Sujets — Algorithmes**, catégories/services librement modifiables. Filtres thématiques facultatifs et réversibles selon les possibilités réelles ; le produit reste utilisable indépendamment des opinions. Modes local/guidé réellement livrés, connecteurs/extensions facultatifs uniquement après qualification.
+
+Modèle commun : service, action exacte, portée, méthode, état, provenance de vérification, date et possibilité de retrait. Une déclaration n'est jamais une confirmation fournisseur ; aucun import/restauration/historique ne crée une telle preuve. Échecs déclarés, vérification, suivi annulé, historique borné et retour local sont distincts des actions inverses dans le compte distant.
+
+Registre technique maintenable : contrôles documentés par plateforme, API/permissions autorisées ou non qualifiées, effets personnels documentés, hypothèses/limites algorithmiques, risques, sources officielles, dates/confiance et péremption. Sources X vérifiées au commit5ed796374ea48ee26058aab66ab10c266bea2bef : paramètres par composant et somme de prédictions, pas des points par action réelle ni une pénalité globale. Code publié ≠ configuration effective/déploiement/effet mesuré. Aucun outil de signalement massif, automatique ou coordonné ; signalement réservé à une possible infraction, transmission ≠ infraction/sanction.
+
+Indicateurs : entrées gérées, préférences enregistrées, déclarations/confirmations séparées, actions restantes, échecs/reprises/annulations, intégrité sauvegardes, compatibilité, accessibilité et consentements. Aucun nombre de comptes prétendument pénalisés ni récompense aux blocages.
+
+| Lot conservé | Critère V3 ajouté sans retirer les précédents |
+| --- | --- |
+| 01 Sécurité/CI | Historique importé strict, aucune fausse preuve/secrets, registre public sans cible, branche protégée et scénario CI gratuit vérifiés. |
+| 02 UX/PWA | Quatre entrées simples et accessibles, services choisis principaux, détails avancés secondaires, parité sans Google/Safari, historique et retour local explicites. |
+| 03 Listes/historique | Anciennes sauvegardes acceptées, nouveaux événements bornés/restaurables, désélection sans perte, absence de faux passé. |
+| 04 API officielles | Matrice réelle/par opération, sources/scopes/permissions/révocation et niveaux de confiance, aucun contrôle fictif activé par documentation. |
+| 05 Orchestration | États à faire/déclaré/échec/revue/annulé distincts, confirmation uniquement après preuve fournisseur qualifiée, aucune répétition massive. |
+| 06 RGPD | Minimisation des historiques sensibles, sources documentaires séparées des données, synchronisation facultative/consentie ; portes juridiques maintenues. |
+| 07 QA | Tests du modèle/registre/UX, non-régression trois moteurs, offline/backup/sécurité, émulation distincte du physique et WCAG complet toujours requis. |
+| 08 Publication/opérations | Registre maintenable/date et guide V3, procédure de downgrade sans perte/source brute, supervision/rollback et Go public avec preuves. |
+
+Budget : alerte officielle identifiée (3 000 minutes Actions incluses épuisées le16/10, remise à zéro annoncée01/11 ; compteur live non accessible). Gratuité des runners standards publics revérifiée ; zéro achat/dépense/Copilot/crédit supplémentaire. Voir [gouvernance](GITHUB_GOVERNANCE.md).
+
+Références V3 : [architecture](UNIVERSAL_CONTROL_V3.md), [matrice/registre](EFFECTS_REGISTER.md), [recherche X](research/2026-10-29-x-algorithm.md), [conception](superpowers/specs/2026-10-29-universal-v3-design.md), [plan](superpowers/plans/2026-10-29-universal-v3.md), [journal](evidence/2026-10-29-universal-v3.md). Les résultats et blocages de livraison sont ceux des preuves, jamais présumés par ce mandat.

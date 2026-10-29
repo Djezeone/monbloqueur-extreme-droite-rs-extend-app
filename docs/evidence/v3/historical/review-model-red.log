@@ -1,0 +1,35 @@
+✔ modèle commun : nature/portée/méthode/date et déclaration sans preuve fournisseur (4.069242ms)
+✔ note locale enregistrée et réglage Safari ne prétendent pas connaître un compte (1.169342ms)
+✔ échec/revue/annulation personnels et retour précédent sont immuables et datés (2.033404ms)
+✔ historique borné à32, sans copie de cible ni faux passé des anciennes fiches (8.847312ms)
+✔ sauvegardes V2/V3 restaurables ; historique falsifié conserve la source de récupération (8.072914ms)
+✔ métriques ne récompensent ni signalements ni pénalités de comptes (0.740306ms)
+✖ restaurer declared exige une nouvelle déclaration explicite, datée comme telle (1.324937ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 246.267698
+
+✖ failing tests:
+
+test at tests/action-model.test.js:96:1
+✖ restaurer declared exige une nouvelle déclaration explicite, datée comme telle (1.324937ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/tests/action-model.test.js:100:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /nouvelle déclaration/i,
+    operator: 'throws',
+    diff: 'simple'
+  }

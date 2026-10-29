@@ -1,0 +1,13 @@
+{"suite":"space-replacements","engine":"chromium","version":"156.0.8078.4","physicalDevice":false}
+{"name":"I1: global erase clears sensitive drafts, filters and hidden historical DOM","result":"PASS"}
+{"name":"I1: V2 restore clears old filters and immediately displays restored records","result":"PASS"}
+{"name":"I1: consented fresh memory space clears old drafts but preserves stored source","result":"PASS"}
+{"name":"I2: V2 restore confirmation names all replaced data","result":"PASS"}
+{"name":"I2: legacy restore explicitly removes current Mes flux after clear consent","result":"PASS"}
+{"name":"I1/I2: cancelled erase preserves all drafts and stored data","result":"PASS"}
+{"name":"I1/I2: cancelled restore preserves all drafts and stored data","result":"PASS"}
+{"name":"I1/I2: cancelled session preserves all drafts and stored data","result":"PASS"}
+{"name":"I1: failed erase preserves all drafts and stored data","result":"PASS"}
+{"name":"I1: failed restore preserves all drafts and stored data","result":"PASS"}
+{"name":"I2: temporary restore names memory scope and leaves persistent source intact","result":"PASS"}
+Space replacements: 11/11 checks passed.

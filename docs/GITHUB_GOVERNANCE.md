@@ -1,12 +1,16 @@
 # GitHub — budget et protection de main
 
-État vérifié le 28 octobre 2026 : dépôt **public**, PR #1 **brouillon**, tête initiale `ee515c17a736ceb865c605eacc9aee37a9776c7a`, `main` à `b7cd31b036cca17b48dbf726c047847191c01a5b`.
+État relu le 29 octobre 2026 : dépôt **public**, PR #1 **brouillon** au SHA V2 `51abcd35adefb757cc4f8831d23131a465b9f52a`, `main` à `b7cd31b036cca17b48dbf726c047847191c01a5b` et `protected:false`. La branche V3 est distincte et dépend de #1 ; ses références finales et contrôles distants figurent dans sa PR et le journal de session. Le SHA initial `ee515c17` reste une preuve historique seulement.
 
 ## Budget : 0 € supplémentaire
 
-Le quota épuisé signalé par le propriétaire n'est pas identifié. Le connecteur GitHub ne fournit pas la facturation/Copilot ; le navigateur cloud n'est pas connecté. La recherche ciblée d'une notification de quota dans Gmail a renvoyé «requires reauthentication» et n'a fourni aucun contenu. Aucune dépense ni modification de budget n'a été demandée. Aucun agent GitHub/Copilot, Codespace, recharge ou abonnement n'est utilisé par FIL CLAIR.
+**Actualisation du 29 octobre 2026 : quota identifié par notification officielle privée.** Le message GitHub du 16 octobre 2026 intitulé « You have used 100% of the Actions minutes included for the Djezeone account » indique **3 000 minutes Actions utilisées sur 3 000 incluses**, et une remise à zéro annoncée au **1er novembre 2026**. Le corps MIME a été lu via le connecteur de messagerie ; les en-têtes de réception indiquent DKIM/SPF/DMARC pass pour github.com. Le contenu brut, l'adresse de réception et les identifiants de messagerie ne sont pas publiés dans ce dépôt public. Ce constat identifie l'alerte Actions ; il ne fournit pas le compteur de facturation en temps réel ni l'état d'autres quotas.
+
+Le constat antérieur « quota inconnu / requires reauthentication » reste historique et est désormais **périmé** : la lecture de la notification a réussi dans cette session. Le connecteur GitHub ne fournit toujours pas la facturation/Copilot ; le navigateur cloud n'est pas connecté. Aucun budget n'a été modifié, aucune dépense demandée. Aucun agent GitHub/Copilot, Codespace, recharge ou abonnement n'est utilisé par FIL CLAIR. Les ressources payantes restent indisponibles.
 
 Les sources GitHub officielles vérifiées indiquent que les runners **standards** des dépôts **publics** sont gratuits et illimités. Les runners de plus grande taille sont payants ; le stockage d'artefacts/caches a ses propres règles. Nous retenons uniquement `ubuntu-latest`, sans téléversement d'artefact ni cache Actions dans les deux workflows de validation. La visibilité publique et l'absence d'autre service facturable sont à relire avant chaque nouvelle campagne CI. Si le dépôt devient privé, ne plus lancer ces campagnes avant une nouvelle vérification du budget.
+
+Ces règles officielles ont été revérifiées le 29 octobre pour la tranche V3. Le quota de minutes incluses épuisé ne justifie aucun recours à des minutes privées supplémentaires : seules les exécutions gratuites du dépôt public sont retenues, après contrôle du scénario exact. Les tests de développement restent locaux ; la nouvelle suite V3 est incluse dans le job existant, sans troisième workflow.
 
 - [Choix du runner](https://docs.github.com/en/actions/how-tos/write-workflows/choose-where-workflows-run/choose-the-runner-for-a-job)
 - [Facturation GitHub Actions](https://docs.github.com/en/billing/concepts/product-billing/github-actions)

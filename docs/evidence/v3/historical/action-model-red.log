@@ -1,0 +1,108 @@
+✖ modèle commun : nature/portée/méthode/date et déclaration sans preuve fournisseur (2.995946ms)
+✖ note locale enregistrée et réglage Safari ne prétendent pas connaître un compte (0.287424ms)
+✖ échec/revue/annulation personnels et retour précédent sont immuables et datés (1.304617ms)
+✖ historique borné à32, sans copie de cible ni faux passé des anciennes fiches (2.982195ms)
+✔ sauvegardes V2/V3 restaurables ; historique falsifié conserve la source de récupération (3.457381ms)
+✖ métriques ne récompensent ni signalements ni pénalités de comptes (0.574506ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 1
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 199.842158
+
+✖ failing tests:
+
+test at tests/action-model.test.js:12:1
+✖ modèle commun : nature/portée/méthode/date et déclaration sans preuve fournisseur (2.995946ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/tests/action-model.test.js:13:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/action-model.test.js:27:1
+✖ note locale enregistrée et réglage Safari ne prétendent pas connaître un compte (0.287424ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/tests/action-model.test.js:28:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/action-model.test.js:38:1
+✖ échec/revue/annulation personnels et retour précédent sont immuables et datés (1.304617ms)
+  Error: Statut de préférence invalide : aucune confirmation API importable.
+      at file:///workspace/scratch/0729b58f0643/fil-clair/pwa/flow-core.js:50:48
+      at Array.map (<anonymous>)
+      at validateFlows (file:///workspace/scratch/0729b58f0643/fil-clair/pwa/flow-core.js:41:27)
+      at Module.setFlowStatus (file:///workspace/scratch/0729b58f0643/fil-clair/pwa/flow-core.js:80:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/tests/action-model.test.js:40:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+
+test at tests/action-model.test.js:53:1
+✖ historique borné à32, sans copie de cible ni faux passé des anciennes fiches (2.982195ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'length')
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/tests/action-model.test.js:56:38)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/action-model.test.js:83:1
+✖ métriques ne récompensent ni signalements ni pénalités de comptes (0.574506ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/tests/action-model.test.js:84:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

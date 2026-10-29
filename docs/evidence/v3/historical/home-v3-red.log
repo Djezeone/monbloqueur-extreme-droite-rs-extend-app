@@ -1,0 +1,96 @@
+{"suite":"universal-v3","engine":"chromium","version":"156.0.8078.4","physicalDevice":false}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+ExpectError: expect(locator).toBeVisible() failed
+
+Locator: getByRole('heading', { name: 'Que souhaitez-vous maîtriser dans votre fil ?' })
+Expected: visible
+Timeout: 2000ms
+Error: element(s) not found
+
+Call log:
+  - Expect "toBeVisible" getByRole('heading', { name: 'Que souhaitez-vous maîtriser dans votre fil ?' }) with timeout 2000ms
+  - waiting for getByRole('heading', { name: 'Que souhaitez-vous maîtriser dans votre fil ?' })
+
+    at captureRawStack (/workspace/scratch/0729b58f0643/fil-clair/node_modules/playwright-core/lib/coreBundle.js:9282:17)
+    at callMatcherAsStep (/workspace/scratch/0729b58f0643/fil-clair/node_modules/playwright/lib/matchers/expect.js:13316:57)
+    at Object.toBeVisible (/workspace/scratch/0729b58f0643/fil-clair/node_modules/playwright/lib/matchers/expect.js:13308:23)
+    at /workspace/scratch/0729b58f0643/fil-clair/scripts/test-pwa-v3.mjs:28:100
+    at check (/workspace/scratch/0729b58f0643/fil-clair/scripts/test-pwa-v3.mjs:12:40)
+    at /workspace/scratch/0729b58f0643/fil-clair/scripts/test-pwa-v3.mjs:27:9 {
+  matcherResult: {
+    message: 'expect(locator).toBeVisible() failed\n' +
+      '\n' +
+      "Locator: getByRole('heading', { name: 'Que souhaitez-vous maîtriser dans votre fil ?' })\n" +
+      'Expected: visible\n' +
+      'Timeout: 2000ms\n' +
+      'Error: element(s) not found\n' +
+      '\n' +
+      'Call log:\n' +
+      `  - Expect "toBeVisible" getByRole('heading', { name: 'Que souhaitez-vous maîtriser dans votre fil ?' }) with timeout 2000ms\n` +
+      "  - waiting for getByRole('heading', { name: 'Que souhaitez-vous maîtriser dans votre fil ?' })\n",
+    pass: false,
+    actual: undefined,
+    name: 'toBeVisible',
+    expected: 'visible',
+    log: [
+      `  - Expect "toBeVisible" getByRole('heading', { name: 'Que souhaitez-vous maîtriser dans votre fil ?' }) with timeout 2000ms`,
+      "  - waiting for getByRole('heading', { name: 'Que souhaitez-vous maîtriser dans votre fil ?' })"
+    ],
+    timeout: 2000,
+    ariaSnapshot: '- link "Aller au contenu":\n' +
+      '  - /url: "#content"\n' +
+      '- banner:\n' +
+      '  - strong: FIL CLAIR\n' +
+      '  - text: MON FIL, MON CHOIX\n' +
+      '- navigation "Navigation principale":\n' +
+      '  - button "Accueil"\n' +
+      '  - button "Mes flux"\n' +
+      '  - button "Mes listes"\n' +
+      '  - button "Historique"\n' +
+      '  - button "Réglages"\n' +
+      '- main:\n' +
+      '  - text: VOTRE ESPACE NUMÉRIQUE\n' +
+      '  - heading "Un fil qui vous ressemble." [level=1]\n' +
+      '  - paragraph: "Comptes, médias, sujets, recommandations : vos choix, à votre rythme, sur votre appareil."\n' +
+      '  - heading "Vos services, vos choix." [level=2]\n' +
+      '  - paragraph: Commencez sans inscription. Le carnet personnel fonctionne sans Google, Apple ou réseau social. Les guides officiels vous accompagnent quand vous choisissez d’agir ailleurs.\n' +
+      '  - button "Choisir mes services"\n' +
+      '  - paragraph: Aucun abonnement ni extension requis. Une note locale ne filtre pas les autres applications.\n' +
+      '  - group "Votre progression":\n' +
+      '    - text: Comptes dans la liste\n' +
+      '    - strong: "0"\n' +
+      '    - text: Actions déclarées\n' +
+      '    - strong: "0"\n' +
+      '    - text: Étoiles personnelles\n' +
+      '    - strong: 0 ★\n' +
+      '  - text: UN GESTE À LA FOIS\n' +
+      '  - heading "Mon parcours" [level=2]\n' +
+      '  - text: 0 %\n' +
+      '  - progressbar "Mon parcours"\n' +
+      '  - paragraph: Aucun profil dans cette liste. Commencez par en ajouter un ou importer la sélection existante.\n' +
+      '  - text: Liste active\n' +
+      '  - combobox "Liste active":\n' +
+      '    - option "Ma liste (0)" [selected]\n' +
+      '  - button "Gérer mes listes"\n' +
+      '  - text: COMMENT ÇA MARCHE ? 1\n' +
+      '  - strong: Je choisis\n' +
+      "  - paragraph: J'ajoute un compte ou une liste.\n" +
+      '  - text: "2"\n' +
+      "  - strong: J'ouvre le profil\n" +
+      "  - paragraph: Le réseau s'ouvre dans son interface officielle.\n" +
+      '  - text: "3"\n' +
+      '  - strong: Je déclare\n' +
+      "  - paragraph: Je note ce que j'ai fait, sans robot.\n" +
+      `  - paragraph: "Vos choix n'affectent que votre propre expérience. Aucun blocage n'est exécuté par FIL CLAIR : vous agissez directement dans le réseau social."\n` +
+      '- contentinfo:\n' +
+      '  - text: FIL CLAIR · V2 en recette · UNTAKA\n' +
+      '  - link "Confidentialité":\n' +
+      '    - /url: ./privacy.html\n' +
+      '  - text: Choix personnels · Aucune action sociale automatique'
+  }
+}
+
+Node.js v24.22.1

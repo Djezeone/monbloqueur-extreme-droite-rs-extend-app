@@ -1,0 +1,11 @@
+PWA storage engine: chromium 156.0.8078.4
+locator.waitFor: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('heading', { name: 'Un fil qui vous ressemble.', exact: true }) to be visible[22m
+
+    at /workspace/scratch/0729b58f0643/fil-clair/scripts/test-pwa-storage.mjs:23:90 {
+  log: [
+    "  - waiting for getByRole('heading', { name: 'Un fil qui vous ressemble.', exact: true }) to be visible"
+  ],
+  name: 'TimeoutError'
+}
