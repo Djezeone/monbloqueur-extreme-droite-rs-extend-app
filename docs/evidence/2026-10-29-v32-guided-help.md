@@ -57,3 +57,10 @@ La première comparaison du drill utilisait des prototypes d'objets différents 
 - Financement interne exclu : toute intention d'ajouter paiement/don/crypto ou connecteur financier dans FIL CLAIR est remplacée par l'unique lien externe désactivé en attente de preuve.
 
 Références : [UX/architecture](../UNIVERSAL_UX_V32.md), [persistance](../LOCAL_PERSISTENCE.md), [ordre d'exécution](../DELIVERY_QUEUE.md), [revue](2026-10-29-v32-review.md), [API](../research/2026-10-29-connect-auth-next.md), [mission](../WORK_MISSION_FIL_CLAIR.md), [Airtable](https://airtable.com/appXkTDooEjMD9lCs).
+## Suivi de la première CI — fixture WebKit
+
+La première CI PWA [40833424238](https://github.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/actions/runs/40833424238), au153a0d2, a **échoué** sur le dernier scénario WebKit : le mock de verrou retardé n'était plus observé (`typeof qaResumeSave` restaitundefined). Les logs ont été lus ; les autres scénarios passaient. L'extension40833424276 a réussi. Zéro artefact dans ces deux runs. La porte courante Parcours critiques a été suspendue dans Airtable ; la validation historiqueV3 demeure à son SHA.
+
+Cause de fixture reproduite : WebKit peut collecter un wrapper DOM LockManager sans référence JavaScript forte et perdre sa propriété de mock. Un probe avec GC forcé a observé mock absent sans référence forte, présent avec référence forte. Le test complet avec `page.requestGC()` a reproduit le RED. Correction **du test seulement** : conserver le LockManager sur une référence forte du contexte de test et forcer explicitement le GC avant le scénario. Aucun fichier PWA ni réglage utilisateur ne change. Les3suitesV3.2 retestées passent14/14 chacune, Node151/151 ; les24autres scripts et sources produit sont inchangés.
+
+La correction et le reçu sont regroupés avant une seule mise à jour de branche. Aucune relance de la CI au même SHA ni seconde revue n'est présentée comme preuve. La nouvelle CI au nouveau SHA reste à lire ; sa conclusion sera consignée dans la PR/cockpit. Le [RED GC](v32/historical/webkit-gc-red.log) est conservé. L'échec initial n'est pas effacé.

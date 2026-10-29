@@ -1,6 +1,6 @@
 # Preuves locales V3.2
 
-Date29octobre2026, Europe/Paris. [Reçu machine](receipt.json) :69empreintes source,27journaux de suites et empreintes des vérifications supplémentaires. Les octets source correspondent au commit local0fafbfaa89406a2dcc28c680f30086989959c359 ; un commit documentaire et la création d'objets Git distants peuvent changer le SHA sans changer ces fichiers. La PR finale conserve la correspondance d'arbres/commits et les résultats CI distants, sans être anticipés ici.
+Date29octobre2026, Europe/Paris. [Reçu machine](receipt.json) :69empreintes source,27journaux de suites et empreintes des vérifications supplémentaires. Le produit est inchangé depuis153a0d2. Après l'échec de la première CI, seule la fixture de sauvegarde lente a été renforcée contre le GC ; les3suitesV3.2 ont été rejouées14/14 chacune, les24autres scripts et octets produit sont inchangés. Le reçu nomme le commit de cette correction de test et les empreintes actuelles. La PR conserve les résultats distants et la correspondance d'arbres, sans les anticiper ici.
 
 - [Node](node.log) :151/151 ; [sécurité/SW](security.log) :9/9 et invariants statiquesPASS.
 - [Dépendances](dependencies.log) :0critical/high/moderate,3low de développement hérités ; seuil high passé, aucune mise à jour forcée.

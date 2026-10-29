@@ -1,7 +1,7 @@
 {
   "date": "2026-10-29",
   "timezone": "Europe/Paris",
-  "codeContentCommit": "0fafbfaa89406a2dcc28c680f30086989959c359",
+  "codeContentCommit": "05e5302fbb09ebc5210610524d4a403913cbc82a",
   "qualification": "Tests ran on these exact source bytes; documentation commits and remote Git object metadata can change commit SHA without changing these bytes.",
   "unit": {
     "pass": 151,
@@ -195,7 +195,7 @@
       "suite": "test-pwa-v32",
       "code": 0,
       "log": "docs/evidence/v32/webkit-test-pwa-v32.log",
-      "sha256": "a17e1da45c2fd4ce16d49fc004461cb5d940ac00add5eb70acad25bce0ee2594"
+      "sha256": "9b49c4ecf0e73e8e5320ab9c6b8011dba14bfe53085e1d9252aed4816b1a8366"
     },
     {
       "engine": "chromium",
@@ -271,7 +271,7 @@
     "scripts/test-pwa-storage.mjs": "4d9c51c01f2f90844ab699624681a83a386cd5b63c55cc54526deaaa2a67d6a8",
     "scripts/test-pwa-sw.mjs": "92d647842855d017f7f5369d84e9d808951740934e48eeed3e9c3aebeb32cb55",
     "scripts/test-pwa-v3.mjs": "bf9fa43741a07436607bcbc9db60eea0a4bf8c53bff641debe09077447e1c3c7",
-    "scripts/test-pwa-v32.mjs": "3824b1852b49594d08d7021295a0d3c30eff268292f4a1b056d3935bdaed7c3c",
+    "scripts/test-pwa-v32.mjs": "5376dbc7cde4dadc67067a77b49d8df163fc6ed3e5b3a33117b3dbfff5129ae0",
     "scripts/test-pwa.mjs": "6a09a5a87eb4caeedea44f8baaacd7a564e33fd186fa2d5df003635c4fb8f9eb",
     "scripts/update-effects-register.mjs": "ee5ae27325e3ea7c791a5fe4bc254e9badf211fb81bffcfa07423891e49adde1",
     "scripts/update-readme.mjs": "a8935e5188ded476407ec96ad0d2d3284601a767e9471738116d8095f9820486",
@@ -307,11 +307,17 @@
     "secondReview": false
   },
   "extraLogSHA256": {
-    "node.log": "98a2acfd662f3ff0e1f02a0d647415ddc14b47e7cae8274a902fcc8d24473b05",
+    "node.log": "f27415c5ea9e71431b599aa93c3420496824ef59ccdb720e4ba75703355af057",
     "security.log": "fe53cacb814a00f6d4186aa1dd42f7c81aa1e574a40367a79ab1e9a5cea785ce",
     "dependencies.log": "83d0583b0e32a8cddec875a9d7fe495000acae1966b04cf1b39fd04fa469d315",
     "list.log": "69081bd858741efa5126bc73cf47a7e435bb0e560e75909e38c76a744e47c5f6",
     "register-sync.log": "37c38d639375bafd764a67b8f74723e8e91b63d75b35a95c5ef9fe7648ed5348",
     "rollback-loader.log": "911841d7ef2157e0eeb52bd24c93a1d7815a02ac6ae8dda9d180d491c882cbf2"
+  },
+  "testRefinement": {
+    "failedCIRun": 40833424238,
+    "failedHead": "153a0d2384129aad38c7368ce06a0804e6f93c81",
+    "change": "Test fixture only: strong LockManager reference and forced GC; no PWA source change",
+    "verification": "14/14 each engine rerun; other24 suite scripts and product source bytes unchanged"
   }
 }
