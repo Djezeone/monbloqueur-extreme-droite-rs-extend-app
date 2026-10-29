@@ -1,0 +1,317 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Europe/Paris",
+  "codeContentCommit": "0fafbfaa89406a2dcc28c680f30086989959c359",
+  "qualification": "Tests ran on these exact source bytes; documentation commits and remote Git object metadata can change commit SHA without changing these bytes.",
+  "unit": {
+    "pass": 151,
+    "fail": 0
+  },
+  "security": {
+    "serviceWorker": 9,
+    "staticAudit": "PASS"
+  },
+  "browser": {
+    "engines": {
+      "chromium": "156.0.8078.4",
+      "firefox": "157.0",
+      "webkit": "27.2"
+    },
+    "physical": false,
+    "suites": 27,
+    "v32ChecksPerEngine": 14,
+    "concurrencyCasesPerEngine": 6
+  },
+  "axe": {
+    "scans": 81,
+    "violations": 0,
+    "scansWithIncomplete": 69,
+    "fullWCAGQualified": false
+  },
+  "logs": [
+    {
+      "engine": "chromium",
+      "suite": "test-pwa",
+      "code": 0,
+      "log": "docs/evidence/v32/chromium-test-pwa.log",
+      "sha256": "00526338d7aa5fe2fe985a2350d9cf1275c14fa2aba94e484e82cc4f4d58bab4"
+    },
+    {
+      "engine": "webkit",
+      "suite": "test-pwa",
+      "code": 0,
+      "log": "docs/evidence/v32/webkit-test-pwa.log",
+      "sha256": "f0e37b581ec4b9135d247a2b93056181bca4559f809bbf8e362a4cfdc0028a21"
+    },
+    {
+      "engine": "chromium",
+      "suite": "test-pwa-storage",
+      "code": 0,
+      "log": "docs/evidence/v32/chromium-test-pwa-storage.log",
+      "sha256": "dc0cd1fb09ed9033cf30221aee73de286023e024661c0d850f23ab9c6cc0a25d"
+    },
+    {
+      "engine": "firefox",
+      "suite": "test-pwa",
+      "code": 0,
+      "log": "docs/evidence/v32/firefox-test-pwa.log",
+      "sha256": "94988a170bb3814ecad05decb85329a40d86ab2ef12bb8f5761747abcbb54dd4"
+    },
+    {
+      "engine": "webkit",
+      "suite": "test-pwa-storage",
+      "code": 0,
+      "log": "docs/evidence/v32/webkit-test-pwa-storage.log",
+      "sha256": "cdff2e81d22cebac5f09c68c248119d2e2b8a4c6b1f7b8ecd8801d072e67faae"
+    },
+    {
+      "engine": "chromium",
+      "suite": "test-pwa-recovery",
+      "code": 0,
+      "log": "docs/evidence/v32/chromium-test-pwa-recovery.log",
+      "sha256": "d87ee50f1692a7c553de978fb868b083a510ac6115c302276bc62f34e64bda89"
+    },
+    {
+      "engine": "firefox",
+      "suite": "test-pwa-storage",
+      "code": 0,
+      "log": "docs/evidence/v32/firefox-test-pwa-storage.log",
+      "sha256": "59f1e4e09e8fff5055ff7901c2533f24ab59d9be9b245749a8f7f759d4c19f19"
+    },
+    {
+      "engine": "webkit",
+      "suite": "test-pwa-recovery",
+      "code": 0,
+      "log": "docs/evidence/v32/webkit-test-pwa-recovery.log",
+      "sha256": "eebeef60df7cb74c1ed7a3344dcb2edf97f142c17cb90fc5c7161600bb0493b7"
+    },
+    {
+      "engine": "firefox",
+      "suite": "test-pwa-recovery",
+      "code": 0,
+      "log": "docs/evidence/v32/firefox-test-pwa-recovery.log",
+      "sha256": "40ced48b6514c657ce72cd10a374834b5ad480d30b2cf13034e2553c2f048799"
+    },
+    {
+      "engine": "chromium",
+      "suite": "test-pwa-concurrency",
+      "code": 0,
+      "log": "docs/evidence/v32/chromium-test-pwa-concurrency.log",
+      "sha256": "8679f188401af762d607ef6b3b108e13c6785fa1ebebadd02ae1252b42bd466b"
+    },
+    {
+      "engine": "webkit",
+      "suite": "test-pwa-concurrency",
+      "code": 0,
+      "log": "docs/evidence/v32/webkit-test-pwa-concurrency.log",
+      "sha256": "58511472c879e8a2d2e8748715e972c1755b553ef9a92aa1761b02a8e08d1dab"
+    },
+    {
+      "engine": "chromium",
+      "suite": "test-pwa-quality",
+      "code": 0,
+      "log": "docs/evidence/v32/chromium-test-pwa-quality.log",
+      "sha256": "77e88694f8ec4f9a95121f0b3487fa37c068de87c8977e8304ca39725359990b"
+    },
+    {
+      "engine": "firefox",
+      "suite": "test-pwa-concurrency",
+      "code": 0,
+      "log": "docs/evidence/v32/firefox-test-pwa-concurrency.log",
+      "sha256": "d637c08d4263e022ab66f4db1f7354f7a382bcbe2de326592fe2cb0d3b1c6c67"
+    },
+    {
+      "engine": "webkit",
+      "suite": "test-pwa-quality",
+      "code": 0,
+      "log": "docs/evidence/v32/webkit-test-pwa-quality.log",
+      "sha256": "17e58bb9aed2b62de7578b0d3fc2893cf3015ce0a843464ad8bd2817c2ac1cd5"
+    },
+    {
+      "engine": "firefox",
+      "suite": "test-pwa-quality",
+      "code": 0,
+      "log": "docs/evidence/v32/firefox-test-pwa-quality.log",
+      "sha256": "2e6ff2ca7428c23cef8039088ee4f16dc1ad3ed16b264133dcc984f42e976009"
+    },
+    {
+      "engine": "chromium",
+      "suite": "test-pwa-flows",
+      "code": 0,
+      "log": "docs/evidence/v32/chromium-test-pwa-flows.log",
+      "sha256": "caa0973f54accfa3819bb4aae649e4c4556fb0d1c0145938f5cbb8ef9bd89881"
+    },
+    {
+      "engine": "webkit",
+      "suite": "test-pwa-flows",
+      "code": 0,
+      "log": "docs/evidence/v32/webkit-test-pwa-flows.log",
+      "sha256": "bece732a0a0ba94085d31592cdfff1ae11e259485b06a900267eed8c4877ed10"
+    },
+    {
+      "engine": "chromium",
+      "suite": "test-pwa-replacements",
+      "code": 0,
+      "log": "docs/evidence/v32/chromium-test-pwa-replacements.log",
+      "sha256": "4712ea7df7c02e58d5eb9a6d2a1f0ca739c5eaa91ae94fbdfe5c11714f3cdc5b"
+    },
+    {
+      "engine": "firefox",
+      "suite": "test-pwa-flows",
+      "code": 0,
+      "log": "docs/evidence/v32/firefox-test-pwa-flows.log",
+      "sha256": "d9e049bb087b980b897a8eee9d4f44f865d49b180a07f944291f8ee424a2f579"
+    },
+    {
+      "engine": "webkit",
+      "suite": "test-pwa-replacements",
+      "code": 0,
+      "log": "docs/evidence/v32/webkit-test-pwa-replacements.log",
+      "sha256": "93eb6a523429712deceb803adc8af3cf61386e58b0416c54501d486f89c2baad"
+    },
+    {
+      "engine": "webkit",
+      "suite": "test-pwa-v3",
+      "code": 0,
+      "log": "docs/evidence/v32/webkit-test-pwa-v3.log",
+      "sha256": "8f096373a660d79bd1d8e331edab87bea116a37ec15f9387f29dacaba1860ea3"
+    },
+    {
+      "engine": "chromium",
+      "suite": "test-pwa-v3",
+      "code": 0,
+      "log": "docs/evidence/v32/chromium-test-pwa-v3.log",
+      "sha256": "9eded544ec8837ef006aef528f76d64f7f9375100b7e4a2445bc49c0b3d0535a"
+    },
+    {
+      "engine": "firefox",
+      "suite": "test-pwa-replacements",
+      "code": 0,
+      "log": "docs/evidence/v32/firefox-test-pwa-replacements.log",
+      "sha256": "fbd80c062bc5e76a4ac9d77f70e4c37d78082dd1e53a47f9c0ada94501ecea86"
+    },
+    {
+      "engine": "webkit",
+      "suite": "test-pwa-v32",
+      "code": 0,
+      "log": "docs/evidence/v32/webkit-test-pwa-v32.log",
+      "sha256": "a17e1da45c2fd4ce16d49fc004461cb5d940ac00add5eb70acad25bce0ee2594"
+    },
+    {
+      "engine": "chromium",
+      "suite": "test-pwa-v32",
+      "code": 0,
+      "log": "docs/evidence/v32/chromium-test-pwa-v32.log",
+      "sha256": "6286f61410b43f629c6bc8618025139f4e417684c324bd82983d35b89b895510"
+    },
+    {
+      "engine": "firefox",
+      "suite": "test-pwa-v3",
+      "code": 0,
+      "log": "docs/evidence/v32/firefox-test-pwa-v3.log",
+      "sha256": "c5925a6ba6da8b380733ff9edc7ac21c0bebfb21fd2b1642d39782c510774a48"
+    },
+    {
+      "engine": "firefox",
+      "suite": "test-pwa-v32",
+      "code": 0,
+      "log": "docs/evidence/v32/firefox-test-pwa-v32.log",
+      "sha256": "cfa0aca8001035d026e501b5758020417243fd3fd1394ace974daf7a8a826ff2"
+    }
+  ],
+  "sourceSHA256": {
+    ".github/workflows/fil-clair-pwa.yml": "dfd5d8946a5d1b57723f861c8d3e82f4aa950960ac0d27318f52dccec2cce0b0",
+    ".github/workflows/release.yml": "7bcbf5b51cefd2c1dc7018629a736957c64a2e43c09cc1c33e6a594076e6ef74",
+    ".github/workflows/tableau.yml": "22ec8989849a0d0fe1ab9456a327235a4dfdff427b153502644e94c0515d2f23",
+    ".github/workflows/verification.yml": "69053efa8c09a892317b99e75dc151f21cb987c09aa56a4d90ee06733fb5f711",
+    "package-lock.json": "1187803ea986f212fb2d9a13fe6d2229a08c3ce80f158c66fc55ae975c8a1160",
+    "package.json": "86f5f0d2944e047db72a3aff456fbf0f86b91999c8663bb65c39df4959fe0dfe",
+    "pwa/README.md": "fb690072f42fb8922083999ff3aafb9648e5ed9657ff957880577e9ecabf2593",
+    "pwa/actions.js": "780be7c8f454a359c381cf6eb4db7f5b4a4e62a2ece31bb9df4e18ec59d710d4",
+    "pwa/app.js": "b368f0d2942b12153284ff4cfc22ced71df748cef45384f0f9b92f1419431e9d",
+    "pwa/connectors/bluesky.js": "988195613cab62adf91274403a08103712567c1ce6598d4fa2a0a4d9a8616398",
+    "pwa/connectors/internal.js": "4ab4a137b480142211d49bdd86608b5dcddedb5a8927a464f3365a315c200275",
+    "pwa/connectors/mastodon.js": "400463be1675829577038f1d9e49b98e4cbf2455c49af4497870020fa2b93be3",
+    "pwa/connectors/orchestration.js": "5f718f8915408276ad1915ce40c7e0ebb6b59d8c64a2a6229a5323e20fbd044d",
+    "pwa/core.js": "6a0f33241173d8f62d9feee124dd490c7ccd18bb152b093fe277da2b8a2839e3",
+    "pwa/effects.js": "2c35d3be934f9b62ad5added952c52147558ec5689dc31d7da1eedbd0b5dd0f9",
+    "pwa/flow-core.js": "462ff7f6f181df1ef588c23d89d39e81d958808d447679a42144721969c4855b",
+    "pwa/flows.js": "d160bad940241588ed9fd4b8d457010f4426f77811494af5467f473cd6475452",
+    "pwa/guided-core.js": "8dce5594752b4502b1b5c4295fba0a95ba4b064f83b88f6270828aa19825aff9",
+    "pwa/guided.js": "feb72dd05e380bf26115a94aa13c519d676720e69907e3309b572bba8eea652e",
+    "pwa/help-data.js": "c77e9ce78a7c0289cd34d542450b4c25fbd6e62d4190aadbd37ec5740b20a410",
+    "pwa/help.js": "252c470f40fda42fa759bfea7116b40b8d2c8eeaf2c3bd87a48b5b9fe473f4e4",
+    "pwa/icon-192.png": "5fd8b1669dba5da8e4eef7795f682d5a0f883de62d23850e88a988f7e2843bb7",
+    "pwa/icon-512.png": "3a1484bec5bdbc09b3d2308d54550d818d87a70477b1a63220371a7ff6ef0c3e",
+    "pwa/icon.svg": "b9a9c06507b55727a0f655807899e96a36775ae696807b30cc44cd0f1a02edc6",
+    "pwa/index.html": "15f2656696298732cdf9ab714d40d3182357190b03bf4a9eb1857fffe3a91f53",
+    "pwa/manifest.webmanifest": "d17c8005f264132d74bd74303f4181dae02db11a0010256737ee8613572c9e74",
+    "pwa/persistence.js": "0df55a7471b550e24fa8d9cde31e4bfe51e1de140ca17957e1840ab2d4fe318c",
+    "pwa/platforms.js": "955d2b87dabff6ed83acee1b548239e13498e173f22d114301147d1f1b16257b",
+    "pwa/privacy.html": "daaa2a5760fd3229bfc2636e8ba0c87c6b1209c14fb767d357515f19c0918da3",
+    "pwa/register-view.js": "89e12fcf616578ba561d2ab4e6205f10effd59a171573a6fc88d7262cdc44fff",
+    "pwa/styles.css": "ce08aa051bdb1c1158fde46f377c9671f0dee57408337877cc03ac4c55c36aea",
+    "pwa/support-config.js": "4c7901b4ee29909e1c9158147d1f53fe20bfc9de95cbe2850535a3012e9c21ac",
+    "pwa/sw.js": "809711897f35940e0e59f1772a81df837df9103344a233e8124aa065564f41e0",
+    "pwa/vercel.json": "a878e25d9182ab1ccf2c4b1b686a5fd58db1eea9f8ae8690845bfb256041fed5",
+    "scripts/assets.mjs": "1053f4ff41d01a27e55302fd1b45cd59a73cf838e8845d57e572aae6a46aa8c1",
+    "scripts/audit-pwa.mjs": "6c1ecc67b883419edd536f70594a3c9183d53e79003452025fc9aa8499ce4442",
+    "scripts/build.mjs": "fe2cf94e591fc3b352ae4e2587b9460997aae5d364ff6842489ab374450d798a",
+    "scripts/manifests.mjs": "c42c7048511f27ddf58f8bffeff6ac59961ef3710f848e3c7451491f5bf59a17",
+    "scripts/package.mjs": "3210b0f0b6dde20ce4887c09cc930da4a72f7dee7a8a4862f24eeb87e545057c",
+    "scripts/pwa-test-utils.mjs": "ab1d261edd379959a69813424cc5304022c23a3acf7aa7caad8a42a6700507d5",
+    "scripts/release.mjs": "71dbbd376dfaafcfd611b8fd7fedc96d8e3dad9deeafaaa79def0da6f6030459",
+    "scripts/test-browser.mjs": "4ec2f8c501156002e1021e015317e7b6c64ea131f0a32f4175ce3bb1dfbfaf6c",
+    "scripts/test-firefox.mjs": "a299ecd5a0fd72209beda98dbe468883683d161319e6e2886ac4f6bca6f32d2b",
+    "scripts/test-pwa-concurrency.mjs": "8e10a21428679da141e706025abe6ff68e1215ee94c90c7ebb28079de55f14e9",
+    "scripts/test-pwa-flows.mjs": "aae51550bbdde8b970336b3d9163ed9703e4ea9b1d7928e4e6e1c01387c34a83",
+    "scripts/test-pwa-quality.mjs": "13f1bd460173839cbe90abb66b3565d5793396c46e4b5d072c9a325f2650b284",
+    "scripts/test-pwa-recovery.mjs": "d564a89391c144b588a479a458208c444831ed7b74ca8053c028af97d1e13a6b",
+    "scripts/test-pwa-replacements.mjs": "edd55e9ba35df7b188287e03a7381b690b7347ec0aa7d72aabaded9990be5b05",
+    "scripts/test-pwa-storage.mjs": "4d9c51c01f2f90844ab699624681a83a386cd5b63c55cc54526deaaa2a67d6a8",
+    "scripts/test-pwa-sw.mjs": "92d647842855d017f7f5369d84e9d808951740934e48eeed3e9c3aebeb32cb55",
+    "scripts/test-pwa-v3.mjs": "bf9fa43741a07436607bcbc9db60eea0a4bf8c53bff641debe09077447e1c3c7",
+    "scripts/test-pwa-v32.mjs": "3824b1852b49594d08d7021295a0d3c30eff268292f4a1b056d3935bdaed7c3c",
+    "scripts/test-pwa.mjs": "6a09a5a87eb4caeedea44f8baaacd7a564e33fd186fa2d5df003635c4fb8f9eb",
+    "scripts/update-effects-register.mjs": "ee5ae27325e3ea7c791a5fe4bc254e9badf211fb81bffcfa07423891e49adde1",
+    "scripts/update-readme.mjs": "a8935e5188ded476407ec96ad0d2d3284601a767e9471738116d8095f9820486",
+    "scripts/validate-list.mjs": "c7407f48a931d880675a14ef6613940a9ad29841a360c187f5b6126404bbd7e3",
+    "tests/action-model.test.js": "9a045879b67a9c6665354134da68d369c17759d91f85751c49dba3d7843b9283",
+    "tests/connectors.test.js": "3eb83008cf1e6cd935ad4384baad0cdbbfc997ab165a3aa3bc3c43abcc50aba1",
+    "tests/core.test.js": "32df8a750cb8a6532fe8bbb928b03c848b24b7fa21b594964d855de6c770a194",
+    "tests/effects.test.js": "0a67eb06a51907deedc2fbca2a2c33591eda4b493273d215bebe5dd938e3d6ad",
+    "tests/fixtures/site.mjs": "4b06836395a7ccb164d867444440333a62f2081c59cb3f7b617216ca8359f197",
+    "tests/flow-core.test.js": "8d1c6202af6e8d1356776836fe0adc455386ab4a7e25329c4678758a4c6e4e61",
+    "tests/guided.test.js": "15262bd92b171e9a47b4631200d296445e5154eef63aaa82657b6720bdcfc15b",
+    "tests/help-support.test.js": "56d2b2f2049e869fe7d54a97503b519b64f3f9ee311d59bbbfbb53f2a488a4bf",
+    "tests/history.test.js": "7b0778c470a5b0617731320c1086b0c975762435738800c269e300e22b3ea55a",
+    "tests/orchestration.test.js": "41486f1b9c79db500dc449d1d339daa54c1ec68f04b6b00aeb5bb222963b9be5",
+    "tests/pwa-core.test.js": "1128cb14e4338291eb5ce2ee6c121a22e45974a6d0d091e421e40796b5ff5368",
+    "tests/queue.test.js": "4b4c370c03854adb87220dceed9b3fc0331d88bf2bdd62f34ba2b966387833a2",
+    "vercel.json": "7593656d8eabb8d035d1b9c15dee83e8df1bc37b2d73b5d901e5a23f77877993"
+  },
+  "limits": [
+    "No physical devices/commercial Safari or full WCAG",
+    "No OAuth/social/provider action",
+    "No live CONTRIB.OS destination; synthetic route interception only",
+    "No Vercel deployment or main protection applied",
+    "Cooperating new writers only; mixed versions and physical crash durability unqualified"
+  ],
+  "review": {
+    "independent": true,
+    "criticalFound": 0,
+    "importantFound": 1,
+    "minorFound": 1,
+    "minorRegradedImportant": true,
+    "fixes": 2,
+    "secondReview": false
+  },
+  "extraLogSHA256": {
+    "node.log": "98a2acfd662f3ff0e1f02a0d647415ddc14b47e7cae8274a902fcc8d24473b05",
+    "security.log": "fe53cacb814a00f6d4186aa1dd42f7c81aa1e574a40367a79ab1e9a5cea785ce",
+    "dependencies.log": "83d0583b0e32a8cddec875a9d7fe495000acae1966b04cf1b39fd04fa469d315",
+    "list.log": "69081bd858741efa5126bc73cf47a7e435bb0e560e75909e38c76a744e47c5f6",
+    "register-sync.log": "37c38d639375bafd764a67b8f74723e8e91b63d75b35a95c5ef9fe7648ed5348",
+    "rollback-loader.log": "911841d7ef2157e0eeb52bd24c93a1d7815a02ac6ae8dda9d180d491c882cbf2"
+  }
+}

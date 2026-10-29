@@ -1,0 +1,110 @@
+✖ guided options expose only documented category controls, including unavailable services (0.7687ms)
+✖ guided batch registers intentions together, never a provider confirmation (0.164057ms)
+✖ guided duplicate preserves existing declaration and history instead of resetting it (0.967671ms)
+✖ invalid or over-limit batch cannot partially modify the original snapshot (6.254135ms)
+✖ guided local route works with no external service and keeps previous selections (0.154824ms)
+✖ support defaults to no destination and fails closed for unreviewed or unsafe URLs (0.706927ms)
+✖ local FAQ covers six action states and offers relevant device guidance without AI (0.198059ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 0
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 94.536103
+
+✖ failing tests:
+
+test at tests/guided.test.js:9:1
+✖ guided options expose only documented category controls, including unavailable services (0.7687ms)
+  TypeError [Error]: guided.guidedOptions is not a function
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/tests/guided.test.js:10:24)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+
+test at tests/guided.test.js:17:1
+✖ guided batch registers intentions together, never a provider confirmation (0.164057ms)
+  TypeError [Error]: guided.buildGuidedPlan is not a function
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/tests/guided.test.js:19:23)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at tests/guided.test.js:26:1
+✖ guided duplicate preserves existing declaration and history instead of resetting it (0.967671ms)
+  TypeError [Error]: guided.buildGuidedPlan is not a function
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/tests/guided.test.js:31:23)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/guided.test.js:35:1
+✖ invalid or over-limit batch cannot partially modify the original snapshot (6.254135ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /500/. Input:
+  
+  'TypeError: guided.buildGuidedPlan is not a function'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/tests/guided.test.js:39:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: TypeError: guided.buildGuidedPlan is not a function
+        at file:///workspace/scratch/0729b58f0643/fil-clair/tests/guided.test.js:39:28
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/tests/guided.test.js:39:10)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1402:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+        at Test.postRun (node:internal/test_runner/test:1542:19)
+        at Test.run (node:internal/test_runner/test:1467:12)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:974:7),
+    expected: /500/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/guided.test.js:49:1
+✖ guided local route works with no external service and keeps previous selections (0.154824ms)
+  TypeError [Error]: guided.buildGuidedPlan is not a function
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/tests/guided.test.js:51:23)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/help-support.test.js:6:1
+✖ support defaults to no destination and fails closed for unreviewed or unsafe URLs (0.706927ms)
+  TypeError [Error]: support.supportDestination is not a function
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/tests/help-support.test.js:7:24)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+
+test at tests/help-support.test.js:14:1
+✖ local FAQ covers six action states and offers relevant device guidance without AI (0.198059ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'length')
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/tests/help-support.test.js:15:22)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)

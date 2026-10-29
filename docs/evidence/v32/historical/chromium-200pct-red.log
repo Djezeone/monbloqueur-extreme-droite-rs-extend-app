@@ -1,0 +1,12 @@
+{"suite":"universal-flows","engine":"chromium","version":"156.0.8078.4","physicalDevice":false}
+{"phase":"services-320","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"categories-320","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"summary-320","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"items-320","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"name":"novice: 3 étapes sans compte et zéro service sélectionné","result":"PASS"}
+{"name":"local: source sensible gardée en texte sans effet fournisseur","result":"PASS"}
+{"name":"choix modifiables: ajouter YouTube conserve la note locale","result":"PASS"}
+{"name":"guidé: portée explicite, aide fixe sans cible, aucun faux blocage YouTube","result":"PASS"}
+{"name":"déclaration guidée: refus puis consentement, jamais confirmation API","result":"PASS"}
+{"name":"universal flow continuation","result":"FAIL","error":"AssertionError [ERR_ASSERTION]: {\"viewport\":320,\"width\":326,\"offenders\":[{\"tag\":\"BUTTON\",\"id\":\"help-open\",\"class\":\"button subtle\",\"text\":\"Besoin d’aide ?\"},{\"tag\":\"SPAN\",\"id\":\"support-entry\",\"class\":\"\",\"text\":\"Soutenir FIL CLAIR\"},{\"tag\":\"BUTTON\",\"id\":\"support-button\",\"class\":\"button subtle\",\"text\":\"Soutenir FIL CLAIR\"}]}\n    at bounds (file:///workspace/scratch/0729b58f0643/fil-clair/scripts/test-pwa-flows.mjs:40:10)\n    at async file:///workspace/scratch/0729b58f0643/fil-clair/scripts/test-pwa-flows.mjs:124:5\n    at async check (file:///workspace/scratch/0729b58f0643/fil-clair/scripts/test-pwa-flows.mjs:15:3)\n    at async file:///workspace/scratch/0729b58f0643/fil-clair/scripts/test-pwa-flows.mjs:113:3"}
+Universal flows: 5/6 checks passed; emulation only, no provider action or full WCAG claim.

@@ -34,12 +34,12 @@ Interfaces : mountGuided({getState,save,notify,navigate,onSaved}) avec open/rese
 
 ### Task 3: Cache et recette
 Files : sw.js (version6 et allowlist exacte), utils/tests SW/audit et workflow existant, scripts/test-pwa-v32.mjs ; docs/evidence/v32/.
-- [ ] Ajouter seulement ressources publiques nécessaires ; tester exclusions OAuth/API/auth/cross-origin.
-- [ ] Exécuter unitaires/sécurité et E2E nouveaux + régressions trois moteurs ; archiver résultats/empreintes et réserves exactes.
+- [x] Ajouter seulement ressources publiques nécessaires ; tester exclusions OAuth/API/auth/cross-origin.
+- [x] Exécuter unitaires/sécurité et E2E nouveaux + régressions trois moteurs ; archiver résultats/empreintes et réserves exactes.
 
 ### Task 4: Livraison traçable et cockpit
 Files : mission/guide/architecture/ops/privacy et docs/evidence/2026-10-29-v32-guided-help.md.
-- [ ] Revue indépendante si outils disponibles, sinon self-review explicite et limitation ; traiter écarts importants avec régressions.
+- [x] Revue indépendante si outils disponibles, sinon self-review explicite et limitation ; traiter écarts importants avec régressions.
 - [ ] Commits groupés, branche/PR draft dépendante#2, une publication Git pour éviter CI redondante ; vérifier arbres et deux runs gratuits existants.
 - [ ] Actualiser8lots/8portes/session Airtable, relire ; prouver ou signaler absence de déploiementVercel ; laisser A/B/C ouvertes.
 
@@ -50,3 +50,5 @@ Files : mission/guide/architecture/ops/privacy et docs/evidence/2026-10-29-v32-g
 - Ruling : échec WebKit réel de concurrence observé (deux formulaires vidés, une seule addition relue dans un troisième onglet). La trace ciblée suivante passe et ne démontre pas la cause exacte. Injecter lecture périmée et absence d'événement pour éprouver le défaut du contrôle localStorage seul. Ajouter une empreinte SHA256 transactionnelle IndexedDB avant écriture, sans copie du carnet ni clé secrète. Web Locks reste requis. Coût si indisponible/interruption : écriture refusée, lecture/export et espace temporaire consenti ; ne pas perdre de données pour préserver la disponibilité. Cette modification de sécurité prime sur le périmètre UI initial.
 - Ruling : Vercel ne fournit pas le plan/capacité et le navigateur exige login. Désactiver uniquement les déploiements Git automatiques de la branche V3.2 dans la configuration, sans modifier les autres branches, les protections ou un domaine. Aucun déploiement manuel avant qualification du coût.
 - Final review : revue indépendante, aucun Critical trouvé ; I1 gel de sauvegarde lente, M1 état conservé du doublon. M1 reclassé Important : risque d'incitation à refaire un geste distant, alors que le statut est déjà déclaré. Deux régressions RED vérifiées avant une seule passe de correction4f51658 ;14/14 ciblés par moteur après correction. Aucune seconde revue revendiquée, aucun Minor différé.
+
+- Vérification finale locale : 151/151 Node,9/9 SW+audit,27/27 suites au contenu0fafbfa,14/14 V3.2 et6/6 concurrence chacun ;81scans axe,0violation et69incomplets.69hashes source et27logs vérifiés. Réserves distantes (publication de branche/CI/cockpit) suivies dans la PR finale sans poussée documentaire supplémentaire.

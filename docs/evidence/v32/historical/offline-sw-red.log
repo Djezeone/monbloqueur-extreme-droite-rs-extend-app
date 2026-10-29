@@ -1,0 +1,36 @@
+✔ only exact shell URLs are precached with credentials omitted (7.637012ms)
+✔ OAuth callbacks, token URLs, API replies and foreign resources bypass the worker (3.33725ms)
+✔ authenticated requests and writes bypass even shell URLs (1.847399ms)
+✔ browser navigations may load the public cached shell with include credentials (3.056486ms)
+✖ native public styles and icons can read the precache offline without caching private replies (6.670183ms)
+✔ installed shell requests are served without a runtime network write (5.432994ms)
+✔ a redirect while installing cannot persist a sign-in response (1.898868ms)
+✔ activation purges the old permissive cache and preserves unrelated app caches (1.982494ms)
+✔ a missing shell entry is fetched without persisting the network reply (1.859738ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 8
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 115.174132
+
+✖ failing tests:
+
+test at scripts/test-pwa-sw.mjs:117:1
+✖ native public styles and icons can read the precache offline without caching private replies (6.670183ms)
+  AssertionError [ERR_ASSERTION]: styles.css
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/scripts/test-pwa-sw.mjs:121:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
