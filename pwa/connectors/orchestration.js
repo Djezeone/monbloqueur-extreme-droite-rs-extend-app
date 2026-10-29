@@ -1,9 +1,10 @@
 import { connectorImplementation, ConnectorError, cooldownTime } from "./internal.js";
 
 // Memory only. There is deliberately no import/restore path for consent or evidence.
-export function createOrchestrator({ connector, now = Date.now } = {}) {
+export function createOrchestrator({ connector, now = Date.now, beforeSend = () => {} } = {}) {
   const implementation = connectorImplementation(connector);
   if (typeof now !== "function") throw new ConnectorError("invalid-clock");
+  if (typeof beforeSend !== "function") throw new ConnectorError("invalid-send-gate");
   const tickets = new WeakMap();
   const operations = new Map();
   const unresolved = new Map();
@@ -99,7 +100,12 @@ export function createOrchestrator({ connector, now = Date.now } = {}) {
       // Verify identity again after the potentially long, paginated pre-read.
       await implementation.readIdentity({ signal:controller.signal });
       guard(record, controller.signal);
-      const result = await implementation.write(target, action, before, { signal:controller.signal, now, beforeWrite:() => guard(record, controller.signal) });
+      const result = await implementation.write(target, action, before, { signal:controller.signal, now, beforeWrite:async () => {
+        guard(record, controller.signal);
+        await beforeSend();
+        // Consent or cancellation can change while the durable gate commits.
+        guard(record, controller.signal);
+      } });
       operation.accepted = result.accepted;
       operation.changed = result.accepted;
       transition(operation, "accepted");

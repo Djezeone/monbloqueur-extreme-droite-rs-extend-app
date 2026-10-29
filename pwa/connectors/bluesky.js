@@ -53,7 +53,7 @@ export function createBlueskyConnector(options) {
     try {
       if (action === "block") {
         if (state.occupiedRkey) throw new ConnectorError("record-key-conflict");
-        beforeWrite();
+        await beforeWrite();
         const body = await request(session, "/xrpc/com.atproto.repo.createRecord", { method:"POST", signal, body:{
           repo:session.accountId, collection, rkey:target.rkey, validate:true,
           record:{ $type:collection, subject:target.did, createdAt:new Date(now()).toISOString() }
@@ -62,7 +62,7 @@ export function createBlueskyConnector(options) {
         accepted = true;
       } else {
         for (const record of state.records) {
-          beforeWrite();
+          await beforeWrite();
           await request(session, "/xrpc/com.atproto.repo.deleteRecord", { method:"POST", signal, body:{ repo:session.accountId, collection, rkey:record.rkey, swapRecord:record.cid } });
           accepted = true;
         }

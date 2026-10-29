@@ -1,0 +1,7 @@
+{"engine": "firefox", "started": 1793301842.1717339, "source": "committed docs/research/2026-10-29-browser-environment.md", "expected_size": 116377639, "expected_sha256": "564f74fa3c46cb83c6252145cf1569c95236c8c404d6a5a80cc736cf32265f0c"}
+{"command": "curl --fail --location --silent --show-error --connect-timeout 20 --max-time 600 --output /tmp/fil-clair-durable-runtime/archives/firefox.zip.part https://playwright.download.prss.microsoft.com/dbazure/download/playwright/builds/firefox/1555/firefox-ubuntu-24.04.zip"}
+{"download_exit": 0}
+{"actual_size": 116377639, "sha256": "564f74fa3c46cb83c6252145cf1569c95236c8c404d6a5a80cc736cf32265f0c"}
+{"zip_crc": "PASS", "entries": 54}
+{"command": "unzip -q /tmp/fil-clair-durable-runtime/archives/firefox.zip -d /tmp/fil-clair-durable-runtime/browsers/firefox"}
+{"result": "PASS", "destination": "/tmp/fil-clair-durable-runtime/browsers/firefox", "finished": 1793301853.7011588}

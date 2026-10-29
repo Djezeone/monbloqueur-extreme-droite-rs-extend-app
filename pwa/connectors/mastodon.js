@@ -13,7 +13,7 @@ export function createMastodonConnector(options) {
     return { target, blocked:body[0].blocking };
   }
   async function write(target, action, state, { signal, beforeWrite } = {}) {
-    beforeWrite();
+    await beforeWrite();
     const body = await request(session, `/api/v1/accounts/${normalizeTarget(target)}/${action}`, { method:"POST", body:{}, signal });
     // This validates acceptance only. A new GET is still required for confirmation.
     if (!body || body.id !== target || typeof body.blocking !== "boolean" || body.blocking !== (action === "block")) {

@@ -1,0 +1,2 @@
+{"name":"firefox","started":"2026-10-29T19:24:34.643Z","executablePath":"/tmp/fil-clair-durable-runtime/browsers/firefox/firefox/firefox","scope":"synthetic in-memory page only; no project suites"}
+{"result":"PASS","name":"firefox","version":"157.0","finished":"2026-10-29T19:24:35.857Z"}

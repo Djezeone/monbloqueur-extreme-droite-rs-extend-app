@@ -1,0 +1,377 @@
+✖ the private gate is awaited before a Mastodon POST starts (5.095744ms)
+✖ durable execution closes only after fresh readback and does not restore its proof (0.580917ms)
+✖ two runners competing for one account send at most one mutation (0.490841ms)
+✖ old, cloned, consumed, and imported consent cannot authorize another execution (0.506044ms)
+✖ prepared recovery fences the old pre-reading runner before its first POST (0.460746ms)
+✖ a matching recovery observation cannot clear a send that may still be in flight (1.426915ms)
+✖ a lost mutation reply is quarantined across restart and never retried (0.302647ms)
+✖ storage denial before claim performs no authenticated request (0.274214ms)
+✖ a rejected send checkpoint performs no POST (0.410921ms)
+✖ failure to commit completion withholds provider confirmation and preserves sending (0.618804ms)
+✖ consent expiring during checkpoint persistence prevents the POST (0.226422ms)
+✖ cancel while waiting on a claim never enters the provider (0.303218ms)
+✖ 429 cooldown survives a fresh runner and requires new consent after expiry (0.215355ms)
+✖ authentication refusal durably stops the lane without leaking provider messages (0.262436ms)
+✖ Bluesky awaits each checkpoint and preserves partial effects if the second fails (0.269277ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 0
+ℹ fail 15
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 133.055217
+
+✖ failing tests:
+
+test at tests/durable-orchestration.test.js:53:1
+✖ the private gate is awaited before a Mastodon POST starts (5.095744ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'ungated' !== 'gated'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:59:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'ungated',
+    expected: 'gated',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:63:1
+✖ durable execution closes only after fresh readback and does not restore its proof (0.580917ms)
+  AssertionError [ERR_ASSERTION]: durable runner must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at f.create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:46:12)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:64:36)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:73:1
+✖ two runners competing for one account send at most one mutation (0.490841ms)
+  AssertionError [ERR_ASSERTION]: durable runner must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at f.create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:46:12)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:75:17)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:81:1
+✖ old, cloned, consumed, and imported consent cannot authorize another execution (0.506044ms)
+  AssertionError [ERR_ASSERTION]: durable runner must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at f.create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:46:12)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:82:35)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:93:1
+✖ prepared recovery fences the old pre-reading runner before its first POST (0.460746ms)
+  AssertionError [ERR_ASSERTION]: durable runner must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at f.create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:46:12)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:96:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:102:1
+✖ a matching recovery observation cannot clear a send that may still be in flight (1.426915ms)
+  AssertionError [ERR_ASSERTION]: durable runner must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at f.create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:46:12)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:105:17)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:115:1
+✖ a lost mutation reply is quarantined across restart and never retried (0.302647ms)
+  AssertionError [ERR_ASSERTION]: durable runner must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at f.create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:46:12)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:117:17)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:123:1
+✖ storage denial before claim performs no authenticated request (0.274214ms)
+  AssertionError [ERR_ASSERTION]: durable runner must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at f.create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:46:12)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:125:30)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:129:1
+✖ a rejected send checkpoint performs no POST (0.410921ms)
+  AssertionError [ERR_ASSERTION]: durable runner must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at f.create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:46:12)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:132:31)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:135:1
+✖ failure to commit completion withholds provider confirmation and preserves sending (0.618804ms)
+  AssertionError [ERR_ASSERTION]: durable runner must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at f.create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:46:12)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:138:30)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:142:1
+✖ consent expiring during checkpoint persistence prevents the POST (0.226422ms)
+  AssertionError [ERR_ASSERTION]: durable runner must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at f.create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:46:12)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:145:30)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:148:1
+✖ cancel while waiting on a claim never enters the provider (0.303218ms)
+  AssertionError [ERR_ASSERTION]: durable runner must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at f.create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:46:12)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:151:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:155:1
+✖ 429 cooldown survives a fresh runner and requires new consent after expiry (0.215355ms)
+  AssertionError [ERR_ASSERTION]: durable runner must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at f.create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:46:12)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:157:31)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:162:1
+✖ authentication refusal durably stops the lane without leaking provider messages (0.262436ms)
+  AssertionError [ERR_ASSERTION]: durable runner must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at f.create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:46:12)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:164:30)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:170:1
+✖ Bluesky awaits each checkpoint and preserves partial effects if the second fails (0.269277ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:171:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
