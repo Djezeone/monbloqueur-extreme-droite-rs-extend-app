@@ -31,6 +31,8 @@ jobs:
         run: npm run validate:list
       - name: Audit statique PWA
         run: node scripts/audit-pwa.mjs
+      - name: Registre documentaire synchronisé
+        run: node scripts/update-effects-register.mjs --check
       - name: Dépendances sans vulnérabilité élevée connue
         run: npm audit --audit-level=high
       - name: Installer les moteurs de test standards
@@ -48,6 +50,7 @@ jobs:
             node scripts/test-pwa-quality.mjs
             node scripts/test-pwa-flows.mjs
             node scripts/test-pwa-replacements.mjs
+            node scripts/test-pwa-v3.mjs
           done
 # Public repository + ubuntu-latest standard runner: free execution.
 # No uploaded artifacts, Actions cache, Copilot, paid runner or paid service.

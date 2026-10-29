@@ -1,0 +1,17 @@
+{"suite":"universal-v3","engine":"webkit","version":"27.2","physicalDevice":false}
+{"phase":"home-v3-320","violations":[],"incomplete":["color-contrast"]}
+{"phase":"register-x-v3-320","violations":[],"incomplete":["color-contrast"]}
+{"phase":"action-history-v3-320","violations":[],"incomplete":["color-contrast"]}
+{"name":"accueil : question universelle, quatre accès de44px sans récompense de blocage","result":"PASS"}
+{"name":"source : une entrée ouvre le carnet local sans fournisseur ni inscription","result":"PASS"}
+{"name":"registre : documentation séparée des preuves, modules tiers secondaires","result":"PASS"}
+{"name":"X : sources figées, composants divergents, aucune action de signalement","result":"PASS"}
+{"name":"guide : service facultatif ajouté sans perdre la source","result":"PASS"}
+{"name":"déclaration refusée puis consentie sans confirmation API","result":"PASS"}
+{"name":"états et historique : revue, échec, annulation et retour uniquement locaux","result":"PASS"}
+{"name":"indicateurs : choix, déclarations, reprises, jamais comptes pénalisés","result":"PASS"}
+{"name":"catégories modifiables : masquer Comptes ne supprime aucune fiche","result":"PASS"}
+{"name":"sauvegarde V3 complète et restore conservent les états/historiques","result":"PASS"}
+{"name":"hors ligne réel : registre, quatre accès et suivi restent disponibles","result":"PASS"}
+{"name":"sécurité : aucune donnée de cible transmise, aucune erreur JavaScript","result":"PASS"}
+Universal V3: 12/12 checks passed; emulation only, no provider action or full WCAG claim.

@@ -1,5 +1,8 @@
 import { PLATFORMS, CATEGORIES, CATALOGUE_CHECKED_AT, getControl } from "./platforms.js";
-import { newFlows, configureFlows, addFlow, setFlowStatus, removeFlow } from "./flow-core.js";
+import { newFlows, configureFlows, addFlow, setFlowStatus, undoFlowStatus, removeFlow } from "./flow-core.js";
+import { actionRecord, flowMetrics, FLOW_STATUS } from "./actions.js";
+import { getEffect } from "./effects.js";
+import { mountRegistry, effectDetails } from "./register-view.js";
 
 const $ = id => document.getElementById(id);
 function node(tag, text, className) {
@@ -38,6 +41,7 @@ export function mountFlows({ getState, save, notify, navigate }) {
   let setupOpen = false, step = 1, configSignature = "";
   let draftPlatforms = new Set(), draftCategories = new Set();
   const current = () => getState().flows || newFlows();
+  const registry = mountRegistry({ getState });
   function checkbox(value, label, description, group) {
     const wrapper = node("label", undefined, "choice-card");
     const input = node("input"); input.type = "checkbox"; input.value = value; input.name = group;
@@ -86,12 +90,27 @@ export function mountFlows({ getState, save, notify, navigate }) {
     if (focus && !$("view-flows").hidden) $("flow-step-heading").focus();
   }
   function openSetup() { setupOpen = true; step = 1; loadDraft(); renderSetup(true); }
+  async function openCategory(category) {
+    if (!Object.hasOwn(CATEGORIES, category)) return;
+    if (!current().setupComplete) {
+      const flows = configureFlows(current(), current().platforms, current().categories);
+      if (!await save({ ...getState(), flows }, "Carnet local prêt, sans inscription ni connexion sociale. Choisissez vos services quand vous le souhaitez.")) return;
+    }
+    if (!current().categories.includes(category)) { openSetup(); navigate("flows"); return; }
+    setupOpen = false; navigate("flows");
+    $("flow-platform").value = "local"; renderCategories();
+    $("flow-category").value = category; renderControls(); $("flow-target").focus();
+  }
 
   function renderControl() {
     const control = getControl($("flow-platform").value, $("flow-control").value);
     $("flow-add-button").disabled = !control;
     $("flow-control-info").replaceChildren(control ? instructions(control)
       : node("p", "Aucun contrôle documenté pour cette catégorie et ce service. Choisissez une autre catégorie ou le carnet Local / autres services.", "fine"));
+    if (control) {
+      const details=node("details"); details.append(node("summary", "Sources, retour arrière et limites"),effectDetails(getEffect($("flow-platform").value,control.id)));
+      $("flow-control-info").append(details);
+    }
   }
   function renderControls() {
     const platform = PLATFORMS[$("flow-platform").value];
@@ -132,9 +151,9 @@ export function mountFlows({ getState, save, notify, navigate }) {
   }
   function renderItems() {
     const flows = current(), query = $("flow-filter").value.trim().toLowerCase();
-    const planned = flows.items.filter(item => item.status === "planned").length;
-    const declared = flows.items.filter(item => item.status === "declared").length;
-    $("flow-count").textContent = `${flows.items.length} choix · ${planned} à faire · ${declared} déclarés · ${flows.items.length - planned - declared} notes locales · 0 confirmation API`;
+    const counts=flowMetrics(flows);
+    $("flow-count").textContent = `${counts.total} choix · ${counts.planned} à faire · ${counts.declared} déclarés · ${counts.local} notes locales · ${counts.failed} en échec · ${counts.review} à vérifier · ${counts.cancelled} suivis annulés · 0 confirmation API`;
+    const openAdvanced=new Set([...$("flow-items").querySelectorAll("li[data-flow-id] > details.flow-advanced[open]")].map(el=>el.parentElement.dataset.flowId));
     const fragment = document.createDocumentFragment();
     flows.items.filter(item => {
       const control = getControl(item.platform, item.control);
@@ -143,22 +162,41 @@ export function mountFlows({ getState, save, notify, navigate }) {
       const control = getControl(item.platform, item.control);
       const li = node("li"); li.dataset.flowId = item.id;
       const heading = node("div", undefined, "section-heading");
-      heading.append(node("h3", item.target), node("span", { planned:"À faire", declared:"Déclaré effectué · non vérifié", local:"Note locale · aucun effet fournisseur" }[item.status], "flow-status"));
+      heading.append(node("h3", item.target), node("span", FLOW_STATUS[item.status], "flow-status"));
       li.append(heading, node("p", PLATFORMS[item.platform].label + " · " + CATEGORIES[control.category] + " · " + control.label, "fine"), node("p", control.scope));
       const actions = node("div", undefined, "import-row");
+      const record=actionRecord(item);
+      li.append(node("p", "Suivi du " + new Date(record.date).toLocaleString("fr-FR") + " · " + record.verification.source + ". Aucune confirmation fournisseur.", "fine"));
       if (control.mode === "guide") {
-        actions.append(officialLink(control, item.target), flowButton(item.status === "declared" ? "Remettre à faire" : "Déclarer effectué", item.status === "declared" ? "reset" : "declare", item));
+        actions.append(officialLink(control, item.target), flowButton(item.status === "cancelled" ? "Reprendre le suivi" : item.status === "declared" ? "Remettre à faire" : "Déclarer effectué", ["declared", "cancelled"].includes(item.status) ? "reset" : "declare", item));
         const details = node("details"); details.append(node("summary", "Étapes et limites · " + control.label), instructions(control, false)); li.append(details);
       }
       actions.append(flowButton("Retirer le choix", "remove", item));
-      li.append(actions); fragment.append(li);
+      li.append(actions);
+      const advanced=node("details",undefined,"flow-advanced"); advanced.open=openAdvanced.has(item.id);
+      advanced.append(node("summary", "Suivi avancé et historique · " + control.label),node("p", record.revocation.description,"fine"));
+      const extra=node("div",undefined,"import-row");
+      if(control.mode === "guide") for (const [action,label] of [["review","Marquer à vérifier"],["failed","Noter un échec"]]) {
+        const b=flowButton(label,action,item); b.disabled=item.status===action; extra.append(b);
+      }
+      extra.append(flowButton(item.status === "cancelled" ? "Reprendre le suivi" : "Annuler le suivi",item.status === "cancelled" ? "reset" : "cancelled",item));
+      if(item.events?.length>=2 && item.events.at(-2).status!==item.status) extra.append(flowButton("État précédent dans FIL CLAIR","undo",item));
+      advanced.append(extra,node("p","32 dernières entrées au maximum, sans preuve fournisseur. Une ancienne fiche peut ne pas avoir d’historique avant la V3.","fine"));
+      const events=node("ol",undefined,"flow-events");
+      record.history.forEach(event=>events.append(node("li",new Date(event.at).toLocaleString("fr-FR")+" · "+FLOW_STATUS[event.status])));
+      advanced.append(events); li.append(advanced); fragment.append(li);
     });
     $("flow-items").replaceChildren(fragment);
     $("flow-empty").hidden = $("flow-items").children.length !== 0;
   }
   function focusItem(id, action) {
     const buttons = [...$("flow-items").querySelectorAll("button")];
-    (buttons.find(button => button.dataset.flowId === id && button.dataset.flowAction === action) || $("flow-filter")).focus();
+    const row=[...$("flow-items").children].find(row=>row.dataset.flowId===id);
+    const button=buttons.find(button => button.dataset.flowId === id && button.dataset.flowAction === action && !button.disabled)
+      || buttons.find(button=>button.dataset.flowId===id && button.dataset.flowAction==="reset" && !button.disabled)
+      || row?.querySelector(".flow-advanced > summary");
+    if(button?.closest("details")) button.closest("details").open=true;
+    (button || $("flow-filter")).focus();
   }
 
   $("flow-next").addEventListener("click", () => {
@@ -195,20 +233,27 @@ export function mountFlows({ getState, save, notify, navigate }) {
     const button = event.target.closest("button[data-flow-action]"); if (!button) return;
     const item = current().items.find(item => item.id === button.dataset.flowId); if (!item) return;
     const action = button.dataset.flowAction, control = getControl(item.platform, item.control);
+    const redeclare=action === "undo" && item.events?.at(-2)?.status === "declared";
     if (action === "declare" && !confirm("Avez-vous effectué « " + control.label + " » vous-même chez " + PLATFORMS[item.platform].label + " pour « " + item.target + " » ?\n\nPortée : " + control.scope + "\n\nCeci est votre déclaration, sans vérification API par FIL CLAIR.")) return;
     if (action === "remove" && !confirm("Retirer ce choix et sa déclaration de FIL CLAIR ? Aucune action ne sera annulée sur la plateforme.")) return;
+    if (action === "undo") {
+      const question = redeclare
+        ? "L’état précédent est « Déclaré effectué ». Confirmez-vous de nouveau avoir effectué « " + control.label + " » vous-même chez " + PLATFORMS[item.platform].label + " pour « " + item.target + " » ?\n\nPortée : " + control.scope + "\n\nCette confirmation constitue une nouvelle déclaration personnelle datée maintenant. Elle ne prouve pas la date de l’action distante, ne modifie aucun réglage fournisseur et n’est pas une confirmation API."
+        : "Revenir à l’état précédent du suivi dans FIL CLAIR ? Aucune action n’est effectuée ou annulée chez le fournisseur ; aucune nouvelle preuve n’est créée.";
+      if (!confirm(question)) return;
+    }
     try {
-      const flows = action === "remove" ? removeFlow(current(), item.id)
-        : setFlowStatus(current(), item.id, action === "declare" ? "declared" : "planned");
-      const message = action === "declare" ? "Déclaration personnelle enregistrée, non confirmée par API."
+      const flows = action === "remove" ? removeFlow(current(), item.id) : action === "undo" ? undoFlowStatus(current(),item.id,Date.now(),{redeclare})
+        : setFlowStatus(current(), item.id, action === "declare" ? "declared" : action === "reset" ? (control.mode === "local" ? "local" : "planned") : action);
+      const message = action === "declare" || redeclare ? "Nouvelle déclaration personnelle enregistrée, non confirmée par API ; aucune date d’action distante n’est vérifiée."
         : "Choix local mis à jour ; aucune action n’est effectuée ou annulée sur la plateforme.";
-      if (await save({ ...getState(), flows }, message)) focusItem(item.id, action === "declare" ? "reset" : "declare");
+      if (await save({ ...getState(), flows }, message)) focusItem(item.id, action === "declare" ? "reset" : action === "remove" ? "absent" : "declare");
     } catch (error) { notify(error.message, true); }
   });
 
   function render() {
     if (!current().setupComplete && !setupOpen) { setupOpen = true; step = 1; loadDraft(); }
-    renderSetup(); renderConfiguration(); renderItems();
+    renderSetup(); renderConfiguration(); renderItems(); registry.render();
   }
   function resetDraft() {
     setupOpen = !current().setupComplete;
@@ -216,6 +261,7 @@ export function mountFlows({ getState, save, notify, navigate }) {
     $("flow-filter").value = "";
     for (const id of ["flow-platform", "flow-category", "flow-control"]) $(id).value = "";
     step = 1; configSignature = ""; loadDraft();
+    registry.reset();
   }
-  return { render, openSetup, resetDraft };
+  return { render, openSetup, openCategory, resetDraft };
 }

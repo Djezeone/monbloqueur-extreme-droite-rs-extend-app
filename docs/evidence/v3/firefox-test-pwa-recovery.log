@@ -1,0 +1,3 @@
+PWA recovery engine: firefox 157.0
+corrupt startup: visible error, no overwrite after mutation attempt, exact raw source export PASS
+near-limit valid state: 9769347 UTF-8 bytes, 500 multibyte preferences and lists roundtrip within 10MB PASS

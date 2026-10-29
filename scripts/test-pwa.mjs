@@ -19,7 +19,7 @@ try {
   const page=await context.newPage();
   await page.goto(url,{waitUntil:"networkidle"});
   await waitForShell(page);
-  await assert.doesNotReject(()=>page.getByRole("heading",{name:"Un fil qui vous ressemble."}).waitFor());
+  await assert.doesNotReject(()=>page.getByRole("heading",{name:"Que souhaitez-vous maîtriser dans votre fil ?"}).waitFor());
   await page.getByRole("button",{name:"Mes listes",exact:true}).click();
   await page.locator("#handle").fill("qa_profil");
   await page.getByRole("button",{name:"Ajouter à ma liste"}).click();
@@ -46,7 +46,7 @@ try {
     for(const key of keys){const cache=await caches.open(key);urls.push(...(await cache.keys()).map(request=>new URL(request.url).pathname+new URL(request.url).search));}
     return urls;
   });
-  assert.deepEqual(cacheUrls.sort(),["/","/index.html","/styles.css","/app.js","/core.js","/flow-core.js","/platforms.js","/flows.js","/privacy.html","/manifest.webmanifest","/icon.svg","/icon-192.png","/icon-512.png"].sort());
+  assert.deepEqual(cacheUrls.sort(),["/","/index.html","/styles.css","/app.js","/core.js","/flow-core.js","/platforms.js","/flows.js","/actions.js","/effects.js","/register-view.js","/privacy.html","/manifest.webmanifest","/icon.svg","/icon-192.png","/icon-512.png"].sort());
   // Firefox may revalidate sw.js outside Playwright's page network emulation.
   // Stop the origin too: offline success must not rely on a reachable server.
   await server.pause();

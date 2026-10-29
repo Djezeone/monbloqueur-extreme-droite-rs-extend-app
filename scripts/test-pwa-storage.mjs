@@ -20,7 +20,7 @@ try {
     });
     const page = await denied.newPage();
     await page.goto(server.url, { waitUntil: "networkidle" });
-    await page.getByRole("heading", { name: "Un fil qui vous ressemble.", exact: true }).waitFor();
+    await page.getByRole("heading", { name: "Que souhaitez-vous maîtriser dans votre fil ?", exact: true }).waitFor();
     await page.getByRole("button", { name: "Mes listes", exact: true }).click();
     const add = page.getByRole("button", { name: "Ajouter à ma liste", exact: true });
     if (await page.locator("#handle").isEnabled() && await add.isEnabled()) {
