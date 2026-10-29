@@ -50,7 +50,7 @@ try{
     page.once("dialog",d=>d.accept());await page.locator('[data-flow-action="declare"]').first().click();
     await expect.poll(async()=>JSON.parse(await snapshot(page)).flows.items[0].status).toBe("declared");
     const before=JSON.parse(await snapshot(page)).flows.items[0];assert.equal(before.status,"declared");
-    await choices("cnews",["discover"],["discover:hide-source"]);await page.locator("#guided-next").click();await expect(page.locator("#guided-body")).toContainText("1 déjà présente");await finish();
+    await choices("cnews",["discover"],["discover:hide-source"]);await page.locator("#guided-next").click();await expect(page.locator("#guided-body")).toContainText("1 déjà présente");await expect(page.locator("#guided-body li")).toContainText("Déclaré effectué");await finish();
     assert.deepEqual(JSON.parse(await snapshot(page)).flows.items[0],before);
   });
   await check("carnet local sans service tiers et nom libre",async()=>{
@@ -104,6 +104,17 @@ try{
     await page.getByRole("button",{name:"Réglages",exact:true}).click();page.once("dialog",d=>d.accept());await page.locator("#erase").click();
     await expect(page.locator("#help-search")).toHaveValue("");await expect.poll(async()=>JSON.parse(await snapshot(page)).flows?.items?.length||0).toBe(0);
     await page.locator("#guided-open").click();await expect(page.locator("#guided-target")).toHaveValue("");await page.locator("#guided-cancel").click();
+  });
+  await check("enregistrement lent : navigation et aide figées jusqu’au résultat, aucun nouveau brouillon perdu",async()=>{
+    await choices("Source en cours",["local"],["local:source-avoid"]);await page.locator("#guided-next").click();
+    await page.evaluate(()=>{
+      const original=navigator.locks.request.bind(navigator.locks);
+      navigator.locks.request=(...args)=>new Promise((resolve,reject)=>{window.qaResumeSave=()=>original(...args).then(resolve,reject);});
+    });
+    await page.locator("#guided-save").click();await expect.poll(()=>page.evaluate(()=>typeof window.qaResumeSave)).toBe("function");
+    for(const selector of ["#guided-back","#guided-cancel","#guided-next",'#guided-dialog [data-help]'])await expect(page.locator(selector)).toBeDisabled();
+    await page.keyboard.press("Escape");await expect(page.locator("#guided-dialog")).toBeVisible();
+    await page.evaluate(()=>window.qaResumeSave());await expect(page.locator("#guided-dialog")).not.toBeVisible();assert.equal(JSON.parse(await snapshot(page)).flows.items.at(-1).target,"Source en cours");
   });
   if(process.env.PWA_CAPTURE_DIR){await mkdir(process.env.PWA_CAPTURE_DIR,{recursive:true});await page.getByRole("button",{name:"Accueil",exact:true}).click();await page.setViewportSize({width:390,height:844});await page.screenshot({path:process.env.PWA_CAPTURE_DIR+"/home-390.png",fullPage:true});await page.locator("#guided-open").click();await page.locator("#guided-target").fill("CNEWS");await page.screenshot({path:process.env.PWA_CAPTURE_DIR+"/guided-390.png"});}
   assert.deepEqual(errors,[]);assert.deepEqual(external,[]);await context.close();

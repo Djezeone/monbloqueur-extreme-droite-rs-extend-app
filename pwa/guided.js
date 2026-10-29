@@ -1,6 +1,7 @@
 import {PLATFORMS,CATEGORIES} from "./platforms.js";
 import {newFlows} from "./flow-core.js";
 import {guidedOptions,buildGuidedPlan} from "./guided-core.js";
+import {FLOW_STATUS} from "./actions.js";
 const $=id=>document.getElementById(id);
 function node(tag,text,className){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(className)el.className=className;return el;}
 export function mountGuided({getState,save,notify,navigate,onSaved}) {
@@ -50,7 +51,11 @@ export function mountGuided({getState,save,notify,navigate,onSaved}) {
     }else{
       const result=buildGuidedPlan(current(),selectedInput());
       body.append(node("p",target),node("p",result.added+" nouvelle(s) fiche(s) à préparer · "+result.existing+" déjà présente(s), avec leur état conservé."));
-      const list=node("ul");for(const p of guidedOptions(category,[...platforms]))for(const c of p.controls)if(selections.has(p.id+":"+c.id))list.append(node("li",p.label+" · "+c.label+" · "+(c.mode==="local"?"Note locale":"À faire chez le fournisseur")));
+      const list=node("ul");for(const p of guidedOptions(category,[...platforms]))for(const c of p.controls)if(selections.has(p.id+":"+c.id)){
+        const existing=current().items.find(i=>i.platform===p.id&&i.control===c.id&&i.target.toLowerCase()===target.trim().toLowerCase());
+        const state=existing?FLOW_STATUS[existing.status]+" · état existant conservé":c.mode==="local"?"Note locale":"À faire chez le fournisseur";
+        list.append(node("li",p.label+" · "+c.label+" · "+state));
+      }
       body.append(list,node("p","Enregistrer ne modifie aucun service. Ensuite, ouvrez l’aide officielle de chaque fiche, effectuez vous-même le geste puis déclarez-le si nécessaire. Aucune confirmation fournisseur n’est produite."));
     }
     if(focus)$("guided-title").focus();
@@ -61,6 +66,7 @@ export function mountGuided({getState,save,notify,navigate,onSaved}) {
   }
   $("guided-open").addEventListener("click",open);
   $("guided-next").addEventListener("click",()=>{
+    if(busy)return;
     try{
       if(step===1&&(!target.trim()||target.trim().length>200||/[\u0000-\u001f\u007f]/.test(target)))throw Error("Choisissez ou saisissez un nom sur une ligne.");
       if(step===2&&!platforms.size)throw Error("Choisissez au moins le carnet local ou un service.");
@@ -68,18 +74,20 @@ export function mountGuided({getState,save,notify,navigate,onSaved}) {
       step=Math.min(4,step+1);render();
     }catch(e){error(e.message);}
   });
-  $("guided-back").addEventListener("click",()=>{step=Math.max(1,step-1);render();});
+  $("guided-back").addEventListener("click",()=>{if(busy)return;step=Math.max(1,step-1);render();});
   $("guided-cancel").addEventListener("click",()=>{if(!busy)dialog.close();});
   dialog.addEventListener("cancel",event=>{if(busy)event.preventDefault();});
   dialog.addEventListener("close",()=>{target="";selections.clear();body.replaceChildren();if(trigger?.isConnected)trigger.focus();});
   $("guided-save").addEventListener("click",async()=>{
-    if(busy)return;busy=true;$("guided-save").disabled=true;
+    if(busy)return;busy=true;
+    const controls=[...dialog.querySelectorAll("button,input,select")].map(el=>({el,disabled:el.disabled}));
+    controls.forEach(({el})=>{el.disabled=true;});dialog.setAttribute("aria-busy","true");
     try{
       const result=buildGuidedPlan(current(),selectedInput()),savedTarget=target.trim();
       if(await save({...getState(),flows:result.flows},result.added+" choix enregistrés ; "+result.existing+" existants conservés. Aucune action distante effectuée.")){
         dialog.close();navigate("flows");onSaved(savedTarget);
       }else error("Enregistrement non confirmé. Votre brouillon est conservé. Consultez le message d’enregistrement puis sauvegardez les données accessibles si nécessaire.");
-    }catch(e){error(e.message);notify(e.message,true);}finally{busy=false;$("guided-save").disabled=false;}
+    }catch(e){error(e.message);notify(e.message,true);}finally{busy=false;dialog.removeAttribute("aria-busy");controls.forEach(({el,disabled})=>{if(el.isConnected)el.disabled=disabled;});}
   });
   return {open,reset(){if(dialog.open)dialog.close();step=1;target="";category="sources";platforms.clear();selections.clear();body.replaceChildren();error("");}};
 }
