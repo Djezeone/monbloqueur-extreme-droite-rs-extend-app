@@ -145,4 +145,8 @@ details p,details li { overflow-wrap:anywhere }
 .assistant-dialog .flow-fieldset{margin-block:1rem}
 .assistant-dialog .choice-card{margin-block:.5rem}
 .assistant-dialog input:not([type=checkbox]),.assistant-dialog select{max-width:100%;box-sizing:border-box}
-footer details{max-width:28rem}footer details p{line-height:1.6}footer summary{min-height:44px;cursor:pointer;padding:.65rem}
+.topbar{flex-wrap:wrap}.topbar .button{max-width:100%;min-width:0}
+@media(max-width:760px){.topbar #help-open{font-size:12px;padding:8px 10px}}
+@media(max-width:380px){.topbar{gap:8px}.topbar #help-open{width:82px;font-size:11px;padding:6px;overflow-wrap:anywhere}}
+footer details{max-width:min(28rem,100%);min-width:0}footer details p{line-height:1.6}footer summary{min-height:44px;cursor:pointer;padding:.65rem}
+#support-entry{display:block;max-width:100%}#support-entry .button{max-width:100%;white-space:normal;overflow-wrap:anywhere}
