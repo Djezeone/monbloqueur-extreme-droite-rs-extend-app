@@ -1,0 +1,325 @@
+✖ the journal exposes only read and compareAndSet (2.06209ms)
+✖ unavailable and denied IndexedDB fail with bounded ConnectorError codes (0.371841ms)
+✖ a pending IndexedDB open times out safely (0.262976ms)
+✖ timeout configuration is an integer between 1 and 10000ms (0.700557ms)
+✖ lane validation precedes storage access and binds the provider account format (0.408346ms)
+✖ lane origins reject credentials, paths, queries, ports and private literal hosts (0.293243ms)
+✖ CAS rejects invalid or caller-assigned revisions before storage access (0.267804ms)
+✖ checkpoint shape is exact and rejects imported proof, consent and secrets (0.326592ms)
+✖ checkpoint scalar fields and bounded reasons are validated before storage (0.30496ms)
+✖ observations allow only a boolean and a nonnegative safe timestamp (0.368576ms)
+✖ Bluesky targets are exact normalized DID and record-key pairs (0.294885ms)
+✖ every bounded checkpoint reason and valid phase passes validation (0.439363ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 0
+ℹ fail 12
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 123.816858
+
+✖ failing tests:
+
+test at tests/operation-journal.test.js:31:1
+✖ the journal exposes only read and compareAndSet (2.06209ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:32:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:37:1
+✖ unavailable and denied IndexedDB fail with bounded ConnectorError codes (0.371841ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:38:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:48:1
+✖ a pending IndexedDB open times out safely (0.262976ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:49:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:53:1
+✖ timeout configuration is an integer between 1 and 10000ms (0.700557ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:55:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+    + actual - expected
+    
+    + 'undefined'
+    - 'function'
+    
+        at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+        at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:55:25
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:55:12)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1402:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+        at Test.postRun (node:internal/test_runner/test:1542:19)
+        at Test.run (node:internal/test_runner/test:1467:12),
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:60:1
+✖ lane validation precedes storage access and binds the provider account format (0.408346ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:62:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:74:1
+✖ lane origins reject credentials, paths, queries, ports and private literal hosts (0.293243ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:76:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:85:1
+✖ CAS rejects invalid or caller-assigned revisions before storage access (0.267804ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:87:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:95:1
+✖ checkpoint shape is exact and rejects imported proof, consent and secrets (0.326592ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:97:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:113:1
+✖ checkpoint scalar fields and bounded reasons are validated before storage (0.30496ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:115:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:129:1
+✖ observations allow only a boolean and a nonnegative safe timestamp (0.368576ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:131:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:140:1
+✖ Bluesky targets are exact normalized DID and record-key pairs (0.294885ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:142:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:151:1
+✖ every bounded checkpoint reason and valid phase passes validation (0.439363ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:153:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,501 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> bloquer-extreme-droite-x@2.3.0 test
+> node --test tests/*.test.js
+
+✔ modèle commun : nature/portée/méthode/date et déclaration sans preuve fournisseur (2.772112ms)
+✔ note locale enregistrée et réglage Safari ne prétendent pas connaître un compte (0.506204ms)
+✔ échec/revue/annulation personnels et retour précédent sont immuables et datés (1.345309ms)
+✔ historique borné à32, sans copie de cible ni faux passé des anciennes fiches (3.729736ms)
+✔ sauvegardes V2/V3 restaurables ; historique falsifié conserve la source de récupération (18.389342ms)
+✔ métriques ne récompensent ni signalements ni pénalités de comptes (0.551552ms)
+✔ restaurer declared exige une nouvelle déclaration explicite, datée comme telle (0.752565ms)
+✔ factories require an explicit official session and transport, with no boot request (10.870148ms)
+✔ Mastodon refuses non-approved origins, IPs, credentials, paths and broad scopes (0.983543ms)
+✔ Mastodon validates decimal target IDs before any authenticated call (6.345552ms)
+✔ Mastodon reads identity then exactly one matching relationship on its fixed origin (7.668017ms)
+▶ Mastodon never trusts a wrong account, redirected reply, missing or ambiguous relationship
+  ✔ identity (0.575438ms)
+  ✔ redirect (0.651203ms)
+  ✔ missing (3.275562ms)
+  ✔ wrong ID (16.542991ms)
+  ✔ string boolean (1.488335ms)
+  ✔ duplicates (0.39768ms)
+✔ Mastodon never trusts a wrong account, redirected reply, missing or ambiguous relationship (27.379068ms)
+✔ Bluesky requires a pinned allowed HTTPS PDS, DID and narrowly granted write scopes (0.532363ms)
+✔ Bluesky scans all pages on its actor repo before reporting a target absent (1.345289ms)
+▶ Bluesky refuses incomplete, looping or malformed block collection reads
+  ✔ looping cursor (0.870954ms)
+  ✔ missing array (0.235616ms)
+  ✔ wrong repo (0.297669ms)
+  ✔ wrong collection (0.776252ms)
+  ✔ wrong record type (1.886045ms)
+  ✔ missing CID (0.621277ms)
+  ✔ invalid subject (0.654688ms)
+✔ Bluesky refuses incomplete, looping or malformed block collection reads (7.267764ms)
+✔ Bluesky target DID and stable record keys are validated before transport (0.580555ms)
+✔ a mutable caller session cannot change the captured provider identity or scopes (1.220871ms)
+✔ préserve les grands identifiants et supprime les données supplémentaires (5.822464ms)
+✔ refuse les identifiants numériques, doublons et injections (0.366022ms)
+✔ refuse une liste mal structurée et accepte une liste vide (0.158368ms)
+✔ rejette les gros fichiers avant leur chargement et les réponses non JSON (11.530914ms)
+✔ the private gate is awaited before a Mastodon POST starts (12.707981ms)
+✔ durable execution closes only after fresh readback and does not restore its proof (7.619595ms)
+✔ two runners competing for one account send at most one mutation (3.230844ms)
+✔ old, cloned, consumed, and imported consent cannot authorize another execution (4.029648ms)
+✔ prepared recovery fences the old pre-reading runner before its first POST (1.861548ms)
+✔ a matching recovery observation cannot clear a send that may still be in flight (4.96512ms)
+✔ a lost mutation reply is quarantined across restart and never retried (33.688816ms)
+✔ storage denial before claim performs no authenticated request (0.674268ms)
+✔ a rejected send checkpoint performs no POST (2.75098ms)
+✔ failure to commit completion withholds provider confirmation and preserves sending (5.624905ms)
+✔ consent expiring during checkpoint persistence prevents the POST (1.0807ms)
+✔ cancel while waiting on a claim never enters the provider (1.650289ms)
+✔ 429 cooldown survives a fresh runner and requires new consent after expiry (1.638292ms)
+✔ authentication refusal durably stops the lane without leaking provider messages (1.315885ms)
+✔ Bluesky awaits each checkpoint and preserves partial effects if the second fails (1.96892ms)
+✔ registre exhaustif des43 contrôles, public/immuable et séparé des preuves d'action (1.966296ms)
+✔ API documentées mais inactives : aucune permission de production implicitement consentie (0.787508ms)
+✔ péremption documentaire déterministe, source ancienne n'est pas disponibilité testée (1.183295ms)
+✔ coefficients X figés par composant, probabilités et absence de configuration de production prouvée (4.887002ms)
+✔ catalogue universel avec quatre catégories et services entièrement facultatifs (5.668437ms)
+✔ sans Google ni réseau, le carnet local est utilisable et immuable (1.673825ms)
+✔ modifier ses services et catégories ne supprime ni ne confirme de fiche existante (1.347212ms)
+✔ déclaré, à faire et note locale gardent des portées distinctes sans statut API (1.467123ms)
+✔ la sauvegarde complète préserve les flux et les anciennes listes sans conversion de preuve (1.979455ms)
+✔ flux corrompus, secrets et fausses confirmations rendent le snapshot récupérable sans écrasement (6.755176ms)
+✔ bornes, doublons et cibles dangereuses refusés sans mutation (15.793895ms)
+✔ bloquer, feedback et réglages ne sont jamais des actions interchangeables (0.752545ms)
+✔ guided options expose only documented category controls, including unavailable services (2.91666ms)
+✔ guided batch registers intentions together, never a provider confirmation (3.328601ms)
+✔ guided duplicate preserves existing declaration and history instead of resetting it (3.09532ms)
+✔ invalid or over-limit batch cannot partially modify the original snapshot (91.568854ms)
+✔ guided local route works with no external service and keeps previous selections (0.458742ms)
+✔ support defaults to no destination and fails closed for unreviewed or unsafe URLs (3.477846ms)
+✔ local FAQ covers six action states and offers relevant device guidance without AI (5.78035ms)
+✔ isole les comptes par clé, même si leur pseudo est identique (4.327578ms)
+✔ fusionne les identifiants en préservant les grands nombres en chaînes (0.940839ms)
+✔ filtre les entrées malformées et retire les champs superflus (0.487285ms)
+✔ ignore les propriétés héritées, les accesseurs et les clés de prototype (0.521807ms)
+✔ borne chaque compte aux 10 000 derniers identifiants uniques (47.445328ms)
+✔ conserve cinq comptes récents et rafraîchit leur position LRU (1.633143ms)
+✔ une clé répétée garde uniquement l’entrée la plus récente (0.816732ms)
+✖ the journal exposes only read and compareAndSet (3.757889ms)
+✖ unavailable and denied IndexedDB fail with bounded ConnectorError codes (0.91477ms)
+✖ a pending IndexedDB open times out safely (0.406794ms)
+✖ timeout configuration is an integer between 1 and 10000ms (0.705635ms)
+✖ lane validation precedes storage access and binds the provider account format (0.623661ms)
+✖ lane origins reject credentials, paths, queries, ports and private literal hosts (0.281335ms)
+✖ CAS rejects invalid or caller-assigned revisions before storage access (0.336628ms)
+✖ checkpoint shape is exact and rejects imported proof, consent and secrets (2.559501ms)
+✖ checkpoint scalar fields and bounded reasons are validated before storage (0.495768ms)
+✖ observations allow only a boolean and a nonnegative safe timestamp (1.032598ms)
+✖ Bluesky targets are exact normalized DID and record-key pairs (0.37761ms)
+✖ every bounded checkpoint reason and valid phase passes validation (0.326473ms)
+✔ an older operation cannot reconcile or clear the current uncertainty lock (31.458731ms)
+✔ HTTP 500 after mutation preserves uncertainty and forbids a replay (8.983532ms)
+✔ HTTP 502 after mutation preserves uncertainty and forbids a replay (2.216193ms)
+✔ HTTP 503 after mutation preserves uncertainty and forbids a replay (3.370024ms)
+✔ HTTP 408 after mutation preserves uncertainty and forbids a replay (9.010783ms)
+✔ HTTP 201 after mutation preserves uncertainty and forbids a replay (1.884212ms)
+✔ HTTP 302 after mutation preserves uncertainty and forbids a replay (1.058227ms)
+✔ HTTP 0 after mutation preserves uncertainty and forbids a replay (4.61648ms)
+✔ HTTP 700 after mutation preserves uncertainty and forbids a replay (3.520531ms)
+✔ no consent, forged/imported consent, mismatched account/target/action or expiry can write (1.139729ms)
+✔ fresh independent readback follows accepted mutation and alone creates confirmation (5.631646ms)
+✔ a provider accepted response is not a confirmation when readback still differs (1.638952ms)
+✔ already blocked state uses a fresh provider read and avoids duplicate mutation (4.491516ms)
+✔ consent is single use and a double click cannot start a second request (1.193801ms)
+✔ cancellation before start or while reading prevents every later write (1.485932ms)
+✔ expired consent while pre-reading does not permit a write (0.561627ms)
+✔ a different authenticated identity stops before state or mutation (0.283437ms)
+✔ a session changed during pre-reading is checked again before mutation (0.468016ms)
+▶ 401 and 403 stop this runner and never trigger refresh or retry
+  ✔ 401 (0.243337ms)
+  ✔ 403 (0.143126ms)
+✔ 401 and 403 stop this runner and never trigger refresh or retry (0.714518ms)
+▶ 429 records Retry-After cooldown with no automatic retry, including HTTP date
+  ✔ 5 (0.80867ms)
+  ✔ Thu, 01 Jan 1970 00:00:09 GMT (0.339352ms)
+  ✔ nonsense (0.454876ms)
+✔ 429 records Retry-After cooldown with no automatic retry, including HTTP date (2.000088ms)
+✔ a mutation 429 requires another explicit consent after cooldown, never a scheduled retry (2.632972ms)
+✔ a lost mutation reply remains unknown and cannot be replayed with fresh consent (0.90147ms)
+✔ a different state cannot release uncertainty while an earlier mutation may still be in flight (2.411227ms)
+✔ an actual request deadline returns unknown and does not retry an in-flight mutation (20.412949ms)
+✔ cancellation in flight cannot claim the remote mutation was cancelled (0.984645ms)
+✔ failed readback keeps accepted true but cannot create a provider confirmation (0.849461ms)
+✔ a malformed successful mutation reply is unknown and never promoted by imported flags (1.216986ms)
+✔ public snapshots cannot mutate runner evidence and imported evidence is ignored (0.962001ms)
+✔ Bluesky sends a stable explicit rkey and verifies the new target record independently (2.291967ms)
+✔ Bluesky pre-read finds an existing later-page block without creating a duplicate (1.268133ms)
+✔ Bluesky refuses an rkey collision with another DID before mutation (0.593065ms)
+✔ Bluesky unblocks every matching record with CID checks, preserving unrelated blocks (0.712334ms)
+✔ Bluesky cannot confirm unblock while a matching block remains on a later page (1.105628ms)
+✔ cancelling a Bluesky multi-record unblock stops the next delete and preserves uncertainty (1.18632ms)
+✔ an explicit refusal after one accepted Bluesky deletion reports the partial change and stops (1.722308ms)
+✔ expiry between Bluesky deletions prevents the next write and preserves accepted partial progress (1.448014ms)
+✔ 10 réseaux, URL HTTPS officielle et dédoublonnage (3.82519ms)
+✔ refus des chemins, pseudo invalide, mauvais domaines Mastodon et XSS (0.525403ms)
+✔ import liste X v1, import autonome v1, limite de taille (7.454786ms)
+✔ historique explicite réversible et progression séparée par liste (3.280739ms)
+✔ seule l'absence de stockage crée un état neuf au démarrage (1.52459ms)
+✔ le démarrage refuse une structure corrompue au lieu de réparer et perdre des données (5.13025ms)
+✔ loadState rend la corruption originale exportable sans proposer un état vide à enregistrer (0.657432ms)
+✔ une sauvegarde corrompue ne peut pas déclencher une restauration vide (21.268314ms)
+✔ un statut à vérifier ne compte pas comme blocage confirmé (0.810643ms)
+✔ les révisions et provenances de listes survivent à import, export et sauvegarde v1 (1.309916ms)
+✔ la version X v1 devient une révision de liste déclarée sans preuve fournisseur (0.380214ms)
+✔ les métadonnées optionnelles sont bornées et ne partagent pas l'objet importé (1.919766ms)
+✔ les champs importés de confirmation ne deviennent jamais des preuves fournisseur (0.500275ms)
+✔ un profil retiré puis réajouté ne retrouve pas son ancienne décision (0.868741ms)
+✔ supprimer une liste purge seulement ses décisions et conserve son historique (0.679806ms)
+✔ retirer une liste inactive préserve la sélection et une cible absente ne détruit rien (0.192941ms)
+✔ une sauvegarde accepte les clés Mastodon valides longues sans supprimer la déclaration (0.489989ms)
+✔ une sauvegarde refuse les clés non canoniques et les titres ou doublons à perte (0.845045ms)
+✔ les dates impossibles ne créent pas de décisions ou de sauvegardes illisibles (1.094672ms)
+✔ une décision ne peut pas viser une liste ou un profil absent (0.592083ms)
+✔ le plafond de décisions refuse un ajout sans perdre les déclarations existantes (107.954744ms)
+✔ les limites acceptent 5000 profils par liste et 30 listes mais refusent les dépassements (33.534848ms)
+✔ les titres texte v1 déjà acceptés restent exportables et restaurables (0.525282ms)
+✔ un clic ouvre un seul onglet sans le rendre actif (17.04973ms)
+✔ succès et compte déjà bloqué comptent sans jamais débloquer (4.436353ms)
+✔ un compte indisponible est conservé dans le bilan et les suivants continuent (1.588006ms)
+✔ un blocage déjà visible sans identité numérique ne remplit pas le cache (1.589999ms)
+✔ refuse les résultats venant d’un autre onglet ou d’une tentative ancienne (1.244958ms)
+✔ erreur de X met en pause et un clic reprend sans perdre la progression (3.062565ms)
+✔ un changement de compte X bloque la reprise (6.679551ms)
+✔ le redémarrage du navigateur suspend et l’arrêt ferme seulement l’onglet de travail (1.570389ms)
+✔ une liste invalide ou inaccessible ne lance aucun blocage (1.804743ms)
+✔ une réponse perdue déclenche une récupération bornée puis une pause (2.495289ms)
+▶ un script absent conserve l’échéance puis déclenche la récupération
+  ✔ inspect (0.725043ms)
+  ✔ block (0.827659ms)
+✔ un script absent conserve l’échéance puis déclenche la récupération (2.033908ms)
+✔ deux reprises après limitation X sont suivies d’une pause de quinze minutes (1.428845ms)
+✔ un nouveau passage saute les comptes déjà traités pour le même compte (1.563348ms)
+✔ le cache ne passe jamais d’un utilisateur à l’autre (1.109775ms)
+✔ Tout revérifier ignore le cache et conserve une liste fraîche (1.567094ms)
+✔ la limitation de X impose une pause même pour Tout revérifier (0.954079ms)
+✔ une identité de compte différente bloque la reprise du cache (1.028401ms)
+✔ une identité devenue indisponible suspend la reprise et conserve la clé connue (0.617001ms)
+✔ un premier passage sans clé fonctionne sans enregistrer ni réutiliser de cache (3.221771ms)
+✔ le signal du contenu permet de traiter avant le chargement complet (0.713546ms)
+✔ la pause entre profils est réduite à 250 ms (1.518891ms)
+✔ l’onglet X est activé seulement sur demande en cas de pause (0.743502ms)
+✔ une navigation attend le nouveau document avant de lire son URL (0.694468ms)
+✔ une navigation interne conserve la page et attend le bon profil (0.639314ms)
+✔ un routeur indisponible déclenche une seule navigation de secours (0.76205ms)
+ℹ tests 178
+ℹ suites 0
+ℹ pass 166
+ℹ fail 12
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 751.605305
+
+✖ failing tests:
+
+test at tests/operation-journal.test.js:31:1
+✖ the journal exposes only read and compareAndSet (3.757889ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:32:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:37:1
+✖ unavailable and denied IndexedDB fail with bounded ConnectorError codes (0.91477ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:38:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:48:1
+✖ a pending IndexedDB open times out safely (0.406794ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:49:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:53:1
+✖ timeout configuration is an integer between 1 and 10000ms (0.705635ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:55:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+    + actual - expected
+    
+    + 'undefined'
+    - 'function'
+    
+        at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+        at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:55:25
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:55:12)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1402:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+        at Test.postRun (node:internal/test_runner/test:1542:19)
+        at Test.run (node:internal/test_runner/test:1467:12),
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:60:1
+✖ lane validation precedes storage access and binds the provider account format (0.623661ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:62:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:74:1
+✖ lane origins reject credentials, paths, queries, ports and private literal hosts (0.281335ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:76:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:85:1
+✖ CAS rejects invalid or caller-assigned revisions before storage access (0.336628ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:87:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:95:1
+✖ checkpoint shape is exact and rejects imported proof, consent and secrets (2.559501ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:97:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:113:1
+✖ checkpoint scalar fields and bounded reasons are validated before storage (0.495768ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:115:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:129:1
+✖ observations allow only a boolean and a nonnegative safe timestamp (1.032598ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:131:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:140:1
+✖ Bluesky targets are exact normalized DID and record-key pairs (0.37761ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:142:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/operation-journal.test.js:151:1
+✖ every bounded checkpoint reason and valid phase passes validation (0.326473ms)
+  AssertionError [ERR_ASSERTION]: The durable operation journal factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at create (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:10:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/operation-journal.test.js:153:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

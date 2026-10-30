@@ -1,0 +1,34 @@
+✔ server session does no bootstrap call and never serializes its token (363.488397ms)
+✔ server factory refuses broad scopes, unapproved origins and unsafe token/config without network (352.764839ms)
+✔ TLS transport binds bearer/host and returns only matching identity and rate headers (696.901413ms)
+✔ Mastodon adapter and durable runner confirm only after TLS relationship readback (385.200766ms)
+✔ 421, redirect and503 produce one POST, no replay, no forwarded Location or body (285.356016ms)
+✔ an applied POST followed by socket reset is unknown and cannot be replayed (117.379164ms)
+✔ mixed private DNS results are refused before native request construction (208.737301ms)
+✔ disconnect during DNS prevents a late authenticated request (260.549127ms)
+✔ abort during DNS settles without waiting for the resolver and prevents later dispatch (124.113025ms)
+✔ local expiry after DNS prevents dispatch and never claims provider revocation (527.047259ms)
+✔ 401 and403 stop as soon as headers arrive, even with an invalid unfinished body (197.652189ms)
+✔ a200identity mismatch stops the captured session (395.367525ms)
+✔ invalid UTF8, JSON, compression and oversized bodies fail without leaking response text (346.016972ms)
+✔ wrong relationship/action binding after POST is uncertain rather than confirmed (195.570556ms)
+✔ deadline covers a stalled TLS response and destroys rather than retries the request (316.11221ms)
+✔ disconnect interrupts an in-flight POST without claiming its remote cancellation (372.808639ms)
+✔ native TLS rejects an otherwise trusted certificate for a different hostname (170.894244ms)
+✔ one active request per handle prevents overlapping dispatches (356.57714ms)
+✔ a DNS deadline settles before any ClientRequest exists (383.58721ms)
+✔ the local lifetime expires and interrupts a stalled DNS lookup (125.61695ms)
+✔ public IPv6 is pinned while the test driver alone uses loopback IPv4 (122.268329ms)
+✔ truncated successful JSON cannot become a successful mutation (201.91047ms)
+✔ oversized response headers fail once without exposing their value (202.145012ms)
+✔ mutating constructor inputs cannot switch the captured token account origin or permissions (638.653042ms)
+✔ an elapsed deadline blocks a DNS continuation before queued timers run (40.764746ms)
+✔ a completed response after the deadline cannot beat the queued timeout (41.09924ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7545.491829

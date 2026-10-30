@@ -1,31 +1,28 @@
-name: Actualiser le tableau des comptes
+name: Vérifier le tableau des comptes
 on:
   push:
     branches: [main]
     paths:
       - liste/accounts.json
       - scripts/update-readme.mjs
+      - README.md
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 concurrency:
-  group: tableau-comptes
-  cancel-in-progress: false
+  group: tableau-comptes-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   tableau:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: "24"
-      - run: node scripts/update-readme.mjs
-      - name: Enregistrer le tableau
-        shell: bash
-        run: |
-          if git diff --quiet -- README.md; then exit 0; fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git commit -m "Mise à jour du tableau"
-          git push
+      - name: Refuser un tableau périmé sans modifier le dépôt
+        run: node scripts/update-readme.mjs --check
+# Fix locally with npm run update:table, then submit the change through a PR.

@@ -1,0 +1,6 @@
+{"engine":"webkit","version":"27.2","physicalDevice":false}
+{"name":"stale tab refuses overwrite, exports its snapshot and resumes only after reload","result":"PASS"}
+{"name":"simultaneous clicks preserve both additions or explicitly refuse the losing writer","result":"PASS"}
+{"name":"one initial SecurityError cannot authorize an unknown overwrite before reload","result":"PASS"}
+{"name":"without Web Locks the browser remains read/export only","result":"PASS"}
+PWA concurrency: 4/4 scenarios passed.

@@ -1,0 +1,161 @@
+{
+  "date": "2026-10-30",
+  "recordedUtc": "2026-10-30T14:10:17.705541+00:00",
+  "phase": "local pre-publication snapshot; final GitHub SHA and CI conclusions in PR body/Airtable",
+  "base": "0af61dee2141ac15a64f1ab3ca0a169f43b4c0ce",
+  "main": "b7cd31b036cca17b48dbf726c047847191c01a5b",
+  "integrationBranch": "integrate/fil-clair-v32-safe",
+  "mainToBaseCommits": 40,
+  "productionPathsChanged": [
+    "pwa/vercel.json"
+  ],
+  "sourceHashes": [
+    {
+      "path": ".github/workflows/fil-clair-pwa.yml",
+      "sha256": "e35d90e4891a25df23ac7216bd2081274d18184df74f4be13f653c28d1c13a29"
+    },
+    {
+      "path": ".github/workflows/verification.yml",
+      "sha256": "69053efa8c09a892317b99e75dc151f21cb987c09aa56a4d90ee06733fb5f711"
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "sha256": "ee08ea55a02461e4cce50b866d36a912ec92783b9a96a8ea8bc47d3c1d057ca5"
+    },
+    {
+      "path": ".github/workflows/tableau.yml",
+      "sha256": "cd5ebbc039e0c0e405901bddc5de069bc8f01b821fefa2e9359dd97343602ac0"
+    },
+    {
+      "path": "vercel.json",
+      "sha256": "b2ca3677c797f6006864cf604eee0ad15713d2d2b5f8b8b8b6f74a683095f428"
+    },
+    {
+      "path": "pwa/vercel.json",
+      "sha256": "715de62930314be3a84cf349557769a460726db4fca9e9edcbe97ade40b44d0c"
+    },
+    {
+      "path": "tests/ci-hardening.test.js",
+      "sha256": "f44cc423503d593de2e02cd8ccd5864324e3d115430e9a4f4b9967708d18e462"
+    },
+    {
+      "path": "scripts/update-readme.mjs",
+      "sha256": "a8935e5188ded476407ec96ad0d2d3284601a767e9471738116d8095f9820486"
+    },
+    {
+      "path": "scripts/release.mjs",
+      "sha256": "71dbbd376dfaafcfd611b8fd7fedc96d8e3dad9deeafaaa79def0da6f6030459"
+    },
+    {
+      "path": "package.json",
+      "sha256": "86f5f0d2944e047db72a3aff456fbf0f86b91999c8663bb65c39df4959fe0dfe"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "1187803ea986f212fb2d9a13fe6d2229a08c3ce80f158c66fc55ae975c8a1160"
+    }
+  ],
+  "outputHashes": [
+    {
+      "path": "baseline-no-dependencies.log",
+      "bytes": 21993,
+      "sha256": "495b0de3d0e0b76929ea891b2a7e338cb5b65179acbeaa023a2a6ffea0484a42"
+    },
+    {
+      "path": "baseline-installed.log",
+      "bytes": 20686,
+      "sha256": "aea812675221ff9e16f131f716440f2fd9ef9175569a61a853fb3ab4e9ddb91b"
+    },
+    {
+      "path": "ci-policy-first-oracle.log",
+      "bytes": 27758,
+      "sha256": "828b11fea48f3d5b0e09aefc00c49fc9e0d2f5413d320b3aa8a5b0ba584bf517"
+    },
+    {
+      "path": "ci-policy-red.log",
+      "bytes": 27750,
+      "sha256": "2483aee10f5def55b148599a3ec7b08a8885c9918ba4731d44ef3c72b249dfc9"
+    },
+    {
+      "path": "ci-policy-green.log",
+      "bytes": 854,
+      "sha256": "9b34d9356e0f175f2dfa91347ff363e3881177a192d2aa4f4b842b439d472702"
+    },
+    {
+      "path": "unit-final.log",
+      "bytes": 21431,
+      "sha256": "689881ad3ee717dcaeb1e3028c1f7af644749bcef2d2eaa44b0a41ec19201ed0"
+    },
+    {
+      "path": "chromium-quality.log",
+      "bytes": 7077,
+      "sha256": "77e88694f8ec4f9a95121f0b3487fa37c068de87c8977e8304ca39725359990b"
+    },
+    {
+      "path": "chromium-v32.log",
+      "bytes": 4887,
+      "sha256": "c69702701622d7ec45dd649e8cf2be86463e50c1854c7b53a505bc2f0f3f5dd7"
+    },
+    {
+      "path": "pwa-static.log",
+      "bytes": 1021,
+      "sha256": "76ba96aaaf5e48ebb08defa48e5599a8d9765bf9864cd57dd40ec0639d075159"
+    },
+    {
+      "path": "build-production.log",
+      "bytes": 290,
+      "sha256": "dfb76a9dc742c3fc2bf291f0adb974974dff76795b0139136aeabde18c6ba375"
+    },
+    {
+      "path": "package-preparation.log",
+      "bytes": 77,
+      "sha256": "aa4269783237ac41c3f6a4fd7c1ed9d0811e40a4a62e28f476bbeba1c23da539"
+    },
+    {
+      "path": "actionlint.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "npm-audit.json",
+      "bytes": 2055,
+      "sha256": "a6b8c380c261671365e4dcfd7182542630f4ddf1c6c6f32506e69493a5c8b050"
+    },
+    {
+      "path": "review-source-audit.log",
+      "bytes": 1022,
+      "sha256": "f4cab7267f756a4298546f33dc7856255c623b192ddb9ad4beb0938c52152506"
+    },
+    {
+      "path": "lint-production.log",
+      "bytes": 327,
+      "sha256": "f5ddbcb0c000e8807718b4ec85618aef24a1ab7d38a131d362ab93a72a07bc9d"
+    }
+  ],
+  "localResults": {
+    "baselineWithoutDependencies": "230 PASS + one test file failed ERR_MODULE_NOT_FOUND; not a product regression",
+    "baselineInstalled": 232,
+    "nodeFinal": 241,
+    "newCiPolicyTests": 9,
+    "ciPolicyBeforeFix": {
+      "pass": 1,
+      "fail": 8
+    },
+    "sw": 9,
+    "chromiumQuality": 30,
+    "chromiumV32": 14,
+    "physicalDevice": false,
+    "firefoxWebkitLocal": "NOT TESTED this tranche; historical CI at0af only"
+  },
+  "audit": {
+    "critical": 0,
+    "high": 0,
+    "moderate": 0,
+    "low": 3,
+    "advisory": "GHSA-gcqx-w48m-w2h4",
+    "upstreamPatchedVersion": null,
+    "deepmergeRegistryLatest": "4.3.1"
+  },
+  "remoteCI": "PENDING new aggregate; do not recycle historical SHA",
+  "whitespace": "source/doc diff check excludes raw docs/evidence/integration/*.log, whose bytes and hashes remain untouched"
+}

@@ -1,0 +1,423 @@
+✖ server session does no bootstrap call and never serializes its token (237.598592ms)
+✖ server factory refuses broad scopes, unapproved origins and unsafe token/config without network (227.962137ms)
+✖ TLS transport binds bearer/host and returns only matching identity and rate headers (202.558191ms)
+✖ Mastodon adapter and durable runner confirm only after TLS relationship readback (375.244077ms)
+✖ 421, redirect and503 produce one POST, no replay, no forwarded Location or body (262.689374ms)
+✖ an applied POST followed by socket reset is unknown and cannot be replayed (111.365797ms)
+✖ mixed private DNS results are refused before native request construction (203.567097ms)
+✖ disconnect during DNS prevents a late authenticated request (139.372247ms)
+✖ abort during DNS settles without waiting for the resolver and prevents later dispatch (159.263259ms)
+✖ local expiry after DNS prevents dispatch and never claims provider revocation (192.041906ms)
+✖ 401 and403 stop as soon as headers arrive, even with an invalid unfinished body (175.0695ms)
+✖ a200identity mismatch stops the captured session (129.007665ms)
+✖ invalid UTF8, JSON, compression and oversized bodies fail without leaking response text (454.219197ms)
+✖ wrong relationship/action binding after POST is uncertain rather than confirmed (672.122115ms)
+✖ deadline covers a stalled TLS response and destroys rather than retries the request (178.124446ms)
+✖ disconnect interrupts an in-flight POST without claiming its remote cancellation (112.184233ms)
+✖ native TLS rejects an otherwise trusted certificate for a different hostname (202.876138ms)
+✖ one active request per handle prevents overlapping dispatches (73.103039ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 0
+ℹ fail 18
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4204.380493
+
+✖ failing tests:
+
+test at tests/server-transport.test.js:19:1
+✖ server session does no bootstrap call and never serializes its token (237.598592ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:20:11
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:25:1
+✖ server factory refuses broad scopes, unapproved origins and unsafe token/config without network (227.962137ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:26:10
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:31:1
+✖ TLS transport binds bearer/host and returns only matching identity and rate headers (202.558191ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:32:11
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:38:1
+✖ Mastodon adapter and durable runner confirm only after TLS relationship readback (375.244077ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:39:11
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:47:1
+✖ 421, redirect and503 produce one POST, no replay, no forwarded Location or body (262.689374ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:50:13
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:56:1
+✖ an applied POST followed by socket reset is unknown and cannot be replayed (111.365797ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:58:11
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:65:1
+✖ mixed private DNS results are refused before native request construction (203.567097ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:66:11
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:70:1
+✖ disconnect during DNS prevents a late authenticated request (139.372247ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:71:55
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:77:1
+✖ abort during DNS settles without waiting for the resolver and prevents later dispatch (159.263259ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:79:11
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:84:1
+✖ local expiry after DNS prevents dispatch and never claims provider revocation (192.041906ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:85:24
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:89:1
+✖ 401 and403 stop as soon as headers arrive, even with an invalid unfinished body (175.0695ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:92:13
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:98:1
+✖ a200identity mismatch stops the captured session (129.007665ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:100:11
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:103:1
+✖ invalid UTF8, JSON, compression and oversized bodies fail without leaking response text (454.219197ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:105:128
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:108:1
+✖ wrong relationship/action binding after POST is uncertain rather than confirmed (672.122115ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:110:11
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:113:1
+✖ deadline covers a stalled TLS response and destroys rather than retries the request (178.124446ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:114:34
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:118:1
+✖ disconnect interrupts an in-flight POST without claiming its remote cancellation (112.184233ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:119:109
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:124:1
+✖ native TLS rejects an otherwise trusted certificate for a different hostname (202.876138ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:125:11
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:129:1
+✖ one active request per handle prevents overlapping dispatches (73.103039ms)
+  AssertionError [ERR_ASSERTION]: server transport factory must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at bound (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:14:10)
+      at file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:130:136
+      at lab (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:17:65)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

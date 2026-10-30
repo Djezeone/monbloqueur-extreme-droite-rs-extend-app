@@ -1,0 +1,2 @@
+{"name":"chromium","started":"2026-10-29T19:24:33.729Z","executablePath":"/tmp/fil-clair-durable-runtime/browsers/chromium/chrome-headless-shell-linux64/chrome-headless-shell","scope":"synthetic in-memory page only; no project suites"}
+{"result":"PASS","name":"chromium","version":"156.0.8078.4","finished":"2026-10-29T19:24:34.020Z"}

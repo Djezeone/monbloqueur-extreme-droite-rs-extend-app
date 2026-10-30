@@ -1,0 +1,60 @@
+{"suite":"v3.2","engine":"chromium","version":"156.0.8078.4","physicalDevice":false}
+{"axe":"nom","violations":[],"incomplete":[]}
+PASS nouveau parcours accessible sans compte, chatbot ou service obligatoire
+PASS aide contextuelle et Retour conservent le nom et rendent le focus
+PASS annuler le parcours ne modifie pas les données
+{"axe":"actions","violations":[],"incomplete":[{"id":"color-contrast","nodes":[{"target":["#guided-title"],"summary":"Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"},{"target":["#guided-progress"],"summary":"Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"},{"target":["fieldset:nth-child(1) > legend"],"summary":"Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"}]}]}
+{"axe":"recapitulatif","violations":[],"incomplete":[]}
+PASS une source sur deux services : choix explicites, contrôles et limites sans identité inventée
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+ExpectError: expect(locator).toContainText(expected) failed
+
+Locator: locator('#guided-body li')
+Expected substring: "Déclaré effectué"
+Received string:    "Google Discover · Ne plus afficher cette source · À faire chez le fournisseur"
+Timeout: 5000ms
+
+Call log:
+  - Expect "toContainText" locator('#guided-body li') with timeout 5000ms
+  - waiting for locator('#guided-body li')
+    14 × locator resolved to <li>Google Discover · Ne plus afficher cette source ·…</li>
+       - unexpected value "Google Discover · Ne plus afficher cette source · À faire chez le fournisseur"
+
+    at captureRawStack (/workspace/scratch/0729b58f0643/fil-clair/node_modules/playwright-core/lib/coreBundle.js:9282:17)
+    at callMatcherAsStep (/workspace/scratch/0729b58f0643/fil-clair/node_modules/playwright/lib/matchers/expect.js:13316:57)
+    at Object.toContainText (/workspace/scratch/0729b58f0643/fil-clair/node_modules/playwright/lib/matchers/expect.js:13308:23)
+    at /workspace/scratch/0729b58f0643/fil-clair/scripts/test-pwa-v32.mjs:53:231
+    at async check (/workspace/scratch/0729b58f0643/fil-clair/scripts/test-pwa-v32.mjs:8:31)
+    at async file:///workspace/scratch/0729b58f0643/fil-clair/scripts/test-pwa-v32.mjs:49:3 {
+  matcherResult: {
+    name: 'toContainText',
+    expected: 'Déclaré effectué',
+    message: 'expect(locator).toContainText(expected) failed\n' +
+      '\n' +
+      "Locator: locator('#guided-body li')\n" +
+      'Expected substring: "Déclaré effectué"\n' +
+      'Received string:    "Google Discover · Ne plus afficher cette source · À faire chez le fournisseur"\n' +
+      'Timeout: 5000ms\n' +
+      '\n' +
+      'Call log:\n' +
+      `  - Expect "toContainText" locator('#guided-body li') with timeout 5000ms\n` +
+      "  - waiting for locator('#guided-body li')\n" +
+      '    14 × locator resolved to <li>Google Discover · Ne plus afficher cette source ·…</li>\n' +
+      '       - unexpected value "Google Discover · Ne plus afficher cette source · À faire chez le fournisseur"\n',
+    pass: false,
+    actual: 'Google Discover · Ne plus afficher cette source · À faire chez le fournisseur',
+    log: [
+      `  - Expect "toContainText" locator('#guided-body li') with timeout 5000ms`,
+      "  - waiting for locator('#guided-body li')",
+      '    14 × locator resolved to <li>Google Discover · Ne plus afficher cette source ·…</li>',
+      '       - unexpected value "Google Discover · Ne plus afficher cette source · À faire chez le fournisseur"'
+    ],
+    timeout: 5000,
+    ariaSnapshot: '- listitem: Google Discover · Ne plus afficher cette source · À faire chez le fournisseur'
+  }
+}
+
+Node.js v24.22.1

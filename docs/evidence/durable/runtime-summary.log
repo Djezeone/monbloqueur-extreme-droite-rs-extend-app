@@ -1,0 +1,56 @@
+{
+  "scope": "launch smokes on an in-memory synthetic page only; no project test suites, no repo writes, no dependency/system installation",
+  "node": "v24.22.1",
+  "playwright": "1.64.1",
+  "engines": {
+    "chromium": {
+      "executable": "/tmp/fil-clair-durable-runtime/browsers/chromium/chrome-headless-shell-linux64/chrome-headless-shell",
+      "environment": {
+        "PWA_EXECUTABLE_PATH": "/tmp/fil-clair-durable-runtime/browsers/chromium/chrome-headless-shell-linux64/chrome-headless-shell"
+      },
+      "result": "PASS",
+      "name": "chromium",
+      "version": "156.0.8078.4",
+      "finished": "2026-10-29T19:24:34.020Z",
+      "command": "node /tmp/fil-clair-durable-runtime/environment-smoke.cjs chromium",
+      "exit_code": 0
+    },
+    "firefox": {
+      "executable": "/tmp/fil-clair-durable-runtime/browsers/firefox/firefox/firefox",
+      "environment": {
+        "PWA_BROWSER": "firefox",
+        "PWA_FIREFOX_NO_SANDBOX": "1",
+        "PWA_EXECUTABLE_PATH": "/tmp/fil-clair-durable-runtime/browsers/firefox/firefox/firefox"
+      },
+      "result": "PASS",
+      "name": "firefox",
+      "version": "157.0",
+      "finished": "2026-10-29T19:24:35.857Z",
+      "command": "node /tmp/fil-clair-durable-runtime/environment-smoke.cjs firefox",
+      "exit_code": 0
+    },
+    "webkit": {
+      "executable": "/tmp/fil-clair-durable-runtime/webkit-launch.sh",
+      "environment": {
+        "PWA_BROWSER": "webkit",
+        "PWA_EXECUTABLE_PATH": "/tmp/fil-clair-durable-runtime/webkit-launch.sh"
+      },
+      "result": "PASS",
+      "name": "webkit",
+      "version": "27.2",
+      "finished": "2026-10-29T19:25:17.884Z",
+      "command": "node /tmp/fil-clair-durable-runtime/environment-smoke.cjs webkit",
+      "exit_code": 0
+    }
+  },
+  "archive_checks": "All three exact committed sizes/SHA256 and ZIP CRC passed",
+  "libraries": "22 downloaded .deb exact committed sizes/SHA256 and metadata verified, dpkg-deb -x into /tmp only",
+  "metadata_parser_note": "First signed-index comparison falsely differed on percent-encoded versus decoded package filenames; parser corrected to compare decoded paths, final full signed-index check is separately logged. No archive extraction occurred based on unchecked bytes.",
+  "helper_sha256": {
+    "/tmp/fil-clair-durable-runtime/environment-smoke.cjs": "2696febb7c700bde2b9a2d8370f1a700c118d333c3752096c1f0c04a6cfe57cb",
+    "/tmp/fil-clair-durable-runtime/restore-browser.py": "85736cbc1cf5613454078dcb893144084ada47f15bcfd43fdeb7bf2796b7f303",
+    "/tmp/fil-clair-durable-runtime/restore-libraries.py": "964c81e671129935f4c596c5f03930146359466717f8e78c6644e3befe9d1ecc",
+    "/tmp/fil-clair-durable-runtime/verify-signed-index.py": "4e841784a241ea447acaf404bb873c64138bdeb35b2361e73eaae55df0b40793",
+    "/tmp/fil-clair-durable-runtime/webkit-launch.sh": "ec25207b5080131d9681181f7c09e99c671355bbeed7a754f70b1ffc7189fad8"
+  }
+}

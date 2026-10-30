@@ -1,0 +1,4 @@
+Mutation check: isolated temporary module resolves on put.success, before transaction.complete. Production files remain unchanged.
+{"engine":"chromium","version":"156.0.8078.4","physicalDevice":false,"network":"loopback modules only"}
+{"name":"abort after a successful put rejects and preserves the old checkpoint","result":"FAIL","error":"AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- 'journal-storage-error'\n\n    at file:///workspace/scratch/0729b58f0643/fil-clair-durable/scripts/test-operation-journal.mjs:169:12\n    at async check (file:///workspace/scratch/0729b58f0643/fil-clair-durable/scripts/test-operation-journal.mjs:31:9)\n    at async file:///workspace/scratch/0729b58f0643/fil-clair-durable/scripts/test-operation-journal.mjs:148:3"}
+Operation journal: 0/1 scenarios passed; served 3 loopback fixture requests.

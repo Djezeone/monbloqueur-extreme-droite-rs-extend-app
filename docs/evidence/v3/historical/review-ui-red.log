@@ -1,0 +1,81 @@
+{"suite":"universal-v3","engine":"chromium","version":"156.0.8078.4","physicalDevice":false}
+{"phase":"home-v3-320","violations":[],"incomplete":["color-contrast"]}
+{"phase":"register-x-v3-320","violations":[],"incomplete":["color-contrast"]}
+{"phase":"action-history-v3-320","violations":[],"incomplete":["color-contrast"]}
+{"name":"revue I1 : retour déclaré ciblé, refus inchangé et nouvelle attestation explicite","result":"FAIL","error":"The input did not match the regular expression /nouvelle déclaration/i. Input:\n\n'Revenir à l’état précédent du suivi dans FIL CLAIR ? Aucune action n’est effectuée ou annulée chez le fournisseur ; aucune nouvelle preuve n’est créée.'\n"}
+{"name":"revue M1 : déclaration orpheline importée conservée, compteur courant à zéro","result":"FAIL","error":"expect(locator).toHaveText(expected) failed\n\nLocator:  locator('#metric-done')\nExpected: \"0\"\nReceived: \"1\"\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toHaveText\" locator('#metric-done') with timeout 5000ms\n  - waiting for locator('#metric-done')\n    14 × locator resolved to <strong id=\"metric-done\">1</strong>\n       - unexpected value \"1\"\n"}
+{"name":"revue M2 : annuler et reprendre une note conserve le focus dans sa fiche","result":"FAIL","error":"Focus doit rester dans la fiche annulée\n\nfalse !== true\n"}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Régressions de revue non corrigées
++ actual - expected
+
++ [
++   {
++     error: 'The input did not match the regular expression /nouvelle déclaration/i. Input:\n' +
++       '\n' +
++       "'Revenir à l’état précédent du suivi dans FIL CLAIR ? Aucune action n’est effectuée ou annulée chez le fournisseur ; aucune nouvelle preuve n’est créée.'\n",
++     name: 'revue I1 : retour déclaré ciblé, refus inchangé et nouvelle attestation explicite'
++   },
++   {
++     error: 'expect(locator).toHaveText(expected) failed\n' +
++       '\n' +
++       "Locator:  locator('#metric-done')\n" +
++       'Expected: "0"\n' +
++       'Received: "1"\n' +
++       'Timeout:  5000ms\n' +
++       '\n' +
++       'Call log:\n' +
++       `  - Expect "toHaveText" locator('#metric-done') with timeout 5000ms\n` +
++       "  - waiting for locator('#metric-done')\n" +
++       '    14 × locator resolved to <strong id="metric-done">1</strong>\n' +
++       '       - unexpected value "1"\n',
++     name: 'revue M1 : déclaration orpheline importée conservée, compteur courant à zéro'
++   },
++   {
++     error: 'Focus doit rester dans la fiche annulée\n\nfalse !== true\n',
++     name: 'revue M2 : annuler et reprendre une note conserve le focus dans sa fiche'
++   }
++ ]
+- []
+
+    at file:///workspace/scratch/0729b58f0643/fil-clair/scripts/test-pwa-v3.mjs:180:10
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:541:9) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [
+    {
+      name: 'revue I1 : retour déclaré ciblé, refus inchangé et nouvelle attestation explicite',
+      error: 'The input did not match the regular expression /nouvelle déclaration/i. Input:\n' +
+        '\n' +
+        "'Revenir à l’état précédent du suivi dans FIL CLAIR ? Aucune action n’est effectuée ou annulée chez le fournisseur ; aucune nouvelle preuve n’est créée.'\n"
+    },
+    {
+      name: 'revue M1 : déclaration orpheline importée conservée, compteur courant à zéro',
+      error: 'expect(locator).toHaveText(expected) failed\n' +
+        '\n' +
+        "Locator:  locator('#metric-done')\n" +
+        'Expected: "0"\n' +
+        'Received: "1"\n' +
+        'Timeout:  5000ms\n' +
+        '\n' +
+        'Call log:\n' +
+        `  - Expect "toHaveText" locator('#metric-done') with timeout 5000ms\n` +
+        "  - waiting for locator('#metric-done')\n" +
+        '    14 × locator resolved to <strong id="metric-done">1</strong>\n' +
+        '       - unexpected value "1"\n'
+    },
+    {
+      name: 'revue M2 : annuler et reprendre une note conserve le focus dans sa fiche',
+      error: 'Focus doit rester dans la fiche annulée\n\nfalse !== true\n'
+    }
+  ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.1

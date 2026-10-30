@@ -1,0 +1,12 @@
+✔ adding a missing profile never revives its imported orphan declaration (2.367234ms)
+✔ adding a profile clears only its own list, service and Mastodon instance declaration (0.559783ms)
+✔ adding an existing normalized profile preserves its declaration and snapshot (0.256587ms)
+✔ invalid or over-capacity additions fail without changing data (6.381768ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 91.252713

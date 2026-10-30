@@ -1,0 +1,21 @@
+{"suite":"v3.2","engine":"chromium","version":"156.0.8078.4","physicalDevice":false}
+{"axe":"nom","violations":[],"incomplete":[]}
+PASS nouveau parcours accessible sans compte, chatbot ou service obligatoire
+PASS aide contextuelle et Retour conservent le nom et rendent le focus
+PASS annuler le parcours ne modifie pas les données
+{"axe":"actions","violations":[],"incomplete":[{"id":"color-contrast","nodes":[{"target":["#guided-title"],"summary":"Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"},{"target":["#guided-progress"],"summary":"Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"},{"target":["fieldset:nth-child(1) > legend"],"summary":"Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"}]}]}
+{"axe":"recapitulatif","violations":[],"incomplete":[]}
+PASS une source sur deux services : choix explicites, contrôles et limites sans identité inventée
+PASS déclaration reste explicite ; un doublon garde sa date et son historique
+PASS carnet local sans service tiers et nom libre
+PASS refus de stockage : aucune fiche partielle et brouillon conservé
+{"axe":"aide","violations":[],"incomplete":[{"id":"color-contrast","nodes":[{"target":["#help-dialog > p:nth-child(2)"],"summary":"Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"},{"target":["details[data-help-id=\"review\"] > summary"],"summary":"Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"},{"target":["#help-dialog > details > summary"],"summary":"Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"}]}]}
+PASS FAQ gratuite : boutons, appareil, recherche accentuée et reprise
+PASS soutien inactif : une seule entrée, aucun href ni appel à CONTRIB.OS
+{"axe":"reflow","violations":[],"incomplete":[]}
+PASS reflow320px, texte espacé et grands contrôles du parcours
+PASS offline réel : carnet, nouveau parcours et aide restent disponibles
+PASS URL de soutien validée synthétique : destination fixe, pas de référent et panne sans effet local
+PASS remplacement d’espace : recherche d’aide et brouillons de l’ancien espace effacés
+PASS enregistrement lent : navigation et aide figées jusqu’au résultat, aucun nouveau brouillon perdu
+{"result":"PASS","checks":14,"names":["nouveau parcours accessible sans compte, chatbot ou service obligatoire","aide contextuelle et Retour conservent le nom et rendent le focus","annuler le parcours ne modifie pas les données","une source sur deux services : choix explicites, contrôles et limites sans identité inventée","déclaration reste explicite ; un doublon garde sa date et son historique","carnet local sans service tiers et nom libre","refus de stockage : aucune fiche partielle et brouillon conservé","FAQ gratuite : boutons, appareil, recherche accentuée et reprise","soutien inactif : une seule entrée, aucun href ni appel à CONTRIB.OS","reflow320px, texte espacé et grands contrôles du parcours","offline réel : carnet, nouveau parcours et aide restent disponibles","URL de soutien validée synthétique : destination fixe, pas de référent et panne sans effet local","remplacement d’espace : recherche d’aide et brouillons de l’ancien espace effacés","enregistrement lent : navigation et aide figées jusqu’au résultat, aucun nouveau brouillon perdu"]}

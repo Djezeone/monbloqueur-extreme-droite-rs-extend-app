@@ -1,0 +1,7 @@
+{"engine": "webkit", "started": 1793301843.4778936, "source": "committed docs/research/2026-10-29-browser-environment.md", "expected_size": 108122739, "expected_sha256": "63b31a5d68d908d9aee2e445b88edc4c1e1d1eba488f5bd7e35668f91315b968"}
+{"command": "curl --fail --location --silent --show-error --connect-timeout 20 --max-time 600 --output /tmp/fil-clair-durable-runtime/archives/webkit.zip.part https://playwright.download.prss.microsoft.com/dbazure/download/playwright/builds/webkit/2370/webkit-ubuntu-24.04.zip"}
+{"download_exit": 0}
+{"actual_size": 108122739, "sha256": "63b31a5d68d908d9aee2e445b88edc4c1e1d1eba488f5bd7e35668f91315b968"}
+{"zip_crc": "PASS", "entries": 60}
+{"command": "unzip -q /tmp/fil-clair-durable-runtime/archives/webkit.zip -d /tmp/fil-clair-durable-runtime/browsers/webkit"}
+{"result": "PASS", "destination": "/tmp/fil-clair-durable-runtime/browsers/webkit", "finished": 1793301857.2622466}

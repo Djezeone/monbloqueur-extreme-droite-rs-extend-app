@@ -1,0 +1,35 @@
+✔ registre exhaustif des43 contrôles, public/immuable et séparé des preuves d'action (2.226526ms)
+✖ API documentées mais inactives : aucune permission de production implicitement consentie (1.222512ms)
+✔ péremption documentaire déterministe, source ancienne n'est pas disponibilité testée (0.856751ms)
+✔ coefficients X figés par composant, probabilités et absence de configuration de production prouvée (1.990659ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 163.1725
+
+✖ failing tests:
+
+test at tests/effects.test.js:34:1
+✖ API documentées mais inactives : aucune permission de production implicitement consentie (1.222512ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  
+  undefined !== []
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair/tests/effects.test.js:38:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

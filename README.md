@@ -1,3 +1,5 @@
+> **NOUVEAU — FIL CLAIR (prototype PWA multi-réseaux)** : [ouvrir le dossier de l'application](pwa/README.md) · [architecture et limites](docs/architecture-fil-clair.md). Contrairement à l'extension ci-dessous, cette PWA ne pilote aucune interface sociale : les actions sont réalisées manuellement par chaque utilisateur dans le réseau concerné. Aucun risque nul de sanction ne peut être garanti.
+
 # Bloquer l’extrême-droite
 
 Une petite extension pour Chrome, Firefox et Edge pour bloquer les comptes d’une liste sur X. On ouvre l’extension, on clique sur **Bloquer l’Extrême-droite**, et elle s’occupe du reste avec la session X déjà connectée.

@@ -1,0 +1,70 @@
+# FIL CLAIR V3 Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
+
+**Goal:** Intégrer quatre accès universels, un suivi vérifiable et un registre d'effets documentés dans la PWA existante.
+
+**Architecture:** Catalogue V2 conservé ; registre public et projection commune séparés du snapshot personnel. Historique optionnel strict et borné, écritures existantes atomiques, aucun connecteur activé.
+
+**Tech Stack:** JavaScript natif, node:test, Playwright/axe existants, PWA statique.
+
+**Spec:** `docs/superpowers/specs/2026-10-29-universal-v3-design.md`
+
+## Global Constraints
+- 0 € supplémentaire, aucun service GitHub payant/Copilot/crédit premium ; CI standard publique sans uploads redondants.
+- Aucun blocage/signalement réel, automatisation clandestine, secret, fusion ou publication générale.
+- Snapshot fil-clair-v1 et flows.version:1, 500 fiches/200 caractères, 32 événements par fiche, plafond 10 Mo.
+- Local sans compte obligatoire ; statut déclaré jamais transformé en confirmation API ; sources documentaires séparées des preuves d'action.
+- A/B/C et les huit lots/portes V2 restent ouverts selon leurs réserves, profils émulés ne valent pas appareils physiques.
+
+## Review Focus
+- Ancienne sauvegarde sans events : source et données intactes, aucun faux passé créé.
+- Import d'événement confirmé, date falsifiée ou champ secret : refus global avec récupération brute.
+- Catégorie désélectionnée avec fiches existantes : fiches conservées et accessibles dans le carnet.
+- Retour arrière suivi annulé/échec : état local seulement, avertissement explicite avant déclaration sensible.
+- Registre périmé et source annonce ancienne : confiance documentaire/date visibles, aucune preuve compte ou effet global déduit.
+
+### Task 1: Modèle commun et historique sûr
+**Files:** `pwa/flow-core.js`, `pwa/actions.js`, `tests/action-model.test.js`.
+**Interfaces:** `actionRecord(item) -> {service,nature,scope,method,state,verification,date,revocation,history}` ; `undoFlowStatus(flows,id,now) -> flows`, `setFlowStatus` enrichi ; `flowMetrics(flows) -> counts`.
+- [x] Écrire tests : projection déclarée non confirmée, échec/revue/annulé, undo, limite32, immutabilité, V2 sans événements, import falsifié et borne500.
+- [x] Exécuter `node --test tests/action-model.test.js`, constater fonctions absentes/statuts refusés.
+- [x] Implémenter schéma optionnel strict, seed connu seulement, journal borné et projection sans réseau.
+- [x] Exécuter `npm test` ; attendu aucun échec. Commit cohérent modèle/tests.
+
+### Task 2: Registre documentaire maintenable
+**Files:** `pwa/effects.js`, `tests/effects.test.js`, `docs/research/2026-10-29-x-algorithm.md`, `docs/research/2026-10-29-effects-register-audit.md`.
+**Interfaces:** `getEffect(service,control) -> effect|null`, `registryEntries() -> effect[]`, `reviewState(effect,asOf)`, `X_ALGORITHM_EVIDENCE` (source figée, valeurs et réserve).
+- [x] Écrire tests : 43 contrôles exacts, URL officielle/aucun secret, sources/date/confiance/échéance, API inactive/scopes explicites, révocation prudente, formule X et absence de promesse de pénalité globale.
+- [x] Constater RED module manquant, puis implémenter à partir des recherches officielles réutilisées/revérifiées, sans requalifier les comptes.
+- [x] `npm test` ; attendu vert. Commit registre/tests.
+
+### Task 3: Expérience quatre entrées et suivi intégré
+**Files:** `pwa/index.html`, `pwa/styles.css`, `pwa/app.js`, `pwa/flows.js`, `pwa/sw.js`, `scripts/test-pwa-v3.mjs`, scripts QA existants selon contrats affectés, `scripts/audit-pwa.mjs`, `.github/workflows/fil-clair-pwa.yml`.
+**Interfaces:** `mountFlows` conserve render/openSetup/resetDraft ; expose `openCategory(id)` ; registre intégré à Mes flux, sans requêtes fournisseur. Compteurs sans étoiles, historique et détails accessibles.
+- [x] E2E RED sur accueil quatre entrées et action/suivi ; assertions sauvegarde/restore, catégorie masquée conservée, registre périmé/absence de preuve fournisseur, cible non transmise, undo, offline.
+- [x] Implémenter UI avec détails avancés secondaires et confirmation ; ajouter actifs publics au SW et au contrôle statique sans nouvelle origine CSP.
+- [x] Exécuter nouveau script puis sept scripts de non-régression sur Chromium/Firefox/WebKit et Node/SW/audit. Examiner chaque échec, corriger cause sans affaiblir les oracles. Commit UI/tests.
+
+### Task 4: Recette, revue, documentation et traçabilité
+**Files:** mission, guide utilisateur, architecture/matrice/registre V3, confidentialité/opérations, journal et logs `docs/evidence/v3/`.
+- [ ] Documenter résultat/limites/32événements/retour local/modèle, sources X exactes, matrice réelle/API inactive et compatibilité honnête.
+- [ ] Revue indépendante de toute la branche ; Critical/Important corrigés en un passage RED→GREEN puis suites affectées vertes ; différés explicites.
+- [ ] Vérifier empreintes, liens, worktree ; commit docs/preuves. Publier branche et PR draft dépendante de #1 en une mise à jour cohérente.
+- [ ] Lire CI au SHA exact sans relance inutile, Vercel/absence de nouveau déploiement, mettre à jour huit lots/huit portes et nouvelle session Airtable Fait/Ouvert/Vérifié comment/Périmé puis relire.
+
+## Ledger
+Task 3: complete — code23f51af2e4082174b520d7f170e5372e6f66dd8f, `npm test`143/143, auditSW8/8, registre synchronisé,24exécutions navigateur finales exit0 (8scripts×3moteurs). Qualité30/29/30, flux17/16/18, remplacements11chacun,V3 12chacun. Axe66scans0violation/63incomplets. Historique des deux sélecteurs périmés et test première vue RED→GREEN conservé.
+Task 4: en cours — docs/guide/confidentialité/opérations et journal locaux, revue indépendante requise ; push/PR/CI/cockpit non encore réalisés pourV3.
+Task 3: en cours — RED E2E après récupération de Chromium : question d'accueil absente ; première implémentation 12/12 Chromium, trois scans axe sans violation et contraste incomplet. Les états avancés restent ouverts après changement pour conserver le contexte.
+Ruling : `pwa/register-view.js` isole le rendu documentaire, avec `mountRegistry({getState})` et `effectDetails(effect)` ; trois nouveaux actifs publics seulement dans le SWv5/serveur QA/allowlists. Coût si incorrect : un module supplémentaire à maintenir, sans nouvelle permission réseau.
+Task 2: complete — quatre tests RED (registre/fonctions absents), puis `npm test` 143/143. Registre43contrôles immuable, péremption/retrait/API inactive, preuves X par composant au SHA5ed7963. Sources du28 réutilisées comme documentation, codeX relu le29, production non vérifiée.
+Task 1: complete — six tests nouveaux, cinq échecs attendus avant implémentation (modèle absent, états refusés et historique absent), suite complète `npm test` 139/139, 0 échec. Historique falsifié déjà refusé avant changement et encore après ; aucune preuve API importée.
+Ruling : la projection commune conserve une révocation générique prudente et renvoie au registre pour les conditions particulières ; elle ne dépend pas du registre, ce qui supprime le cycle Task1/Task2. Coût si incorrect : détails de retrait moins précis dans la seule projection, détails complets visibles dans le registre.
+Pré-vol : Task1 produit le modèle/statuts consommés par Task3 ; Task2 produit getEffect et sources consommés par Task1/actionRecord et Task3. Pour éviter cycle, actionRecord conserve les métadonnées d'action du catalogue et lit getEffect seulement une fois Task2 intégrée ; aucune copie modifiable côté snapshot.
+Ruling : exécution native dans le checkout dédié avec deux spécialistes documentaires, puis revue indépendante — les changements UI/modèle partagent trop d'interfaces pour des implémentations concurrentes.
+Transition V2 : 29/10, PR#1 au51abcd3, deux CI success et0artefact, cockpit8lots/8portes relu, sessionrecSl5qjw0wmOQvyg. Blocages consignés dans la spec ; V3 autorisée sans automatisation future programmée.
+
+Final: revue indépendante sur23f51af :0Critical,1Important et2Minor. M1 reclassé Important (KPI non traçable),M2 reclassé Important (focus et contexte clavier à500fiches) ; les trois reproduits en E2E avant correction, contrat de nouvelle déclaration RED→GREEN. Commit12ab9be :144/144 Node,15/15 V3 Chromium ; passage final trois moteurs en cours. Aucune seconde revue revendiquée ; limites/rulings dans le dossier de revue.
+
+Final: fixed I1/M1/M2 — trois reproductions E2E RED→GREEN et contrat Node RED→GREEN ; suite144/144,SW8/8,24scénarios navigateur finals éprouvés, V3 15/15 par moteur, axe66/0/63. Log WebKit concurrence vide malgré exit0 : non acquis avant répétition ciblée, quatre scénarios nommés4/4 exit0 enregistrés. Task4 local complete ; issue distante finale à consigner dans PR/Airtable sans commit de documentation déclenchant une CI redondante.

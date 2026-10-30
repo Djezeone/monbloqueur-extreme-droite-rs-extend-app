@@ -1,0 +1,6 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> bloquer-extreme-droite-x@2.3.0 validate:list
+> node scripts/validate-list.mjs
+
+162 comptes valides · version 2026-10-27.5 · SHA-256 Jez_nt8-5xgnBbln2fr26CA41CqeFVTTyLiUQ_5-7Tk

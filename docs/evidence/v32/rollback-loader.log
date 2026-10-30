@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-29",
+  "oldRef": "51abcd35adefb757cc4f8831d23131a465b9f52a",
+  "oldSourceSHA256": {
+    "core.js": "6a0f33241173d8f62d9feee124dd490c7ccd18bb152b093fe277da2b8a2839e3",
+    "flow-core.js": "bd3506822af946b193af4b569a0c4c3c708a8bcb1bb15bc553d0281ab005b85a",
+    "platforms.js": "955d2b87dabff6ed83acee1b548239e13498e173f22d114301147d1f1b16257b"
+  },
+  "newCode": "ecd07b49c6c1c1dfae06ed7867a5d76eeb56f5b1",
+  "syntheticSnapshotSHA256": "7391049522708d91584291be323390f08fcb4c476322b460c5f532c02d350836",
+  "checks": 6,
+  "result": "PASS",
+  "oldError": "Structure de préférence invalide : champs absents ou non autorisés.",
+  "scope": "Pure loaders only. V2 refuses V3 fields/states and preserves exact raw source; V3 restores it. No browser, write, domain promotion, provider rollback or compatible downgrade claimed."
+}

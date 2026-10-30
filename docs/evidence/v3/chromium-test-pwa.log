@@ -1,0 +1,3 @@
+PWA E2E engine: chromium 156.0.8078.4
+offline transport: HTTP origin stopped and navigator.onLine=false
+E2E FIL CLAIR : ajout, à vérifier, historique, annulation, persistance, sauvegarde corrompue, export/effacement/restauration, SW installé et contrôlant, cache allowlist, reload et écriture hors ligne, confidentialité hors ligne, suppression/réajout profil et dernière liste sans résurrection, focus voisin, métadonnées affichées et exportées, viewport tactile PASS

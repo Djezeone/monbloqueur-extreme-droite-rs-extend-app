@@ -1,0 +1,3 @@
+PWA storage engine: webkit 27.2
+storage SecurityError: app usable, error visible, no false successful mutation PASS
+storage QuotaExceededError: existing data unchanged and exportable, rejected write absent PASS

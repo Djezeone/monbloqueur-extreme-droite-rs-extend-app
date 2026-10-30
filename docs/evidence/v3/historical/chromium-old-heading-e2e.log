@@ -1,0 +1,14 @@
+PWA E2E engine: chromium 156.0.8078.4
+AssertionError [ERR_ASSERTION]: Got unwanted rejection.
+Actual message: "locator.waitFor: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('heading', { name: 'Un fil qui vous ressemble.' }) to be visible[22m
+"
+    at async file:///workspace/scratch/0729b58f0643/fil-clair/scripts/test-pwa.mjs:22:3 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [TimeoutError2],
+  expected: undefined,
+  operator: 'doesNotReject',
+  diff: 'simple'
+}

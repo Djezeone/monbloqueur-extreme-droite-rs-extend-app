@@ -1,0 +1,36 @@
+{
+  "id": "./",
+  "name": "FIL CLAIR — Mon fil, mon choix",
+  "short_name": "FIL CLAIR",
+  "description": "Votre carnet local de comptes, sources, sujets et recommandations, avec des guides officiels facultatifs et sans inscription.",
+  "lang": "fr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#090e1b",
+  "theme_color": "#10192d",
+  "categories": [
+    "utilities",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

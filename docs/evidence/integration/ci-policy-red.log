@@ -1,0 +1,309 @@
+✖ every third-party workflow action is pinned to a full commit (1.810779ms)
+✖ workflow checkouts never retain credentials (0.855815ms)
+✖ all workflow tokens remain read-only (0.600675ms)
+✖ workflows allocate no Actions cache or artifact storage (0.461768ms)
+✖ package preparation is manual and cannot publish a release or tag (0.956998ms)
+✖ table validation checks the generated document without pushing Git (0.590242ms)
+✖ vercel.json disables Git deployments for every branch until costs are verified (18.41725ms)
+✖ pwa/vercel.json disables Git deployments for every branch until costs are verified (2.980281ms)
+✔ the real table checker accepts fresh content and rejects stale content without rewriting it (299.960114ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 1
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 463.97411
+
+✖ failing tests:
+
+test at tests/ci-hardening.test.js:14:1
+✖ every third-party workflow action is pinned to a full commit (1.810779ms)
+  AssertionError [ERR_ASSERTION]: release.yml: actions/checkout@v4
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/ci-hardening.test.js:18:39)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'actions/checkout@v4',
+    expected: /^[\w.-]+\/[\w./-]+@[a-f0-9]{40}$/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/ci-hardening.test.js:22:1
+✖ workflow checkouts never retain credentials (0.855815ms)
+  AssertionError [ERR_ASSERTION]: tableau.yml
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/ci-hardening.test.js:35:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: '',
+    expected: /persist-credentials:\s*false\b/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/ci-hardening.test.js:40:1
+✖ all workflow tokens remain read-only (0.600675ms)
+  AssertionError [ERR_ASSERTION]: release.yml
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/ci-hardening.test.js:43:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'name: Publier une version\non:\n  push:\n    tags: ["v*"]\n  workflow_dispatch:\n    inputs:\n      tag:\n        description: "Tag de la version à publier, identique au manifeste"\n        type: string\n        required: true\n        default: "v2.3.0"\npermissions:\n  contents: read\nconcurrency:\n  group: release-${{ github.event_name == \'push\' && github.ref_name || inputs.tag }}\n  cancel-in-progress: false\njobs:\n  preparer:\n    runs-on: ubuntu-latest\n    permissions:\n      contents: read\n    outputs:\n      tag: ${{ steps.paquets.outputs.tag }}\n      commit: ${{ steps.paquets.outputs.commit }}\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          ref: ${{ github.sha }}\n          persist-credentials: false\n      - uses: actions/setup-node@v4\n        with:\n          node-version: "24"\n          cache: npm\n      - run: npm ci\n      - run: npm test\n      - run: npm run validate:list\n      - run: npm run build\n      - run: npm run lint:firefox\n      - run: npx playwright install --with-deps chromium\n      - run: npm run test:browser\n      - run: npm run test:firefox\n      - name: Vérifier les paquets et leurs empreintes\n        id: paquets\n        env:\n          RELEASE_TAG: ${{ github.event_name == \'push\' && github.ref_name || inputs.tag }}\n        run: |\n          node scripts/release.mjs --tag "$RELEASE_TAG"\n          echo "tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"\n          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"\n      - uses: actions/upload-artifact@v4\n        with:\n          name: paquets-${{ steps.paquets.outputs.tag }}\n          path: dist/releases/${{ steps.paquets.outputs.tag }}/\n          if-no-files-found: error\n          retention-days: 7\n  publier:\n    needs: preparer\n    runs-on: ubuntu-latest\n    permissions:\n      contents: write\n    steps:\n      - uses: actions/download-artifact@v4\n        with:\n          name: paquets-${{ needs.preparer.outputs.tag }}\n          path: release/\n      - name: Publier les trois paquets\n        env:\n          GH_TOKEN: ${{ github.token }}\n          RELEASE_TAG: ${{ needs.preparer.outputs.tag }}\n          RELEASE_COMMIT: ${{ needs.preparer.outputs.commit }}\n        run: |\n          existing_release=$(gh api "repos/$GITHUB_REPOSITORY/releases?per_page=100" --paginate \\\n            --jq ".[] | select(.tag_name == \\"$RELEASE_TAG\\") | .id")\n          if [ -n "$existing_release" ]; then\n            echo "Une release existe déjà pour $RELEASE_TAG. Aucun fichier n’est remplacé."\n            exit 1\n          fi\n          tag_count=$(gh api "repos/$GITHUB_REPOSITORY/git/matching-refs/tags/$RELEASE_TAG" \\\n            --jq "map(select(.ref == \\"refs/tags/$RELEASE_TAG\\")) | length")\n          if [ "$tag_count" = "0" ]; then\n            gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \\\n              -f ref="refs/tags/$RELEASE_TAG" -f sha="$RELEASE_COMMIT" --silent\n          fi\n          actual_commit=$(gh api "repos/$GITHUB_REPOSITORY/commits/tags/$RELEASE_TAG" --jq \'.sha\')\n          if [ "$actual_commit" != "$RELEASE_COMMIT" ]; then\n            echo "Le tag ne correspond pas au commit vérifié. Aucune release n’est créée."\n            exit 1\n          fi\n          gh release create "$RELEASE_TAG" \\\n            release/extension-chrome.zip release/extension-chrome.zip.sha256 \\\n            release/extension-edge.zip release/extension-edge.zip.sha256 \\\n            release/extension-firefox.zip release/extension-firefox.zip.sha256 \\\n            release/SHA256SUMS.txt \\\n            --repo "$GITHUB_REPOSITORY" --target "$RELEASE_COMMIT" --title "$RELEASE_TAG" \\\n            --notes-file release/NOTES.md --draft --verify-tag\n          actual_commit=$(gh api "repos/$GITHUB_REPOSITORY/commits/tags/$RELEASE_TAG" --jq \'.sha\')\n          if [ "$actual_commit" != "$RELEASE_COMMIT" ]; then\n            echo "Le tag ne correspond pas au commit vérifié. La release reste en brouillon."\n            exit 1\n          fi\n          gh release edit "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --draft=false --latest\n',
+    expected: /^\s*[\w-]+:\s*write\b/m,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+test at tests/ci-hardening.test.js:47:1
+✖ workflows allocate no Actions cache or artifact storage (0.461768ms)
+  AssertionError [ERR_ASSERTION]: release.yml
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/ci-hardening.test.js:49:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'name: Publier une version\non:\n  push:\n    tags: ["v*"]\n  workflow_dispatch:\n    inputs:\n      tag:\n        description: "Tag de la version à publier, identique au manifeste"\n        type: string\n        required: true\n        default: "v2.3.0"\npermissions:\n  contents: read\nconcurrency:\n  group: release-${{ github.event_name == \'push\' && github.ref_name || inputs.tag }}\n  cancel-in-progress: false\njobs:\n  preparer:\n    runs-on: ubuntu-latest\n    permissions:\n      contents: read\n    outputs:\n      tag: ${{ steps.paquets.outputs.tag }}\n      commit: ${{ steps.paquets.outputs.commit }}\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          ref: ${{ github.sha }}\n          persist-credentials: false\n      - uses: actions/setup-node@v4\n        with:\n          node-version: "24"\n          cache: npm\n      - run: npm ci\n      - run: npm test\n      - run: npm run validate:list\n      - run: npm run build\n      - run: npm run lint:firefox\n      - run: npx playwright install --with-deps chromium\n      - run: npm run test:browser\n      - run: npm run test:firefox\n      - name: Vérifier les paquets et leurs empreintes\n        id: paquets\n        env:\n          RELEASE_TAG: ${{ github.event_name == \'push\' && github.ref_name || inputs.tag }}\n        run: |\n          node scripts/release.mjs --tag "$RELEASE_TAG"\n          echo "tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"\n          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"\n      - uses: actions/upload-artifact@v4\n        with:\n          name: paquets-${{ steps.paquets.outputs.tag }}\n          path: dist/releases/${{ steps.paquets.outputs.tag }}/\n          if-no-files-found: error\n          retention-days: 7\n  publier:\n    needs: preparer\n    runs-on: ubuntu-latest\n    permissions:\n      contents: write\n    steps:\n      - uses: actions/download-artifact@v4\n        with:\n          name: paquets-${{ needs.preparer.outputs.tag }}\n          path: release/\n      - name: Publier les trois paquets\n        env:\n          GH_TOKEN: ${{ github.token }}\n          RELEASE_TAG: ${{ needs.preparer.outputs.tag }}\n          RELEASE_COMMIT: ${{ needs.preparer.outputs.commit }}\n        run: |\n          existing_release=$(gh api "repos/$GITHUB_REPOSITORY/releases?per_page=100" --paginate \\\n            --jq ".[] | select(.tag_name == \\"$RELEASE_TAG\\") | .id")\n          if [ -n "$existing_release" ]; then\n            echo "Une release existe déjà pour $RELEASE_TAG. Aucun fichier n’est remplacé."\n            exit 1\n          fi\n          tag_count=$(gh api "repos/$GITHUB_REPOSITORY/git/matching-refs/tags/$RELEASE_TAG" \\\n            --jq "map(select(.ref == \\"refs/tags/$RELEASE_TAG\\")) | length")\n          if [ "$tag_count" = "0" ]; then\n            gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \\\n              -f ref="refs/tags/$RELEASE_TAG" -f sha="$RELEASE_COMMIT" --silent\n          fi\n          actual_commit=$(gh api "repos/$GITHUB_REPOSITORY/commits/tags/$RELEASE_TAG" --jq \'.sha\')\n          if [ "$actual_commit" != "$RELEASE_COMMIT" ]; then\n            echo "Le tag ne correspond pas au commit vérifié. Aucune release n’est créée."\n            exit 1\n          fi\n          gh release create "$RELEASE_TAG" \\\n            release/extension-chrome.zip release/extension-chrome.zip.sha256 \\\n            release/extension-edge.zip release/extension-edge.zip.sha256 \\\n            release/extension-firefox.zip release/extension-firefox.zip.sha256 \\\n            release/SHA256SUMS.txt \\\n            --repo "$GITHUB_REPOSITORY" --target "$RELEASE_COMMIT" --title "$RELEASE_TAG" \\\n            --notes-file release/NOTES.md --draft --verify-tag\n          actual_commit=$(gh api "repos/$GITHUB_REPOSITORY/commits/tags/$RELEASE_TAG" --jq \'.sha\')\n          if [ "$actual_commit" != "$RELEASE_COMMIT" ]; then\n            echo "Le tag ne correspond pas au commit vérifié. La release reste en brouillon."\n            exit 1\n          fi\n          gh release edit "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --draft=false --latest\n',
+    expected: /actions\/(?:upload-artifact|download-artifact|cache)@|^\s*cache:\s*(?:npm|true)\b/m,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+test at tests/ci-hardening.test.js:53:1
+✖ package preparation is manual and cannot publish a release or tag (0.956998ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /^on:\s*\n\s+workflow_dispatch:/m. Input:
+  
+  'name: Publier une version\n' +
+    'on:\n' +
+    '  push:\n' +
+    '    tags: ["v*"]\n' +
+    '  workflow_dispatch:\n' +
+    '    inputs:\n' +
+    '      tag:\n' +
+    '        description: "Tag de la version à publier, identique au manifeste"\n' +
+    '        type: string\n' +
+    '        required: true\n' +
+    '        default: "v2.3.0"\n' +
+    'permissions:\n' +
+    '  contents: read\n' +
+    'concurrency:\n' +
+    "  group: release-${{ github.event_name == 'push' && github.ref_name || inputs.tag }}\n" +
+    '  cancel-in-progress: false\n' +
+    'jobs:\n' +
+    '  preparer:\n' +
+    '    runs-on: ubuntu-latest\n' +
+    '    permissions:\n' +
+    '      contents: read\n' +
+    '    outputs:\n' +
+    '      tag: ${{ steps.paquets.outputs.tag }}\n' +
+    '      commit: ${{ steps.paquets.outputs.commit }}\n' +
+    '    steps:\n' +
+    '      - uses: actions/checkout@v4\n' +
+    '        with:\n' +
+    '          ref: ${{ github.sha }}\n' +
+    '          persist-credentials: false\n' +
+    '      - uses: actions/setup-node@v4\n' +
+    '        with:\n' +
+    '          node-version: "24"\n' +
+    '          cache: npm\n' +
+    '      - run: npm ci\n' +
+    '      - run: npm test\n' +
+    '      - run: npm run validate:list\n' +
+    '      - run: npm run build\n' +
+    '      - run: npm run lint:firefox\n' +
+    '      - run: npx playwright install --with-deps chromium\n' +
+    '      - run: npm run test:browser\n' +
+    '      - run: npm run test:firefox\n' +
+    '      - name: Vérifier les paquets et leurs empreintes\n' +
+    '        id: paquets\n' +
+    '        env:\n' +
+    "          RELEASE_TAG: ${{ github.event_name == 'push' && github.ref_name || inputs.tag }}\n" +
+    '        run: |\n' +
+    '          node scripts/release.mjs --tag "$RELEASE_TAG"\n' +
+    '          echo "tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"\n' +
+    '          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"\n' +
+    '      - uses: actions/upload-artifact@v4\n' +
+    '        with:\n' +
+    '          name: paquets-${{ steps.paquets.outputs.tag }}\n' +
+    '          path: dist/releases/${{ steps.paquets.outputs.tag }}/\n' +
+    '          if-no-files-found: error\n' +
+    '          retention-days: 7\n' +
+    '  publier:\n' +
+    '    needs: preparer\n' +
+    '    runs-on: ubuntu-latest\n' +
+    '    permissions:\n' +
+    '      contents: write\n' +
+    '    steps:\n' +
+    '      - uses: actions/download-artifact@v4\n' +
+    '        with:\n' +
+    '          name: paquets-${{ needs.preparer.outputs.tag }}\n' +
+    '          path: release/\n' +
+    '      - name: Publier les trois paquets\n' +
+    '        env:\n' +
+    '          GH_TOKEN: ${{ github.token }}\n' +
+    '          RELEASE_TAG: ${{ needs.preparer.outputs.tag }}\n' +
+    '          RELEASE_COMMIT: ${{ needs.preparer.outputs.commit }}\n' +
+    '        run: |\n' +
+    '          existing_release=$(gh api "repos/$GITHUB_REPOSITORY/releases?per_page=100" --paginate \\\n' +
+    '            --jq ".[] | select(.tag_name == \\"$RELEASE_TAG\\") | .id")\n' +
+    '          if [ -n "$existing_release" ]; then\n' +
+    '            echo "Une release existe déjà pour $RELEASE_TAG. Aucun fichier n’est remplacé."\n' +
+    '            exit 1\n' +
+    '          fi\n' +
+    '          tag_count=$(gh api "repos/$GITHUB_REPOSITORY/git/matching-refs/tags/$RELEASE_TAG" \\\n' +
+    '            --jq "map(select(.ref == \\"refs/tags/$RELEASE_TAG\\")) | length")\n' +
+    '          if [ "$tag_count" = "0" ]; then\n' +
+    '            gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \\\n' +
+    '              -f ref="refs/tags/$RELEASE_TAG" -f sha="$RELEASE_COMMIT" --silent\n' +
+    '          fi\n' +
+    `          actual_commit=$(gh api "repos/$GITHUB_REPOSITORY/commits/tags/$RELEASE_TAG" --jq '.sha')\n` +
+    '          if [ "$actual_commit" != "$RELEASE_COMMIT" ]; then\n' +
+    '            echo "Le tag ne correspond pas au commit vérifié. Aucune release n’est créée."\n' +
+    '            exit 1\n' +
+    '          fi\n' +
+    '          gh release create "$RELEASE_TAG" \\\n' +
+    '            release/extension-chrome.zip release/extension-chrome.zip.sha256 \\\n' +
+    '            release/extension-edge.zip release/extension-edge.zip.sha256 \\\n' +
+    '            release/extension-firefox.zip release/extension-firefox.zip.sha256 \\\n' +
+    '            release/SHA256SUMS.txt \\\n' +
+    '            --repo "$GITHUB_REPOSITORY" --target "$RELEASE_COMMIT" --title "$RELEASE_TAG" \\\n' +
+    '            --notes-file release/NOTES.md --draft --verify-tag\n' +
+    `          actual_commit=$(gh api "repos/$GITHUB_REPOSITORY/commits/tags/$RELEASE_TAG" --jq '.sha')\n` +
+    '          if [ "$actual_commit" != "$RELEASE_COMMIT" ]; then\n' +
+    '            echo "Le tag ne correspond pas au commit vérifié. La release reste en brouillon."\n' +
+    '            exit 1\n' +
+    '          fi\n' +
+    '          gh release edit "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --draft=false --latest\n'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/ci-hardening.test.js:55:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'name: Publier une version\non:\n  push:\n    tags: ["v*"]\n  workflow_dispatch:\n    inputs:\n      tag:\n        description: "Tag de la version à publier, identique au manifeste"\n        type: string\n        required: true\n        default: "v2.3.0"\npermissions:\n  contents: read\nconcurrency:\n  group: release-${{ github.event_name == \'push\' && github.ref_name || inputs.tag }}\n  cancel-in-progress: false\njobs:\n  preparer:\n    runs-on: ubuntu-latest\n    permissions:\n      contents: read\n    outputs:\n      tag: ${{ steps.paquets.outputs.tag }}\n      commit: ${{ steps.paquets.outputs.commit }}\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          ref: ${{ github.sha }}\n          persist-credentials: false\n      - uses: actions/setup-node@v4\n        with:\n          node-version: "24"\n          cache: npm\n      - run: npm ci\n      - run: npm test\n      - run: npm run validate:list\n      - run: npm run build\n      - run: npm run lint:firefox\n      - run: npx playwright install --with-deps chromium\n      - run: npm run test:browser\n      - run: npm run test:firefox\n      - name: Vérifier les paquets et leurs empreintes\n        id: paquets\n        env:\n          RELEASE_TAG: ${{ github.event_name == \'push\' && github.ref_name || inputs.tag }}\n        run: |\n          node scripts/release.mjs --tag "$RELEASE_TAG"\n          echo "tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"\n          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"\n      - uses: actions/upload-artifact@v4\n        with:\n          name: paquets-${{ steps.paquets.outputs.tag }}\n          path: dist/releases/${{ steps.paquets.outputs.tag }}/\n          if-no-files-found: error\n          retention-days: 7\n  publier:\n    needs: preparer\n    runs-on: ubuntu-latest\n    permissions:\n      contents: write\n    steps:\n      - uses: actions/download-artifact@v4\n        with:\n          name: paquets-${{ needs.preparer.outputs.tag }}\n          path: release/\n      - name: Publier les trois paquets\n        env:\n          GH_TOKEN: ${{ github.token }}\n          RELEASE_TAG: ${{ needs.preparer.outputs.tag }}\n          RELEASE_COMMIT: ${{ needs.preparer.outputs.commit }}\n        run: |\n          existing_release=$(gh api "repos/$GITHUB_REPOSITORY/releases?per_page=100" --paginate \\\n            --jq ".[] | select(.tag_name == \\"$RELEASE_TAG\\") | .id")\n          if [ -n "$existing_release" ]; then\n            echo "Une release existe déjà pour $RELEASE_TAG. Aucun fichier n’est remplacé."\n            exit 1\n          fi\n          tag_count=$(gh api "repos/$GITHUB_REPOSITORY/git/matching-refs/tags/$RELEASE_TAG" \\\n            --jq "map(select(.ref == \\"refs/tags/$RELEASE_TAG\\")) | length")\n          if [ "$tag_count" = "0" ]; then\n            gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \\\n              -f ref="refs/tags/$RELEASE_TAG" -f sha="$RELEASE_COMMIT" --silent\n          fi\n          actual_commit=$(gh api "repos/$GITHUB_REPOSITORY/commits/tags/$RELEASE_TAG" --jq \'.sha\')\n          if [ "$actual_commit" != "$RELEASE_COMMIT" ]; then\n            echo "Le tag ne correspond pas au commit vérifié. Aucune release n’est créée."\n            exit 1\n          fi\n          gh release create "$RELEASE_TAG" \\\n            release/extension-chrome.zip release/extension-chrome.zip.sha256 \\\n            release/extension-edge.zip release/extension-edge.zip.sha256 \\\n            release/extension-firefox.zip release/extension-firefox.zip.sha256 \\\n            release/SHA256SUMS.txt \\\n            --repo "$GITHUB_REPOSITORY" --target "$RELEASE_COMMIT" --title "$RELEASE_TAG" \\\n            --notes-file release/NOTES.md --draft --verify-tag\n          actual_commit=$(gh api "repos/$GITHUB_REPOSITORY/commits/tags/$RELEASE_TAG" --jq \'.sha\')\n          if [ "$actual_commit" != "$RELEASE_COMMIT" ]; then\n            echo "Le tag ne correspond pas au commit vérifié. La release reste en brouillon."\n            exit 1\n          fi\n          gh release edit "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --draft=false --latest\n',
+    expected: /^on:\s*\n\s+workflow_dispatch:/m,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/ci-hardening.test.js:61:1
+✖ table validation checks the generated document without pushing Git (0.590242ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /run:\s*node scripts\/update-readme\.mjs --check\b/. Input:
+  
+  'name: Actualiser le tableau des comptes\n' +
+    'on:\n' +
+    '  push:\n' +
+    '    branches: [main]\n' +
+    '    paths:\n' +
+    '      - liste/accounts.json\n' +
+    '      - scripts/update-readme.mjs\n' +
+    '  workflow_dispatch:\n' +
+    'permissions:\n' +
+    '  contents: write\n' +
+    'concurrency:\n' +
+    '  group: tableau-comptes\n' +
+    '  cancel-in-progress: false\n' +
+    'jobs:\n' +
+    '  tableau:\n' +
+    '    runs-on: ubuntu-latest\n' +
+    '    steps:\n' +
+    '      - uses: actions/checkout@v4\n' +
+    '      - uses: actions/setup-node@v4\n' +
+    '        with:\n' +
+    '          node-version: "24"\n' +
+    '      - run: node scripts/update-readme.mjs\n' +
+    '      - name: Enregistrer le tableau\n' +
+    '        shell: bash\n' +
+    '        run: |\n' +
+    '          if git diff --quiet -- README.md; then exit 0; fi\n' +
+    '          git config user.name "github-actions[bot]"\n' +
+    '          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"\n' +
+    '          git add README.md\n' +
+    '          git commit -m "Mise à jour du tableau"\n' +
+    '          git push\n'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/ci-hardening.test.js:63:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'name: Actualiser le tableau des comptes\non:\n  push:\n    branches: [main]\n    paths:\n      - liste/accounts.json\n      - scripts/update-readme.mjs\n  workflow_dispatch:\npermissions:\n  contents: write\nconcurrency:\n  group: tableau-comptes\n  cancel-in-progress: false\njobs:\n  tableau:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: "24"\n      - run: node scripts/update-readme.mjs\n      - name: Enregistrer le tableau\n        shell: bash\n        run: |\n          if git diff --quiet -- README.md; then exit 0; fi\n          git config user.name "github-actions[bot]"\n          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"\n          git add README.md\n          git commit -m "Mise à jour du tableau"\n          git push\n',
+    expected: /run:\s*node scripts\/update-readme\.mjs --check\b/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/ci-hardening.test.js:68:3
+✖ vercel.json disables Git deployments for every branch until costs are verified (18.41725ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   'feat/fil-clair-durable-operations': false,
+  +   'feat/fil-clair-server-transport': false,
+  +   'feat/fil-clair-v32-guided-help': false,
+  +   'fix/fil-clair-local-data-lifecycle': false
+  + }
+  - false
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/ci-hardening.test.js:70:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { 'feat/fil-clair-v32-guided-help': false, 'feat/fil-clair-durable-operations': false, 'feat/fil-clair-server-transport': false, 'fix/fil-clair-local-data-lifecycle': false },
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/ci-hardening.test.js:68:3
+✖ pwa/vercel.json disables Git deployments for every branch until costs are verified (2.980281ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   'feat/fil-clair-durable-operations': false,
+  +   'feat/fil-clair-server-transport': false,
+  +   'feat/fil-clair-v32-guided-help': false,
+  +   'fix/fil-clair-local-data-lifecycle': false
+  + }
+  - false
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/ci-hardening.test.js:70:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { 'feat/fil-clair-v32-guided-help': false, 'feat/fil-clair-durable-operations': false, 'feat/fil-clair-server-transport': false, 'fix/fil-clair-local-data-lifecycle': false },
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

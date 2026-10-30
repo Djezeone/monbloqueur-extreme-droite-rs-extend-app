@@ -1,0 +1,63 @@
+{
+  "browser": "firefox",
+  "version": "157.0",
+  "results": [
+    {
+      "name": "fresh confirmation requires commit; reload returns metadata without restored proof",
+      "result": "PASS"
+    },
+    {
+      "name": "two pages cannot claim the same account simultaneously",
+      "result": "PASS"
+    },
+    {
+      "name": "recovering prepared in another page fences a suspended sender",
+      "result": "PASS"
+    },
+    {
+      "name": "matching cross-page readback preserves quarantine against a late POST and inverse consent",
+      "result": "PASS"
+    },
+    {
+      "name": "timeout, reload and a new consent never replay an uncertain mutation",
+      "result": "PASS"
+    },
+    {
+      "name": "an aborted sending transaction after put success prevents the POST",
+      "result": "PASS"
+    },
+    {
+      "name": "consent serialized before reload has no execution authority",
+      "result": "PASS"
+    },
+    {
+      "name": "429 pause survives reload; expiry grants no automatic write",
+      "result": "PASS"
+    },
+    {
+      "name": "401 stops future runners on the account without persisting provider text",
+      "result": "PASS"
+    },
+    {
+      "name": "second Bluesky sending checkpoint abort preserves the first accepted deletion",
+      "result": "PASS"
+    },
+    {
+      "name": "recovery respects partial 429 pause and persists a second read-only 429",
+      "result": "PASS"
+    },
+    {
+      "name": "a quarantined recovery 401 stops same-page and reloaded recovery reads",
+      "result": "PASS"
+    },
+    {
+      "name": "persistent journal abort keeps known partial acceptance but never provider confirmation",
+      "result": "PASS"
+    },
+    {
+      "name": "second-checkpoint consent expiry prevents the next Bluesky deletion",
+      "result": "PASS"
+    }
+  ],
+  "outsideRequests": []
+}

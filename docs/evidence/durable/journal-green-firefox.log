@@ -1,0 +1,12 @@
+{"engine":"firefox","version":"157.0","physicalDevice":false,"network":"loopback modules only"}
+{"name":"CAS assigns revisions, captures input and survives reload without proof fields","result":"PASS"}
+{"name":"two pages race atomically for one lane and one revision","result":"PASS"}
+{"name":"CAS waits for strict transaction complete and closes every connection","result":"PASS"}
+{"name":"abort after a successful put rejects and preserves the old checkpoint","result":"PASS"}
+{"name":"a transaction blocked past timeout cannot commit after its lock is released","result":"PASS"}
+{"name":"an engine that ignores strict durability is refused before writing","result":"PASS"}
+{"name":"corrupt, cross-bound and proof-bearing envelopes fail closed without overwrite","result":"PASS"}
+{"name":"the 128-lane bound is atomic across pages and permits existing-lane updates","result":"PASS"}
+{"name":"provider, account and normalized origin identify independent lanes","result":"PASS"}
+{"name":"same-operation timestamps cannot roll back or change the original creation time","result":"PASS"}
+Operation journal: 10/10 scenarios passed; served 39 loopback fixture requests.

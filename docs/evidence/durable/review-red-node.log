@@ -1,0 +1,121 @@
+✔ the private gate is awaited before a Mastodon POST starts (5.361214ms)
+✔ durable execution closes only after fresh readback and does not restore its proof (4.381213ms)
+✔ two runners competing for one account send at most one mutation (1.885978ms)
+✔ old, cloned, consumed, and imported consent cannot authorize another execution (0.680415ms)
+✔ prepared recovery fences the old pre-reading runner before its first POST (1.064169ms)
+✔ a matching recovery observation cannot clear a send that may still be in flight (1.193685ms)
+✔ a lost mutation reply is quarantined across restart and never retried (10.919392ms)
+✔ storage denial before claim performs no authenticated request (0.397234ms)
+✔ a rejected send checkpoint performs no POST (0.993651ms)
+✖ failure to commit completion withholds provider confirmation and preserves sending (1.885939ms)
+✔ consent expiring during checkpoint persistence prevents the POST (0.572581ms)
+✔ cancel while waiting on a claim never enters the provider (0.433629ms)
+✔ 429 cooldown survives a fresh runner and requires new consent after expiry (1.143649ms)
+✔ authentication refusal durably stops the lane without leaking provider messages (0.671051ms)
+✔ Bluesky awaits each checkpoint and preserves partial effects if the second fails (1.439208ms)
+✖ recovery respects a durable pause after partial acceptance without any GET (1.626384ms)
+✖ 429 during recovery persists its pause for the next runner (10.839596ms)
+✖ recovery authentication failures stop current and fresh runners without false storage reasons (13.7621ms)
+✖ persistent journal failure preserves a known partial deletion without confirmation (1.07867ms)
+✔ consent expiry at the second Bluesky checkpoint preserves the first deletion only (0.507902ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 15
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 164.229813
+
+✖ failing tests:
+
+test at tests/durable-orchestration.test.js:153:1
+✖ failure to commit completion withholds provider confirmation and preserves sending (1.885939ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  null !== true
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:157:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:209:1
+✖ recovery respects a durable pause after partial acceptance without any GET (1.626384ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'unknown'
+  - 'cooldown'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:213:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'unknown',
+    expected: 'cooldown',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:216:1
+✖ 429 during recovery persists its pause for the next runner (10.839596ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'unknown'
+  - 'cooldown'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:220:49)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'unknown',
+    expected: 'cooldown',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:224:1
+✖ recovery authentication failures stop current and fresh runners without false storage reasons (13.7621ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'journal-write-failed'
+  - 'session-stopped'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:229:72)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'journal-write-failed',
+    expected: 'session-stopped',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/durable-orchestration.test.js:236:1
+✖ persistent journal failure preserves a known partial deletion without confirmation (1.07867ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  null !== true
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/durable-orchestration.test.js:239:85)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

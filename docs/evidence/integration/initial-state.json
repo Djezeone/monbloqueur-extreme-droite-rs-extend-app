@@ -1,0 +1,150 @@
+{
+  "date": "2026-10-30",
+  "main": {
+    "sha": "b7cd31b036cca17b48dbf726c047847191c01a5b",
+    "protected": false
+  },
+  "rulesets": [],
+  "repository": {
+    "visibility": "public",
+    "ownerAdmin": true,
+    "connectorAdministration": false
+  },
+  "prs": [
+    {
+      "number": 1,
+      "url": "https://github.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/pull/1",
+      "head": "51abcd35adefb757cc4f8831d23131a465b9f52a",
+      "source": "feat/fil-clair-pwa-safe-v1",
+      "base": "main",
+      "baseSha": "b7cd31b036cca17b48dbf726c047847191c01a5b",
+      "commits": 11,
+      "draft": true,
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean"
+    },
+    {
+      "number": 2,
+      "url": "https://github.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/pull/2",
+      "head": "b3b0660584429dfe6acdf031e03064a95eafd8c6",
+      "source": "feat/fil-clair-v3-effects-registry",
+      "base": "feat/fil-clair-pwa-safe-v1",
+      "baseSha": "51abcd35adefb757cc4f8831d23131a465b9f52a",
+      "commits": 5,
+      "draft": true,
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean"
+    },
+    {
+      "number": 3,
+      "url": "https://github.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/pull/3",
+      "head": "839049a1f675873ff6aedf0471e659f4a211bb0c",
+      "source": "feat/fil-clair-v32-guided-help",
+      "base": "feat/fil-clair-v3-effects-registry",
+      "baseSha": "b3b0660584429dfe6acdf031e03064a95eafd8c6",
+      "commits": 9,
+      "draft": true,
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean"
+    },
+    {
+      "number": 4,
+      "url": "https://github.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/pull/4",
+      "head": "42a70ca528245100fe9866c9d8485c31d2cfa9e2",
+      "source": "feat/fil-clair-durable-operations",
+      "base": "feat/fil-clair-v32-guided-help",
+      "baseSha": "839049a1f675873ff6aedf0471e659f4a211bb0c",
+      "commits": 5,
+      "draft": true,
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean"
+    },
+    {
+      "number": 5,
+      "url": "https://github.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/pull/5",
+      "head": "04454543f3df190f54f5fdacbccb82a413f901c0",
+      "source": "feat/fil-clair-server-transport",
+      "base": "feat/fil-clair-durable-operations",
+      "baseSha": "42a70ca528245100fe9866c9d8485c31d2cfa9e2",
+      "commits": 5,
+      "draft": true,
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean"
+    },
+    {
+      "number": 6,
+      "url": "https://github.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/pull/6",
+      "head": "0af61dee2141ac15a64f1ab3ca0a169f43b4c0ce",
+      "source": "fix/fil-clair-local-data-lifecycle",
+      "base": "feat/fil-clair-server-transport",
+      "baseSha": "04454543f3df190f54f5fdacbccb82a413f901c0",
+      "commits": 5,
+      "draft": true,
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean"
+    }
+  ],
+  "finalHistoricalRuns": [
+    {
+      "id": 40987904888,
+      "sha": "0af61dee2141ac15a64f1ab3ca0a169f43b4c0ce",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "url": "https://github.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/actions/runs/40987904888"
+    },
+    {
+      "id": 40987904767,
+      "sha": "0af61dee2141ac15a64f1ab3ca0a169f43b4c0ce",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "url": "https://github.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/actions/runs/40987904767"
+    }
+  ],
+  "quota": {
+    "notificationDate": "2026-10-16",
+    "service": "GitHub Actions included monthly minutes",
+    "included3000": true,
+    "used100": true,
+    "reset20261101": true,
+    "currentMeterAvailable": false,
+    "auth": [
+      {
+        "dkim": true,
+        "spf": true,
+        "dmarc": true,
+        "github": true
+      },
+      {
+        "dkim": true,
+        "spf": true,
+        "dmarc": true,
+        "github": true
+      }
+    ]
+  },
+  "vercel": {
+    "projectId": "prj_NXqsPNu36zUfalaQ40AcYbWxdD1R",
+    "teamId": "team_Ezhg0ev2HLrI1U8bu9SS8m2U",
+    "billingRead": "404 Plan not found; absence de coût non déductible",
+    "newDeploymentRequested": false
+  },
+  "decisions": {
+    "A_SAFE": "NO-GO",
+    "B_CONNECT": "NO-GO",
+    "C_PUBLIC": "NO-GO"
+  }
+}

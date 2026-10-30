@@ -1,0 +1,28 @@
+✔ the private gate is awaited before a Mastodon POST starts (3.450193ms)
+✔ durable execution closes only after fresh readback and does not restore its proof (3.561543ms)
+✔ two runners competing for one account send at most one mutation (0.974832ms)
+✔ old, cloned, consumed, and imported consent cannot authorize another execution (0.915381ms)
+✔ prepared recovery fences the old pre-reading runner before its first POST (1.169397ms)
+✔ a matching recovery observation cannot clear a send that may still be in flight (1.133742ms)
+✔ a lost mutation reply is quarantined across restart and never retried (11.134331ms)
+✔ storage denial before claim performs no authenticated request (0.453429ms)
+✔ a rejected send checkpoint performs no POST (0.547342ms)
+✔ failure to commit completion withholds provider confirmation and preserves sending (0.654665ms)
+✔ consent expiring during checkpoint persistence prevents the POST (0.447991ms)
+✔ cancel while waiting on a claim never enters the provider (0.368359ms)
+✔ 429 cooldown survives a fresh runner and requires new consent after expiry (0.906628ms)
+✔ authentication refusal durably stops the lane without leaking provider messages (0.310291ms)
+✔ Bluesky awaits each checkpoint and preserves partial effects if the second fails (1.159982ms)
+✔ recovery respects a durable pause after partial acceptance without any GET (0.827949ms)
+✔ 429 during recovery persists its pause for the next runner (11.90462ms)
+✔ recovery authentication failures stop current and fresh runners without false storage reasons (33.563726ms)
+✔ persistent journal failure preserves a known partial deletion without confirmation (0.86861ms)
+✔ consent expiry at the second Bluesky checkpoint preserves the first deletion only (0.523155ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 165.801359

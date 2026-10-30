@@ -1,0 +1,17 @@
+✔ only exact shell URLs are precached with credentials omitted (9.677242ms)
+✔ OAuth callbacks, token URLs, API replies and foreign resources bypass the worker (7.587916ms)
+✔ authenticated requests and writes bypass even shell URLs (3.756544ms)
+✔ browser navigations may load the public cached shell with include credentials (4.673207ms)
+✔ installed shell requests are served without a runtime network write (8.745341ms)
+✔ a redirect while installing cannot persist a sign-in response (2.72616ms)
+✔ activation purges the old permissive cache and preserves unrelated app caches (2.654173ms)
+✔ a missing shell entry is fetched without persisting the network reply (2.335652ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 150.725881
+FIL CLAIR security invariants: PASS

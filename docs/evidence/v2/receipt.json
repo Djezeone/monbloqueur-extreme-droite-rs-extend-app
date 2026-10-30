@@ -1,0 +1,195 @@
+{
+  "capturedAtUTC": "2026-10-28T18:41:00.399079+00:00",
+  "sourceCommitLocal": "358904481caf1f2ac7d8c18359ede2ded6dde6eb",
+  "physicalDevice": false,
+  "node": {
+    "passed": 133,
+    "failed": 0
+  },
+  "serviceWorker": {
+    "passed": 8,
+    "failed": 0
+  },
+  "scripts": {
+    "chromium": {
+      "test-pwa": {
+        "log": "chromium-test-pwa.log",
+        "sha256": "00526338d7aa5fe2fe985a2350d9cf1275c14fa2aba94e484e82cc4f4d58bab4",
+        "tail": "E2E FIL CLAIR : ajout, à vérifier, historique, annulation, persistance, sauvegarde corrompue, export/effacement/restauration, SW installé et contrôlant, cache allowlist, reload et écriture hors ligne, confidentialité hors ligne, suppression/réajout profil et dernière liste sans résurrection, focus voisin, métadonnées affichées et exportées, viewport tactile PASS"
+      },
+      "test-pwa-storage": {
+        "log": "chromium-test-pwa-storage.log",
+        "sha256": "dc0cd1fb09ed9033cf30221aee73de286023e024661c0d850f23ab9c6cc0a25d",
+        "tail": "storage QuotaExceededError: existing data unchanged and exportable, rejected write absent PASS"
+      },
+      "test-pwa-recovery": {
+        "log": "chromium-test-pwa-recovery.log",
+        "sha256": "d87ee50f1692a7c553de978fb868b083a510ac6115c302276bc62f34e64bda89",
+        "tail": "near-limit valid state: 9769347 UTF-8 bytes, 500 multibyte preferences and lists roundtrip within 10MB PASS"
+      },
+      "test-pwa-concurrency": {
+        "log": "chromium-test-pwa-concurrency.log",
+        "sha256": "8b726f038ba78b8cea037f260cf4ce2ff9a485ed653ede7982a1e0b7e04596de",
+        "tail": "PWA concurrency: 4/4 scenarios passed."
+      },
+      "test-pwa-quality": {
+        "log": "chromium-test-pwa-quality.log",
+        "sha256": "c30e0fe26d83857f8de13f1f030999f3d81ca98841e04816ef1bdb4fe46df9cf",
+        "tail": "PWA quality: 30/30 checks passed. Automated checks do not establish full WCAG 2.2 AA conformance or physical-device acceptance."
+      },
+      "test-pwa-flows": {
+        "log": "chromium-test-pwa-flows.log",
+        "sha256": "caa0973f54accfa3819bb4aae649e4c4556fb0d1c0145938f5cbb8ef9bd89881",
+        "tail": "Universal flows: 17/17 checks passed; emulation only, no provider action or full WCAG claim."
+      },
+      "test-pwa-replacements": {
+        "log": "chromium-test-pwa-replacements.log",
+        "sha256": "4712ea7df7c02e58d5eb9a6d2a1f0ca739c5eaa91ae94fbdfe5c11714f3cdc5b",
+        "tail": "Space replacements: 11/11 checks passed."
+      }
+    },
+    "firefox": {
+      "test-pwa": {
+        "log": "firefox-test-pwa.log",
+        "sha256": "94988a170bb3814ecad05decb85329a40d86ab2ef12bb8f5761747abcbb54dd4",
+        "tail": "E2E FIL CLAIR : ajout, à vérifier, historique, annulation, persistance, sauvegarde corrompue, export/effacement/restauration, SW installé et contrôlant, cache allowlist, reload et écriture hors ligne, confidentialité hors ligne, suppression/réajout profil et dernière liste sans résurrection, focus voisin, métadonnées affichées et exportées, viewport tactile PASS"
+      },
+      "test-pwa-storage": {
+        "log": "firefox-test-pwa-storage.log",
+        "sha256": "59f1e4e09e8fff5055ff7901c2533f24ab59d9be9b245749a8f7f759d4c19f19",
+        "tail": "storage QuotaExceededError: existing data unchanged and exportable, rejected write absent PASS"
+      },
+      "test-pwa-recovery": {
+        "log": "firefox-test-pwa-recovery.log",
+        "sha256": "40ced48b6514c657ce72cd10a374834b5ad480d30b2cf13034e2553c2f048799",
+        "tail": "near-limit valid state: 9769347 UTF-8 bytes, 500 multibyte preferences and lists roundtrip within 10MB PASS"
+      },
+      "test-pwa-concurrency": {
+        "log": "firefox-test-pwa-concurrency.log",
+        "sha256": "f54e95c608958cb74a5c1c901619d2061c21b56c64e0d8ec0df61908943c98de",
+        "tail": "PWA concurrency: 4/4 scenarios passed."
+      },
+      "test-pwa-quality": {
+        "log": "firefox-test-pwa-quality.log",
+        "sha256": "c46e2eb9c6b9fbb336275ad070007a144182c573bdc62ca76cbe5e94d7874813",
+        "tail": "PWA quality: 29/29 checks passed. Automated checks do not establish full WCAG 2.2 AA conformance or physical-device acceptance."
+      },
+      "test-pwa-flows": {
+        "log": "firefox-test-pwa-flows.log",
+        "sha256": "d9e049bb087b980b897a8eee9d4f44f865d49b180a07f944291f8ee424a2f579",
+        "tail": "Universal flows: 16/16 checks passed; emulation only, no provider action or full WCAG claim."
+      },
+      "test-pwa-replacements": {
+        "log": "firefox-test-pwa-replacements.log",
+        "sha256": "fbd80c062bc5e76a4ac9d77f70e4c37d78082dd1e53a47f9c0ada94501ecea86",
+        "tail": "Space replacements: 11/11 checks passed."
+      }
+    },
+    "webkit": {
+      "test-pwa": {
+        "log": "webkit-test-pwa.log",
+        "sha256": "f0e37b581ec4b9135d247a2b93056181bca4559f809bbf8e362a4cfdc0028a21",
+        "tail": "E2E FIL CLAIR : ajout, à vérifier, historique, annulation, persistance, sauvegarde corrompue, export/effacement/restauration, SW installé et contrôlant, cache allowlist, reload et écriture hors ligne, confidentialité hors ligne, suppression/réajout profil et dernière liste sans résurrection, focus voisin, métadonnées affichées et exportées, viewport tactile PASS"
+      },
+      "test-pwa-storage": {
+        "log": "webkit-test-pwa-storage.log",
+        "sha256": "cdff2e81d22cebac5f09c68c248119d2e2b8a4c6b1f7b8ecd8801d072e67faae",
+        "tail": "storage QuotaExceededError: existing data unchanged and exportable, rejected write absent PASS"
+      },
+      "test-pwa-recovery": {
+        "log": "webkit-test-pwa-recovery.log",
+        "sha256": "eebeef60df7cb74c1ed7a3344dcb2edf97f142c17cb90fc5c7161600bb0493b7",
+        "tail": "near-limit valid state: 9769347 UTF-8 bytes, 500 multibyte preferences and lists roundtrip within 10MB PASS"
+      },
+      "test-pwa-concurrency": {
+        "log": "webkit-test-pwa-concurrency.log",
+        "sha256": "e3fcde5a350eb645304a2a6e56b83f30887970e1f960e5cc664efce0c83dfca5",
+        "tail": "PWA concurrency: 4/4 scenarios passed."
+      },
+      "test-pwa-quality": {
+        "log": "webkit-test-pwa-quality.log",
+        "sha256": "8d76c5e1ad2524298ae8adaf9cc71afb209556933ab4272af8bf09d3c9e0559e",
+        "tail": "PWA quality: 30/30 checks passed. Automated checks do not establish full WCAG 2.2 AA conformance or physical-device acceptance."
+      },
+      "test-pwa-flows": {
+        "log": "webkit-test-pwa-flows.log",
+        "sha256": "bece732a0a0ba94085d31592cdfff1ae11e259485b06a900267eed8c4877ed10",
+        "tail": "Universal flows: 18/18 checks passed; emulation only, no provider action or full WCAG claim."
+      },
+      "test-pwa-replacements": {
+        "log": "webkit-test-pwa-replacements.log",
+        "sha256": "93eb6a523429712deceb803adc8af3cf61386e58b0416c54501d486f89c2baad",
+        "tail": "Space replacements: 11/11 checks passed."
+      }
+    }
+  },
+  "axe": {
+    "scans": 57,
+    "violations": 0,
+    "incompleteScans": 54
+  },
+  "sourceSHA256": {
+    ".github/workflows/fil-clair-pwa.yml": "ed753a6805954c7f39aa8298a0b193554796c805c653117e6fe2524c47cf0800",
+    ".github/workflows/release.yml": "7bcbf5b51cefd2c1dc7018629a736957c64a2e43c09cc1c33e6a594076e6ef74",
+    ".github/workflows/tableau.yml": "22ec8989849a0d0fe1ab9456a327235a4dfdff427b153502644e94c0515d2f23",
+    ".github/workflows/verification.yml": "69053efa8c09a892317b99e75dc151f21cb987c09aa56a4d90ee06733fb5f711",
+    "package-lock.json": "1187803ea986f212fb2d9a13fe6d2229a08c3ce80f158c66fc55ae975c8a1160",
+    "package.json": "86f5f0d2944e047db72a3aff456fbf0f86b91999c8663bb65c39df4959fe0dfe",
+    "pwa/README.md": "6d2d80344d4155a3a948fdf1b400615bb9c0f7083885b2098e6f92edcf1b0dc2",
+    "pwa/app.js": "130bca2ae2cfb8ea38df18393358a123df4db13cb13c7c311f0f110985939a7b",
+    "pwa/connectors/bluesky.js": "988195613cab62adf91274403a08103712567c1ce6598d4fa2a0a4d9a8616398",
+    "pwa/connectors/internal.js": "4ab4a137b480142211d49bdd86608b5dcddedb5a8927a464f3365a315c200275",
+    "pwa/connectors/mastodon.js": "400463be1675829577038f1d9e49b98e4cbf2455c49af4497870020fa2b93be3",
+    "pwa/connectors/orchestration.js": "5f718f8915408276ad1915ce40c7e0ebb6b59d8c64a2a6229a5323e20fbd044d",
+    "pwa/core.js": "6a0f33241173d8f62d9feee124dd490c7ccd18bb152b093fe277da2b8a2839e3",
+    "pwa/flow-core.js": "bd3506822af946b193af4b569a0c4c3c708a8bcb1bb15bc553d0281ab005b85a",
+    "pwa/flows.js": "2180baafb000bdfacbff7e0d7515094c66f5a288a5efb933f69d3e68d7844392",
+    "pwa/icon-192.png": "5fd8b1669dba5da8e4eef7795f682d5a0f883de62d23850e88a988f7e2843bb7",
+    "pwa/icon-512.png": "3a1484bec5bdbc09b3d2308d54550d818d87a70477b1a63220371a7ff6ef0c3e",
+    "pwa/icon.svg": "b9a9c06507b55727a0f655807899e96a36775ae696807b30cc44cd0f1a02edc6",
+    "pwa/index.html": "af0c47c7b305e50e67b68e4caea69f23a066cb7db05eed3463c15acb69b47121",
+    "pwa/manifest.webmanifest": "d17c8005f264132d74bd74303f4181dae02db11a0010256737ee8613572c9e74",
+    "pwa/platforms.js": "955d2b87dabff6ed83acee1b548239e13498e173f22d114301147d1f1b16257b",
+    "pwa/privacy.html": "888b8bb470c25cfdc2a18b84a1210148792d36f62b4c3be82c606a4263864246",
+    "pwa/styles.css": "9fbc9c03fb351fea97e24739293effd80af76dcdf79c7bcf14e9b95e1ade0361",
+    "pwa/sw.js": "11647675b69a5ca0a167ca6940dddf25d1ea5510a7dcfc8d97bd733f4d5e0238",
+    "pwa/vercel.json": "385777fc86ceff5f002adb9edd14db70b9a4d1b918fc80f02982cea2cda72060",
+    "scripts/assets.mjs": "1053f4ff41d01a27e55302fd1b45cd59a73cf838e8845d57e572aae6a46aa8c1",
+    "scripts/audit-pwa.mjs": "838256016d5590b2e53d41d319aa350662131ed3ba9f4efbf411388015e94f01",
+    "scripts/build.mjs": "fe2cf94e591fc3b352ae4e2587b9460997aae5d364ff6842489ab374450d798a",
+    "scripts/manifests.mjs": "c42c7048511f27ddf58f8bffeff6ac59961ef3710f848e3c7451491f5bf59a17",
+    "scripts/package.mjs": "3210b0f0b6dde20ce4887c09cc930da4a72f7dee7a8a4862f24eeb87e545057c",
+    "scripts/pwa-test-utils.mjs": "e12470ddc69be8e40a83e425091d3162a36f46f2765ff4c66b6fa080aecb41de",
+    "scripts/release.mjs": "71dbbd376dfaafcfd611b8fd7fedc96d8e3dad9deeafaaa79def0da6f6030459",
+    "scripts/test-browser.mjs": "4ec2f8c501156002e1021e015317e7b6c64ea131f0a32f4175ce3bb1dfbfaf6c",
+    "scripts/test-firefox.mjs": "a299ecd5a0fd72209beda98dbe468883683d161319e6e2886ac4f6bca6f32d2b",
+    "scripts/test-pwa-concurrency.mjs": "0d892e6cc74cb1cee8c3171f1b02bc2f29b60c069f85457dcd9e1af19f747373",
+    "scripts/test-pwa-flows.mjs": "aae51550bbdde8b970336b3d9163ed9703e4ea9b1d7928e4e6e1c01387c34a83",
+    "scripts/test-pwa-quality.mjs": "abebafb3b82d44b489be4b35e573747000eec99865748452e1050dde4ca0728f",
+    "scripts/test-pwa-recovery.mjs": "d564a89391c144b588a479a458208c444831ed7b74ca8053c028af97d1e13a6b",
+    "scripts/test-pwa-replacements.mjs": "edd55e9ba35df7b188287e03a7381b690b7347ec0aa7d72aabaded9990be5b05",
+    "scripts/test-pwa-storage.mjs": "1e7f08aa41a0eb016461802d10abdb6939f1978aebd415a8006135d918567546",
+    "scripts/test-pwa-sw.mjs": "d005c47ba78917b85018dbaab3fe70b1a2f8f361cbfc04bf71f0c83b2978f592",
+    "scripts/test-pwa.mjs": "aec293a297a4be8fbc34d55b975afe459235f75044ec1fd67c04f2077dcd85d1",
+    "scripts/update-readme.mjs": "a8935e5188ded476407ec96ad0d2d3284601a767e9471738116d8095f9820486",
+    "scripts/validate-list.mjs": "c7407f48a931d880675a14ef6613940a9ad29841a360c187f5b6126404bbd7e3",
+    "tests/connectors.test.js": "3eb83008cf1e6cd935ad4384baad0cdbbfc997ab165a3aa3bc3c43abcc50aba1",
+    "tests/core.test.js": "32df8a750cb8a6532fe8bbb928b03c848b24b7fa21b594964d855de6c770a194",
+    "tests/fixtures/site.mjs": "4b06836395a7ccb164d867444440333a62f2081c59cb3f7b617216ca8359f197",
+    "tests/flow-core.test.js": "8d1c6202af6e8d1356776836fe0adc455386ab4a7e25329c4678758a4c6e4e61",
+    "tests/history.test.js": "7b0778c470a5b0617731320c1086b0c975762435738800c269e300e22b3ea55a",
+    "tests/orchestration.test.js": "41486f1b9c79db500dc449d1d339daa54c1ec68f04b6b00aeb5bb222963b9be5",
+    "tests/pwa-core.test.js": "1128cb14e4338291eb5ce2ee6c121a22e45974a6d0d091e421e40796b5ff5368",
+    "tests/queue.test.js": "4b4c370c03854adb87220dceed9b3fc0331d88bf2bdd62f34ba2b966387833a2"
+  },
+  "npmAudit": {
+    "info": 0,
+    "low": 3,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 3
+  },
+  "sourceContext": "Local code commit plus documentation/privacy copy finalized in the following commit; sourceSHA256 lists the exact workspace files. Remote commit provenance is in the PR; CI must validate its final head.",
+  "sourceHashesVerifiedAtUTC": "2026-10-28T18:43:53.174402+00:00"
+}
