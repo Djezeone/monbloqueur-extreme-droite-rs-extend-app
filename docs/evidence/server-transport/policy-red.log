@@ -1,0 +1,433 @@
+✖ server origins normalize HTTPS case, port 443 and a single optional slash (1.490595ms)
+✖ server origins reject IP literals, numeric aliases and local DNS suffixes (0.224518ms)
+✖ server origins reject URL features and parser spelling aliases (0.178239ms)
+✖ server DNS host labels enforce LDH and total 253 character bounds (0.235284ms)
+✖ IPv4 public selection excludes every special prefix and multicast (0.183156ms)
+✖ IPv6 public selection enforces global unicast and the special prefix boundaries (0.326551ms)
+✖ public addresses reject ambiguous text, scoped IPv6 and malformed inputs (0.18631ms)
+✖ DNS selection returns the first public address after validating up to 16 answers (0.158709ms)
+✖ DNS selection fails closed when any answer is private, mapped, special or mismatched (0.177317ms)
+✖ DNS selection accepts only bounded arrays of exact safe data records (0.761857ms)
+✖ Mastodon requests normalize exactly the four qualified routes and literal query (0.193862ms)
+✖ Mastodon requests preserve strict decimal ID bounds (0.23264ms)
+✖ Mastodon URLs reject alternate origins, path aliases, fragments and query on non-query routes (0.26574ms)
+✖ Mastodon relationships require exactly one canonical ID and with_suspended=true (0.148764ms)
+✖ Mastodon methods and bodies admit only bodyless GET and empty-object POST (0.182375ms)
+✖ Mastodon transport options require exact data-only keys and a real optional AbortSignal (0.268715ms)
+✖ policy errors discard thrown input messages and arbitrary error details (1.057373ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 0
+ℹ fail 17
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 99.900413
+
+✖ failing tests:
+
+test at tests/network-policy.test.js:28:1
+✖ server origins normalize HTTPS case, port 443 and a single optional slash (1.490595ms)
+  AssertionError [ERR_ASSERTION]: normalizeOrigin network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:29:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:38:1
+✖ server origins reject IP literals, numeric aliases and local DNS suffixes (0.224518ms)
+  AssertionError [ERR_ASSERTION]: normalizeOrigin network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:39:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:48:1
+✖ server origins reject URL features and parser spelling aliases (0.178239ms)
+  AssertionError [ERR_ASSERTION]: normalizeOrigin network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:49:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:60:1
+✖ server DNS host labels enforce LDH and total 253 character bounds (0.235284ms)
+  AssertionError [ERR_ASSERTION]: normalizeOrigin network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:61:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:68:1
+✖ IPv4 public selection excludes every special prefix and multicast (0.183156ms)
+  AssertionError [ERR_ASSERTION]: isPublicAddress network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:69:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:93:1
+✖ IPv6 public selection enforces global unicast and the special prefix boundaries (0.326551ms)
+  AssertionError [ERR_ASSERTION]: isPublicAddress network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:94:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:112:1
+✖ public addresses reject ambiguous text, scoped IPv6 and malformed inputs (0.18631ms)
+  AssertionError [ERR_ASSERTION]: isPublicAddress network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:113:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:120:1
+✖ DNS selection returns the first public address after validating up to 16 answers (0.158709ms)
+  AssertionError [ERR_ASSERTION]: selectPublicAddress network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:121:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:133:1
+✖ DNS selection fails closed when any answer is private, mapped, special or mismatched (0.177317ms)
+  AssertionError [ERR_ASSERTION]: selectPublicAddress network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:134:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:146:1
+✖ DNS selection accepts only bounded arrays of exact safe data records (0.761857ms)
+  AssertionError [ERR_ASSERTION]: selectPublicAddress network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:147:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:163:1
+✖ Mastodon requests normalize exactly the four qualified routes and literal query (0.193862ms)
+  AssertionError [ERR_ASSERTION]: normalizeMastodonRequest network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:164:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:183:1
+✖ Mastodon requests preserve strict decimal ID bounds (0.23264ms)
+  AssertionError [ERR_ASSERTION]: normalizeMastodonRequest network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:184:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:195:1
+✖ Mastodon URLs reject alternate origins, path aliases, fragments and query on non-query routes (0.26574ms)
+  AssertionError [ERR_ASSERTION]: normalizeMastodonRequest network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:196:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:213:1
+✖ Mastodon relationships require exactly one canonical ID and with_suspended=true (0.148764ms)
+  AssertionError [ERR_ASSERTION]: normalizeMastodonRequest network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:214:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:226:1
+✖ Mastodon methods and bodies admit only bodyless GET and empty-object POST (0.182375ms)
+  AssertionError [ERR_ASSERTION]: normalizeMastodonRequest network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:227:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:245:1
+✖ Mastodon transport options require exact data-only keys and a real optional AbortSignal (0.268715ms)
+  AssertionError [ERR_ASSERTION]: normalizeMastodonRequest network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:246:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/network-policy.test.js:273:1
+✖ policy errors discard thrown input messages and arbitrary error details (1.057373ms)
+  AssertionError [ERR_ASSERTION]: normalizeMastodonRequest network policy must exist
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at implementation (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:15:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/network-policy.test.js:274:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,26 @@
+✔ server session does no bootstrap call and never serializes its token (455.369517ms)
+✔ server factory refuses broad scopes, unapproved origins and unsafe token/config without network (183.262146ms)
+✔ TLS transport binds bearer/host and returns only matching identity and rate headers (474.862164ms)
+✔ Mastodon adapter and durable runner confirm only after TLS relationship readback (274.466224ms)
+✔ 421, redirect and503 produce one POST, no replay, no forwarded Location or body (189.646441ms)
+✔ an applied POST followed by socket reset is unknown and cannot be replayed (150.030594ms)
+✔ mixed private DNS results are refused before native request construction (337.309554ms)
+✔ disconnect during DNS prevents a late authenticated request (101.344059ms)
+✔ abort during DNS settles without waiting for the resolver and prevents later dispatch (250.693635ms)
+✔ local expiry after DNS prevents dispatch and never claims provider revocation (284.374075ms)
+✔ 401 and403 stop as soon as headers arrive, even with an invalid unfinished body (199.561169ms)
+✔ a200identity mismatch stops the captured session (205.505002ms)
+✔ invalid UTF8, JSON, compression and oversized bodies fail without leaking response text (230.729661ms)
+✔ wrong relationship/action binding after POST is uncertain rather than confirmed (96.802389ms)
+✔ deadline covers a stalled TLS response and destroys rather than retries the request (321.839715ms)
+✔ disconnect interrupts an in-flight POST without claiming its remote cancellation (106.348742ms)
+✔ native TLS rejects an otherwise trusted certificate for a different hostname (244.366913ms)
+✔ one active request per handle prevents overlapping dispatches (129.476184ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4329.592016
