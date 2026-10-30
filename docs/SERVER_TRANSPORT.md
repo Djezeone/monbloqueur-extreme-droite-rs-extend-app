@@ -16,6 +16,8 @@ Une seule requête active par handle, un `https.request` et un `end` par appel, 
 
 Timeout total10secondes par défaut, maximum30secondes, couvrant DNS→corps et détruisant la requête ; réponse64KiB par défaut/1MiB maximum, headers16KiB. Pas de décompression de réponse ; uniquement JSON UTF-8 non compressé. Aucun journal applicatif contenant jetons, identités ou cibles n'est émis par ces modules.
 
+Le délai écoulé est revérifié avec une horloge monotone après DNS, avant dispatch et avant acceptation de réponse. Une boucle JavaScript bloquée peut retarder l'annulation physique ; quand le code reprend, aucune nouvelle construction ni réponse achevée hors délai n'est acceptée. Un effet distant déjà en vol reste incertain.
+
 ## Qualification et limites
 Tests avec certificat/clé éphémères, serveur TLS loopback et drivers de confiance injectés. Le driver de test vérifie les options publiques/TLS puis redirige le fil vers localhost avec sa CA éphémère ; aucun bypass de ce type dans le module de production. IPv6 : validation de politique/paramètres testée, le fil de la fixture reste IPv4. Aucune connectivité IPv6 externe ou API réelle n'est certifiée.
 

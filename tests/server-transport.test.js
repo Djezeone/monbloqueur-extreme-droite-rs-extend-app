@@ -161,3 +161,22 @@ test("mutating constructor inputs cannot switch the captured token account origi
   const b=module.createMastodonTransport(options);options.origin="https://other.example";options.accountId="8";options.accessToken="new-synthetic-token";permissions[0]="admin:write";
   assert.deepEqual((await b.transport(identity)).body,{id:"7"});assert.equal(f.calls[0].headers.authorization,"Bearer "+token);assert.equal(b.session.accountId,"7");assert.deepEqual(b.session.scopes,scopes);b.disconnect();
 }));
+
+test("an elapsed deadline blocks a DNS continuation before queued timers run",async()=>{
+  const release=deferred();let dispatches=0;
+  const b=module.createMastodonTransport({origin,allowedOrigins:[origin],accountId:"7",accessToken:token,scopes,timeoutMs:10,lookup:()=>release.promise,request:()=>{dispatches++;throw Error("driver must not be invoked");}});
+  const pending=b.transport(mutation);const until=performance.now()+40;while(performance.now()<until){}
+  release.resolve([{address:"93.184.216.34",family:4}]);
+  try{await assert.rejects(pending,e=>e.code==="timeout"&&e.sent===false&&e.uncertain===false);assert.equal(dispatches,0);}finally{b.disconnect();}
+});
+
+test("a completed response after the deadline cannot beat the queued timeout",async()=>{
+  const {EventEmitter}=await import("node:events");let dispatches=0;
+  const driver=(options,receive)=>{
+    dispatches++;
+    const response=new EventEmitter();Object.assign(response,{statusCode:200,headers:{"content-type":"application/json"},complete:true,destroy(){}});
+    return{on(){return this;},destroy(){},end(){receive(response);response.emit("data",Buffer.from('{"id":"42","blocking":true}'));const until=performance.now()+40;while(performance.now()<until){}response.emit("end");}};
+  };
+  const b=module.createMastodonTransport({origin,allowedOrigins:[origin],accountId:"7",accessToken:token,scopes,timeoutMs:10,lookup:async()=>[{address:"93.184.216.34",family:4}],request:driver});
+  try{await assert.rejects(b.transport(mutation),e=>e.code==="timeout"&&e.uncertain===true);assert.equal(dispatches,1);}finally{b.disconnect();}
+});

@@ -35,7 +35,7 @@ Consumes : task1 et ConnectorError/decimalId ; produit handle exact décrit dans
 ### Task3 — revue, preuves et pilotage
 Files : docs/SERVER_TRANSPORT.md, mission/queue/privacy/ops, recherche datée, journal Fait/Ouvert/Vérifié/Périmé, configurations Vercel/audit existants.
 - [x] Docs et scope inactif précis ; déploiement Git interdit pour cette seule branche.
-- [ ] Audits et revue indépendante fraîche de toute branche ; une passe RED→GREEN pour constats importants, réserves documentées.
+- [x] Audits et revue indépendante fraîche de toute branche ; une passe RED→GREEN pour constats importants, réserves documentées.
 - [ ] Preuves/hash/commits et PR draft dépendant#4 ; scénario CI gratuit revérifié, aucun upload/cache ni relance inchangée.
 - [ ] Lire CI au SHA exact, déploiements et cockpit ; mettre à jour/re-lire8lots/8portes/session. A/B/C restent No-Go.
 
@@ -47,3 +47,9 @@ Files : docs/SERVER_TRANSPORT.md, mission/queue/privacy/ops, recherche datée, j
 - Task1 complete :17groupes de tests de politique RED→GREEN, pas de réseau.
 - Task2 complete :18tests initiaux RED→GREEN et6qualifications supplémentaires ;24/24TLS/session. Suite complète224/224Node,9/9SW+audit et14imports shell sans connecteur.
 - Ruling : le driver de test réoriente seulement le fil vers127.0.0.1 avecCAéphémère, après vérification de la sélection publique/TLS. IPv6 paramètres validés, pas de connectivité IPv6externe certifiée ; coût d'erreur : activation interdite avant qualification egress réelle.
+
+- Revue indépendante gpt-6-astra/high sur42a70ca..faab750 :0Critical,0Important,1Minor ;41tests ciblés exécutés par le relecteur, pas de CI/service externe.
+- Final: Ruling: deadline évalué seulement par timer reclassé Important : construction tardive et fausse incertitude peuvent bloquer une opération ; cela ne prouve pas un POST réel tardif. Coût d'erreur : envoi inattendu/quarantaine trompeuse.
+- Final: fixed deadline —2régressions RED/26 puis26/26GREEN, garde monotone aprèsDNS/avantdispatch/avantacceptation ; suite complète226/226. Une passe, pas de seconde revue.
+- Final: Ruling: OAuth/scopes réellement accordés, routes/auth/CSRF, sessions/journal serveur durables, révocation, réseau IPv6 externe/egress/proxy/NAT, drivers/serveur compromis, déploiement/coût/CI/distants, physique/WCAG et décisions juridiques restent hors qualification indépendante. Activation interdite avant leurs preuves ; ces risques ne sont pas supprimés par les tests.
+- Final: minor(deferred): aucun ; le seul Minor a été reclassé et corrigé.
