@@ -1,0 +1,50 @@
+{"suite":"local-data-lifecycle","engine":"webkit","version":"27.2","physicalDevice":false}
+{"start":"profile: adding an imported orphan starts at To do without a fresh declaration"}
+{"start":"draft: newer account text survives a pending save and retains focus"}
+{"start":"draft: changed account context and help focus survive a pending save"}
+{"start":"draft: newer flow text survives a pending save and retains focus"}
+{"start":"draft: changed flow context and help focus survive a pending save"}
+{"start":"draft: moving to an unchanged service selector keeps keyboard focus after save"}
+{"start":"draft: unchanged successful submission clears its submitted fields"}
+{"start":"draft: failed account write keeps the current text and persisted snapshot"}
+{"start":"import: late list after successful erase cannot modify the new space"}
+{"start":"import: late backup after successful erase cannot modify the new space"}
+{"start":"import: late list after successful restore cannot modify the new space"}
+{"start":"import: late backup after successful restore cannot modify the new space"}
+{"start":"import: late list after successful session cannot modify the new space"}
+{"start":"import: late backup after successful session cannot modify the new space"}
+{"start":"import: delayed public response after erase is ignored"}
+{"start":"import: delayed public response after restore is ignored"}
+{"start":"import: delayed public response after session is ignored"}
+{"start":"import: a stale invalid file reports cancellation without its private error text"}
+{"start":"import boundary: a rejected file read after replacement cannot expose its error"}
+{"start":"import boundary: a public body finishing after replacement cannot write"}
+{"start":"import: cancelled replacement or ordinary mutation preserves an authorized import"}
+{"start":"import: failed replacement or ordinary mutation preserves an authorized import"}
+{"start":"import: ordinary replacement or ordinary mutation preserves an authorized import"}
+{"start":"import: finishing the older file does not clear a newer selection"}
+{"name":"profile: adding an imported orphan starts at To do without a fresh declaration","result":"PASS"}
+{"name":"draft: newer account text survives a pending save and retains focus","result":"PASS"}
+{"name":"draft: changed account context and help focus survive a pending save","result":"PASS"}
+{"name":"draft: newer flow text survives a pending save and retains focus","result":"PASS"}
+{"name":"draft: changed flow context and help focus survive a pending save","result":"PASS"}
+{"name":"draft: moving to an unchanged service selector keeps keyboard focus after save","result":"PASS"}
+{"name":"draft: unchanged successful submission clears its submitted fields","result":"PASS"}
+{"name":"draft: failed account write keeps the current text and persisted snapshot","result":"PASS"}
+{"name":"import: late list after successful erase cannot modify the new space","result":"PASS"}
+{"name":"import: late backup after successful erase cannot modify the new space","result":"PASS"}
+{"name":"import: late list after successful restore cannot modify the new space","result":"PASS"}
+{"name":"import: late backup after successful restore cannot modify the new space","result":"PASS"}
+{"name":"import: late list after successful session cannot modify the new space","result":"PASS"}
+{"name":"import: late backup after successful session cannot modify the new space","result":"PASS"}
+{"name":"import: delayed public response after erase is ignored","result":"PASS"}
+{"name":"import: delayed public response after restore is ignored","result":"PASS"}
+{"name":"import: delayed public response after session is ignored","result":"PASS"}
+{"name":"import: a stale invalid file reports cancellation without its private error text","result":"PASS"}
+{"name":"import boundary: a rejected file read after replacement cannot expose its error","result":"PASS"}
+{"name":"import boundary: a public body finishing after replacement cannot write","result":"PASS"}
+{"name":"import: cancelled replacement or ordinary mutation preserves an authorized import","result":"PASS"}
+{"name":"import: failed replacement or ordinary mutation preserves an authorized import","result":"PASS"}
+{"name":"import: ordinary replacement or ordinary mutation preserves an authorized import","result":"PASS"}
+{"name":"import: finishing the older file does not clear a newer selection","result":"PASS"}
+{"suite":"local-data-lifecycle","passed":24,"total":24,"externalRequests":0}

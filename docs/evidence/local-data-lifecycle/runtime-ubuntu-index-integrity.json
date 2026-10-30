@@ -1,0 +1,14 @@
+[
+  {
+    "index": "/tmp/fil-clair-resume-runtime/archives/noble-main-Packages.xz",
+    "size": 1401160,
+    "sha256": "2a6a199e1031a5c279cb346646d594993f35b1c03dd4a82aaa0323980dd92451",
+    "verified": "signed Ubuntu noble InRelease"
+  },
+  {
+    "index": "/tmp/fil-clair-resume-runtime/archives/noble-universe-Packages.xz",
+    "size": 15037908,
+    "sha256": "ba9057fa1b91438cc8a1d26808d00c85389fe101d0c1496254df97236405599a",
+    "verified": "signed Ubuntu noble InRelease"
+  }
+]

@@ -1,0 +1,14 @@
+{"suite":"local-data-lifecycle","engine":"chromium","version":"156.0.8078.4","physicalDevice":false}
+{"start":"draft: newer account text survives a pending save and retains focus"}
+{"start":"draft: changed account context and help focus survive a pending save"}
+{"start":"draft: newer flow text survives a pending save and retains focus"}
+{"start":"draft: changed flow context and help focus survive a pending save"}
+{"start":"draft: unchanged successful submission clears while failed submission keeps text"}
+{"start":"draft: failed account write keeps the current text and persisted snapshot"}
+{"name":"draft: newer account text survives a pending save and retains focus","result":"PASS"}
+{"name":"draft: changed account context and help focus survive a pending save","result":"PASS"}
+{"name":"draft: newer flow text survives a pending save and retains focus","result":"PASS"}
+{"name":"draft: changed flow context and help focus survive a pending save","result":"PASS"}
+{"name":"draft: unchanged successful submission clears while failed submission keeps text","result":"PASS"}
+{"name":"draft: failed account write keeps the current text and persisted snapshot","result":"PASS"}
+{"suite":"local-data-lifecycle","passed":6,"total":6,"externalRequests":0}

@@ -1,0 +1,10 @@
+2026-10-30T00:46:13.790Z pw:browser <launching> /tmp/fil-clair-resume-runtime/webkit-launch.sh --inspector-pipe --headless --no-startup-window
+2026-10-30T00:46:13.795Z pw:browser <launched> pid=17
+2026-10-30T00:46:13.849Z pw:browser [pid=17][err] 
+2026-10-30T00:46:13.849Z pw:browser [pid=17][err] ** (MiniBrowser:17): CRITICAL **: 01:46:13.848: WebKitWebView is-controlled-by-automation set but automation is not allowed in the context, falling back to default session.
+{"engine":"webkit","version":"27.2","executablePath":"/tmp/fil-clair-resume-runtime/webkit-launch.sh","status":"PASS","title":"Local runtime smoke","button":"Ready","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Safari/605.1.15"}
+2026-10-30T00:46:14.037Z pw:browser [pid=17] <gracefully close start>
+2026-10-30T00:46:14.115Z pw:browser [pid=17] <process did exit: exitCode=0, signal=null>
+2026-10-30T00:46:14.115Z pw:browser [pid=17] starting temporary directories cleanup
+2026-10-30T00:46:14.117Z pw:browser [pid=17] finished temporary directories cleanup
+2026-10-30T00:46:14.117Z pw:browser [pid=17] <gracefully close end>

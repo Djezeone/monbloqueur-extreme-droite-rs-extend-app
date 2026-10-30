@@ -1,0 +1,59 @@
+[
+  {
+    "archive": "/tmp/fil-clair-resume-runtime/archives/chromium-1248.zip",
+    "size": 125797539,
+    "sha256": "c3e50596aef52c58f8fda3c6b3411c33d34c88b177b3ed1c2243359fd3b8ba20",
+    "zip_entries": 287,
+    "zip_crc": "PASS",
+    "header_md5": "md5=dD2se6+Z6qcuIhM16pZvBw==",
+    "header_length": "125797539",
+    "root_entries": [
+      "chrome-headless-shell-linux64/ABOUT",
+      "chrome-headless-shell-linux64/LICENSE.headless_shell",
+      "chrome-headless-shell-linux64/chrome-headless-shell",
+      "chrome-headless-shell-linux64/deb.deps",
+      "chrome-headless-shell-linux64/headless_command_resources.pak",
+      "chrome-headless-shell-linux64/headless_lib_data.pak",
+      "chrome-headless-shell-linux64/headless_lib_strings.pak",
+      "chrome-headless-shell-linux64/hyphen-data/hyph-af.hyb"
+    ]
+  },
+  {
+    "archive": "/tmp/fil-clair-resume-runtime/archives/firefox-1555.zip",
+    "size": 116377639,
+    "sha256": "564f74fa3c46cb83c6252145cf1569c95236c8c404d6a5a80cc736cf32265f0c",
+    "zip_entries": 54,
+    "zip_crc": "PASS",
+    "header_md5": null,
+    "header_length": "116377639",
+    "root_entries": [
+      "firefox/",
+      "firefox/omni.ja",
+      "firefox/liblgpllibs.so",
+      "firefox/libplds4.so",
+      "firefox/firefox-bin",
+      "firefox/libmozinference.so",
+      "firefox/libmozgtk.so",
+      "firefox/pingsender"
+    ]
+  },
+  {
+    "archive": "/tmp/fil-clair-resume-runtime/archives/webkit-2370.zip",
+    "size": 108122739,
+    "sha256": "63b31a5d68d908d9aee2e445b88edc4c1e1d1eba488f5bd7e35668f91315b968",
+    "zip_entries": 60,
+    "zip_crc": "PASS",
+    "header_md5": null,
+    "header_length": "108122739",
+    "root_entries": [
+      "protocol.json",
+      "minibrowser-wpe/",
+      "minibrowser-wpe/bin/",
+      "minibrowser-wpe/bin/WPEGPUProcess",
+      "minibrowser-wpe/bin/WPENetworkProcess",
+      "minibrowser-wpe/bin/WPEWebProcess",
+      "minibrowser-wpe/bin/MiniBrowser",
+      "minibrowser-wpe/lib/"
+    ]
+  }
+]
