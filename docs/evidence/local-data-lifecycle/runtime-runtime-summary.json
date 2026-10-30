@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "scope": "Standalone browser launch and in-memory page/JavaScript only; no repository application tests run.",
+  "browser_smokes": [
+    {
+      "engine": "chromium",
+      "version": "156.0.8078.4",
+      "executablePath": "/tmp/fil-clair-resume-runtime/browsers/chromium-1248/chrome-headless-shell-linux64/chrome-headless-shell",
+      "status": "PASS",
+      "title": "Local runtime smoke",
+      "button": "Ready",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36",
+      "source_url": "https://storage.googleapis.com/chrome-for-testing-public/156.0.8078.4/linux64/chrome-headless-shell-linux64.zip",
+      "log": "/tmp/fil-clair-resume-runtime/logs/chromium-smoke.log"
+    },
+    {
+      "engine": "firefox",
+      "version": "157.0",
+      "executablePath": "/tmp/fil-clair-resume-runtime/browsers/firefox-1555/firefox/firefox",
+      "status": "PASS",
+      "title": "Local runtime smoke",
+      "button": "Ready",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64; rv:157.0) Gecko/20100101 Firefox/157.0",
+      "source_url": "https://playwright.download.prss.microsoft.com/dbazure/download/playwright/builds/firefox/1555/firefox-ubuntu-24.04.zip",
+      "log": "/tmp/fil-clair-resume-runtime/logs/firefox-smoke.log"
+    },
+    {
+      "engine": "webkit",
+      "version": "27.2",
+      "executablePath": "/tmp/fil-clair-resume-runtime/webkit-launch.sh",
+      "status": "PASS",
+      "title": "Local runtime smoke",
+      "button": "Ready",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Safari/605.1.15",
+      "source_url": "https://playwright.download.prss.microsoft.com/dbazure/download/playwright/builds/webkit/2370/webkit-ubuntu-24.04.zip",
+      "log": "/tmp/fil-clair-resume-runtime/logs/webkit-smoke-3.log"
+    }
+  ],
+  "temporary_ubuntu_packages": 20,
+  "ubuntu_snapshot": "20260828T000000Z",
+  "ubuntu_release_signature": "Good signature from Ubuntu Archive Automatic Signing Key (2018), fingerprint F6ECB3762474EDA9D21B7022871920D1991BC93C",
+  "webkit_launcher_sha256": "ed6468f68dfd8517da336ab43df7b7c8bccba8f30af9dc2f5b477ff82a458328",
+  "limits": [
+    "Headless Linux only; no physical device or graphical browser installation verified.",
+    "WebKit startup emits automation-context warning; first page and JavaScript smoke passed.",
+    "Firefox requires explicit sandbox opt-in as provided by scripts/pwa-test-utils.mjs.",
+    "Runtime exists only in /tmp; system packages and global configuration unchanged."
+  ]
+}

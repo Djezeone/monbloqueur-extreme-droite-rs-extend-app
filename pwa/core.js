@@ -149,6 +149,17 @@ export function loadState(text) {
 export function decisionKey(listId, account) {
   return listId + "|" + accountKey(account);
 }
+/** A newly added profile never inherits a historical orphan declaration. */
+export function addAccount(state, listId, input) {
+  const list = state.lists.find(item => item.id === listId);
+  if (!list) throw Error("Cette liste n'existe pas.");
+  const account = normalise(input), key = accountKey(account);
+  if (list.accounts.some(item => accountKey(item) === key)) return state;
+  const accounts = uniqueAccounts([...list.accounts, account]);
+  const decisions = { ...state.decisions };
+  delete decisions[decisionKey(listId, account)];
+  return { ...state, decisions, lists:state.lists.map(item => item.id === listId ? { ...item, accounts } : item) };
+}
 export function markDecision(state, listId, account, status, now = Date.now()) {
   if (!["blocked", "muted", "skipped", "review", "todo"].includes(status)) throw Error("Action inconnue.");
   if (!validTimestamp(now)) throw Error("Date de déclaration invalide.");

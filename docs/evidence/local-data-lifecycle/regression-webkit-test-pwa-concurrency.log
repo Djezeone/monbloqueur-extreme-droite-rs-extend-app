@@ -1,0 +1,8 @@
+{"engine":"webkit","version":"27.2","physicalDevice":false}
+{"name":"stale tab refuses overwrite, exports its snapshot and resumes only after reload","result":"PASS"}
+{"name":"simultaneous clicks preserve both additions or explicitly refuse the losing writer","result":"PASS"}
+{"name":"transaction witness refuses a second writer even when renderer storage reads and events are stale","result":"PASS"}
+{"name":"unavailable, corrupt or interrupted transaction witness refuses writes without erasing drafts","result":"PASS"}
+{"name":"one initial SecurityError cannot authorize an unknown overwrite before reload","result":"PASS"}
+{"name":"without Web Locks the browser remains read/export only","result":"PASS"}
+PWA concurrency: 6/6 scenarios passed.

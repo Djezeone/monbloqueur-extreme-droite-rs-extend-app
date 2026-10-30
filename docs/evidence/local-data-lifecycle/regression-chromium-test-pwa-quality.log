@@ -1,0 +1,43 @@
+{"engine":"chromium","version":"156.0.8078.4","axePlaywright":"4.14.0","physicalDevice":false}
+{"axeEngine":"4.14.0","violations":0,"manualReview":[{"id":"color-contrast","targets":[[".brand-icon"],[".brand > div:nth-child(2) > strong"],[".brand > div:nth-child(2) > span"],[".hero > div:nth-child(1) > .eyebrow"],[".hero > div:nth-child(1) > h1"],[".hero > div:nth-child(1) > p"],["#home-accounts > span[aria-hidden=\"true\"]"],["button[data-home-category=\"sources\"] > span[aria-hidden=\"true\"]"],["button[data-home-category=\"topics\"] > span[aria-hidden=\"true\"]"],["button[data-home-category=\"recommendations\"] > span[aria-hidden=\"true\"]"],["button[data-help=\"source\"]"],["#view-home > .fine:nth-child(4)"],["#home-followup"],["footer > span"],["footer > a[href$=\"privacy.html\"]"],["footer > details > summary"]]}]}
+{"axeEngine":"4.14.0","violations":0,"manualReview":[{"id":"color-contrast","targets":[[".brand-icon"],[".brand > div:nth-child(2) > strong"],[".brand > div:nth-child(2) > span"],["#view-flows > .section-heading > div > .eyebrow"],["#view-flows > .section-heading > div > h1"],["#view-flows > .muted"],["footer > span"],["footer > a[href$=\"privacy.html\"]"],["footer > details > summary"]]}]}
+{"axeEngine":"4.14.0","violations":0,"manualReview":[{"id":"color-contrast","targets":[[".brand-icon"],[".brand > div:nth-child(2) > strong"],[".brand > div:nth-child(2) > span"],["#view-lists > .section-heading > div > .eyebrow"],["#view-lists > .section-heading > div > h1"],["label[for=\"list-picker\"]"],["#list-metadata"],["footer > span"],["footer > a[href$=\"privacy.html\"]"],["footer > details > summary"]]}]}
+{"axeEngine":"4.14.0","violations":0,"manualReview":[{"id":"color-contrast","targets":[[".brand-icon"],[".brand > div:nth-child(2) > strong"],[".brand > div:nth-child(2) > span"],["#view-history > .section-heading > div > .eyebrow"],["#view-history > .section-heading > div > h1"],["#export-history"],["footer > span"],["footer > a[href$=\"privacy.html\"]"],["footer > details > summary"]]}]}
+{"axeEngine":"4.14.0","violations":0,"manualReview":[{"id":"color-contrast","targets":[[".brand-icon"],[".brand > div:nth-child(2) > strong"],[".brand > div:nth-child(2) > span"],["#view-settings > .section-heading > div > .eyebrow"],["#view-settings > .section-heading > div > h1"],["footer > span"],["footer > a[href$=\"privacy.html\"]"],["footer > details > summary"]]}]}
+{"axeEngine":"4.14.0","violations":0,"manualReview":[]}
+{"axeEngine":"4.14.0","violations":0,"manualReview":[{"id":"color-contrast","targets":[[".brand-icon"],[".brand > div:nth-child(2) > strong"],[".brand > div:nth-child(2) > span"],[".private > span[aria-hidden=\"true\"]"],[".hero > div:nth-child(1) > .eyebrow"],[".hero > div:nth-child(1) > h1"],[".hero > div:nth-child(1) > p"],[".hero-art > span"],[".hero-art > small"],["#home-accounts > span[aria-hidden=\"true\"]"],["button[data-home-category=\"sources\"] > span[aria-hidden=\"true\"]"],["button[data-home-category=\"topics\"] > span[aria-hidden=\"true\"]"],["button[data-home-category=\"recommendations\"] > span[aria-hidden=\"true\"]"],["button[data-help=\"source\"]"],["#view-home > .fine:nth-child(4)"],["#home-followup"],["footer > span"],["footer > a[href$=\"privacy.html\"]"],["footer > details > summary"]]}]}
+{"axeEngine":"4.14.0","violations":0,"manualReview":[{"id":"color-contrast","targets":[[".brand-icon"],[".brand > div:nth-child(2) > strong"],[".brand > div:nth-child(2) > span"],[".private > span[aria-hidden=\"true\"]"],["#view-flows > .section-heading > div > .eyebrow"],["#view-flows > .section-heading > div > h1"],["#view-flows > .muted"],["footer > span"],["footer > a[href$=\"privacy.html\"]"],["footer > details > summary"]]}]}
+{"axeEngine":"4.14.0","violations":0,"manualReview":[{"id":"color-contrast","targets":[[".brand-icon"],[".brand > div:nth-child(2) > strong"],[".brand > div:nth-child(2) > span"],[".private > span[aria-hidden=\"true\"]"],["#view-lists > .section-heading > div > .eyebrow"],["#view-lists > .section-heading > div > h1"],["label[for=\"list-picker\"]"],["#list-metadata"],["footer > span"],["footer > a[href$=\"privacy.html\"]"],["footer > details > summary"]]}]}
+{"axeEngine":"4.14.0","violations":0,"manualReview":[{"id":"color-contrast","targets":[[".brand-icon"],[".brand > div:nth-child(2) > strong"],[".brand > div:nth-child(2) > span"],[".private > span[aria-hidden=\"true\"]"],["#view-history > .section-heading > div > .eyebrow"],["#view-history > .section-heading > div > h1"],["#export-history"],["footer > span"],["footer > a[href$=\"privacy.html\"]"],["footer > details > summary"]]}]}
+{"axeEngine":"4.14.0","violations":0,"manualReview":[{"id":"color-contrast","targets":[[".brand-icon"],[".brand > div:nth-child(2) > strong"],[".brand > div:nth-child(2) > span"],[".private > span[aria-hidden=\"true\"]"],["#view-settings > .section-heading > div > .eyebrow"],["#view-settings > .section-heading > div > h1"],["footer > span"],["footer > a[href$=\"privacy.html\"]"],["footer > details > summary"]]}]}
+{"name":"navigation: single-word tab labels remain unbroken at 320px","result":"PASS"}
+{"name":"keyboard: skip link focuses main content","result":"PASS"}
+{"name":"keyboard: next native control has a visible focus outline","result":"PASS"}
+{"name":"Accueil: 320px reflow","result":"PASS"}
+{"name":"Accueil: axe automated A/AA rules","result":"PASS"}
+{"name":"Mes flux: 320px reflow","result":"PASS"}
+{"name":"Mes flux: axe automated A/AA rules","result":"PASS"}
+{"name":"keyboard: account decision retains focus after render","result":"PASS"}
+{"name":"names: account actions include profile context","result":"PASS"}
+{"name":"progress: accessible value follows declared decisions","result":"PASS"}
+{"name":"metadata: long declared source is visible","result":"PASS"}
+{"name":"Mes listes: 320px reflow","result":"PASS"}
+{"name":"Mes listes: axe automated A/AA rules","result":"PASS"}
+{"name":"Historique: 320px reflow","result":"PASS"}
+{"name":"Historique: axe automated A/AA rules","result":"PASS"}
+{"name":"Réglages: 320px reflow","result":"PASS"}
+{"name":"Réglages: axe automated A/AA rules","result":"PASS"}
+{"name":"privacy: 320px reflow","result":"PASS"}
+{"name":"privacy: axe automated A/AA rules","result":"PASS"}
+{"name":"Accueil: 1280px bounds","result":"PASS"}
+{"name":"Accueil: desktop axe automated A/AA rules","result":"PASS"}
+{"name":"Mes flux: 1280px bounds","result":"PASS"}
+{"name":"Mes flux: desktop axe automated A/AA rules","result":"PASS"}
+{"name":"Mes listes: 1280px bounds","result":"PASS"}
+{"name":"Mes listes: desktop axe automated A/AA rules","result":"PASS"}
+{"name":"Historique: 1280px bounds","result":"PASS"}
+{"name":"Historique: desktop axe automated A/AA rules","result":"PASS"}
+{"name":"Réglages: 1280px bounds","result":"PASS"}
+{"name":"Réglages: desktop axe automated A/AA rules","result":"PASS"}
+{"name":"Android Pixel 7: emulated touch form workflow","result":"PASS"}
+PWA quality: 30/30 checks passed. Automated checks do not establish full WCAG 2.2 AA conformance or physical-device acceptance.

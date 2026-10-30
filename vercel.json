@@ -4,7 +4,8 @@
     "deploymentEnabled": {
       "feat/fil-clair-v32-guided-help": false,
       "feat/fil-clair-durable-operations": false,
-      "feat/fil-clair-server-transport": false
+      "feat/fil-clair-server-transport": false,
+      "fix/fil-clair-local-data-lifecycle": false
     }
   }
 }

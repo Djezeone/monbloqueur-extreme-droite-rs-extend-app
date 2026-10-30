@@ -1,0 +1,8 @@
+{"suite":"universal-flows","engine":"webkit","version":"27.2","physicalDevice":false}
+{"phase":"services-320","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"categories-320","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"summary-320","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"items-320","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"items-1280-text200","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"temporary-storage","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"temporary-locks","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}

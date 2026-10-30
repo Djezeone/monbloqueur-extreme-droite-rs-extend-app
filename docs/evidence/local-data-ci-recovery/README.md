@@ -1,0 +1,5 @@
+# Sorties de reprise CI
+
+[Journal et limites de causalité](../2026-10-30-local-data-ci-recovery.md). `ci-036e66b-pwa.log` : journal décodé de la CI annulée, pas une sortie verte. Les logs `test-server-*` distinguent les deux RED de blocage, le premier oracle clientECONNRESET, le driver final RED sur helper historique et les2GREEN. `ci-recovery-node.log`/`ci-recovery-security.log` :232Node/9SW/audit après correction de l'oracle ; `ci-recovery-node-first.log` conserve l'échec initial de cet oracle, sans qualification réussie.
+
+`ci-recovery-v32-*.log` :14/14par moteur avec le helper corrigé avant ajout des seuls marqueurs de progression. `complement-*` : reprises des3scripts interrompus au036e66b, sans prétendre reconstituer la matrice locale entière. Aucun log historique remplacé. Le receipt sépare empreintes source courantes et sorties ; il ne s'auto-hache pas. Les conclusions distantes du nouveau head seront ajoutées au corps dePR6/Airtable après lecture pour éviter un push documentaire et des CI redondants.

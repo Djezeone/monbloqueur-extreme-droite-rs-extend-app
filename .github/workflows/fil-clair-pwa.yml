@@ -50,6 +50,7 @@ jobs:
             node scripts/test-pwa-quality.mjs
             node scripts/test-pwa-flows.mjs
             node scripts/test-pwa-replacements.mjs
+            node scripts/test-pwa-data-lifecycle.mjs
             node scripts/test-pwa-v3.mjs
             node scripts/test-pwa-v32.mjs
             node scripts/test-operation-journal.mjs
