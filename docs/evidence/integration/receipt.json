@@ -36,7 +36,7 @@
     },
     {
       "path": "tests/ci-hardening.test.js",
-      "sha256": "b3443f35adc9b67c9139443bb33e71899a8525e052f2cf32cb277bfdcd8fa555"
+      "sha256": "f44cc423503d593de2e02cd8ccd5864324e3d115430e9a4f4b9967708d18e462"
     },
     {
       "path": "scripts/update-readme.mjs",
@@ -125,6 +125,11 @@
       "path": "review-source-audit.log",
       "bytes": 1022,
       "sha256": "f4cab7267f756a4298546f33dc7856255c623b192ddb9ad4beb0938c52152506"
+    },
+    {
+      "path": "lint-production.log",
+      "bytes": 327,
+      "sha256": "f5ddbcb0c000e8807718b4ec85618aef24a1ab7d38a131d362ab93a72a07bc9d"
     }
   ],
   "localResults": {
@@ -151,5 +156,6 @@
     "upstreamPatchedVersion": null,
     "deepmergeRegistryLatest": "4.3.1"
   },
-  "remoteCI": "PENDING new aggregate; do not recycle historical SHA"
+  "remoteCI": "PENDING new aggregate; do not recycle historical SHA",
+  "whitespace": "source/doc diff check excludes raw docs/evidence/integration/*.log, whose bytes and hashes remain untouched"
 }

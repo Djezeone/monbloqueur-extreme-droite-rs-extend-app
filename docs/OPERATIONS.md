@@ -221,4 +221,3 @@ La qualification technique des parcours V3/V3.2 et correctifs locaux est acquise
 Les workflows historiques tableau/release sont corrigés dans ce candidat : vérification du tableau sans réécriture/push ; préparation manuelle de paquets éphémères sans artifact, cache, tag ni publication. Pour distribuer ultérieurement une extension, construire un parcours distinct à coût vérifié et portes satisfaites ; ne pas réactiver l'ancien workflow par habitude. Le mode local ne dépend pas de ces paquets.
 
 Le verrou Vercel est désormais global dans les deux configs du candidat. Il empêche les commits Git de publier implicitement ; il ne prouve ni coût d'une preview manuelle, ni headers effectifs, ni rollback. Les six branches restent conservées ; pas de fusion/pub avant règles effectives et recette applicable. [Rapport, limites et NO-GO A/B/C](evidence/2026-10-30-security-integration.md).
-

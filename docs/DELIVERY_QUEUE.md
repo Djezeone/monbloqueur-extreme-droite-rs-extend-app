@@ -37,4 +37,3 @@ Le correctif du serveur de test a permis une CI PWA complète verte au998e053. R
 La qualification technique PR#6 est close au0af61de avec deux CI vertes ; l'ancienne « clôture CI en cours » est historique. Les six PR représentent40commits distincts, sans cherry-pick nécessaire. Branche agrégée integrate/fil-clair-v32-safe, PR vers main à qualifier au nouveau SHA ; originales conservées.
 
 Candidat : tableau en --check, préparation manuelle sans publication/cache/artifact, actions figées/permissions lecture et verrou Vercel global. Prochaine porteP0 : administration GitHub effective/ruleset, CI exacte et revue ; aucune fusion par contournement. Preview si coût prouvé ; physique/WCAG, RGPD et exploitation ensuite selon critères propres A SAFE. B CONNECT reste inactif et nécessite encore OAuth, backend/session/journal/révocation durables. [Registre et décisions](evidence/2026-10-30-security-integration.md).
-

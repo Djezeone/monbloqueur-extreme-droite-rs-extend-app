@@ -93,4 +93,3 @@ test("the real table checker accepts fresh content and rejects stale content wit
     assert.equal(await readFile(join(dir,"README.md"),"utf8"),stale);
   } finally { await rm(dir,{recursive:true,force:true}); }
 });
-

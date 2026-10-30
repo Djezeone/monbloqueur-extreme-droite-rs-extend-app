@@ -126,4 +126,3 @@ Le socle local peut progresser indépendamment de B, sans retirer ses propres po
 **Vérifié comment :** appels GitHub/AT/Vercel, ascendance et patch-id, tests listés/empreintes ; portée locale et historique clairement distinguée.
 
 **Périmé :** environnement indisponible rétabli ; ancien fichier en attente identique au blob canonique puis fast-forward propre. Qualification PR#6 en cours désormais close, deux CI success. « Quota exact inconnu » remplacé par identification de l'alerte Actions3000minutes, sans compteur live. Exceptions Vercel par noms insuffisantes pour une nouvelle branche ; ancien push bot/publication rendus inertes dans le candidat. Aucune ancienne réserve physique/juridique/production n'est levée.
-

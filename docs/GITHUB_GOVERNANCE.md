@@ -56,4 +56,3 @@ L'alerte Actions3000/3000 du16/10 et reset annoncé01/11 ont été relus. Compte
 Le candidat retire les chemins historiques risqués : tableau vérifié par --check sans push, release limitée à préparation manuelle sans publication/tag/cache/artifact, actions restantes figées et tokens contents:read avec credentials non persistants. Aucun dispatch de ces workflows n'est lancé. **Main conserve son code historique tant que la PR n'est pas fusionnée** ; aucun Go de publication implicite.
 
 Vercel : déploiement Git désactivé globalement dans les deux racines du candidat, y compris main et nouveaux noms de branches ; une preview manuelle exige encore preuve de coût et recette. Voir [audit/risques/preuves](evidence/2026-10-30-security-integration.md).
-
