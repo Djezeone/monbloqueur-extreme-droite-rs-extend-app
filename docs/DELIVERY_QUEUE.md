@@ -32,3 +32,9 @@ PR5 relue au0445454 : deuxCI vertes, aucune modification externe ultérieure con
 
 ## Clôture CI en cours —30octobre
 Le correctif du serveur de test a permis une CI PWA complète verte au998e053. Reste à qualifier le correctif de synchronisation d'un test extension, sans nouvelle fonction ni modification de la PWA. Première CI annulée et échec extension sont conservés ; aucun rerun du même SHA. L'environnement local est indisponible, GitHub porte la suite du code et des preuves. Les portes physiques/admin/Vercel coût/RGPD/exploitation demeurent ; [journal](evidence/2026-10-30-extension-ci-sync.md).
+
+## Reprise30octobre — agrégat et priorité Sécurité/CI
+La qualification technique PR#6 est close au0af61de avec deux CI vertes ; l'ancienne « clôture CI en cours » est historique. Les six PR représentent40commits distincts, sans cherry-pick nécessaire. Branche agrégée integrate/fil-clair-v32-safe, PR vers main à qualifier au nouveau SHA ; originales conservées.
+
+Candidat : tableau en --check, préparation manuelle sans publication/cache/artifact, actions figées/permissions lecture et verrou Vercel global. Prochaine porteP0 : administration GitHub effective/ruleset, CI exacte et revue ; aucune fusion par contournement. Preview si coût prouvé ; physique/WCAG, RGPD et exploitation ensuite selon critères propres A SAFE. B CONNECT reste inactif et nécessite encore OAuth, backend/session/journal/révocation durables. [Registre et décisions](evidence/2026-10-30-security-integration.md).
+

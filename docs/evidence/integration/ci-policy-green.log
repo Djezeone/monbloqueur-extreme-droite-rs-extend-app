@@ -1,0 +1,17 @@
+✔ every third-party workflow action is pinned to a full commit (1.916274ms)
+✔ workflow checkouts never retain credentials (0.646983ms)
+✔ all workflow tokens remain read-only (0.459843ms)
+✔ workflows allocate no Actions cache or artifact storage (0.236979ms)
+✔ package preparation is manual and cannot publish a release or tag (0.289305ms)
+✔ table validation checks the generated document without pushing Git (0.34824ms)
+✔ vercel.json disables Git deployments for every branch until costs are verified (7.605513ms)
+✔ pwa/vercel.json disables Git deployments for every branch until costs are verified (1.205473ms)
+✔ the real table checker accepts fresh content and rejects stale content without rewriting it (540.488222ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 705.836858

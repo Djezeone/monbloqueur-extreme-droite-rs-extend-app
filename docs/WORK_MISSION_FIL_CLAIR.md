@@ -140,3 +140,11 @@ La première CI PR6 a été annulée après20min avant conclusion de la matrice.
 
 ## Synchronisation CI extension —30octobre2026
 Au998e053, la PWA passe sa matrice complète36scripts/232Node/9SW/72nouveauxcas. L'extension échoue sur une lecture immédiate de tabs.active après une demande asynchrone : correctif limité au test, avec observation bornée de l'onglet exact du job en pause. Aucun code PWA/extension/serveur ni workflow modifié. [Journal et limites](evidence/2026-10-30-extension-ci-sync.md). L'environnement local devenu indisponible impose la qualification du nouveau head par CI ; aucune réussite locale ajoutée. A/B/C restent non livrées.
+
+## Mandat du30octobre2026 — corrections, intégration et livraison conditionnelle
+Le nouvel ordre autorise explicitement branches, corrections, PR, tests et workflows nécessaires gratuits, **fusions et déploiements seulement lorsque leurs critères applicables sont satisfaits**. Il remplace l'absence d'autorisation générale historique sans dispenser de la sécurité, de la recette, du rollback, du RGPD ni des validations sensibles. A SAFE peut être livrée seule, les connecteurs non qualifiés restant désactivés. Budget supplémentaire0€, aucun compte social réel, secret ou suppression irréversible. Aucun contournement des protections.
+
+Reprise : [audit et registre initial](evidence/2026-10-30-security-integration.md), [plan et décisions](superpowers/plans/2026-10-30-security-integration.md). Les six PR forment40commits linéaires distincts ; l'agrégat part de0af61de sans rejeu. Les workflows historiques d'écriture/publication sont remplacés dans le candidat par vérification/préparation manuelle en lecture seule, actions figées, sans cache/artifact. Les deux configs Vercel verrouillent globalement les déploiements Git jusqu'à coût admissible. Ces modifications ne sont pas réputées effectives sur main avant intégration.
+
+Les huit lots/critères sont conservés, avec PASS/FAIL/BLOCKED/NOT TESTED explicites, SHA, preuve et prochaine action. L'automatisation existante de suivi reste en lecture seule, aucune exécution de développement future prétendument programmée. Le bilan complet et les CI au SHA canonique final sont dans la PR d'agrégation et Airtable ; aucune livraison annoncée sans preuve.
+

@@ -47,3 +47,13 @@ Ces deux preuves ne valent pas pour un nouveau SHA. Ne pas les recycler comme va
 `pwa/vercel.json` prépare uniquement des en-têtes statiques : CSP avec `frame-ancestors 'none'`, refus d'iframe, `nosniff`, referrer absent et permissions caméra/micro/localisation désactivées. Le style embarqué de la notice est autorisé par son empreinte SHA256 ; toute modification de ce style exige de recalculer l'empreinte. Le service worker doit être revalidé par HTTP (`max-age=0`). Aucun middleware, fonction serveur, analytics ou service facturable n'est ajouté.
 
 Ces paramètres ne sont pas réputés actifs sur la preview existante : vérifier le contenu et les en-têtes du nouveau déploiement avant sa recette. La CSP reste limitée à l'origine et au téléchargement public GitHub ; les adaptateurs API inactifs ne disposent pas d'une permission réseau supplémentaire.
+
+## Actualisation30octobre — intégration et chemins historiques
+Les deux CI finales PR#6 sont vertes au0af61dee2141ac15a64f1ab3ca0a169f43b4c0ce. Les six PR sont ouvertes, linéaires et déjà agrégées dans ce tip ; aucune fusion réalisée. Le nouvel ordre autorise les fusions admissibles, pas une dérogation aux contrôles.
+
+L'alerte Actions3000/3000 du16/10 et reset annoncé01/11 ont été relus. Compteur live et budgets restent inconnus. Main protected:false/rulesets=[] relus ; protection détaillée403, session navigateur non connectée, gh absente. La présence du JSON reste distincte de son application.
+
+Le candidat retire les chemins historiques risqués : tableau vérifié par --check sans push, release limitée à préparation manuelle sans publication/tag/cache/artifact, actions restantes figées et tokens contents:read avec credentials non persistants. Aucun dispatch de ces workflows n'est lancé. **Main conserve son code historique tant que la PR n'est pas fusionnée** ; aucun Go de publication implicite.
+
+Vercel : déploiement Git désactivé globalement dans les deux racines du candidat, y compris main et nouveaux noms de branches ; une preview manuelle exige encore preuve de coût et recette. Voir [audit/risques/preuves](evidence/2026-10-30-security-integration.md).
+
