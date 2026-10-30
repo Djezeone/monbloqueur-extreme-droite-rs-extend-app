@@ -1,0 +1,62 @@
+# Local data lifecycle Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Empêcher les réintroductions après remplacement, la perte d'un nouveau brouillon et la réactivation d'une déclaration orpheline.
+
+**Architecture:** Conserver le snapshot, le protocole de persistance et les parcours existants. Ajouter une mutation pure de profil et périmer les seules continuations d'import appartenant à un espace remplacé.
+
+**Tech Stack:** JavaScript ESM, Node24, Web Locks/IndexedDB existants, Playwright1.64.1 sans dépendance nouvelle.
+
+**Spec:** `docs/superpowers/specs/2026-10-30-local-data-lifecycle-design.md`
+
+## Global Constraints
+
+- 0 € supplémentaire ; aucune action sociale réelle, fusion main ou publication générale.
+- Format de sauvegarde et compatibilité historiques conservés ; aucune purge générale des décisions orphelines.
+- Refus ou annulation conserve données et brouillons ; aucune confirmation fournisseur créée.
+- Réutiliser le worktree isolé et créer une branche dédiée ; désactiver son déploiement Git Vercel.
+
+## Review Focus
+
+- Même identifiant avec casse/instance différentes : seule la bonne décision doit être retirée.
+- Changement de plateforme pendant une sauvegarde : le nouveau brouillon et le focus doivent rester disponibles.
+- Import tardif d'une sauvegarde complète : aucune confirmation ni remplacement dans un nouvel espace.
+- Effacement refusé/annulé et mutation ordinaire : l'import toujours autorisé doit pouvoir terminer.
+- Deux fichiers en lecture : la continuation ancienne ne vide pas le sélecteur du plus récent.
+
+## Task 1: Ajout de profil et brouillons pendant une sauvegarde
+
+**Files:** `pwa/core.js`, `pwa/app.js`, `pwa/flows.js`, `tests/pwa-core.test.js`, `scripts/test-pwa-data-lifecycle.mjs`.
+
+**Interfaces:** Produire `addAccount(state, listId, input) -> nextState`, mutation pure normalisée, doublon inchangé, maximum5000 ; conserver autres données/historique et retirer seulement la décision du profil nouvellement ajouté. Les signatures `persist`/`mountFlows` restent inchangées.
+
+- [ ] Écrire les tests Node : orpheline matching retirée, autres décisions/historique conservés, doublon conservé et liste inexistante/limite refusées ; exécuter et constater RED avant implémentation.
+- [ ] Écrire les scénarios navigateur : ajout orphelin à faire ; nouveau brouillon compte/flux et changement de contexte/focus pendant un vrai Web Lock ; nettoyage normal et refus préservés. Exécuter RED sur les défauts.
+- [ ] Implémenter la mutation et son appel dans l'ajout UI ; ne vider/focaliser que les valeurs encore soumises et le focus restant dans le formulaire.
+- [ ] Exécuter tests ciblés puis `npm test` ; résultat attendu : aucun échec. Commit cohérent du correctif.
+
+## Task 2: Imports périmés par remplacement réussi
+
+**Files:** `pwa/app.js`, `pwa/sw.js`, `scripts/test-pwa-data-lifecycle.mjs`, `.github/workflows/fil-clair-pwa.yml`, `vercel.json`, `pwa/vercel.json`, docs mission/queue/utilisateur/opérations/confidentialité et preuves datées.
+
+**Interfaces:** Compteur privé de génération d'espace ; capturer avant lecture, vérifier après chaque attente d'E/S et dans le traitement d'erreur ; incrémenter seulement dans `applyState(..., true)`. Aucun import/export de génération.
+
+- [ ] Écrire puis exécuter RED : fichier/liste publique/sauvegarde tardifs après effacement, restauration et mode temporaire, erreur tardive et fichier plus récent ; contrôles de non-annulation sur refus/annulation/mutation ordinaire.
+- [ ] Garder les contrôles de génération dans le fichier existant ; refuser sans écriture ni confirmation les continuations périmées. Ne vider que le fichier effectivement traité.
+- [ ] Bumper le shell, inscrire le scénario dans les trois moteurs CI existants, désactiver seulement la nouvelle branche Vercel ; aucun nouveau workflow/runner/cache/artifact.
+- [ ] Exécuter `npm test`, les tests SW/audit/liste/registre puis le scénario navigateur et les suites de régression pertinentes ; relever moteurs, logs et limites réels.
+- [ ] Mettre à jour mission/queue/guide/opérations/confidentialité, empreintes et journal Fait/Ouvert/Vérifié comment/Périmé. Revue indépendante de toute la branche, une passe corrective RED→GREEN si nécessaire, puis commit.
+- [ ] Vérifier gratuité du scénario GitHub public standard ; pousser les commits en un lot, créer une PR draft dépendante de #5, lire les deux CI au head exact et mettre à jour/re-lire Airtable. Aucun déploiement ni merge.
+
+## Ledger
+
+Baseline : arbre propre au0445454,226/226 tests Node ; cinq PR draft inchangées, deux CI PR5 success tentative1. Main protected:false/rulesets0 ; trois anciens déploiements Vercel, aucun du head. Cockpit8lots/8portes relu. PlanPro connu mais capacité gratuite non établie ; la queue antérieure disant « plan non établi » est périmée.
+
+Pre-flight : Task1 et Task2 partagent `pwa/app.js`, sans changement de signature `persist`/`applyState`. La génération ne change que dans le chemin de remplacement réussi ; les valeurs du formulaire sont capturées après normalisation du lien profil. Les deux correctifs n'ajoutent aucune voie de persistance.
+
+Ruling : regrouper les deux tâches d'implémentation dans un commit cohérent, car elles partagent le même fichier et le même shell — chaque groupe garde sa preuve RED→GREEN — coût si mauvais : granularité de cherry-pick plus large, sans écriture supplémentaire ni migration.
+
+Task1 : implémenté, modèle4RED→4GREEN, six scénarios de brouillons GREEN et profil UI inclus dans21/21 par moteur ;230/230Node.
+
+Task2 : implémenté,16FAIL/21 avant correctifs→21/21 sur trois moteurs ;9/9SW et audit/registre/liste. Non-régression locale élargie interrompue par déconnexion exec :16scripts complets conservés, trois incomplets sans verdict ; matrice complète à qualifier en CI standard gratuite, sans relancer localement les scripts déjà réussis. Revue finale et clôture distante à suivre.

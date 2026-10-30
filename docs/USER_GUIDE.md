@@ -59,6 +59,10 @@ Mes listes conserve le parcours de profils déjà présent. Ajoutez un pseudo ou
 
 La confirmation de restauration nomme les listes, Mes flux, déclarations et historique remplacés. Une sauvegarde ancienne sans Mes flux les retire de l’espace courant après votre accord explicite. Un remplacement réussi ou un nouvel espace temporaire vide aussi les brouillons non enregistrés et les recherches/filtres de l’interface ; une annulation ou un refus de stockage les conserve.
 
+Si un import était encore en lecture au moment d'un effacement, d'une restauration ou de l'ouverture d'un espace temporaire réussis, il est interrompu. Choisissez de nouveau le fichier ou relancez le chargement pour l'ajouter au nouvel espace. Annuler une confirmation ou rencontrer un refus de stockage ne change pas d'espace et ne supprime pas l'import en attente.
+
+Pendant une sauvegarde lente, vous pouvez préparer le profil ou choix suivant : ce nouveau brouillon reste dans le formulaire. Un profil absent que vous ajoutez commence à faire ; une ancienne déclaration isolée dans une sauvegarde ne le marque pas automatiquement comme bloqué. L'historique ancien reste distinct d'une nouvelle déclaration.
+
 En cas de données illisibles, les modifications sont suspendues. Exportez la **source de récupération**, puis restaurez une sauvegarde valide ou effacez explicitement l’état concerné. Cette source brute peut être invalide et contenir des champs inconnus : protégez-la, ne la partagez pas publiquement.
 
 ## Safari, autres navigateurs et hors ligne

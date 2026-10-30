@@ -1,4 +1,4 @@
-import { NETWORKS, normalise, profileUrl, accountKey, uniqueAccounts, parseImport, cleanTitle, newState, loadState, markDecision, decisionKey, progress, MAX_BACKUP_BYTES, parseBackup, listMetadata, exportList, removeAccount, removeList } from "./core.js";
+import { NETWORKS, normalise, profileUrl, accountKey, uniqueAccounts, parseImport, cleanTitle, newState, loadState, addAccount, markDecision, decisionKey, progress, MAX_BACKUP_BYTES, parseBackup, listMetadata, exportList, removeAccount, removeList } from "./core.js";
 import { mountFlows } from "./flows.js";
 import { getControl } from "./platforms.js";
 import { flowMetrics } from "./actions.js";
@@ -17,6 +17,7 @@ let storageRead = false;
 let storageConflict = false;
 let saving = false;
 let sessionMode = false;
+let spaceGeneration = 0;
 let flowsUI = null;
 let guidedUI = null, helpUI = null;
 try {
@@ -111,6 +112,7 @@ function applyState(next, message, resetFlows = false) {
   } : null;
   state = next;
   if (resetFlows) {
+    spaceGeneration++;
     // A successful replacement starts a new space, including unsaved UI data.
     // Rejected/cancelled writes never reach this path and retain the drafts.
     for (const id of ["handle", "instance", "search", "filter-network", "filter-status"]) $(id).value = "";
@@ -325,11 +327,6 @@ function guessAccount(raw, network, instance) {
   $("instance-field").hidden = kind !== "mastodon";
   return a;
 }
-function updateList(accounts, message) {
-  const list = active();
-  const lists = state.lists.map(l => l.id === list.id ? { ...l, accounts: uniqueAccounts(accounts) } : l);
-  return persist({ ...state, lists }, message);
-}
 async function newList(title, accounts = [], metadata = {}) {
   if (state.lists.length >= 30) throw Error("Maximum : 30 listes.");
   const id = "list-" + crypto.randomUUID();
@@ -351,6 +348,11 @@ function download(filename, value) { downloadText(filename, JSON.stringify(value
 function exportAll() {
   if (!sessionMode && recoveryRaw !== null) downloadText("fil-clair-recuperation.json", recoveryRaw);
   else download("fil-clair-sauvegarde.json", state);
+}
+function importStillCurrent(generation) {
+  if (generation === spaceGeneration) return true;
+  notify("Import interrompu : l’espace a changé. Choisissez de nouveau le fichier ou relancez le chargement pour l’ajouter à cet espace.", true);
+  return false;
 }
 function setupRecovery() {
   const button = document.createElement("button");
@@ -405,7 +407,9 @@ function bindEvents() {
       const a = guessAccount($("handle").value, $("network").value, $("instance").value);
       const list = active();
       if (list.accounts.some(item => accountKey(item) === accountKey(a))) return notify("Ce compte figure déjà dans cette liste.");
-      if (await updateList([...list.accounts, a], "Profil ajouté. Il n'a pas été bloqué.")) $("handle").value = "";
+      const fields = ["handle", "network", "instance"], submitted = fields.map(id => $(id).value);
+      if (await persist(addAccount(state, list.id, a), "Profil ajouté. Il n'a pas été bloqué.") && fields.every((id, i) => $(id).value === submitted[i]))
+        $("handle").value = "";
     } catch (error) { notify(error.message, true); }
   });
   ["search", "filter-network", "filter-status"].forEach(id => $(id).addEventListener("input", renderAccounts));
@@ -446,9 +450,11 @@ function bindEvents() {
   $("import-file").addEventListener("click", () => $("file").click());
   $("file").addEventListener("change", async e => {
     const file = e.target.files?.[0]; if(!file) return;
+    const generation = spaceGeneration;
     try {
       if (file.size > MAX_BACKUP_BYTES) throw Error("Fichier trop volumineux.");
       const text = await file.text();
+      if (!importStillCurrent(generation)) return;
       const parsed = JSON.parse(text);
       if (parsed?.version === 1 && Array.isArray(parsed.lists)) {
         // Reject incomplete or corrupted backups before asking to replace user data.
@@ -466,20 +472,23 @@ function bindEvents() {
         if (await newList(imported.title, imported.accounts, imported))
           notify(imported.accounts.length + " profils importés dans une nouvelle liste. Vérifiez-les avant d'agir.");
       }
-    } catch(err) { notify(err.message,true); }
-    finally { e.target.value=""; }
+    } catch(err) { if (importStillCurrent(generation)) notify(err.message,true); }
+    finally { if (e.target.files?.[0] === file) e.target.value=""; }
   });
   $("import-public").addEventListener("click", async e => {
+    const generation = spaceGeneration;
     const button=e.target; button.disabled=true; button.textContent="Chargement…";
     try {
       const res=await fetch(SOURCE,{credentials:"omit",cache:"no-store",signal:AbortSignal.timeout(15000)});
+      if (!importStillCurrent(generation)) return;
       if (!res.ok) throw Error("La liste distante n'est pas accessible.");
       const payload=await res.text();
+      if (!importStillCurrent(generation)) return;
       const imported=parseImport(payload);
       if (await newList("Sélection publique X · à vérifier", imported.accounts, { ...imported,
         provenance: { label: "Sélection éditoriale du dépôt · non vérifiée", url: SOURCE, retrievedAt: Date.now() }
       })) notify(imported.accounts.length + " comptes importés. Aucun blocage effectué. Examinez librement cette sélection.");
-    } catch(err) { notify("Impossible d'importer : "+err.message,true); }
+    } catch(err) { if (importStillCurrent(generation)) notify("Impossible d'importer : "+err.message,true); }
     finally { button.disabled=false; button.textContent="Charger la liste X du dépôt"; }
   });
   $("export-list").addEventListener("click", () => download("fil-clair-liste.json", exportList(active())));

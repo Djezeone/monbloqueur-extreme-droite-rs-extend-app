@@ -1,4 +1,4 @@
-const CACHE = "fil-clair-shell-v7";
+const CACHE = "fil-clair-shell-v8";
 // Only this public application shell may enter Cache Storage. OAuth callbacks,
 // queries, API replies and future connector resources must bypass this worker.
 const ASSETS = ["./", "./index.html", "./styles.css", "./app.js", "./core.js", "./flow-core.js", "./platforms.js", "./flows.js", "./actions.js", "./effects.js", "./register-view.js", "./guided-core.js", "./guided.js", "./help-data.js", "./help.js", "./support-config.js", "./persistence.js", "./privacy.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
