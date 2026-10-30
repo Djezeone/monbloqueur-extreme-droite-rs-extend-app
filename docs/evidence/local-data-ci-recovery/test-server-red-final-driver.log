@@ -1,0 +1,26 @@
+✖ the owned PWA server stops and resumes with idle preconnection (1516.352321ms)
+✖ the owned PWA server stops and resumes with unfinished request headers (1506.116282ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3458.106255
+
+✖ failing tests:
+
+test at tests/pwa-server-lifecycle.test.js:10:4
+✖ the owned PWA server stops and resumes with idle preconnection (1516.352321ms)
+  Error: The test server cannot stop while an owned client socket stays open
+      at Timeout.<anonymous> (file:///tmp/fil-clair-lifecycle-baseline/tests/pwa-server-lifecycle.test.js:24:68)
+      at listOnTimeout (node:internal/timers:685:17)
+      at process.processTimers (node:internal/timers:618:7)
+
+test at tests/pwa-server-lifecycle.test.js:10:4
+✖ the owned PWA server stops and resumes with unfinished request headers (1506.116282ms)
+  Error: The test server cannot stop while an owned client socket stays open
+      at Timeout.<anonymous> (file:///tmp/fil-clair-lifecycle-baseline/tests/pwa-server-lifecycle.test.js:24:68)
+      at listOnTimeout (node:internal/timers:685:17)
+      at process.processTimers (node:internal/timers:618:7)

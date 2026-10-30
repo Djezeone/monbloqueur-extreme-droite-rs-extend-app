@@ -1,0 +1,26 @@
+{"suite":"universal-flows","engine":"firefox","version":"157.0","physicalDevice":false}
+{"phase":"services-320","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"categories-320","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"summary-320","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"items-320","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"items-1280-text200","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"temporary-storage","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"temporary-locks","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"phase":"temporary-corrupt","axe":"4.14.0","violations":[],"incomplete":["color-contrast"]}
+{"name":"novice: 3 étapes sans compte et zéro service sélectionné","result":"PASS"}
+{"name":"local: source sensible gardée en texte sans effet fournisseur","result":"PASS"}
+{"name":"choix modifiables: ajouter YouTube conserve la note locale","result":"PASS"}
+{"name":"guidé: portée explicite, aide fixe sans cible, aucun faux blocage YouTube","result":"PASS"}
+{"name":"déclaration guidée: refus puis consentement, jamais confirmation API","result":"PASS"}
+{"name":"accessibilité du carnet: axe, 320 px, cibles tactiles et agrandissement du texte","result":"PASS"}
+{"name":"export, effacement global et restauration incluent toutes les préférences","result":"PASS"}
+{"name":"import falsifié: aucune preuve API ni modification des préférences","result":"PASS"}
+{"name":"hors ligne: rechargement, guide embarqué et nouvelle note sans réseau","result":"PASS"}
+{"name":"désélection et retrait: conservation puis oubli local uniquement","result":"PASS"}
+{"name":"confidentialité: aucun appel externe ni exception JavaScript","result":"PASS"}
+{"name":"concurrence: préférence contre profil, perdant refusé sans écrasement, oracle dans un onglet frais","result":"PASS"}
+{"name":"secours storage: consentement mémoire, aucune écriture persistante, export et recharge sûrs","result":"PASS"}
+{"name":"secours locks: consentement mémoire, aucune écriture persistante, export et recharge sûrs","result":"PASS"}
+{"name":"secours corrupt: consentement mémoire, aucune écriture persistante, export et recharge sûrs","result":"PASS"}
+{"name":"anciennes listes: aucun bouton de blocage vidéo ou sourdine générique pour YouTube","result":"PASS"}
+Universal flows: 16/16 checks passed; emulation only, no provider action or full WCAG claim.

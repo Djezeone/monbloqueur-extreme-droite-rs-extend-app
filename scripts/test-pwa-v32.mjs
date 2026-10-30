@@ -5,7 +5,7 @@ import AxeBuilder from "@axe-core/playwright";
 import {servePwa,launchPwaBrowser,waitForShell} from "./pwa-test-utils.mjs";
 const server=await servePwa(),checks=[];let browser;
 const snapshot=p=>p.evaluate(()=>localStorage.getItem("fil-clair-v1"));
-async function check(name,fn){await fn();checks.push(name);console.log("PASS "+name);}
+async function check(name,fn){console.log("START "+name);await fn();checks.push(name);console.log("PASS "+name);}
 async function scan(page,phase){
   const r=await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21a","wcag21aa","wcag22aa"]).analyze();
   console.log(JSON.stringify({axe:phase,violations:r.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))})),incomplete:r.incomplete.map(v=>({id:v.id,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))}))}));
@@ -81,7 +81,9 @@ try{
     await scan(page,"reflow");await page.locator("#guided-cancel").click();
   });
   await check("offline réel : carnet, nouveau parcours et aide restent disponibles",async()=>{
-    await server.pause();await context.setOffline(true);await page.reload({waitUntil:"load"});assert.equal(await page.evaluate(()=>navigator.onLine),false);
+    await server.pause();console.log(JSON.stringify({phase:"offline-server-stopped"}));
+    await context.setOffline(true);console.log(JSON.stringify({phase:"offline-browser-set"}));
+    await page.reload({waitUntil:"load"});console.log(JSON.stringify({phase:"offline-reloaded"}));assert.equal(await page.evaluate(()=>navigator.onLine),false);
     assert.equal(await page.locator(".skip").evaluate(e=>getComputedStyle(e).position),"absolute","Public CSS must remain available offline, not just HTML and JS");
     await page.locator("#help-open").click();await expect(page.locator("#help-results details")).toHaveCount(13);await page.locator("#help-close").click();
     await choices("Note hors ligne",["local"],["local:source-avoid"]);await page.locator("#guided-next").click();await finish();assert.equal(JSON.parse(await snapshot(page)).flows.items.at(-1).target,"Note hors ligne");

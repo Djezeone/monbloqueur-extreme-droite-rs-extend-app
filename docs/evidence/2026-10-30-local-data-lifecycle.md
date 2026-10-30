@@ -40,3 +40,6 @@ CI au head exact après revue terminée et passe corrective. Lots01/06/08 bloqu�
 ## Périmé
 
 « Cycle local sans risque après remplacement » : contredit par les reproductions ; correctifs ciblés et non reconstruction V3.2. Déclarations orphelines compatibles ne doivent plus se réactiver au nouvel ajout. Un nouveau brouillon ne doit plus être vidé après accusé du précédent. « Plan Vercel inconnu » :Pro identifié lors de PR5, capacité gratuite toujours inconnue. Les sorties RED et anciennes versions du shell ne décrivent pas le comportement corrigé ; la CI/poussée demeurent à constater séparément.
+
+## Résultat distant ultérieur au036e66b
+Extension40983277066success ; PWA40983277220cancelled après20min, matrice incomplète. Le statut candidat n'est donc pas vert : porte globale décochée,0/8jusqu'à nouvelle preuve. [Reproduction TCP, correctif du helper et nouvelle qualification locale](2026-10-30-local-data-ci-recovery.md). Ce complément préserve le snapshot pré-push ci-dessus ; le corpsPR6 et Airtable reçoivent le dernier état vérifié.

@@ -29,7 +29,12 @@ export async function servePwa() {
   await new Promise(done => server.listen(0, "localhost", done));
   const port = server.address().port;
   // app.js registers its worker for localhost; 127.0.0.1 would skip registration.
-  const close = () => new Promise(done => server.close(done));
+  const close = () => new Promise(done => {
+    server.close(done);
+    // This fixture owns every socket. Browser preconnections or incomplete
+    // headers must not keep an offline test waiting for a graceful shutdown.
+    server.closeAllConnections();
+  });
   return { url:"http://localhost:" + port, requests, close, pause:close,
     listening:() => server.listening,
     resume:() => new Promise((resolve, reject) => {
