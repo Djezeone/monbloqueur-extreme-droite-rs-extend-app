@@ -1,0 +1,759 @@
+﻿2026-10-30T01:31:01.5704904Z Current runner version: '2.338.0'
+2026-10-30T01:31:01.5753448Z ##[group]Runner Image Provisioner
+2026-10-30T01:31:01.5754240Z Hosted Compute Agent
+2026-10-30T01:31:01.5754861Z Version: 20261021.618
+2026-10-30T01:31:01.5755661Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-10-30T01:31:01.5756376Z Build Date: 2026-10-21T00:45:21Z
+2026-10-30T01:31:01.5756996Z Worker ID: {73fa0d52-efb3-489c-ac15-aaa28dc1fa4f}
+2026-10-30T01:31:01.5757628Z Region: westus3
+2026-10-30T01:31:01.5758162Z Cloud: Azure
+2026-10-30T01:31:01.5758642Z ##[endgroup]
+2026-10-30T01:31:01.5760077Z ##[group]Operating System
+2026-10-30T01:31:01.5760656Z Ubuntu
+2026-10-30T01:31:01.5761131Z 24.04.5
+2026-10-30T01:31:01.5761612Z LTS
+2026-10-30T01:31:01.5762075Z ##[endgroup]
+2026-10-30T01:31:01.5762697Z ##[group]Runner Image
+2026-10-30T01:31:01.5763240Z Image: ubuntu-24.04
+2026-10-30T01:31:01.5763749Z Version: 20261025.353.1
+2026-10-30T01:31:01.5764920Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-30T01:31:01.5766513Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+2026-10-30T01:31:01.5767385Z ##[endgroup]
+2026-10-30T01:31:01.5768353Z ##[group]GITHUB_TOKEN Permissions
+2026-10-30T01:31:01.5770302Z Contents: read
+2026-10-30T01:31:01.5770939Z Metadata: read
+2026-10-30T01:31:01.5771519Z ##[endgroup]
+2026-10-30T01:31:01.5773565Z Secret source: Actions
+2026-10-30T01:31:01.5774466Z Cache mode: write
+2026-10-30T01:31:01.5775074Z Prepare workflow directory
+2026-10-30T01:31:01.6145595Z Prepare all required actions
+2026-10-30T01:31:01.6193925Z Getting action download info
+2026-10-30T01:31:01.9010321Z Download action repository 'actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683' (SHA:11bd71901bbe5b1630ceea73d27597364c9af683)
+2026-10-30T01:31:02.0697425Z Download action repository 'actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-30T01:31:02.2333428Z Complete job name: verifier
+2026-10-30T01:31:02.3375529Z ##[group]Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+2026-10-30T01:31:02.3376572Z with:
+2026-10-30T01:31:02.3376998Z   persist-credentials: false
+2026-10-30T01:31:02.3377608Z   repository: Djezeone/monbloqueur-extreme-droite-rs-extend-app
+2026-10-30T01:31:02.3381798Z   token: ***
+2026-10-30T01:31:02.3382225Z   ssh-strict: true
+2026-10-30T01:31:02.3382709Z   ssh-user: git
+2026-10-30T01:31:02.3383094Z   clean: true
+2026-10-30T01:31:02.3383490Z   sparse-checkout-cone-mode: true
+2026-10-30T01:31:02.3383960Z   fetch-depth: 1
+2026-10-30T01:31:02.3384346Z   fetch-tags: false
+2026-10-30T01:31:02.3384740Z   show-progress: true
+2026-10-30T01:31:02.3385142Z   lfs: false
+2026-10-30T01:31:02.3385840Z   submodules: false
+2026-10-30T01:31:02.3386262Z   set-safe-directory: true
+2026-10-30T01:31:02.3387040Z ##[endgroup]
+2026-10-30T01:31:02.6477790Z Syncing repository: Djezeone/monbloqueur-extreme-droite-rs-extend-app
+2026-10-30T01:31:02.6485191Z ##[group]Getting Git version info
+2026-10-30T01:31:02.6487834Z Working directory is '/home/runner/work/monbloqueur-extreme-droite-rs-extend-app/monbloqueur-extreme-droite-rs-extend-app'
+2026-10-30T01:31:02.6490529Z [command]/usr/bin/git version
+2026-10-30T01:31:02.6577665Z git version 2.56.0
+2026-10-30T01:31:02.6602738Z ##[endgroup]
+2026-10-30T01:31:02.6620537Z Temporarily overriding HOME='/home/runner/work/_temp/9c91663f-9f88-4c02-b7cd-250193cf7d4b' before making global git config changes
+2026-10-30T01:31:02.6623230Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-30T01:31:02.6628499Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/monbloqueur-extreme-droite-rs-extend-app/monbloqueur-extreme-droite-rs-extend-app
+2026-10-30T01:31:02.6700864Z Deleting the contents of '/home/runner/work/monbloqueur-extreme-droite-rs-extend-app/monbloqueur-extreme-droite-rs-extend-app'
+2026-10-30T01:31:02.6709212Z ##[group]Initializing the repository
+2026-10-30T01:31:02.6739539Z [command]/usr/bin/git init /home/runner/work/monbloqueur-extreme-droite-rs-extend-app/monbloqueur-extreme-droite-rs-extend-app
+2026-10-30T01:31:02.6870604Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-30T01:31:02.6872152Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-30T01:31:02.6873017Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-30T01:31:02.6873704Z hint: call:
+2026-10-30T01:31:02.6874076Z hint:
+2026-10-30T01:31:02.6874563Z hint: 	git config --global init.defaultBranch <name>
+2026-10-30T01:31:02.6875432Z hint:
+2026-10-30T01:31:02.6875987Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-30T01:31:02.6876838Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-30T01:31:02.6877514Z hint:
+2026-10-30T01:31:02.6877895Z hint: 	git branch -m <name>
+2026-10-30T01:31:02.6878464Z hint:
+2026-10-30T01:31:02.6879066Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-30T01:31:02.6896895Z Initialized empty Git repository in /home/runner/work/monbloqueur-extreme-droite-rs-extend-app/monbloqueur-extreme-droite-rs-extend-app/.git/
+2026-10-30T01:31:02.6899321Z [command]/usr/bin/git remote add origin https://github.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app
+2026-10-30T01:31:02.6948837Z ##[endgroup]
+2026-10-30T01:31:02.6949891Z ##[group]Disabling automatic garbage collection
+2026-10-30T01:31:02.6955608Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-30T01:31:02.6991254Z ##[endgroup]
+2026-10-30T01:31:02.6992293Z ##[group]Setting up auth
+2026-10-30T01:31:02.7000924Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-30T01:31:02.7041861Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-30T01:31:02.7440871Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-30T01:31:02.7473650Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-30T01:31:02.7686899Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-30T01:31:02.7729549Z ##[endgroup]
+2026-10-30T01:31:02.7730587Z ##[group]Fetching the repository
+2026-10-30T01:31:02.7744271Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2d8eec59b011ebd57cfe3c3e75fbf551409c968b:refs/remotes/pull/6/merge
+2026-10-30T01:31:03.6818752Z From https://github.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app
+2026-10-30T01:31:03.6820984Z  * [new ref]         2d8eec59b011ebd57cfe3c3e75fbf551409c968b -> pull/6/merge
+2026-10-30T01:31:03.6824584Z ##[endgroup]
+2026-10-30T01:31:03.6826904Z ##[group]Determining the checkout info
+2026-10-30T01:31:03.6828817Z ##[endgroup]
+2026-10-30T01:31:03.6832264Z [command]/usr/bin/git sparse-checkout disable
+2026-10-30T01:31:03.6898005Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-30T01:31:03.6932233Z ##[group]Checking out the ref
+2026-10-30T01:31:03.6937232Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/6/merge
+2026-10-30T01:31:03.7206425Z Note: switching to 'refs/remotes/pull/6/merge'.
+2026-10-30T01:31:03.7207537Z 
+2026-10-30T01:31:03.7208263Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-30T01:31:03.7210077Z changes and commit them, and you can discard any commits you make in this
+2026-10-30T01:31:03.7211883Z state without impacting any branches by switching back to a branch.
+2026-10-30T01:31:03.7212957Z 
+2026-10-30T01:31:03.7213699Z If you want to create a new branch to retain commits you create, you may
+2026-10-30T01:31:03.7215839Z do so (now or later) by using -c with the switch command. Example:
+2026-10-30T01:31:03.7216822Z 
+2026-10-30T01:31:03.7217226Z   git switch -c <new-branch-name>
+2026-10-30T01:31:03.7217911Z 
+2026-10-30T01:31:03.7218312Z Or undo this operation with:
+2026-10-30T01:31:03.7218926Z 
+2026-10-30T01:31:03.7219272Z   git switch -
+2026-10-30T01:31:03.7219752Z 
+2026-10-30T01:31:03.7220532Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-30T01:31:03.7221695Z 
+2026-10-30T01:31:03.7223032Z HEAD is now at 2d8eec5 Merge 998e05372e01e3bab25d9539591fe05369e76b24 into 04454543f3df190f54f5fdacbccb82a413f901c0
+2026-10-30T01:31:03.7237928Z ##[endgroup]
+2026-10-30T01:31:03.7278953Z [command]/usr/bin/git log -1 --format=%H
+2026-10-30T01:31:03.7303250Z 2d8eec59b011ebd57cfe3c3e75fbf551409c968b
+2026-10-30T01:31:03.7314149Z ##[group]Removing auth
+2026-10-30T01:31:03.7318894Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-30T01:31:03.7349120Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-30T01:31:03.7532228Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-30T01:31:03.7558020Z http.https://github.com/.extraheader
+2026-10-30T01:31:03.7566601Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-30T01:31:03.7603382Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-30T01:31:03.7784170Z ##[endgroup]
+2026-10-30T01:31:03.8139867Z ##[group]Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+2026-10-30T01:31:03.8141487Z with:
+2026-10-30T01:31:03.8142345Z   node-version: 24
+2026-10-30T01:31:03.8143290Z   always-auth: false
+2026-10-30T01:31:03.8144277Z   check-latest: false
+2026-10-30T01:31:03.8154116Z   token: ***
+2026-10-30T01:31:03.8155000Z ##[endgroup]
+2026-10-30T01:31:03.9676486Z Found in cache @ /opt/hostedtoolcache/node/24.22.1/x64
+2026-10-30T01:31:03.9680097Z (node:2357) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-30T01:31:03.9680907Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-30T01:31:03.9683016Z ##[group]Environment details
+2026-10-30T01:31:04.3931548Z node: v24.22.1
+2026-10-30T01:31:04.3932272Z npm: 11.19.1
+2026-10-30T01:31:04.3932717Z yarn: 1.22.22
+2026-10-30T01:31:04.3933803Z ##[endgroup]
+2026-10-30T01:31:04.4065586Z ##[group]Run npm ci
+2026-10-30T01:31:04.4066021Z [36;1mnpm ci[0m
+2026-10-30T01:31:04.4089943Z shell: /usr/bin/bash -e {0}
+2026-10-30T01:31:04.4090298Z ##[endgroup]
+2026-10-30T01:31:05.8778210Z npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+2026-10-30T01:31:08.4221610Z npm warn deprecated eslint@9.39.4: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+2026-10-30T01:31:08.5399159Z 
+2026-10-30T01:31:08.5400275Z added 336 packages, and audited 337 packages in 4s
+2026-10-30T01:31:08.5400904Z 
+2026-10-30T01:31:08.5425914Z 101 packages are looking for funding
+2026-10-30T01:31:08.5446234Z   run `npm fund` for details
+2026-10-30T01:31:08.5446931Z 
+2026-10-30T01:31:08.5447614Z 3 low severity vulnerabilities
+2026-10-30T01:31:08.5448205Z 
+2026-10-30T01:31:08.5448807Z To address all issues (including breaking changes), run:
+2026-10-30T01:31:08.5450074Z   npm audit fix --force
+2026-10-30T01:31:08.5450718Z 
+2026-10-30T01:31:08.5451287Z Run `npm audit` for details.
+2026-10-30T01:31:08.5940286Z ##[group]Run npm test
+2026-10-30T01:31:08.5940564Z [36;1mnpm test[0m
+2026-10-30T01:31:08.5956227Z shell: /usr/bin/bash -e {0}
+2026-10-30T01:31:08.5956504Z ##[endgroup]
+2026-10-30T01:31:08.7026070Z 
+2026-10-30T01:31:08.7027291Z > bloquer-extreme-droite-x@2.3.0 test
+2026-10-30T01:31:08.7028308Z > node --test tests/*.test.js
+2026-10-30T01:31:08.7028907Z 
+2026-10-30T01:31:08.8498651Z ✔ modèle commun : nature/portée/méthode/date et déclaration sans preuve fournisseur (3.19056ms)
+2026-10-30T01:31:08.8567725Z ✔ note locale enregistrée et réglage Safari ne prétendent pas connaître un compte (0.678202ms)
+2026-10-30T01:31:08.8584523Z ✔ échec/revue/annulation personnels et retour précédent sont immuables et datés (1.754912ms)
+2026-10-30T01:31:08.8621462Z ✔ historique borné à32, sans copie de cible ni faux passé des anciennes fiches (4.770246ms)
+2026-10-30T01:31:08.8654407Z ✔ sauvegardes V2/V3 restaurables ; historique falsifié conserve la source de récupération (3.171406ms)
+2026-10-30T01:31:08.8657163Z ✔ métriques ne récompensent ni signalements ni pénalités de comptes (0.844245ms)
+2026-10-30T01:31:08.8687144Z ✔ restaurer declared exige une nouvelle déclaration explicite, datée comme telle (1.027343ms)
+2026-10-30T01:31:08.8776945Z ✔ factories require an explicit official session and transport, with no boot request (3.759423ms)
+2026-10-30T01:31:08.8807360Z ✔ Mastodon refuses non-approved origins, IPs, credentials, paths and broad scopes (1.649714ms)
+2026-10-30T01:31:08.8826961Z ✔ Mastodon validates decimal target IDs before any authenticated call (0.788583ms)
+2026-10-30T01:31:08.8832877Z ✔ Mastodon reads identity then exactly one matching relationship on its fixed origin (2.725747ms)
+2026-10-30T01:31:08.8834701Z ▶ Mastodon never trusts a wrong account, redirected reply, missing or ambiguous relationship
+2026-10-30T01:31:08.8836060Z   ✔ identity (0.68836ms)
+2026-10-30T01:31:08.8836805Z   ✔ redirect (0.543908ms)
+2026-10-30T01:31:08.8837479Z   ✔ missing (0.935552ms)
+2026-10-30T01:31:08.8838463Z   ✔ wrong ID (2.5617ms)
+2026-10-30T01:31:08.8839192Z   ✔ string boolean (1.248071ms)
+2026-10-30T01:31:08.8839958Z   ✔ duplicates (1.719172ms)
+2026-10-30T01:31:08.8841455Z ✔ Mastodon never trusts a wrong account, redirected reply, missing or ambiguous relationship (11.211178ms)
+2026-10-30T01:31:08.8843554Z ✔ Bluesky requires a pinned allowed HTTPS PDS, DID and narrowly granted write scopes (0.609316ms)
+2026-10-30T01:31:08.8845569Z ✔ Bluesky scans all pages on its actor repo before reporting a target absent (1.57884ms)
+2026-10-30T01:31:08.8847277Z ▶ Bluesky refuses incomplete, looping or malformed block collection reads
+2026-10-30T01:31:08.8848486Z   ✔ looping cursor (1.157936ms)
+2026-10-30T01:31:08.8849380Z   ✔ missing array (0.287594ms)
+2026-10-30T01:31:08.8850223Z   ✔ wrong repo (0.251205ms)
+2026-10-30T01:31:08.8851085Z   ✔ wrong collection (0.375109ms)
+2026-10-30T01:31:08.8852016Z   ✔ wrong record type (0.460771ms)
+2026-10-30T01:31:08.8853005Z   ✔ missing CID (0.386917ms)
+2026-10-30T01:31:08.8853886Z   ✔ invalid subject (0.287684ms)
+2026-10-30T01:31:08.8855160Z ✔ Bluesky refuses incomplete, looping or malformed block collection reads (5.200833ms)
+2026-10-30T01:31:08.8856813Z ✔ Bluesky target DID and stable record keys are validated before transport (0.620536ms)
+2026-10-30T01:31:08.8858513Z ✔ a mutable caller session cannot change the captured provider identity or scopes (1.119367ms)
+2026-10-30T01:31:08.9179899Z ✔ préserve les grands identifiants et supprime les données supplémentaires (2.354653ms)
+2026-10-30T01:31:08.9209070Z ✔ refuse les identifiants numériques, doublons et injections (0.539315ms)
+2026-10-30T01:31:08.9210772Z ✔ refuse une liste mal structurée et accepte une liste vide (0.298815ms)
+2026-10-30T01:31:08.9231039Z ✔ rejette les gros fichiers avant leur chargement et les réponses non JSON (55.222749ms)
+2026-10-30T01:31:09.0607205Z ✔ the private gate is awaited before a Mastodon POST starts (11.382973ms)
+2026-10-30T01:31:09.0637970Z ✔ durable execution closes only after fresh readback and does not restore its proof (19.506784ms)
+2026-10-30T01:31:09.0640787Z ✔ two runners competing for one account send at most one mutation (5.63825ms)
+2026-10-30T01:31:09.0646704Z ✔ old, cloned, consumed, and imported consent cannot authorize another execution (2.894718ms)
+2026-10-30T01:31:09.0668337Z ✔ prepared recovery fences the old pre-reading runner before its first POST (4.251411ms)
+2026-10-30T01:31:09.0707981Z ✔ a matching recovery observation cannot clear a send that may still be in flight (4.079473ms)
+2026-10-30T01:31:09.0884139Z ✔ a lost mutation reply is quarantined across restart and never retried (19.088292ms)
+2026-10-30T01:31:09.0906016Z ✔ storage denial before claim performs no authenticated request (0.534713ms)
+2026-10-30T01:31:09.0927053Z ✔ a rejected send checkpoint performs no POST (6.414642ms)
+2026-10-30T01:31:09.0937116Z ✔ failure to commit completion withholds provider confirmation and preserves sending (1.23814ms)
+2026-10-30T01:31:09.0938981Z ✔ consent expiring during checkpoint persistence prevents the POST (0.785176ms)
+2026-10-30T01:31:09.0940373Z ✔ cancel while waiting on a claim never enters the provider (0.473794ms)
+2026-10-30T01:31:09.0941837Z ✔ 429 cooldown survives a fresh runner and requires new consent after expiry (7.394526ms)
+2026-10-30T01:31:09.0943712Z ✔ authentication refusal durably stops the lane without leaking provider messages (0.593242ms)
+2026-10-30T01:31:09.0945465Z ✔ Bluesky awaits each checkpoint and preserves partial effects if the second fails (2.100004ms)
+2026-10-30T01:31:09.0947110Z ✔ recovery respects a durable pause after partial acceptance without any GET (1.393675ms)
+2026-10-30T01:31:09.1004437Z ✔ 429 during recovery persists its pause for the next runner (12.226123ms)
+2026-10-30T01:31:09.1397865Z ✔ recovery authentication failures stop current and fresh runners without false storage reasons (34.318128ms)
+2026-10-30T01:31:09.1402516Z ✔ persistent journal failure preserves a known partial deletion without confirmation (1.42585ms)
+2026-10-30T01:31:09.1404418Z ✔ consent expiry at the second Bluesky checkpoint preserves the first deletion only (3.024088ms)
+2026-10-30T01:31:09.1577809Z ✔ registre exhaustif des43 contrôles, public/immuable et séparé des preuves d'action (2.741007ms)
+2026-10-30T01:31:09.1599582Z ✔ API documentées mais inactives : aucune permission de production implicitement consentie (2.91157ms)
+2026-10-30T01:31:09.1607032Z ✔ péremption documentaire déterministe, source ancienne n'est pas disponibilité testée (0.640432ms)
+2026-10-30T01:31:09.1639270Z ✔ coefficients X figés par composant, probabilités et absence de configuration de production prouvée (0.387944ms)
+2026-10-30T01:31:09.1669567Z ✔ catalogue universel avec quatre catégories et services entièrement facultatifs (3.367298ms)
+2026-10-30T01:31:09.1671425Z ✔ sans Google ni réseau, le carnet local est utilisable et immuable (1.119317ms)
+2026-10-30T01:31:09.1672995Z ✔ modifier ses services et catégories ne supprime ni ne confirme de fiche existante (1.46323ms)
+2026-10-30T01:31:09.1674635Z ✔ déclaré, à faire et note locale gardent des portées distinctes sans statut API (1.47909ms)
+2026-10-30T01:31:09.1707336Z ✔ la sauvegarde complète préserve les flux et les anciennes listes sans conversion de preuve (4.957389ms)
+2026-10-30T01:31:09.1709379Z ✔ flux corrompus, secrets et fausses confirmations rendent le snapshot récupérable sans écrasement (2.987968ms)
+2026-10-30T01:31:09.1736947Z ✔ bornes, doublons et cibles dangereuses refusés sans mutation (11.313624ms)
+2026-10-30T01:31:09.1767081Z ✔ bloquer, feedback et réglages ne sont jamais des actions interchangeables (0.500193ms)
+2026-10-30T01:31:09.1797099Z ✔ guided options expose only documented category controls, including unavailable services (1.090104ms)
+2026-10-30T01:31:09.1827053Z ✔ guided batch registers intentions together, never a provider confirmation (1.127998ms)
+2026-10-30T01:31:09.1828894Z ✔ guided duplicate preserves existing declaration and history instead of resetting it (1.294082ms)
+2026-10-30T01:31:09.1854215Z ✔ invalid or over-limit batch cannot partially modify the original snapshot (25.391214ms)
+2026-10-30T01:31:09.1858665Z ✔ guided local route works with no external service and keeps previous selections (0.396525ms)
+2026-10-30T01:31:09.1860525Z ✔ support defaults to no destination and fails closed for unreviewed or unsafe URLs (2.488139ms)
+2026-10-30T01:31:09.1862366Z ✔ local FAQ covers six action states and offers relevant device guidance without AI (4.046184ms)
+2026-10-30T01:31:09.2459627Z ✔ isole les comptes par clé, même si leur pseudo est identique (4.052666ms)
+2026-10-30T01:31:09.2502294Z ✔ fusionne les identifiants en préservant les grands nombres en chaînes (0.67189ms)
+2026-10-30T01:31:09.2560902Z ✔ filtre les entrées malformées et retire les champs superflus (0.613898ms)
+2026-10-30T01:31:09.2562473Z ✔ ignore les propriétés héritées, les accesseurs et les clés de prototype (0.434449ms)
+2026-10-30T01:31:09.2563794Z ✔ borne chaque compte aux 10 000 derniers identifiants uniques (35.682958ms)
+2026-10-30T01:31:09.2565055Z ✔ conserve cinq comptes récents et rafraîchit leur position LRU (0.568974ms)
+2026-10-30T01:31:09.2566515Z ✔ une clé répétée garde uniquement l’entrée la plus récente (0.255858ms)
+2026-10-30T01:31:09.2690161Z ✔ adding a missing profile never revives its imported orphan declaration (3.603517ms)
+2026-10-30T01:31:09.2692363Z ✔ adding a profile clears only its own list, service and Mastodon instance declaration (1.028113ms)
+2026-10-30T01:31:09.2693825Z ✔ adding an existing normalized profile preserves its declaration and snapshot (0.454637ms)
+2026-10-30T01:31:09.2695128Z ✔ invalid or over-capacity additions fail without changing data (14.862038ms)
+2026-10-30T01:31:09.3018559Z ✔ server origins normalize HTTPS case, port 443 and a single optional slash (9.266791ms)
+2026-10-30T01:31:09.3067177Z ✔ server origins reject IP literals, numeric aliases and local DNS suffixes (2.563731ms)
+2026-10-30T01:31:09.3075966Z ✔ server origins reject URL features and parser spelling aliases (0.866323ms)
+2026-10-30T01:31:09.3096901Z ✔ server DNS host labels enforce LDH and total 253 character bounds (0.415109ms)
+2026-10-30T01:31:09.3127065Z ✔ IPv4 public selection excludes every special prefix and multicast (0.716944ms)
+2026-10-30T01:31:09.3136466Z ✔ IPv6 public selection enforces global unicast and the special prefix boundaries (2.252041ms)
+2026-10-30T01:31:09.3138185Z ✔ public addresses reject ambiguous text, scoped IPv6 and malformed inputs (0.429755ms)
+2026-10-30T01:31:09.3139810Z ✔ DNS selection returns the first public address after validating up to 16 answers (0.948137ms)
+2026-10-30T01:31:09.3141599Z ✔ DNS selection fails closed when any answer is private, mapped, special or mismatched (4.547217ms)
+2026-10-30T01:31:09.3143145Z ✔ DNS selection accepts only bounded arrays of exact safe data records (1.093746ms)
+2026-10-30T01:31:09.3144667Z ✔ Mastodon requests normalize exactly the four qualified routes and literal query (1.606775ms)
+2026-10-30T01:31:09.3181537Z ✔ Mastodon requests preserve strict decimal ID bounds (2.76328ms)
+2026-10-30T01:31:09.3183057Z ✔ Mastodon URLs reject alternate origins, path aliases, fragments and query on non-query routes (1.475233ms)
+2026-10-30T01:31:09.3184441Z ✔ Mastodon relationships require exactly one canonical ID and with_suspended=true (1.499011ms)
+2026-10-30T01:31:09.3185197Z ✔ Mastodon methods and bodies admit only bodyless GET and empty-object POST (1.842949ms)
+2026-10-30T01:31:09.3186630Z ✔ Mastodon transport options require exact data-only keys and a real optional AbortSignal (1.601875ms)
+2026-10-30T01:31:09.3187961Z ✔ policy errors discard thrown input messages and arbitrary error details (0.393731ms)
+2026-10-30T01:31:09.3363178Z ✔ the journal exposes only read and compareAndSet (2.744358ms)
+2026-10-30T01:31:09.3377483Z ✔ unavailable and denied IndexedDB fail with bounded ConnectorError codes (3.102942ms)
+2026-10-30T01:31:09.3561789Z ✔ a pending IndexedDB open times out safely (7.781015ms)
+2026-10-30T01:31:09.3608462Z ✔ timeout configuration is an integer between 1 and 10000ms (1.91652ms)
+2026-10-30T01:31:09.3627642Z ✔ lane validation precedes storage access and binds the provider account format (2.979842ms)
+2026-10-30T01:31:09.3636954Z ✔ lane origins reject credentials, paths, queries, ports and private literal hosts (0.753525ms)
+2026-10-30T01:31:09.3667190Z ✔ CAS rejects invalid or caller-assigned revisions before storage access (0.603724ms)
+2026-10-30T01:31:09.3694287Z ✔ checkpoint shape is exact and rejects imported proof, consent and secrets (0.702637ms)
+2026-10-30T01:31:09.3696081Z ✔ checkpoint scalar fields and bounded reasons are validated before storage (2.739255ms)
+2026-10-30T01:31:09.3697416Z ✔ observations allow only a boolean and a nonnegative safe timestamp (0.928245ms)
+2026-10-30T01:31:09.3698736Z ✔ Bluesky targets are exact normalized DID and record-key pairs (0.985641ms)
+2026-10-30T01:31:09.3700091Z ✔ every bounded checkpoint reason and valid phase passes validation (4.222835ms)
+2026-10-30T01:31:09.4014754Z ✔ an older operation cannot reconcile or clear the current uncertainty lock (23.258703ms)
+2026-10-30T01:31:09.4047101Z ✔ HTTP 500 after mutation preserves uncertainty and forbids a replay (2.652226ms)
+2026-10-30T01:31:09.4066706Z ✔ HTTP 502 after mutation preserves uncertainty and forbids a replay (1.317918ms)
+2026-10-30T01:31:09.4077680Z ✔ HTTP 503 after mutation preserves uncertainty and forbids a replay (1.377925ms)
+2026-10-30T01:31:09.4104956Z ✔ HTTP 408 after mutation preserves uncertainty and forbids a replay (1.389568ms)
+2026-10-30T01:31:09.4136789Z ✔ HTTP 201 after mutation preserves uncertainty and forbids a replay (0.685177ms)
+2026-10-30T01:31:09.4170119Z ✔ HTTP 302 after mutation preserves uncertainty and forbids a replay (0.484336ms)
+2026-10-30T01:31:09.4198648Z ✔ HTTP 0 after mutation preserves uncertainty and forbids a replay (0.85885ms)
+2026-10-30T01:31:09.4200212Z ✔ HTTP 700 after mutation preserves uncertainty and forbids a replay (1.846708ms)
+2026-10-30T01:31:09.4229131Z ✔ no consent, forged/imported consent, mismatched account/target/action or expiry can write (2.755074ms)
+2026-10-30T01:31:09.4257081Z ✔ fresh independent readback follows accepted mutation and alone creates confirmation (5.137234ms)
+2026-10-30T01:31:09.4286822Z ✔ a provider accepted response is not a confirmation when readback still differs (0.882364ms)
+2026-10-30T01:31:09.4314081Z ✔ already blocked state uses a fresh provider read and avoids duplicate mutation (0.417625ms)
+2026-10-30T01:31:09.4316373Z ✔ consent is single use and a double click cannot start a second request (3.907328ms)
+2026-10-30T01:31:09.4347106Z ✔ cancellation before start or while reading prevents every later write (1.082833ms)
+2026-10-30T01:31:09.4376602Z ✔ expired consent while pre-reading does not permit a write (2.347477ms)
+2026-10-30T01:31:09.4387721Z ✔ a different authenticated identity stops before state or mutation (0.295059ms)
+2026-10-30T01:31:09.4416639Z ✔ a session changed during pre-reading is checked again before mutation (0.46664ms)
+2026-10-30T01:31:09.4436424Z ▶ 401 and 403 stop this runner and never trigger refresh or retry
+2026-10-30T01:31:09.4458553Z   ✔ 401 (0.446493ms)
+2026-10-30T01:31:09.4459497Z   ✔ 403 (0.260269ms)
+2026-10-30T01:31:09.4460748Z ✔ 401 and 403 stop this runner and never trigger refresh or retry (1.224372ms)
+2026-10-30T01:31:09.4467046Z ▶ 429 records Retry-After cooldown with no automatic retry, including HTTP date
+2026-10-30T01:31:09.4496240Z   ✔ 5 (0.729579ms)
+2026-10-30T01:31:09.4526388Z   ✔ Thu, 01 Jan 1970 00:00:09 GMT (0.416807ms)
+2026-10-30T01:31:09.4556231Z   ✔ nonsense (0.27864ms)
+2026-10-30T01:31:09.4557570Z ✔ 429 records Retry-After cooldown with no automatic retry, including HTTP date (1.877643ms)
+2026-10-30T01:31:09.4586812Z ✔ a mutation 429 requires another explicit consent after cooldown, never a scheduled retry (1.823166ms)
+2026-10-30T01:31:09.4617010Z ✔ a lost mutation reply remains unknown and cannot be replayed with fresh consent (0.814965ms)
+2026-10-30T01:31:09.4646929Z ✔ a different state cannot release uncertainty while an earlier mutation may still be in flight (1.347549ms)
+2026-10-30T01:31:09.4649418Z ✔ an actual request deadline returns unknown and does not retry an in-flight mutation (36.007167ms)
+2026-10-30T01:31:09.4676868Z ✔ cancellation in flight cannot claim the remote mutation was cancelled (0.931254ms)
+2026-10-30T01:31:09.4706766Z ✔ failed readback keeps accepted true but cannot create a provider confirmation (0.798617ms)
+2026-10-30T01:31:09.4731509Z ✔ a malformed successful mutation reply is unknown and never promoted by imported flags (0.912539ms)
+2026-10-30T01:31:09.4746361Z ✔ public snapshots cannot mutate runner evidence and imported evidence is ignored (0.718491ms)
+2026-10-30T01:31:09.4776735Z ✔ Bluesky sends a stable explicit rkey and verifies the new target record independently (6.579315ms)
+2026-10-30T01:31:09.4798766Z ✔ Bluesky pre-read finds an existing later-page block without creating a duplicate (1.672959ms)
+2026-10-30T01:31:09.4823722Z ✔ Bluesky refuses an rkey collision with another DID before mutation (1.638945ms)
+2026-10-30T01:31:09.4857964Z ✔ Bluesky unblocks every matching record with CID checks, preserving unrelated blocks (0.900902ms)
+2026-10-30T01:31:09.4886701Z ✔ Bluesky cannot confirm unblock while a matching block remains on a later page (3.812506ms)
+2026-10-30T01:31:09.4905855Z ✔ cancelling a Bluesky multi-record unblock stops the next delete and preserves uncertainty (0.880835ms)
+2026-10-30T01:31:09.4941045Z ✔ an explicit refusal after one accepted Bluesky deletion reports the partial change and stops (2.825274ms)
+2026-10-30T01:31:09.4956790Z ✔ expiry between Bluesky deletions prevents the next write and preserves accepted partial progress (2.323704ms)
+2026-10-30T01:31:09.6727059Z ✔ 10 réseaux, URL HTTPS officielle et dédoublonnage (2.54642ms)
+2026-10-30T01:31:09.6752752Z ✔ refus des chemins, pseudo invalide, mauvais domaines Mastodon et XSS (0.650584ms)
+2026-10-30T01:31:09.6754266Z ✔ import liste X v1, import autonome v1, limite de taille (5.700601ms)
+2026-10-30T01:31:09.6763578Z ✔ historique explicite réversible et progression séparée par liste (2.388013ms)
+2026-10-30T01:31:09.6765108Z ✔ seule l'absence de stockage crée un état neuf au démarrage (1.112023ms)
+2026-10-30T01:31:09.6786702Z ✔ le démarrage refuse une structure corrompue au lieu de réparer et perdre des données (4.343373ms)
+2026-10-30T01:31:09.6806485Z ✔ loadState rend la corruption originale exportable sans proposer un état vide à enregistrer (0.629922ms)
+2026-10-30T01:31:09.6826982Z ✔ une sauvegarde corrompue ne peut pas déclencher une restauration vide (23.58124ms)
+2026-10-30T01:31:09.6843560Z ✔ un statut à vérifier ne compte pas comme blocage confirmé (0.774668ms)
+2026-10-30T01:31:09.6845153Z ✔ les révisions et provenances de listes survivent à import, export et sauvegarde v1 (2.047515ms)
+2026-10-30T01:31:09.6846999Z ✔ la version X v1 devient une révision de liste déclarée sans preuve fournisseur (0.437285ms)
+2026-10-30T01:31:09.6868851Z ✔ les métadonnées optionnelles sont bornées et ne partagent pas l'objet importé (1.966263ms)
+2026-10-30T01:31:09.6892273Z ✔ les champs importés de confirmation ne deviennent jamais des preuves fournisseur (0.503191ms)
+2026-10-30T01:31:09.6919187Z ✔ un profil retiré puis réajouté ne retrouve pas son ancienne décision (1.119554ms)
+2026-10-30T01:31:09.6946756Z ✔ supprimer une liste purge seulement ses décisions et conserve son historique (1.148059ms)
+2026-10-30T01:31:09.6979323Z ✔ retirer une liste inactive préserve la sélection et une cible absente ne détruit rien (0.182002ms)
+2026-10-30T01:31:09.6986675Z ✔ une sauvegarde accepte les clés Mastodon valides longues sans supprimer la déclaration (0.563105ms)
+2026-10-30T01:31:09.7016680Z ✔ une sauvegarde refuse les clés non canoniques et les titres ou doublons à perte (0.874443ms)
+2026-10-30T01:31:09.7036698Z ✔ les dates impossibles ne créent pas de décisions ou de sauvegardes illisibles (0.891401ms)
+2026-10-30T01:31:09.7066551Z ✔ une décision ne peut pas viser une liste ou un profil absent (0.197212ms)
+2026-10-30T01:31:09.7097010Z ✔ le plafond de décisions refuse un ajout sans perdre les déclarations existantes (149.529727ms)
+2026-10-30T01:31:09.7127424Z ✔ les limites acceptent 5000 profils par liste et 30 listes mais refusent les dépassements (58.103939ms)
+2026-10-30T01:31:09.7129213Z ✔ les titres texte v1 déjà acceptés restent exportables et restaurables (0.412659ms)
+2026-10-30T01:31:10.0971161Z ✔ the owned PWA server stops and resumes with idle preconnection (72.836318ms)
+2026-10-30T01:31:10.1107286Z ✔ the owned PWA server stops and resumes with unfinished request headers (12.220772ms)
+2026-10-30T01:31:10.1927823Z ✔ un clic ouvre un seul onglet sans le rendre actif (58.741821ms)
+2026-10-30T01:31:10.1929105Z ✔ succès et compte déjà bloqué comptent sans jamais débloquer (5.648657ms)
+2026-10-30T01:31:10.1936948Z ✔ un compte indisponible est conservé dans le bilan et les suivants continuent (1.942867ms)
+2026-10-30T01:31:10.1938564Z ✔ un blocage déjà visible sans identité numérique ne remplit pas le cache (1.985941ms)
+2026-10-30T01:31:10.1940281Z ✔ refuse les résultats venant d’un autre onglet ou d’une tentative ancienne (2.181453ms)
+2026-10-30T01:31:10.1941923Z ✔ erreur de X met en pause et un clic reprend sans perdre la progression (2.433511ms)
+2026-10-30T01:31:10.1967187Z ✔ un changement de compte X bloque la reprise (1.584164ms)
+2026-10-30T01:31:10.1993695Z ✔ le redémarrage du navigateur suspend et l’arrêt ferme seulement l’onglet de travail (3.118781ms)
+2026-10-30T01:31:10.1996159Z ✔ une liste invalide ou inaccessible ne lance aucun blocage (1.079907ms)
+2026-10-30T01:31:10.1997659Z ✔ une réponse perdue déclenche une récupération bornée puis une pause (1.859547ms)
+2026-10-30T01:31:10.1998869Z ▶ un script absent conserve l’échéance puis déclenche la récupération
+2026-10-30T01:31:10.1999816Z   ✔ inspect (1.658359ms)
+2026-10-30T01:31:10.2000455Z   ✔ block (1.259287ms)
+2026-10-30T01:31:10.2001586Z ✔ un script absent conserve l’échéance puis déclenche la récupération (3.565291ms)
+2026-10-30T01:31:10.2003181Z ✔ deux reprises après limitation X sont suivies d’une pause de quinze minutes (2.360499ms)
+2026-10-30T01:31:10.2004687Z ✔ un nouveau passage saute les comptes déjà traités pour le même compte (2.498258ms)
+2026-10-30T01:31:10.2005911Z ✔ le cache ne passe jamais d’un utilisateur à l’autre (1.4905ms)
+2026-10-30T01:31:10.2006985Z ✔ Tout revérifier ignore le cache et conserve une liste fraîche (1.622708ms)
+2026-10-30T01:31:10.2008156Z ✔ la limitation de X impose une pause même pour Tout revérifier (2.83023ms)
+2026-10-30T01:31:10.2009538Z ✔ une identité de compte différente bloque la reprise du cache (1.490886ms)
+2026-10-30T01:31:10.2011081Z ✔ une identité devenue indisponible suspend la reprise et conserve la clé connue (1.707808ms)
+2026-10-30T01:31:10.2012639Z ✔ un premier passage sans clé fonctionne sans enregistrer ni réutiliser de cache (1.597645ms)
+2026-10-30T01:31:10.2014188Z ✔ le signal du contenu permet de traiter avant le chargement complet (0.612138ms)
+2026-10-30T01:31:10.2015533Z ✔ la pause entre profils est réduite à 250 ms (0.6957ms)
+2026-10-30T01:31:10.2016798Z ✔ l’onglet X est activé seulement sur demande en cas de pause (0.923017ms)
+2026-10-30T01:31:10.2018199Z ✔ une navigation attend le nouveau document avant de lire son URL (0.7476ms)
+2026-10-30T01:31:10.2019605Z ✔ une navigation interne conserve la page et attend le bon profil (0.810715ms)
+2026-10-30T01:31:10.2021058Z ✔ un routeur indisponible déclenche une seule navigation de secours (1.030556ms)
+2026-10-30T01:31:10.3075970Z ✔ server session does no bootstrap call and never serializes its token (526.999573ms)
+2026-10-30T01:31:10.5031368Z ✔ server factory refuses broad scopes, unapproved origins and unsafe token/config without network (195.487849ms)
+2026-10-30T01:31:10.7544986Z ✔ TLS transport binds bearer/host and returns only matching identity and rate headers (251.331844ms)
+2026-10-30T01:31:10.8699725Z ✔ Mastodon adapter and durable runner confirm only after TLS relationship readback (115.383211ms)
+2026-10-30T01:31:11.0186535Z ✔ 421, redirect and503 produce one POST, no replay, no forwarded Location or body (148.581605ms)
+2026-10-30T01:31:11.2472156Z ✔ an applied POST followed by socket reset is unknown and cannot be replayed (228.481439ms)
+2026-10-30T01:31:11.4737826Z ✔ mixed private DNS results are refused before native request construction (226.402338ms)
+2026-10-30T01:31:11.8426966Z ✔ disconnect during DNS prevents a late authenticated request (368.865065ms)
+2026-10-30T01:31:12.2070157Z ✔ abort during DNS settles without waiting for the resolver and prevents later dispatch (364.135993ms)
+2026-10-30T01:31:12.4191680Z ✔ local expiry after DNS prevents dispatch and never claims provider revocation (211.994799ms)
+2026-10-30T01:31:12.7028776Z ✔ 401 and403 stop as soon as headers arrive, even with an invalid unfinished body (283.879112ms)
+2026-10-30T01:31:13.0185644Z ✔ a200identity mismatch stops the captured session (315.516371ms)
+2026-10-30T01:31:13.4934036Z ✔ invalid UTF8, JSON, compression and oversized bodies fail without leaking response text (474.826519ms)
+2026-10-30T01:31:13.6281579Z ✔ wrong relationship/action binding after POST is uncertain rather than confirmed (134.730015ms)
+2026-10-30T01:31:13.9426963Z ✔ deadline covers a stalled TLS response and destroys rather than retries the request (314.368972ms)
+2026-10-30T01:31:14.1654332Z ✔ disconnect interrupts an in-flight POST without claiming its remote cancellation (222.828477ms)
+2026-10-30T01:31:14.5824119Z ✔ native TLS rejects an otherwise trusted certificate for a different hostname (416.842737ms)
+2026-10-30T01:31:14.7879729Z ✔ one active request per handle prevents overlapping dispatches (205.478203ms)
+2026-10-30T01:31:14.9045715Z ✔ a DNS deadline settles before any ClientRequest exists (116.483663ms)
+2026-10-30T01:31:15.0689307Z ✔ the local lifetime expires and interrupts a stalled DNS lookup (164.344728ms)
+2026-10-30T01:31:15.3481769Z ✔ public IPv6 is pinned while the test driver alone uses loopback IPv4 (279.204917ms)
+2026-10-30T01:31:15.5211031Z ✔ truncated successful JSON cannot become a successful mutation (172.827175ms)
+2026-10-30T01:31:15.6419960Z ✔ oversized response headers fail once without exposing their value (120.851688ms)
+2026-10-30T01:31:16.1213913Z ✔ mutating constructor inputs cannot switch the captured token account origin or permissions (397.430652ms)
+2026-10-30T01:31:16.1215078Z ✔ an elapsed deadline blocks a DNS continuation before queued timers run (40.775337ms)
+2026-10-30T01:31:16.1216322Z ✔ a completed response after the deadline cannot beat the queued timeout (41.085779ms)
+2026-10-30T01:31:16.1303035Z ℹ tests 232
+2026-10-30T01:31:16.1303668Z ℹ suites 0
+2026-10-30T01:31:16.1303888Z ℹ pass 232
+2026-10-30T01:31:16.1304100Z ℹ fail 0
+2026-10-30T01:31:16.1304313Z ℹ cancelled 0
+2026-10-30T01:31:16.1304540Z ℹ skipped 0
+2026-10-30T01:31:16.1304748Z ℹ todo 0
+2026-10-30T01:31:16.1304994Z ℹ duration_ms 7382.726757
+2026-10-30T01:31:16.1442240Z ##[group]Run npm run validate:list
+2026-10-30T01:31:16.1442550Z [36;1mnpm run validate:list[0m
+2026-10-30T01:31:16.1455789Z shell: /usr/bin/bash -e {0}
+2026-10-30T01:31:16.1456053Z ##[endgroup]
+2026-10-30T01:31:16.2490650Z 
+2026-10-30T01:31:16.2491315Z > bloquer-extreme-droite-x@2.3.0 validate:list
+2026-10-30T01:31:16.2491905Z > node scripts/validate-list.mjs
+2026-10-30T01:31:16.2492084Z 
+2026-10-30T01:31:16.2869517Z 162 comptes valides · version 2026-10-27.5 · SHA-256 Jez_nt8-5xgnBbln2fr26CA41CqeFVTTyLiUQ_5-7Tk
+2026-10-30T01:31:16.2987375Z ##[group]Run npm run build:dev
+2026-10-30T01:31:16.2987665Z [36;1mnpm run build:dev[0m
+2026-10-30T01:31:16.3000946Z shell: /usr/bin/bash -e {0}
+2026-10-30T01:31:16.3001216Z ##[endgroup]
+2026-10-30T01:31:16.3956104Z 
+2026-10-30T01:31:16.3957021Z > bloquer-extreme-droite-x@2.3.0 build:dev
+2026-10-30T01:31:16.3957493Z > node scripts/build.mjs --development
+2026-10-30T01:31:16.3957715Z 
+2026-10-30T01:31:16.4605065Z Paquet créé : dist/extension-chrome.zip
+2026-10-30T01:31:16.4710581Z Paquet créé : dist/extension-edge.zip
+2026-10-30T01:31:16.4809303Z Paquet créé : dist/extension-firefox.zip
+2026-10-30T01:31:16.4926442Z ##[group]Run npm run lint:firefox
+2026-10-30T01:31:16.4926749Z [36;1mnpm run lint:firefox[0m
+2026-10-30T01:31:16.4940094Z shell: /usr/bin/bash -e {0}
+2026-10-30T01:31:16.4940353Z ##[endgroup]
+2026-10-30T01:31:16.5899654Z 
+2026-10-30T01:31:16.5900347Z > bloquer-extreme-droite-x@2.3.0 lint:firefox
+2026-10-30T01:31:16.5901211Z > web-ext lint --source-dir dist/firefox --warnings-as-errors
+2026-10-30T01:31:16.5901976Z 
+2026-10-30T01:31:17.7552211Z Validation Summary:
+2026-10-30T01:31:17.7552539Z 
+2026-10-30T01:31:17.7552778Z errors          0              
+2026-10-30T01:31:17.7553271Z notices         0              
+2026-10-30T01:31:17.7553793Z warnings        0              
+2026-10-30T01:31:17.7554077Z 
+2026-10-30T01:31:17.7787297Z ##[group]Run npx playwright install --with-deps chromium
+2026-10-30T01:31:17.7787719Z [36;1mnpx playwright install --with-deps chromium[0m
+2026-10-30T01:31:17.7800496Z shell: /usr/bin/bash -e {0}
+2026-10-30T01:31:17.7800756Z ##[endgroup]
+2026-10-30T01:31:18.5006416Z Installing dependencies...
+2026-10-30T01:31:18.5089996Z Switching to root user to install dependencies...
+2026-10-30T01:31:18.5893632Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-30T01:31:18.6176832Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+2026-10-30T01:31:18.6271921Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+2026-10-30T01:31:18.6299605Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+2026-10-30T01:31:18.6350419Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+2026-10-30T01:31:18.6375598Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+2026-10-30T01:31:18.6871706Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [617 kB]
+2026-10-30T01:31:18.7066320Z Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [682 kB]
+2026-10-30T01:31:18.7872715Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1406 kB]
+2026-10-30T01:31:18.7945492Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [310 kB]
+2026-10-30T01:31:18.7965730Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1708 kB]
+2026-10-30T01:31:18.8049722Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [343 kB]
+2026-10-30T01:31:18.8105188Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1809 kB]
+2026-10-30T01:31:18.8187649Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [411 kB]
+2026-10-30T01:31:18.8222615Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse Translation-en [14.3 kB]
+2026-10-30T01:31:18.8829995Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1146 kB]
+2026-10-30T01:31:18.8884258Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [231 kB]
+2026-10-30T01:31:18.8902912Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1223 kB]
+2026-10-30T01:31:18.9436374Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [246 kB]
+2026-10-30T01:31:21.9780274Z Fetched 10.5 MB in 1s (9975 kB/s)
+2026-10-30T01:31:23.0432432Z Reading package lists...
+2026-10-30T01:31:23.0742692Z Reading package lists...
+2026-10-30T01:31:23.3520635Z Building dependency tree...
+2026-10-30T01:31:23.3528002Z Reading state information...
+2026-10-30T01:31:23.5451507Z libasound2t64 is already the newest version (1.2.11-1ubuntu0.3).
+2026-10-30T01:31:23.5452323Z libasound2t64 set to manually installed.
+2026-10-30T01:31:23.5453176Z libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-30T01:31:23.5453954Z libatk-bridge2.0-0t64 set to manually installed.
+2026-10-30T01:31:23.5454663Z libatk1.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-30T01:31:23.5455583Z libatk1.0-0t64 set to manually installed.
+2026-10-30T01:31:23.5456379Z libatspi2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-30T01:31:23.5457164Z libatspi2.0-0t64 set to manually installed.
+2026-10-30T01:31:23.5457951Z libcairo2 is already the newest version (1.18.0-3build1).
+2026-10-30T01:31:23.5458687Z libcairo2 set to manually installed.
+2026-10-30T01:31:23.5459461Z libcups2t64 is already the newest version (2.4.7-1.2ubuntu7.14).
+2026-10-30T01:31:23.5460785Z libcups2t64 set to manually installed.
+2026-10-30T01:31:23.5461385Z libdbus-1-3 is already the newest version (1.14.10-4ubuntu4.1).
+2026-10-30T01:31:23.5461842Z libdbus-1-3 set to manually installed.
+2026-10-30T01:31:23.5462748Z libdrm2 is already the newest version (2.4.125-1ubuntu0.1~24.04.2).
+2026-10-30T01:31:23.5463490Z libdrm2 set to manually installed.
+2026-10-30T01:31:23.5464221Z libgbm1 is already the newest version (25.2.8-0ubuntu0.24.04.4).
+2026-10-30T01:31:23.5464939Z libgbm1 set to manually installed.
+2026-10-30T01:31:23.5465795Z libglib2.0-0t64 is already the newest version (2.80.0-6ubuntu3.10).
+2026-10-30T01:31:23.5466280Z libglib2.0-0t64 set to manually installed.
+2026-10-30T01:31:23.5466767Z libnspr4 is already the newest version (2:4.35-1.1build1).
+2026-10-30T01:31:23.5467355Z libnspr4 set to manually installed.
+2026-10-30T01:31:23.5467799Z libnss3 is already the newest version (2:3.98-1ubuntu0.3).
+2026-10-30T01:31:23.5468250Z libnss3 set to manually installed.
+2026-10-30T01:31:23.5468718Z libpango-1.0-0 is already the newest version (1.52.1+ds-1build1).
+2026-10-30T01:31:23.5469293Z libpango-1.0-0 set to manually installed.
+2026-10-30T01:31:23.5469765Z libx11-6 is already the newest version (2:1.8.7-1ubuntu0.1).
+2026-10-30T01:31:23.5470202Z libx11-6 set to manually installed.
+2026-10-30T01:31:23.5470620Z libxcb1 is already the newest version (1.15-1ubuntu2).
+2026-10-30T01:31:23.5471035Z libxcb1 set to manually installed.
+2026-10-30T01:31:23.5471503Z libxcomposite1 is already the newest version (1:0.4.5-1build3).
+2026-10-30T01:31:23.5471988Z libxcomposite1 set to manually installed.
+2026-10-30T01:31:23.5472461Z libxdamage1 is already the newest version (1:1.1.6-1build1).
+2026-10-30T01:31:23.5472906Z libxdamage1 set to manually installed.
+2026-10-30T01:31:23.5473383Z libxext6 is already the newest version (2:1.3.4-1build2).
+2026-10-30T01:31:23.5473866Z libxext6 set to manually installed.
+2026-10-30T01:31:23.5474309Z libxfixes3 is already the newest version (1:6.0.0-2build1).
+2026-10-30T01:31:23.5474766Z libxfixes3 set to manually installed.
+2026-10-30T01:31:23.5475400Z libxkbcommon0 is already the newest version (1.6.0-1build1).
+2026-10-30T01:31:23.5475886Z libxkbcommon0 set to manually installed.
+2026-10-30T01:31:23.5476471Z libxrandr2 is already the newest version (2:1.5.2-2build1).
+2026-10-30T01:31:23.5476910Z libxrandr2 set to manually installed.
+2026-10-30T01:31:23.5477360Z xvfb is already the newest version (2:21.1.12-1ubuntu1.9).
+2026-10-30T01:31:23.5477995Z fonts-noto-color-emoji is already the newest version (2.047-0ubuntu0.24.04.1).
+2026-10-30T01:31:23.5478642Z libfontconfig1 is already the newest version (2.15.0-1.1ubuntu2).
+2026-10-30T01:31:23.5479123Z libfontconfig1 set to manually installed.
+2026-10-30T01:31:23.5479633Z libfreetype6 is already the newest version (2.13.2+dfsg-1ubuntu0.2).
+2026-10-30T01:31:23.5480111Z libfreetype6 set to manually installed.
+2026-10-30T01:31:23.5480584Z fonts-liberation is already the newest version (1:2.1.5-3).
+2026-10-30T01:31:23.5481051Z fonts-liberation set to manually installed.
+2026-10-30T01:31:23.5481506Z The following additional packages will be installed:
+2026-10-30T01:31:23.5481909Z   xfonts-encodings xfonts-utils
+2026-10-30T01:31:23.5482258Z Recommended packages:
+2026-10-30T01:31:23.5482586Z   fonts-ipafont-mincho fonts-tlwg-loma
+2026-10-30T01:31:23.5656314Z The following NEW packages will be installed:
+2026-10-30T01:31:23.5657117Z   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+2026-10-30T01:31:23.5669604Z   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
+2026-10-30T01:31:23.5670213Z   xfonts-utils
+2026-10-30T01:31:23.5871757Z 0 upgraded, 9 newly installed, 0 to remove and 6 not upgraded.
+2026-10-30T01:31:23.5872267Z Need to get 21.1 MB of archives.
+2026-10-30T01:31:23.5872679Z After this operation, 79.5 MB of additional disk space will be used.
+2026-10-30T01:31:23.5873152Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-30T01:31:23.6532776Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
+2026-10-30T01:31:23.7500049Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf all 20211204+svn4273-2 [5641 kB]
+2026-10-30T01:31:23.9451898Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
+2026-10-30T01:31:23.9910187Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
+2026-10-30T01:31:24.1290447Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
+2026-10-30T01:31:24.4087757Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+2026-10-30T01:31:24.4598701Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+2026-10-30T01:31:24.5088177Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
+2026-10-30T01:31:24.5571343Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
+2026-10-30T01:31:24.8268326Z Fetched 21.1 MB in 1s (21.5 MB/s)
+2026-10-30T01:31:24.8498273Z Selecting previously unselected package fonts-ipafont-gothic.
+2026-10-30T01:31:24.8733349Z (Reading database ... 
+2026-10-30T01:31:24.8733714Z (Reading database ... 5%
+2026-10-30T01:31:24.8734008Z (Reading database ... 10%
+2026-10-30T01:31:24.8734409Z (Reading database ... 15%
+2026-10-30T01:31:24.8734719Z (Reading database ... 20%
+2026-10-30T01:31:24.8735011Z (Reading database ... 25%
+2026-10-30T01:31:24.8735540Z (Reading database ... 30%
+2026-10-30T01:31:24.8735918Z (Reading database ... 35%
+2026-10-30T01:31:24.8737593Z (Reading database ... 40%
+2026-10-30T01:31:24.8738009Z (Reading database ... 45%
+2026-10-30T01:31:24.8738390Z (Reading database ... 50%
+2026-10-30T01:31:24.8780076Z (Reading database ... 55%
+2026-10-30T01:31:25.0152983Z (Reading database ... 60%
+2026-10-30T01:31:25.2155467Z (Reading database ... 65%
+2026-10-30T01:31:25.4248255Z (Reading database ... 70%
+2026-10-30T01:31:25.6175607Z (Reading database ... 75%
+2026-10-30T01:31:25.7692926Z (Reading database ... 80%
+2026-10-30T01:31:25.8342765Z (Reading database ... 85%
+2026-10-30T01:31:25.9590263Z (Reading database ... 90%
+2026-10-30T01:31:26.1217887Z (Reading database ... 95%
+2026-10-30T01:31:26.1218420Z (Reading database ... 100%
+2026-10-30T01:31:26.1218935Z (Reading database ... 215504 files and directories currently installed.)
+2026-10-30T01:31:26.1269857Z Preparing to unpack .../0-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
+2026-10-30T01:31:26.1351992Z Unpacking fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-10-30T01:31:26.3742481Z Selecting previously unselected package fonts-freefont-ttf.
+2026-10-30T01:31:26.3863489Z Preparing to unpack .../1-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
+2026-10-30T01:31:26.3874823Z Unpacking fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-10-30T01:31:26.4661417Z Selecting previously unselected package fonts-tlwg-loma-otf.
+2026-10-30T01:31:26.4784274Z Preparing to unpack .../2-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
+2026-10-30T01:31:26.4795074Z Unpacking fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-10-30T01:31:26.4970386Z Selecting previously unselected package fonts-unifont.
+2026-10-30T01:31:26.5093233Z Preparing to unpack .../3-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
+2026-10-30T01:31:26.5100876Z Unpacking fonts-unifont (1:15.1.01-1build1) ...
+2026-10-30T01:31:26.6076318Z Selecting previously unselected package fonts-wqy-zenhei.
+2026-10-30T01:31:26.6201724Z Preparing to unpack .../4-fonts-wqy-zenhei_0.9.45-8_all.deb ...
+2026-10-30T01:31:26.6295791Z Unpacking fonts-wqy-zenhei (0.9.45-8) ...
+2026-10-30T01:31:27.1187380Z Selecting previously unselected package xfonts-encodings.
+2026-10-30T01:31:27.1311971Z Preparing to unpack .../5-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+2026-10-30T01:31:27.1319977Z Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-10-30T01:31:27.1554683Z Selecting previously unselected package xfonts-utils.
+2026-10-30T01:31:27.1681473Z Preparing to unpack .../6-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+2026-10-30T01:31:27.1692913Z Unpacking xfonts-utils (1:7.7+6build3) ...
+2026-10-30T01:31:27.2012166Z Selecting previously unselected package xfonts-cyrillic.
+2026-10-30T01:31:27.2139015Z Preparing to unpack .../7-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
+2026-10-30T01:31:27.2151313Z Unpacking xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-10-30T01:31:27.2404702Z Selecting previously unselected package xfonts-scalable.
+2026-10-30T01:31:27.2529142Z Preparing to unpack .../8-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
+2026-10-30T01:31:27.2539483Z Unpacking xfonts-scalable (1:1.0.3-1.3) ...
+2026-10-30T01:31:27.2922129Z Setting up fonts-wqy-zenhei (0.9.45-8) ...
+2026-10-30T01:31:27.3031683Z Setting up fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-10-30T01:31:27.3050252Z Setting up fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-10-30T01:31:27.3068564Z Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-10-30T01:31:27.3086781Z Setting up fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-10-30T01:31:27.3145885Z update-alternatives: using /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf to provide /usr/share/fonts/truetype/fonts-japanese-gothic.ttf (fonts-japanese-gothic.ttf) in auto mode
+2026-10-30T01:31:27.3160034Z Setting up fonts-unifont (1:15.1.01-1build1) ...
+2026-10-30T01:31:27.3178433Z Setting up xfonts-utils (1:7.7+6build3) ...
+2026-10-30T01:31:27.3222524Z Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-10-30T01:31:27.3491293Z Setting up xfonts-scalable (1:1.0.3-1.3) ...
+2026-10-30T01:31:27.3728640Z Processing triggers for man-db (2.12.0-4build2) ...
+2026-10-30T01:31:27.3747534Z Not building database; man-db/auto-update is not 'true'.
+2026-10-30T01:31:27.3760235Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+2026-10-30T01:31:28.0246517Z 
+2026-10-30T01:31:28.0247246Z Running kernel seems to be up-to-date.
+2026-10-30T01:31:28.0247615Z 
+2026-10-30T01:31:28.0247867Z No services need to be restarted.
+2026-10-30T01:31:28.0248132Z 
+2026-10-30T01:31:28.0248355Z No containers need to be restarted.
+2026-10-30T01:31:28.0248624Z 
+2026-10-30T01:31:28.0248912Z No user sessions are running outdated binaries.
+2026-10-30T01:31:28.0249277Z 
+2026-10-30T01:31:28.0249717Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+2026-10-30T01:31:29.0313652Z Downloading Chrome for Testing 156.0.8078.4 (playwright chromium v1248) from https://cdn.playwright.dev/builds/cft/156.0.8078.4/linux64/chrome-linux64.zip
+2026-10-30T01:31:29.4598697Z |                                                                                |   0% of 191.1 MiB
+2026-10-30T01:31:29.6217859Z |■■■■■■■■                                                                        |  10% of 191.1 MiB
+2026-10-30T01:31:29.6910188Z |■■■■■■■■■■■■■■■■                                                                |  20% of 191.1 MiB
+2026-10-30T01:31:29.7720277Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 191.1 MiB
+2026-10-30T01:31:29.8225652Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 191.1 MiB
+2026-10-30T01:31:29.8952851Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 191.1 MiB
+2026-10-30T01:31:29.9652115Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 191.1 MiB
+2026-10-30T01:31:30.0142986Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 191.1 MiB
+2026-10-30T01:31:30.1144723Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 191.1 MiB
+2026-10-30T01:31:30.2006203Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 191.1 MiB
+2026-10-30T01:31:30.2834769Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 191.1 MiB
+2026-10-30T01:31:33.3127626Z Chrome for Testing 156.0.8078.4 (playwright chromium v1248) downloaded to /home/runner/.cache/ms-playwright/chromium-1248
+2026-10-30T01:31:33.3131567Z Downloading FFmpeg (playwright ffmpeg v1013) from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1013/ffmpeg-linux.zip
+2026-10-30T01:31:33.6869558Z |                                                                                |   0% of 2.2 MiB
+2026-10-30T01:31:33.6900256Z |■■■■■■■■                                                                        |  10% of 2.2 MiB
+2026-10-30T01:31:33.6915006Z |■■■■■■■■■■■■■■■■                                                                |  20% of 2.2 MiB
+2026-10-30T01:31:33.6944234Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.2 MiB
+2026-10-30T01:31:33.6950295Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.2 MiB
+2026-10-30T01:31:33.6961658Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.2 MiB
+2026-10-30T01:31:33.6972752Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.2 MiB
+2026-10-30T01:31:33.6984014Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.2 MiB
+2026-10-30T01:31:33.6995489Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.2 MiB
+2026-10-30T01:31:33.7014503Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.2 MiB
+2026-10-30T01:31:33.7021398Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.2 MiB
+2026-10-30T01:31:33.7538999Z FFmpeg (playwright ffmpeg v1013) downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1013
+2026-10-30T01:31:33.7542140Z Downloading Chrome Headless Shell 156.0.8078.4 (playwright chromium-headless-shell v1248) from https://cdn.playwright.dev/builds/cft/156.0.8078.4/linux64/chrome-headless-shell-linux64.zip
+2026-10-30T01:31:34.1783757Z |                                                                                |   0% of 120 MiB
+2026-10-30T01:31:34.2974634Z |■■■■■■■■                                                                        |  10% of 120 MiB
+2026-10-30T01:31:34.3865859Z |■■■■■■■■■■■■■■■■                                                                |  20% of 120 MiB
+2026-10-30T01:31:34.4664398Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 120 MiB
+2026-10-30T01:31:34.6006821Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 120 MiB
+2026-10-30T01:31:34.6901669Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 120 MiB
+2026-10-30T01:31:34.8169454Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 120 MiB
+2026-10-30T01:31:34.9096838Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 120 MiB
+2026-10-30T01:31:35.0120258Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 120 MiB
+2026-10-30T01:31:35.1477821Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 120 MiB
+2026-10-30T01:31:35.2440468Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 120 MiB
+2026-10-30T01:31:37.4874255Z Chrome Headless Shell 156.0.8078.4 (playwright chromium-headless-shell v1248) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1248
+2026-10-30T01:31:37.5180148Z ##[group]Run npm run test:browser
+2026-10-30T01:31:37.5180676Z [36;1mnpm run test:browser[0m
+2026-10-30T01:31:37.5200439Z shell: /usr/bin/bash -e {0}
+2026-10-30T01:31:37.5200869Z ##[endgroup]
+2026-10-30T01:31:37.6123453Z 
+2026-10-30T01:31:37.6124168Z > bloquer-extreme-droite-x@2.3.0 test:browser
+2026-10-30T01:31:37.6124839Z > node scripts/test-browser.mjs
+2026-10-30T01:31:37.6125186Z 
+2026-10-30T01:31:43.7640597Z État au moment de l’échec : {
+2026-10-30T01:31:43.7644443Z   job: {
+2026-10-30T01:31:43.7644956Z     accounts: [ [Object] ],
+2026-10-30T01:31:43.7645638Z     already: 0,
+2026-10-30T01:31:43.7647228Z     attempt: '747219b8-cc0c-42f2-b502-98143f61f67b',
+2026-10-30T01:31:43.7647954Z     cached: 0,
+2026-10-30T01:31:43.7648463Z     confirmed: 0,
+2026-10-30T01:31:43.7649118Z     created: 0,
+2026-10-30T01:31:43.7649449Z     currentUsername: 'CompteTest_A',
+2026-10-30T01:31:43.7649805Z     deadline: 1793323925686,
+2026-10-30T01:31:43.7650076Z     documentReady: true,
+2026-10-30T01:31:43.7650533Z     failed: [],
+2026-10-30T01:31:43.7650879Z     force: false,
+2026-10-30T01:31:43.7651221Z     id: '376be655-1024-468b-9a12-6e949146b872',
+2026-10-30T01:31:43.7651494Z     index: 0,
+2026-10-30T01:31:43.7652101Z     message: 'X ne permet pas de vérifier l’identité de ce profil. Le blocage est en pause.',
+2026-10-30T01:31:43.7652530Z     nextAt: 1793323903676,
+2026-10-30T01:31:43.7653153Z     owner: 'AutreCompte',
+2026-10-30T01:31:43.7653566Z     ownerKey: 'a58fe0992dcd16ffde84899a4ecbdf4b7e00dd7b9839e18ea55e2cd7ba51f219',
+2026-10-30T01:31:43.7653978Z     phase: 'blocking',
+2026-10-30T01:31:43.7654199Z     planned: true,
+2026-10-30T01:31:43.7654414Z     retryAt: null,
+2026-10-30T01:31:43.7654638Z     sessionPath: '/home',
+2026-10-30T01:31:43.7654882Z     skipIds: [ '11', '12' ],
+2026-10-30T01:31:43.7655120Z     softNavigation: true,
+2026-10-30T01:31:43.7655622Z     startedAt: 1793323903644,
+2026-10-30T01:31:43.7655873Z     status: 'paused',
+2026-10-30T01:31:43.7656093Z     tabId: 95405360
+2026-10-30T01:31:43.7656320Z   }
+2026-10-30T01:31:43.7656524Z }
+2026-10-30T01:31:43.7860142Z Page : about:blank 
+2026-10-30T01:31:43.7883068Z Page : chrome-extension://pbmoejdblnnjfhomfdoelnfnabmdlkna/popup.html Bloquer sur X
+2026-10-30T01:31:43.7884036Z Faites barrage à
+2026-10-30T01:31:43.7884322Z l’extrême droite.
+2026-10-30T01:31:43.7884449Z 
+2026-10-30T01:31:43.7884654Z Bloquez les comptes de la liste depuis votre compte X.
+2026-10-30T01:31:43.7884904Z 
+2026-10-30T01:31:43.7885013Z Reprendre le blocage
+2026-10-30T01:31:43.7885488Z Une pause est nécessaire
+2026-10-30T01:31:43.7885644Z 
+2026-10-30T01:31:43.7885752Z Compte : @AutreCompte
+2026-10-30T01:31:43.7885894Z 
+2026-10-30T01:31:43.7886267Z X ne permet pas de vérifier l’identité de ce profil. Le blocage est en pause.
+2026-10-30T01:31:43.7886557Z 
+2026-10-30T01:31:43.7886648Z 0 / 1 profils
+2026-10-30T01:31:43.7886846Z 0 %
+2026-10-30T01:31:43.7887058Z Vérifier X
+2026-10-30T01:31:43.7887269Z Arrêter
+2026-10-30T01:31:43.7887476Z Voir la liste (1)
+2026-10-30T01:31:43.7887715Z @CompteTest_A
+2026-10-30T01:31:43.7887935Z Tout revérifier
+2026-10-30T01:31:43.7888053Z 
+2026-10-30T01:31:43.7888420Z Si vous avez débloqué un compte sur X, cette option vérifie à nouveau toute la liste.
+2026-10-30T01:31:43.7888734Z 
+2026-10-30T01:31:43.7888917Z La liste se met à jour toute seule.
+2026-10-30T01:31:43.7889181Z Confidentialité
+2026-10-30T01:31:43.8072954Z Page : https://x.com/CompteTest_A Profil 
+2026-10-30T01:31:43.8074489Z Compte de test @CompteTest_A
+2026-10-30T01:31:43.8075072Z Bloqué Plus
+2026-10-30T01:31:43.8075710Z Aucun post pour le moment.
+2026-10-30T01:31:43.8752176Z node:internal/modules/run_main:107
+2026-10-30T01:31:43.8752733Z     triggerUncaughtException(
+2026-10-30T01:31:43.8753047Z     ^
+2026-10-30T01:31:43.8753205Z 
+2026-10-30T01:31:43.8753589Z AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+2026-10-30T01:31:43.8753883Z 
+2026-10-30T01:31:43.8753969Z false !== true
+2026-10-30T01:31:43.8754104Z 
+2026-10-30T01:31:43.8755006Z     at file:///home/runner/work/monbloqueur-extreme-droite-rs-extend-app/monbloqueur-extreme-droite-rs-extend-app/scripts/test-browser.mjs:258:10 {
+2026-10-30T01:31:43.8756157Z   generatedMessage: true,
+2026-10-30T01:31:43.8756538Z   code: 'ERR_ASSERTION',
+2026-10-30T01:31:43.8756802Z   actual: false,
+2026-10-30T01:31:43.8757104Z   expected: true,
+2026-10-30T01:31:43.8757350Z   operator: 'strictEqual',
+2026-10-30T01:31:43.8757670Z   diff: 'simple'
+2026-10-30T01:31:43.8758122Z }
+2026-10-30T01:31:43.8758265Z 
+2026-10-30T01:31:43.8758355Z Node.js v24.22.1
+2026-10-30T01:31:43.8943446Z ##[error]Process completed with exit code 1.
+2026-10-30T01:31:43.9082267Z Post job cleanup.
+2026-10-30T01:31:43.9916305Z [command]/usr/bin/git version
+2026-10-30T01:31:43.9964946Z git version 2.56.0
+2026-10-30T01:31:44.0011181Z Temporarily overriding HOME='/home/runner/work/_temp/c9cc8641-00fb-4bb9-840f-a47fa2b90413' before making global git config changes
+2026-10-30T01:31:44.0012808Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-30T01:31:44.0018961Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/monbloqueur-extreme-droite-rs-extend-app/monbloqueur-extreme-droite-rs-extend-app
+2026-10-30T01:31:44.0061510Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-30T01:31:44.0098102Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-30T01:31:44.0314459Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-30T01:31:44.0352318Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-30T01:31:44.0768538Z Cleaning up orphan processes
+2026-10-30T01:31:44.1181383Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

@@ -255,13 +255,11 @@ try {
   await expect(page.locator("#status")).toContainText("vérifier l’identité");
   assert.equal(blocked.length, 3);
   await page.getByRole("button", { name: "Vérifier X", exact: true }).click();
-  assert.equal(
-    await worker.evaluate(async () => {
-      const { job } = await chrome.storage.local.get("job");
-      return (await chrome.tabs.get(job.tabId)).active;
-    }),
-    true,
-  );
+  // A DOM click does not await the background handler's asynchronous tab API.
+  // Observe the exact paused job's tab; a permanent activation failure must fail.
+  await expect
+    .poll(() => worker.evaluate(async tabId => (await chrome.tabs.get(tabId)).active, invalid.job.tabId))
+    .toBe(true);
   await page.getByRole("button", { name: "Arrêter", exact: true }).click();
   await page
     .getByText("Arrêté. Les blocages déjà faits restent actifs.", {

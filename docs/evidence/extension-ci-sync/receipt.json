@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-30",
+  "timezone": "Europe/Paris",
+  "base": "998e05372e01e3bab25d9539591fe05369e76b24",
+  "pwaRun": 40986303042,
+  "pwaStatus": "success",
+  "pwaLogCharacters": 272767,
+  "pwaNodePass": 232,
+  "pwaServiceWorkerPass": 9,
+  "pwaBrowserScripts": 36,
+  "pwaLifecyclePass": 72,
+  "extensionRun": 40986302996,
+  "extensionStatus": "failure",
+  "extensionLogCharacters": 67550,
+  "extensionFailure": "scripts/test-browser.mjs:258, immediate false tab.active after Inspect click",
+  "localFullChromium": "Official full archive restored; persistent launch blocked by AF_UNIX EPERM. No local extension application test executed.",
+  "localEnvironment": "became unavailable during this session; no new local verification claimed after that point",
+  "parentTree": "2d78e1ea38a4f987fac759c3ccd5f3e6cb43c0a1",
+  "changedCodePaths": [
+    "scripts/test-browser.mjs"
+  ],
+  "scriptBeforeSha256": "4ec2f8c501156002e1021e015317e7b6c64ea131f0a32f4175ce3bb1dfbfaf6c",
+  "scriptAfterGitBlob": "c481bc66eac0e33cb5385a67ef36588b1915305e",
+  "scriptContentReadbackExact": true,
+  "localTreeComparison": false,
+  "productionPathsToVerifyUnchanged": [
+    "pwa",
+    "extension",
+    "server",
+    ".github"
+  ],
+  "newHeadCI": "pending at this snapshot; final in PR body and Airtable",
+  "gitBlobs": [
+    {
+      "path": "scripts/test-browser.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c481bc66eac0e33cb5385a67ef36588b1915305e"
+    },
+    {
+      "path": "docs/evidence/extension-ci-sync/ci-998e053-extension.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e221c5b885f8ee822fb310211f4fe9a6bd434e5d"
+    },
+    {
+      "path": "docs/evidence/extension-ci-sync/ci-998e053-pwa.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "21ac71b06fbba42b91993fdbf54d218cddffca5b"
+    },
+    {
+      "path": "docs/WORK_MISSION_FIL_CLAIR.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ef6aaa605d02a09d930a8de27f80baecf512a6d4"
+    },
+    {
+      "path": "docs/DELIVERY_QUEUE.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4f5c799abee63cf821dd9a9b0722a3a9adf861c3"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-10-30-local-data-lifecycle.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d0b7542a7174f466d5ff04b3b61942ad072a5d47"
+    },
+    {
+      "path": "docs/evidence/2026-10-30-extension-ci-sync.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "22db5bc3ca98327e64611114922570ad62dbbfda"
+    },
+    {
+      "path": "docs/evidence/extension-ci-sync/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2cc41debc264668220b232d66bb6bc9ff64180cd"
+    }
+  ]
+}

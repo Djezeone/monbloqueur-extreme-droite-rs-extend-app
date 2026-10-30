@@ -28,3 +28,7 @@ PR4 au42a70ca relue : deuxCI vertes, socle durable conservé. Nouvelle branche d
 
 ## Reprise du30octobre — priorité aux données du socle local
 PR5 relue au0445454 : deuxCI vertes, aucune modification externe ultérieure constatée. Une revue bornée du socle A a trouvé trois défauts distincts des parcours déjà qualifiés : import en attente après remplacement, brouillon suivant vidé par une sauvegarde lente et déclaration orpheline réactivée à l'ajout. Correctifs et recette dédiée dans une branche dépendante ; [conception](superpowers/specs/2026-10-30-local-data-lifecycle-design.md), [plan/ledger](superpowers/plans/2026-10-30-local-data-lifecycle.md), [preuve datée](evidence/2026-10-30-local-data-lifecycle.md). Aucune migration ni activation sociale. La suite OAuth/serveur reste ouverte après ce correctif A prioritaire ; main/admin, preview/capacité gratuite, physique/WCAG et décisions RGPD ne sont pas présumés résolus.
+
+
+## Clôture CI en cours —30octobre
+Le correctif du serveur de test a permis une CI PWA complète verte au998e053. Reste à qualifier le correctif de synchronisation d'un test extension, sans nouvelle fonction ni modification de la PWA. Première CI annulée et échec extension sont conservés ; aucun rerun du même SHA. L'environnement local est indisponible, GitHub porte la suite du code et des preuves. Les portes physiques/admin/Vercel coût/RGPD/exploitation demeurent ; [journal](evidence/2026-10-30-extension-ci-sync.md).
