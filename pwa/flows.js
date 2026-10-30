@@ -223,11 +223,13 @@ export function mountFlows({ getState, save, notify, navigate }) {
     event.preventDefault();
     try {
       const fields = ["flow-target", "flow-platform", "flow-category", "flow-control"], submitted = fields.map(id => $(id).value);
+      const submittedFocus = document.activeElement;
       const flows = addFlow(current(), { id:"flow-" + crypto.randomUUID(), platform:$("flow-platform").value,
         control:$("flow-control").value, target:$("flow-target").value });
       if (await save({ ...getState(), flows }, "Choix ajouté sur cet appareil. Aucun contenu distant n’a été modifié.") && fields.every((id, i) => $(id).value === submitted[i])) {
         $("flow-target").value = "";
-        if ($("flow-add").contains(document.activeElement)) $("flow-target").focus();
+        if (document.activeElement === submittedFocus && (submittedFocus === $("flow-target") || submittedFocus === event.submitter))
+          $("flow-target").focus();
       }
     } catch (error) { notify(error.message, true); }
   });

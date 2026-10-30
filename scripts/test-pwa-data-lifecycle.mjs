@@ -135,7 +135,18 @@ try {
       await expect(p.locator("#view-settings h1")).toBeFocused();
     });
   }
-  await check("draft: unchanged successful submission clears while failed submission keeps text", async p => {
+  await check("draft: moving to an unchanged service selector keeps keyboard focus after save", async p => {
+    await p.getByRole("button", { name:"Mes flux", exact:true }).click();
+    await p.locator("#flow-target").fill("Earlier source"); await holdWrite(p);
+    await p.locator("#flow-add-button").click(); await queuedWrite(p);
+    await p.locator("#flow-target").focus();
+    for (let i = 0; i < 3; i++) await p.keyboard.press("Shift+Tab");
+    await expect(p.locator("#flow-platform")).toBeFocused();
+    await p.evaluate(() => window.qaReleaseWrite()); await settled(p);
+    await expect(p.locator("#flow-platform")).toBeFocused();
+    assert.deepEqual(parseBackup(await snapshot(p)).flows.items.map(i => i.target), ["Earlier source"]);
+  });
+  await check("draft: unchanged successful submission clears its submitted fields", async p => {
     await p.getByRole("button", { name:"Mes listes", exact:true }).click();
     await p.locator("#handle").fill("qa_first"); await p.locator("#add-account button[type=submit]").click();
     await settled(p); await expect(p.locator("#handle")).toHaveValue("");
@@ -195,6 +206,42 @@ try {
     await replaceSpace(p, "erase"); const before = await snapshot(p); await finishFile(p);
     await expect(p.locator("#notice")).toContainText(/import.*interrompu|import.*annulé/i);
     assert.ok(!(await p.locator("#notice").textContent()).includes("SENSITIVE")); assert.equal(await snapshot(p), before);
+  });
+  await check("import boundary: a rejected file read after replacement cannot expose its error", async p => {
+    await p.evaluate(() => {
+      File.prototype.text = async function () {
+        window.qaRejectedReadPending = true;
+        await new Promise(resolve => { window.qaReleaseRejectedRead = resolve; });
+        throw Error("SENSITIVE REJECTED FILE");
+      };
+    });
+    await p.locator("#file").setInputFiles(file(listFile)); await p.waitForFunction(() => window.qaRejectedReadPending);
+    await replaceSpace(p, "erase"); const before = await snapshot(p);
+    await p.evaluate(() => window.qaReleaseRejectedRead());
+    await expect(p.locator("#notice")).toContainText(/import.*interrompu|import.*annulé/i);
+    assert.ok(!(await p.locator("#notice").textContent()).includes("SENSITIVE")); assert.equal(await snapshot(p), before);
+  });
+  await check("import boundary: a public body finishing after replacement cannot write", async p => {
+    await p.evaluate(() => {
+      window.qaOriginalFetch = window.fetch;
+      window.fetch = async (...args) => {
+        if (args[0] !== "https://raw.githubusercontent.com/Djezeone/monbloqueur-extreme-droite-rs-extend-app/b7cd31b036cca17b48dbf726c047847191c01a5b/liste/accounts.json") return window.qaOriginalFetch(...args);
+        window.qaDelayedBody = new Response(new ReadableStream({ start(controller) { window.qaBodyController = controller; } }), { status:200, headers:{ "Content-Type":"application/json" } });
+        const read = window.qaDelayedBody.text.bind(window.qaDelayedBody);
+        window.qaDelayedBody.text = () => { window.qaBodyReadPending = true; return read(); };
+        return window.qaDelayedBody;
+      };
+    });
+    await p.getByRole("button", { name:"Mes listes", exact:true }).click(); await p.locator("#import-public").click();
+    await p.waitForFunction(() => window.qaBodyReadPending);
+    await replaceSpace(p, "erase"); const before = await snapshot(p);
+    await p.evaluate(() => {
+      window.qaBodyController.enqueue(new TextEncoder().encode(JSON.stringify({ schemaVersion:1, version:"synthetic-v1", accounts:[{ username:"qa_body_late" }] })));
+      window.qaBodyController.close();
+    });
+    await expect(p.locator("#import-public")).toBeEnabled();
+    await expect(p.locator("#notice")).toContainText(/import.*interrompu|import.*annulé/i);
+    assert.equal(await snapshot(p), before);
   });
   for (const action of ["cancelled", "failed", "ordinary"]) {
     await check(`import: ${action} replacement or ordinary mutation preserves an authorized import`, async p => {
