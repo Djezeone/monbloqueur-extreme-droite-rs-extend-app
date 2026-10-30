@@ -1,0 +1,68 @@
+✔ server session does no bootstrap call and never serializes its token (210.291162ms)
+✔ server factory refuses broad scopes, unapproved origins and unsafe token/config without network (225.689988ms)
+✔ TLS transport binds bearer/host and returns only matching identity and rate headers (682.351853ms)
+✔ Mastodon adapter and durable runner confirm only after TLS relationship readback (204.004704ms)
+✔ 421, redirect and503 produce one POST, no replay, no forwarded Location or body (357.565234ms)
+✔ an applied POST followed by socket reset is unknown and cannot be replayed (181.939808ms)
+✔ mixed private DNS results are refused before native request construction (211.991056ms)
+✔ disconnect during DNS prevents a late authenticated request (334.892175ms)
+✔ abort during DNS settles without waiting for the resolver and prevents later dispatch (435.108888ms)
+✔ local expiry after DNS prevents dispatch and never claims provider revocation (96.017131ms)
+✔ 401 and403 stop as soon as headers arrive, even with an invalid unfinished body (147.772128ms)
+✔ a200identity mismatch stops the captured session (220.123671ms)
+✔ invalid UTF8, JSON, compression and oversized bodies fail without leaking response text (211.118899ms)
+✔ wrong relationship/action binding after POST is uncertain rather than confirmed (332.165737ms)
+✔ deadline covers a stalled TLS response and destroys rather than retries the request (463.366187ms)
+✔ disconnect interrupts an in-flight POST without claiming its remote cancellation (168.463344ms)
+✔ native TLS rejects an otherwise trusted certificate for a different hostname (134.193349ms)
+✔ one active request per handle prevents overlapping dispatches (351.836524ms)
+✔ a DNS deadline settles before any ClientRequest exists (266.238772ms)
+✔ the local lifetime expires and interrupts a stalled DNS lookup (374.761515ms)
+✔ public IPv6 is pinned while the test driver alone uses loopback IPv4 (370.365154ms)
+✔ truncated successful JSON cannot become a successful mutation (207.722015ms)
+✔ oversized response headers fail once without exposing their value (153.198192ms)
+✔ mutating constructor inputs cannot switch the captured token account origin or permissions (538.50457ms)
+✖ an elapsed deadline blocks a DNS continuation before queued timers run (41.784458ms)
+✖ a completed response after the deadline cannot beat the queued timeout (41.206569ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 24
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7074.018211
+
+✖ failing tests:
+
+test at tests/server-transport.test.js:165:1
+✖ an elapsed deadline blocks a DNS continuation before queued timers run (41.784458ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  ConnectorError: wire-error
+      at async TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:170:7)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: ConnectorError: wire-error
+        at context.fail (file:///workspace/scratch/0729b58f0643/fil-clair-durable/server/connectors/mastodon-transport.js:70:33)
+        at file:///workspace/scratch/0729b58f0643/fil-clair-durable/server/connectors/mastodon-transport.js:116:54,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests/server-transport.test.js:173:1
+✖ a completed response after the deadline cannot beat the queued timeout (41.206569ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///workspace/scratch/0729b58f0643/fil-clair-durable/tests/server-transport.test.js:181:7)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'rejects',
+    diff: 'simple'
+  }

@@ -1,0 +1,32 @@
+✔ server session does no bootstrap call and never serializes its token (142.231501ms)
+✔ server factory refuses broad scopes, unapproved origins and unsafe token/config without network (129.479024ms)
+✔ TLS transport binds bearer/host and returns only matching identity and rate headers (643.640413ms)
+✔ Mastodon adapter and durable runner confirm only after TLS relationship readback (366.147812ms)
+✔ 421, redirect and503 produce one POST, no replay, no forwarded Location or body (536.044457ms)
+✔ an applied POST followed by socket reset is unknown and cannot be replayed (234.730088ms)
+✔ mixed private DNS results are refused before native request construction (115.910265ms)
+✔ disconnect during DNS prevents a late authenticated request (284.664974ms)
+✔ abort during DNS settles without waiting for the resolver and prevents later dispatch (221.752112ms)
+✔ local expiry after DNS prevents dispatch and never claims provider revocation (443.655782ms)
+✔ 401 and403 stop as soon as headers arrive, even with an invalid unfinished body (491.827605ms)
+✔ a200identity mismatch stops the captured session (162.094091ms)
+✔ invalid UTF8, JSON, compression and oversized bodies fail without leaking response text (404.309337ms)
+✔ wrong relationship/action binding after POST is uncertain rather than confirmed (82.295673ms)
+✔ deadline covers a stalled TLS response and destroys rather than retries the request (444.116527ms)
+✔ disconnect interrupts an in-flight POST without claiming its remote cancellation (118.221069ms)
+✔ native TLS rejects an otherwise trusted certificate for a different hostname (336.194047ms)
+✔ one active request per handle prevents overlapping dispatches (97.010023ms)
+✔ a DNS deadline settles before any ClientRequest exists (296.37528ms)
+✔ the local lifetime expires and interrupts a stalled DNS lookup (334.583458ms)
+✔ public IPv6 is pinned while the test driver alone uses loopback IPv4 (138.73123ms)
+✔ truncated successful JSON cannot become a successful mutation (259.169462ms)
+✔ oversized response headers fail once without exposing their value (333.662204ms)
+✔ mutating constructor inputs cannot switch the captured token account origin or permissions (78.484476ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6789.095897

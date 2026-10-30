@@ -1,0 +1,25 @@
+✔ server origins normalize HTTPS case, port 443 and a single optional slash (6.690428ms)
+✔ server origins reject IP literals, numeric aliases and local DNS suffixes (1.861514ms)
+✔ server origins reject URL features and parser spelling aliases (0.417779ms)
+✔ server DNS host labels enforce LDH and total 253 character bounds (0.21857ms)
+✔ IPv4 public selection excludes every special prefix and multicast (0.351639ms)
+✔ IPv6 public selection enforces global unicast and the special prefix boundaries (0.268915ms)
+✔ public addresses reject ambiguous text, scoped IPv6 and malformed inputs (0.225921ms)
+✔ DNS selection returns the first public address after validating up to 16 answers (0.787487ms)
+✔ DNS selection fails closed when any answer is private, mapped, special or mismatched (0.939305ms)
+✔ DNS selection accepts only bounded arrays of exact safe data records (2.900158ms)
+✔ Mastodon requests normalize exactly the four qualified routes and literal query (0.777962ms)
+✔ Mastodon requests preserve strict decimal ID bounds (1.109722ms)
+✔ Mastodon URLs reject alternate origins, path aliases, fragments and query on non-query routes (1.124083ms)
+✔ Mastodon relationships require exactly one canonical ID and with_suspended=true (0.862729ms)
+✔ Mastodon methods and bodies admit only bodyless GET and empty-object POST (0.971013ms)
+✔ Mastodon transport options require exact data-only keys and a real optional AbortSignal (2.102112ms)
+✔ policy errors discard thrown input messages and arbitrary error details (0.246481ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 135.249119
